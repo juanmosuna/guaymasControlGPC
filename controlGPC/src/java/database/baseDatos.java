@@ -13,14 +13,14 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author elara
+ * @author juan_m_osuna
  */
 public class baseDatos {
     private Connection _connection = null;
 
     public baseDatos() {
         
-        String _url = "jdbc:mysql://localhost/gpcControl";
+        String _url = "jdbc:mysql://127.0.0.1:3306/controlGPC";
         String _user = "root";
         String _password="phantomteam";
         

@@ -1,0 +1,53 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : May 16, 2018, 10:01:56 PM
+    Author     : juan_m_osuna
+*/
+
+@font-face{
+    font-family: 'ubuntuLight';
+    src: url(../fonts/Ubuntu-L.ttf);
+}
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    
+    font-family: ubuntuLight;
+}
+
+body{
+    
+    width: 100vw;
+    height: 100vh;
+}
+
+div.paginaCompleta{
+    
+    width: 100%;
+    height: 100%;
+    
+    background: #f8f8f8;
+}
+
+div.cabeceraPagina{
+    
+    background-color: #007bff;
+    
+    display: flex;
+    justify-content: space-between;
+}
+
+
+div.cuerpoPagina{
+    
+}
+
+div.piePagina{
+    
+}
