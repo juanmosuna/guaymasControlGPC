@@ -27,8 +27,27 @@
         <link href="css/plataforma.css" rel="stylesheet" type="text/css"/>
         <link href="css/menuPrincipal.css" rel="stylesheet" type="text/css"/>
         <link href="css/cabeceraPagina.css" rel="stylesheet" type="text/css"/>
+        <link href="css/formUsuario.css" rel="stylesheet" type="text/css"/>
+        
     </head>
     <body>
+        <div id="userform" class="formUsuario">
+            <div class="formUsuario_cabecera"></div>
+            <div class="formUsuario_cuerpo">
+                <div class="formUsuario_cuerpoIzquierdo">
+                    <img src="<%=(_usuario.getSexo().toLowerCase().equals("hombre") ? "images/boy.png" : "images/girl.png" ) %>" width="96" height="96" alt=""/>
+                </div>
+                <div class="formUsuario_cuerpoDerecho">
+                    <div class="formUsuario_usuario"><%=_usuario.getNombreCompleto() %></div>
+                    <div class="formUsuario_perfil"><%=_usuario.getPerfilUsuario().getNombreCompleto() %></div>
+                    <div class="formUsuario_cuenta"><%=_usuario.getCuenta() %></div>
+                    <div class="formUsuario_botonEditar"><a href=""><i class="fa fa-pencil-alt">&nbsp;&nbsp;Editar</i></a></div>
+                </div>
+            </div>
+            <div class="formUsuario_pie">
+                <a href="logout.do"><i class="fas fa-power-off" >&nbsp;&nbsp;Salir</i></a>
+            </div>
+        </div>
         <div class="paginaCompleta">
             <div class="cabeceraPagina">
                 <div class="contenedorCabecera">
@@ -42,7 +61,7 @@
                             <div class="botonUsuario">
                                 <div class="nombreUsuario"><%=_usuario.getNombreCompleto() %></div>
                                 <div>
-                                    <input type="checkbox">
+                                    <input type="checkbox" onclick="toggle_visibility('userform');">
                                     <i class="fa fa-chevron-down"></i>
                                 </div>
                             </div>
@@ -104,7 +123,7 @@
                                <a href="logout.do">
                                      <i class="fas fa-power-off"></i>
                                     <span class="nav-text">
-                                        Logout
+                                        Salir del sistema
                                     </span>
                                 </a>
                             </li>  
@@ -113,6 +132,18 @@
                 </div>
             </div>
         </div>
+        <script type="text/javascript">
+
+            function toggle_visibility(id) {
+                var e = document.getElementById(id);
+                if(e.style.display === 'block'){
+                    e.style.display = 'none';
+                }else{
+                    e.style.display = 'block';
+                }
+            }
+
+        </script>
     </body>
 </html>
 <%

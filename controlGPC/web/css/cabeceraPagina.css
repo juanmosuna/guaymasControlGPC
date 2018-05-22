@@ -105,3 +105,6 @@ div.usuario label.switch input:checked + i{
   transform: rotate(180deg);
 }
 
+div.usuario label.switch input:checked ~ div.formUsuario{
+    display: block;
+}

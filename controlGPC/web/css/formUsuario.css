@@ -1,0 +1,178 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : May 21, 2018, 8:59:04 PM
+    Author     : juan_m_osuna
+*/
+
+div.formUsuario{
+    position: absolute;
+    top: 60px;
+    right: 10px;
+    
+    background: white;
+        
+    border: 1px solid #c8c8c8;
+    
+    z-index: 100;
+    
+    box-shadow: 0px 0px 5px #ccc;
+    
+    display: none;
+}
+
+div.formUsuario_cabecera{
+    
+    margin-top: -10px;
+    margin-right: 20px;
+    
+    position: relative;
+    float: right;
+    width: 0; 
+    height: 0; 
+    
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+
+    border-bottom: 10px solid #c8c8c8;
+    
+}
+
+div.formUsuario_cabecera:before{
+    
+    content: "";
+    
+    position: absolute;
+    
+    
+    width: 0; 
+    height: 0; 
+    
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+
+    border-bottom: 8px solid white;
+    
+    top: 2px;
+    left: -8px;
+    
+}
+
+div.formUsuario_cuerpo{
+        
+    display: flex;
+    justify-content: flex-start;
+}
+
+div.formUsuario_cuerpoIzquierdo{
+    padding: 10px;
+    
+}
+
+div.formUsuario_cuerpoDerecho{
+    padding: 10px;
+    
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+div.formUsuario_usuario{
+    padding-bottom: 3px;
+    font-family: sans-serif;
+    font-size: 1em;
+    color: #306bff;
+}
+
+div.formUsuario_perfil{
+    padding-bottom: 3px;
+    font-family: sans-serif;
+    font-size: 0.9em;
+    color: gray;
+}
+
+div.formUsuario_cuenta{
+    padding-bottom: 15px;
+    font-family: sans-serif;
+    font-size: 0.9em;
+    color: gray;
+}
+
+div.formUsuario_botonEditar{
+    padding-bottom: 5px;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    color: gray;
+}
+
+div.formUsuario_botonEditar a{
+    
+    padding: 7px 15px;
+    
+    font-size: 0.9em;
+    
+    color: white;
+    
+    background: #4d90fe;
+    
+    border: 1px solid #3079ed;
+    
+    border-radius: 3px;
+
+    text-decoration: none;
+    
+}
+
+div.formUsuario_botonEditar a:hover{
+    cursor: pointer;
+    
+    color: white;
+    
+    background: #005cbf;
+}
+
+div.formUsuario_pie{
+    padding: 5px;
+    
+    background: #f8f8f8;
+    
+    border-top: 1px solid #c8c8c8;
+    
+    display: flex;
+    justify-content: flex-end;
+}
+
+div.formUsuario_pie a{
+    padding: 0px 15px;
+    
+    font-size: 0.8em;
+    
+    color: #555;
+    
+    background: #e5e5e5;
+    
+    border: 1px solid #c8c8c8;
+    
+    border-radius: 3px;
+
+    text-decoration: none;
+}
+
+div.formUsuario_pie a i{
+    padding: 0;
+    font-size: 1em;
+}
+
+div.formUsuario_pie a:hover{
+    cursor: pointer;
+    
+    color: white;
+    
+    background: tomato;
+    
+    border: 1px solid tomato;
+}
