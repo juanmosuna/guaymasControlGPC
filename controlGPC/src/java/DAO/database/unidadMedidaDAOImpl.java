@@ -6,7 +6,7 @@
 package DAO.database;
 
 import DAO.interfaces.catalogosInterface;
-import entity.tipoMovimiento;
+import entity.unidadMedida;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,20 +18,20 @@ import java.util.List;
  *
  * @author elara
  */
-public class tipoMovimientoDAOImpl implements catalogosInterface {
+public class unidadMedidaDAOImpl implements catalogosInterface {
     
     private Connection _conn;
 
-    public tipoMovimientoDAOImpl(Connection _conn) {
+    public unidadMedidaDAOImpl(Connection _conn) {
         this._conn = _conn;
     }
 
     @Override
     public boolean agregarRegistro(Object o) throws Exception {
 
-        tipoMovimiento _tpMovimientoObj = (tipoMovimiento) o;
+        unidadMedida _unidadMedidaObj = (unidadMedida) o;
 
-        String _consulta = "INSERT INTO controlGPC.dbtipoMovimiento " +
+        String _consulta = "INSERT INTO controlGPC.dbunidadMedida " +
                 "(nombreCompleto, " +
                 "descripcion, " +
                 "idEstado) " +
@@ -40,9 +40,9 @@ public class tipoMovimientoDAOImpl implements catalogosInterface {
 
         PreparedStatement st = this._conn.prepareStatement(_consulta);
 
-        st.setString(1, _tpMovimientoObj.getNombreCompleto());
-        st.setString(2, _tpMovimientoObj.getDescripcion());
-        st.setInt(3, _tpMovimientoObj.getIdEstado());
+        st.setString(1, _unidadMedidaObj.getNombreCompleto());
+        st.setString(2, _unidadMedidaObj.getDescripcion());
+        st.setInt(3, _unidadMedidaObj.getIdEstado());
 
         boolean resultado = st.execute();
 
@@ -56,9 +56,9 @@ public class tipoMovimientoDAOImpl implements catalogosInterface {
     @Override
     public boolean modificarRegistro(Object o) throws Exception {
 
-        tipoMovimiento _tpMovimientoObj = (tipoMovimiento) o;
+        unidadMedida _unidadMedidaObj = (unidadMedida) o;
 
-        String _consulta = "UPDATE controlGPC.dbtipoMovimiento " +
+        String _consulta = "UPDATE controlGPC.dbunidadMedida " +
                 "SET " +
                 "nombreCompleto = ?, " +
                 "descripcion = ?, " +
@@ -67,11 +67,11 @@ public class tipoMovimientoDAOImpl implements catalogosInterface {
 
         PreparedStatement st = this._conn.prepareStatement(_consulta);
 
-        st.setString(1, _tpMovimientoObj.getNombreCompleto());
-        st.setString(2, _tpMovimientoObj.getDescripcion());
-        st.setInt(3, _tpMovimientoObj.getIdEstado());
+        st.setString(1, _unidadMedidaObj.getNombreCompleto());
+        st.setString(2, _unidadMedidaObj.getDescripcion());
+        st.setInt(3, _unidadMedidaObj.getIdEstado());
         
-        st.setInt(4, _tpMovimientoObj.getId());
+        st.setInt(4, _unidadMedidaObj.getId());
 
         boolean resultado = st.execute();
 
@@ -85,7 +85,7 @@ public class tipoMovimientoDAOImpl implements catalogosInterface {
     @Override
     public boolean eliminarRegistro(int id) throws Exception {
 
-        String _consulta = "UPDATE controlGPC.dbtipoMovimiento SET idEstado = 3 WHERE id = ?;";
+        String _consulta = "UPDATE controlGPC.dbunidadMedida SET idEstado = 3 WHERE id = ?;";
 
         PreparedStatement st = this._conn.prepareStatement(_consulta);
         
@@ -103,19 +103,19 @@ public class tipoMovimientoDAOImpl implements catalogosInterface {
     @Override
     public Object consultarTodos() throws Exception {
 
-        tipoMovimiento _tpMovimientoObj;
+        unidadMedida _unidadMedidaObj;
 
-        List<tipoMovimiento> _listatpMovimientos = new ArrayList();
+        List<unidadMedida> _listaUnidadMedida = new ArrayList();
 
         String _consulta = "SELECT  " +
-                "    dbtipoMovimiento.id AS 'id', " +
-                "    dbtipoMovimiento.nombreCompleto AS 'nombreCompleto', " +
-                "    dbtipoMovimiento.descripcion AS 'descripcion', " +
-                "    dbtipoMovimiento.idEstado AS 'idEstado' " +
+                "    dbunidadMedida.id AS 'id', " +
+                "    dbunidadMedida.nombreCompleto AS 'nombreCompleto', " +
+                "    dbunidadMedida.descripcion AS 'descripcion', " +
+                "    dbunidadMedida.idEstado AS 'idEstado' " +
                 "FROM " +
-                "    controlGPC.dbtipoMovimiento " +
+                "    controlGPC.dbunidadMedida " +
                 "WHERE " +
-                "    dbtipoMovimiento.idEstado <> 3;";
+                "    dbunidadMedida.idEstado <> 3;";
 
         PreparedStatement st = this._conn.prepareStatement(_consulta);
 
@@ -125,14 +125,14 @@ public class tipoMovimientoDAOImpl implements catalogosInterface {
 
             while (rs.next()) {
 
-                _tpMovimientoObj = new tipoMovimiento();
+                _unidadMedidaObj = new unidadMedida();
 
-                _tpMovimientoObj.setId(rs.getInt(1));
-                _tpMovimientoObj.setNombreCompleto(rs.getString(2));
-                _tpMovimientoObj.setDescripcion(rs.getString(3));
-                _tpMovimientoObj.setIdEstado(rs.getInt(4));
+                _unidadMedidaObj.setId(rs.getInt(1));
+                _unidadMedidaObj.setNombreCompleto(rs.getString(2));
+                _unidadMedidaObj.setDescripcion(rs.getString(3));
+                _unidadMedidaObj.setIdEstado(rs.getInt(4));
 
-                _listatpMovimientos.add(_tpMovimientoObj);
+                _listaUnidadMedida.add(_unidadMedidaObj);
             }
 
         } catch (SQLException ex) {
@@ -148,24 +148,24 @@ public class tipoMovimientoDAOImpl implements catalogosInterface {
 
         }
 
-        return _listatpMovimientos;
+        return _listaUnidadMedida;
     }
 
     @Override
     public Object consultarPor(String _campo, String _dato) throws Exception {
 
-        tipoMovimiento _tpMovimientoObj;
+        unidadMedida _unidadMedidaObj;
 
-        List<tipoMovimiento> _listatpMovimientos = new ArrayList();
+        List<unidadMedida> _listaUnidadMedida = new ArrayList();
 
         String _consulta = "SELECT  " +
-                "    dbtipoMovimiento.id AS 'id', " +
-                "    dbtipoMovimiento.nombreCompleto AS 'nombreCompleto', " +
-                "    dbtipoMovimiento.descripcion AS 'descripcion', " +
-                "    dbtipoMovimiento.idEstado AS 'idEstado' " +
+                "    dbunidadMedida.id AS 'id', " +
+                "    dbunidadMedida.nombreCompleto AS 'nombreCompleto', " +
+                "    dbunidadMedida.descripcion AS 'descripcion', " +
+                "    dbunidadMedida.idEstado AS 'idEstado' " +
                 "FROM " +
-                "    controlGPC.dbtipoMovimiento " +
-                "WHERE " + _campo + " LIKE '%" + _dato + "%' AND dbtipoMovimiento.idEstado <> 3;";
+                "    controlGPC.dbunidadMedida " +
+                "WHERE " + _campo + " LIKE '%" + _dato + "%' AND dbunidadMedida.idEstado <> 3;";
 
         PreparedStatement st = this._conn.prepareStatement(_consulta);
 
@@ -175,14 +175,14 @@ public class tipoMovimientoDAOImpl implements catalogosInterface {
 
             while (rs.next()) {
 
-                _tpMovimientoObj = new tipoMovimiento();
+                _unidadMedidaObj = new unidadMedida();
 
-                _tpMovimientoObj.setId(rs.getInt(1));
-                _tpMovimientoObj.setNombreCompleto(rs.getString(2));
-                _tpMovimientoObj.setDescripcion(rs.getString(3));
-                _tpMovimientoObj.setIdEstado(rs.getInt(4));
+                _unidadMedidaObj.setId(rs.getInt(1));
+                _unidadMedidaObj.setNombreCompleto(rs.getString(2));
+                _unidadMedidaObj.setDescripcion(rs.getString(3));
+                _unidadMedidaObj.setIdEstado(rs.getInt(4));
 
-                _listatpMovimientos.add(_tpMovimientoObj);
+                _listaUnidadMedida.add(_unidadMedidaObj);
             }
 
         } catch (SQLException ex) {
@@ -198,22 +198,22 @@ public class tipoMovimientoDAOImpl implements catalogosInterface {
 
         }
 
-        return _listatpMovimientos;
+        return _listaUnidadMedida;
     }
 
     @Override
     public Object consultarPorId(int id) throws Exception {
 
-        tipoMovimiento _tpMovimientoObj = new tipoMovimiento();
+        unidadMedida _unidadMedidaObj = new unidadMedida();
 
         String _consulta = "SELECT  " +
-                "    dbtipoMovimiento.id AS 'id', " +
-                "    dbtipoMovimiento.nombreCompleto AS 'nombreCompleto', " +
-                "    dbtipoMovimiento.descripcion AS 'descripcion', " +
-                "    dbtipoMovimiento.idEstado AS 'idEstado' " +
+                "    dbunidadMedida.id AS 'id', " +
+                "    dbunidadMedida.nombreCompleto AS 'nombreCompleto', " +
+                "    dbunidadMedida.descripcion AS 'descripcion', " +
+                "    dbunidadMedida.idEstado AS 'idEstado' " +
                 "FROM " +
-                "    controlGPC.dbtipoMovimiento " +
-                "WHERE dbtipoMovimiento.id = " + id + " AND dbtipoMovimiento.idEstado <> 3;";
+                "    controlGPC.dbunidadMedida " +
+                "WHERE dbunidadMedida.id = " + id + " AND dbunidadMedida.idEstado <> 3;";
 
         PreparedStatement st = this._conn.prepareStatement(_consulta);
 
@@ -223,10 +223,10 @@ public class tipoMovimientoDAOImpl implements catalogosInterface {
 
             while (rs.next()) {
 
-                _tpMovimientoObj.setId(rs.getInt(1));
-                _tpMovimientoObj.setNombreCompleto(rs.getString(2));
-                _tpMovimientoObj.setDescripcion(rs.getString(3));
-                _tpMovimientoObj.setIdEstado(rs.getInt(4));
+                _unidadMedidaObj.setId(rs.getInt(1));
+                _unidadMedidaObj.setNombreCompleto(rs.getString(2));
+                _unidadMedidaObj.setDescripcion(rs.getString(3));
+                _unidadMedidaObj.setIdEstado(rs.getInt(4));
 
             }
 
@@ -243,7 +243,7 @@ public class tipoMovimientoDAOImpl implements catalogosInterface {
 
         }
 
-        return _tpMovimientoObj;
+        return _unidadMedidaObj;
     }
     
 }

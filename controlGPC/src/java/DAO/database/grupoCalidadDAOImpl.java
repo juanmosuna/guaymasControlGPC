@@ -31,7 +31,7 @@ public class grupoCalidadDAOImpl implements catalogosInterface {
 
         grupoCalidad _grupoCalidadesObj = (grupoCalidad) o;
 
-        String _consulta = "INSERT INTO gpcControl.dbgrupoCalidad "
+        String _consulta = "INSERT INTO controlGPC.dbgrupoCalidad "
                 + "(nombreCompleto, "
                 + "descripcion, "
                 + "idEstado) "
@@ -58,7 +58,7 @@ public class grupoCalidadDAOImpl implements catalogosInterface {
 
         grupoCalidad _grupoCalidadesObj = (grupoCalidad) o;
 
-        String _consulta = "UPDATE gpcControl.dbgrupoCalidad "
+        String _consulta = "UPDATE controlGPC.dbgrupoCalidad "
                 + "SET "
                 + "nombreCompleto = ?, "
                 + "descripcion = ?, "
@@ -85,7 +85,7 @@ public class grupoCalidadDAOImpl implements catalogosInterface {
     @Override
     public boolean eliminarRegistro(int id) throws Exception {
 
-        String _consulta = "UPDATE gpcControl.dbgrupoCalidad SET idEstado = 3 WHERE id = ?;";
+        String _consulta = "UPDATE controlGPC.dbgrupoCalidad SET idEstado = 3 WHERE id = ?;";
 
         PreparedStatement st = this._conn.prepareStatement(_consulta);
 
@@ -113,7 +113,7 @@ public class grupoCalidadDAOImpl implements catalogosInterface {
                 + "    dbgrupoCalidad.descripcion AS 'descripcion', "
                 + "    dbgrupoCalidad.idEstado AS 'idEstado' "
                 + "FROM "
-                + "    gpcControl.dbgrupoCalidad "
+                + "    controlGPC.dbgrupoCalidad "
                 + "WHERE "
                 + "    dbgrupoCalidad.idEstado <> 3;";
 
@@ -164,7 +164,7 @@ public class grupoCalidadDAOImpl implements catalogosInterface {
                 + "    dbgrupoCalidad.descripcion AS 'descripcion', "
                 + "    dbgrupoCalidad.idEstado AS 'idEstado' "
                 + "FROM "
-                + "    gpcControl.dbgrupoCalidad "
+                + "    controlGPC.dbgrupoCalidad "
                 + "WHERE " + _campo + " LIKE '%" + _dato + "%' "
                 + "    dbgrupoCalidad.idEstado <> 3;";
 
@@ -213,7 +213,7 @@ public class grupoCalidadDAOImpl implements catalogosInterface {
                 + "    dbgrupoCalidad.descripcion AS 'descripcion', "
                 + "    dbgrupoCalidad.idEstado AS 'idEstado' "
                 + "FROM "
-                + "    gpcControl.dbgrupoCalidad "
+                + "    controlGPC.dbgrupoCalidad "
                 + "WHERE dbgrupoCalidad.id = " + id + " dbgrupoCalidad.idEstado <> 3;";
 
         PreparedStatement st = this._conn.prepareStatement(_consulta);
