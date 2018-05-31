@@ -402,7 +402,10 @@ public class usuarioDAOImpl {
                     .append("u.idEstado, ")
                     .append("pu.nombreCompleto, ")
                     .append("pu.descripcion, ")
-                    .append("pu.ingresoPlataforma, ")
+                    .append("pu.accesoPlataforma, ")
+                    .append("pu.gestionCatalogos, ")
+                    .append("pu.gestionUsuario, ")
+                    .append("pu.gestionDocumentos, ")
                     .append("pu.agregarDocumento, ")
                     .append("pu.eliminarDocumento, ")
                     .append("pu.modificarDocumento, ")
@@ -458,13 +461,16 @@ public class usuarioDAOImpl {
                 
                 _perfilUsuario.setNombreCompleto(rs.getString(13));
                 _perfilUsuario.setDescripcion(rs.getString(14));
-                _perfilUsuario.setIngresoPlataforma(rs.getBoolean(15));
-                _perfilUsuario.setAgregarDocumento(rs.getBoolean(16));
-                _perfilUsuario.setEliminarDocumento(rs.getBoolean(17));
-                _perfilUsuario.setModificarDocumento(rs.getBoolean(18));
-                _perfilUsuario.setBuscarDocumento(rs.getBoolean(19));
-                _perfilUsuario.setImprimirDocumento(rs.getBoolean(20));
-                _perfilUsuario.setIdEstado(rs.getInt(21));
+                _perfilUsuario.setAccesoPlataforma(rs.getBoolean(15));
+                _perfilUsuario.setGestionCatalogos(rs.getBoolean(16));
+                _perfilUsuario.setGestionUsuario(rs.getBoolean(17));
+                _perfilUsuario.setGestionDocumentos(rs.getBoolean(18));
+                _perfilUsuario.setAgregarDocumento(rs.getBoolean(19));
+                _perfilUsuario.setEliminarDocumento(rs.getBoolean(20));
+                _perfilUsuario.setModificarDocumento(rs.getBoolean(21));
+                _perfilUsuario.setBuscarDocumento(rs.getBoolean(22));
+                _perfilUsuario.setImprimirDocumento(rs.getBoolean(23));
+                _perfilUsuario.setIdEstado(rs.getInt(24));
                 
                 _usuario.setPerfilUsuario(_perfilUsuario);
 

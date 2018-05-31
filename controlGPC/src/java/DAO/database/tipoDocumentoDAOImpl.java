@@ -31,7 +31,7 @@ public class tipoDocumentoDAOImpl implements catalogosInterface {
 
         tipoDocumento _tpDocumentosObj = (tipoDocumento) o;
 
-        String _consulta = "INSERT INTO gpcControl.dbtipoDocumento " +
+        String _consulta = "INSERT INTO controlGPC.dbtipoDocumento " +
                 "(nombreCompleto, " +
                 "descripcion, " +
                 "idEstado) " +
@@ -58,7 +58,7 @@ public class tipoDocumentoDAOImpl implements catalogosInterface {
 
         tipoDocumento _tpDocumentosObj = (tipoDocumento) o;
 
-        String _consulta = "UPDATE gpcControl.dbtipoDocumento " +
+        String _consulta = "UPDATE controlGPC.dbtipoDocumento " +
             "SET " +
             "nombreCompleto = ?, " +
             "descripcion = ?, " +
@@ -85,7 +85,7 @@ public class tipoDocumentoDAOImpl implements catalogosInterface {
     @Override
     public boolean eliminarRegistro(int id) throws Exception {
 
-        String _consulta = "UPDATE gpcControl.dbtipoDocumento SET idEstado = 3 WHERE id = ?;";
+        String _consulta = "UPDATE controlGPC.dbtipoDocumento SET idEstado = 3 WHERE id = ?;";
 
         PreparedStatement st = this._conn.prepareStatement(_consulta);
         
@@ -113,7 +113,7 @@ public class tipoDocumentoDAOImpl implements catalogosInterface {
                     "    dbtipoDocumento.descripcion AS 'descripcion', " +
                     "    dbtipoDocumento.idEstado AS 'idEstado' " +
                     "FROM " +
-                    "    gpcControl.dbtipoDocumento " +
+                    "    controlGPC.dbtipoDocumento " +
                     "WHERE " +
                     "    dbtipoDocumento.idEstado <> 3;";
 
@@ -164,7 +164,7 @@ public class tipoDocumentoDAOImpl implements catalogosInterface {
                     "    dbtipoDocumento.descripcion AS 'descripcion', " +
                     "    dbtipoDocumento.idEstado AS 'idEstado' " +
                     "FROM " +
-                    "    gpcControl.dbtipoDocumento " +
+                    "    controlGPC.dbtipoDocumento " +
                     "WHERE " + _campo + " LIKE '%" + _dato + "%' AND dbtipoDocumento.idEstado <> 3;";
 
         PreparedStatement st = this._conn.prepareStatement(_consulta);
@@ -212,7 +212,7 @@ public class tipoDocumentoDAOImpl implements catalogosInterface {
                     "    dbtipoDocumento.descripcion AS 'descripcion', " +
                     "    dbtipoDocumento.idEstado AS 'idEstado' " +
                     "FROM " +
-                    "    gpcControl.dbtipoDocumento " +
+                    "    controlGPC.dbtipoDocumento " +
                     "WHERE dbtipoDocumento.id = " + id + " AND dbtipoDocumento.idEstado <> 3;";
 
         PreparedStatement st = this._conn.prepareStatement(_consulta);

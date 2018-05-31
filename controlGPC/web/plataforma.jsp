@@ -71,10 +71,10 @@
             </div>
             <div class="cuerpoPagina">
                 <div class="contenedorMenu">
-                    <div class="area"></div>
-                    <nav class="main-menu">
-                        <ul>
-                            <li>
+                    <div class="areaMenu"></div>
+                    <nav class="navMenu">
+                        <ul class="ulMenu">
+                            <li class="liMenu">
                                 <a href="#">
                                     <i class="fas fa-home"></i>
                                     <span class="nav-text">
@@ -83,16 +83,15 @@
                                 </a>
 
                             </li>
-                            <li>
+                            <li class="liMenu">
                                 <a href="#">
                                     <i class="fas fa-warehouse"></i>
                                     <span class="nav-text">
                                         Almacén
                                     </span>
                                 </a>
-
                             </li>
-                            <li>
+                            <li class="liMenu">
                                 <a href="#">
                                     <i class="fas fa-calendar-alt"></i>
                                     <span class="nav-text">
@@ -100,7 +99,7 @@
                                     </span>
                                 </a>
                             </li>
-                            <li>
+                            <li class="liMenu">
                                 <a href="#">
                                     <i class="fas fa-file"></i>
                                     <span class="nav-text">
@@ -108,7 +107,7 @@
                                     </span>
                                 </a>
                             </li>
-                            <li>
+                            <li class="liMenu">
                                 <a href="#">
                                     <i class="fas fa-wrench"></i>
                                     <span class="nav-text">
@@ -118,8 +117,7 @@
                             </li>
                         </ul>
                         <ul class="logout">
-                            
-                            <li>
+                            <li class="liMenu">
                                <a href="logout.do">
                                      <i class="fas fa-power-off"></i>
                                     <span class="nav-text">
