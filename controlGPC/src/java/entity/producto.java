@@ -12,8 +12,10 @@ package entity;
 public class producto {
 
     private int id = 0;
+    private String codigo = new String();
     private String nombreCompleto = new String();
     private String descripcion = new String();
+    private categoriaProducto ctgProducto = new categoriaProducto();
     private int idEstado = 0;
 
     public producto() {
@@ -49,6 +51,22 @@ public class producto {
 
     public void setIdEstado(int idEstado) {
         this.idEstado = idEstado;
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
+    public categoriaProducto getCtgProducto() {
+        return ctgProducto;
+    }
+
+    public void setCtgProducto(categoriaProducto ctgProducto) {
+        this.ctgProducto = ctgProducto;
     }
 
 }

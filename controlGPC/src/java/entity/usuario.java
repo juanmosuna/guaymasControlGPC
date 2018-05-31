@@ -13,15 +13,16 @@ public class usuario {
 
     private int id = 0;
     private String nombreCompleto = new String();
+    private String sexo = new String();
     private perfilUsuario perfilUsuario = new perfilUsuario();
-    private int idLocalidad = 0;
-    private int idDepartamento = 0;
-    private int idEmpresa = 0;
+    private localidad localidad = new localidad();
+    private departamento departamento = new departamento();
+    private empresa empresa = new empresa();
     private String cuenta = new String();
     private String contrasena = new String();
     private String fotoUsuario = new String();
     private boolean cuentaActiva = false;
-    private int idEstado =  0;
+    private estado estado =  new estado();
     
     public usuario() {
     }
@@ -42,6 +43,14 @@ public class usuario {
         this.nombreCompleto = nombreCompleto;
     }
 
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
+
     public perfilUsuario getPerfilUsuario() {
         return perfilUsuario;
     }
@@ -50,28 +59,28 @@ public class usuario {
         this.perfilUsuario = perfilUsuario;
     }
 
-    public int getIdLocalidad() {
-        return idLocalidad;
+    public localidad getLocalidad() {
+        return localidad;
     }
 
-    public void setIdLocalidad(int idLocalidad) {
-        this.idLocalidad = idLocalidad;
+    public void setLocalidad(localidad localidad) {
+        this.localidad = localidad;
     }
 
-    public int getIdDepartamento() {
-        return idDepartamento;
+    public departamento getDepartamento() {
+        return departamento;
     }
 
-    public void setIdDepartamento(int idDepartamento) {
-        this.idDepartamento = idDepartamento;
+    public void setDepartamento(departamento departamento) {
+        this.departamento = departamento;
     }
 
-    public int getIdEmpresa() {
-        return idEmpresa;
+    public empresa getEmpresa() {
+        return empresa;
     }
 
-    public void setIdEmpresa(int idEmpresa) {
-        this.idEmpresa = idEmpresa;
+    public void setEmpresa(empresa empresa) {
+        this.empresa = empresa;
     }
 
     public String getCuenta() {
@@ -106,14 +115,12 @@ public class usuario {
         this.cuentaActiva = cuentaActiva;
     }
 
-    public int getIdEstado() {
-        return idEstado;
+    public estado getEstado() {
+        return estado;
     }
 
-    public void setIdEstado(int idEstado) {
-        this.idEstado = idEstado;
+    public void setEstado(estado estado) {
+        this.estado = estado;
     }
 
-    
-    
 }

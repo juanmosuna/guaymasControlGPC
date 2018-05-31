@@ -15,7 +15,7 @@ public class almacen {
     private String codigo = new String();
     private String nombreCompleto = new String();
     private String descripcion = new String();
-    private int idtipoAlmacen = 0;
+    private tipoAlmacen tpAlmacen = new tipoAlmacen();
     private String nombreTipoAlmacen = new String();
     private double capacidad = 0.0;
     private int idunidadMedida = 0;
@@ -59,14 +59,6 @@ public class almacen {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
-    }
-
-    public int getIdtipoAlmacen() {
-        return idtipoAlmacen;
-    }
-
-    public void setIdtipoAlmacen(int idtipoAlmacen) {
-        this.idtipoAlmacen = idtipoAlmacen;
     }
 
     public String getNombreTipoAlmacen() {
@@ -139,6 +131,14 @@ public class almacen {
 
     public void setIdEstado(int idEstado) {
         this.idEstado = idEstado;
+    }
+
+    public tipoAlmacen getTpAlmacen() {
+        return tpAlmacen;
+    }
+
+    public void setTpAlmacen(tipoAlmacen tpAlmacen) {
+        this.tpAlmacen = tpAlmacen;
     }
 
 }

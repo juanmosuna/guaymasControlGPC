@@ -5,6 +5,10 @@
  */
 package DAO.database;
 
+import entity.departamento;
+import entity.empresa;
+import entity.estado;
+import entity.localidad;
 import entity.perfilUsuario;
 import entity.usuario;
 import java.sql.Connection;
@@ -34,6 +38,7 @@ public class usuarioDAOImpl {
         
         _consulta.append("INSERT INTO controlGPC.dbusuario ")
                     .append("(nombreCompleto, ")
+                    .append("(sexo, ")
                     .append("idPerfilUsuario, ")
                     .append("idLocalidad, ")
                     .append("idDepartamento, ")
@@ -43,20 +48,21 @@ public class usuarioDAOImpl {
                     .append("fotoUsuario, ")
                     .append("cuentaActiva, ")
                     .append("idEstado) ")
-                .append("VALUES (?, ?, ?, ?, ?, ?, aes_encrypt(?, 'gpc'), ?, ?, ?);");
+                .append("VALUES (?, ?' ?, ?, ?, ?, ?, aes_encrypt(?, 'gpc'), ?, ?, ?);");
                 
         PreparedStatement st = this.conexion.prepareStatement(_consulta.toString());
         
         st.setString(1, _usuario.getNombreCompleto());
-        st.setInt(2, _usuario.getPerfilUsuario().getId());
-        st.setInt(3, _usuario.getIdLocalidad());
-        st.setInt(4, _usuario.getIdDepartamento());
-        st.setInt(5, _usuario.getIdEmpresa());
-        st.setString(6, _usuario.getCuenta());
-        st.setString(7, _usuario.getContrasena());
-        st.setString(8, _usuario.getFotoUsuario());
-        st.setBoolean(9, _usuario.isCuentaActiva());
-        st.setInt(10, _usuario.getIdEstado());
+        st.setString(2, _usuario.getSexo());
+        st.setInt(3, _usuario.getPerfilUsuario().getId());
+        st.setInt(4, _usuario.getLocalidad().getId());
+        st.setInt(5, _usuario.getDepartamento().getId());
+        st.setInt(6, _usuario.getEstado().getId());
+        st.setString(7, _usuario.getCuenta());
+        st.setString(8, _usuario.getContrasena());
+        st.setString(9, _usuario.getFotoUsuario());
+        st.setBoolean(10, _usuario.isCuentaActiva());
+        st.setInt(11, _usuario.getEstado().getId());
         
         boolean resultado = st.execute();
         
@@ -93,6 +99,7 @@ public class usuarioDAOImpl {
         _consulta.append("UPDATE controlGPC.dbusuario ")
                 .append("SET ")
                     .append("nombreCompleto = ?, ")
+                    .append("sexo = ?, ")
                     .append("idPerfilUsuario = ?, ")
                     .append("idLocalidad = ?, ")
                     .append("idDepartamento = ?, ")
@@ -107,16 +114,17 @@ public class usuarioDAOImpl {
         PreparedStatement st = this.conexion.prepareStatement(_consulta.toString());
         
         st.setString(1, _usuario.getNombreCompleto());
-        st.setInt(2, _usuario.getPerfilUsuario().getId());
-        st.setInt(3, _usuario.getIdLocalidad());
-        st.setInt(4, _usuario.getIdDepartamento());
-        st.setInt(5, _usuario.getIdEmpresa());
-        st.setString(6, _usuario.getCuenta());
-        st.setString(7, _usuario.getContrasena());
-        st.setString(8, _usuario.getFotoUsuario());
-        st.setBoolean(9, _usuario.isCuentaActiva());
-        st.setInt(10, _usuario.getIdEstado());
-        st.setInt(11, _usuario.getId());
+        st.setString(2, _usuario.getSexo());
+        st.setInt(3, _usuario.getPerfilUsuario().getId());
+        st.setInt(4, _usuario.getLocalidad().getId());
+        st.setInt(5, _usuario.getDepartamento().getId());
+        st.setInt(6, _usuario.getEstado().getId());
+        st.setString(7, _usuario.getCuenta());
+        st.setString(8, _usuario.getContrasena());
+        st.setString(9, _usuario.getFotoUsuario());
+        st.setBoolean(10, _usuario.isCuentaActiva());
+        st.setInt(11, _usuario.getEstado().getId());
+        st.setInt(12, _usuario.getId());
         
         boolean resultado = st.execute();
         
@@ -134,8 +142,10 @@ public class usuarioDAOImpl {
                 
         StringBuilder _consulta = new StringBuilder();
         
-        _consulta.append("SELECT dbusuario.id, ")
+        _consulta.append("SELECT ")
+                    .append("dbusuario.id, ")
                     .append("dbusuario.nombreCompleto, ")
+                    .append("dbusuario.sexo, ")
                     .append("dbusuario.idPerfilUsuario, ")
                     .append("dbusuario.idLocalidad, ")
                     .append("dbusuario.idDepartamento, ")
@@ -162,19 +172,32 @@ public class usuarioDAOImpl {
             
                 _usuario.setId(rs.getInt(1));
                 _usuario.setNombreCompleto(rs.getString(2));
+                _usuario.setId(rs.getInt(3));
                 
                 perfilUsuario _perfilUsuario = new perfilUsuario();
-                _perfilUsuario.setId(rs.getInt(3));
-                
+                _perfilUsuario.setId(rs.getInt(4));
                 _usuario.setPerfilUsuario(_perfilUsuario);
-                _usuario.setIdLocalidad(rs.getInt(4));
-                _usuario.setIdDepartamento(rs.getInt(5));
-                _usuario.setIdEmpresa(rs.getInt(6));
-                _usuario.setCuenta(rs.getString(7));
-                _usuario.setContrasena(rs.getString(8));
-                _usuario.setFotoUsuario(rs.getString(9));
-                _usuario.setCuentaActiva(rs.getBoolean(10));
-                _usuario.setIdEstado(rs.getInt(11));
+                
+                localidad _localidad = new localidad();
+                _localidad.setId(rs.getInt(5));
+                _usuario.setLocalidad(_localidad);
+                
+                departamento _departamento = new departamento();
+                _departamento.setId(rs.getInt(6));
+                _usuario.setDepartamento(_departamento);
+                
+                empresa _empresa = new empresa();
+                _empresa.setId(rs.getInt(7));
+                _usuario.setEmpresa(_empresa);
+                
+                _usuario.setCuenta(rs.getString(8));
+                _usuario.setContrasena(rs.getString(9));
+                _usuario.setFotoUsuario(rs.getString(10));
+                _usuario.setCuentaActiva(rs.getBoolean(11));
+                
+                estado _estado = new estado();
+                _estado.setId(rs.getInt(12));
+                _usuario.setEstado(_estado);
                 
                 o = (Object)_usuario;
                 
@@ -205,6 +228,7 @@ public class usuarioDAOImpl {
         
         _consulta.append("SELECT dbusuario.id, ")
                     .append("dbusuario.nombreCompleto, ")
+                    .append("dbusuario.sexo, ")
                     .append("dbusuario.idPerfilUsuario, ")
                     .append("dbusuario.idLocalidad, ")
                     .append("dbusuario.idDepartamento, ")
@@ -231,19 +255,32 @@ public class usuarioDAOImpl {
             
                 _usuario.setId(rs.getInt(1));
                 _usuario.setNombreCompleto(rs.getString(2));
+                _usuario.setId(rs.getInt(3));
                 
                 perfilUsuario _perfilUsuario = new perfilUsuario();
-                _perfilUsuario.setId(rs.getInt(3));
-                
+                _perfilUsuario.setId(rs.getInt(4));
                 _usuario.setPerfilUsuario(_perfilUsuario);
-                _usuario.setIdLocalidad(rs.getInt(4));
-                _usuario.setIdDepartamento(rs.getInt(5));
-                _usuario.setIdEmpresa(rs.getInt(6));
-                _usuario.setCuenta(rs.getString(7));
-                _usuario.setContrasena(rs.getString(8));
-                _usuario.setFotoUsuario(rs.getString(9));
-                _usuario.setCuentaActiva(rs.getBoolean(10));
-                _usuario.setIdEstado(rs.getInt(11));
+                
+                localidad _localidad = new localidad();
+                _localidad.setId(rs.getInt(5));
+                _usuario.setLocalidad(_localidad);
+                
+                departamento _departamento = new departamento();
+                _departamento.setId(rs.getInt(6));
+                _usuario.setDepartamento(_departamento);
+                
+                empresa _empresa = new empresa();
+                _empresa.setId(rs.getInt(7));
+                _usuario.setEmpresa(_empresa);
+                
+                _usuario.setCuenta(rs.getString(8));
+                _usuario.setContrasena(rs.getString(9));
+                _usuario.setFotoUsuario(rs.getString(10));
+                _usuario.setCuentaActiva(rs.getBoolean(11));
+                
+                estado _estado = new estado();
+                _estado.setId(rs.getInt(12));
+                _usuario.setEstado(_estado);
             
                 _listaUsuarios.add(_usuario);
             }
@@ -273,6 +310,7 @@ public class usuarioDAOImpl {
         
         _consulta.append("SELECT dbusuario.id, ")
                     .append("dbusuario.nombreCompleto, ")
+                    .append("dbusuario.sexo, ")
                     .append("dbusuario.idPerfilUsuario, ")
                     .append("dbusuario.idLocalidad, ")
                     .append("dbusuario.idDepartamento, ")
@@ -296,19 +334,32 @@ public class usuarioDAOImpl {
             
                 _usuario.setId(rs.getInt(1));
                 _usuario.setNombreCompleto(rs.getString(2));
+                _usuario.setId(rs.getInt(3));
                 
                 perfilUsuario _perfilUsuario = new perfilUsuario();
-                _perfilUsuario.setId(rs.getInt(3));
-                
+                _perfilUsuario.setId(rs.getInt(4));
                 _usuario.setPerfilUsuario(_perfilUsuario);
-                _usuario.setIdLocalidad(rs.getInt(4));
-                _usuario.setIdDepartamento(rs.getInt(5));
-                _usuario.setIdEmpresa(rs.getInt(6));
-                _usuario.setCuenta(rs.getString(7));
-                _usuario.setContrasena(rs.getString(8));
-                _usuario.setFotoUsuario(rs.getString(9));
-                _usuario.setCuentaActiva(rs.getBoolean(10));
-                _usuario.setIdEstado(rs.getInt(11));
+                
+                localidad _localidad = new localidad();
+                _localidad.setId(rs.getInt(5));
+                _usuario.setLocalidad(_localidad);
+                
+                departamento _departamento = new departamento();
+                _departamento.setId(rs.getInt(6));
+                _usuario.setDepartamento(_departamento);
+                
+                empresa _empresa = new empresa();
+                _empresa.setId(rs.getInt(7));
+                _usuario.setEmpresa(_empresa);
+                
+                _usuario.setCuenta(rs.getString(8));
+                _usuario.setContrasena(rs.getString(9));
+                _usuario.setFotoUsuario(rs.getString(10));
+                _usuario.setCuentaActiva(rs.getBoolean(11));
+                
+                estado _estado = new estado();
+                _estado.setId(rs.getInt(12));
+                _usuario.setEstado(_estado);
             
                 _listaUsuarios.add(_usuario);
             }
@@ -339,6 +390,7 @@ public class usuarioDAOImpl {
         _consulta.append("SELECT ")
                     .append("u.id, ")
                     .append("u.nombreCompleto, ")
+                    .append("u.sexo, ")
                     .append("u.idPerfilUsuario, ")
                     .append("u.idLocalidad, ")
                     .append("u.idDepartamento, ")
@@ -350,7 +402,10 @@ public class usuarioDAOImpl {
                     .append("u.idEstado, ")
                     .append("pu.nombreCompleto, ")
                     .append("pu.descripcion, ")
-                    .append("pu.ingresoPlataforma, ")
+                    .append("pu.accesoPlataforma, ")
+                    .append("pu.gestionCatalogos, ")
+                    .append("pu.gestionUsuario, ")
+                    .append("pu.gestionDocumentos, ")
                     .append("pu.agregarDocumento, ")
                     .append("pu.eliminarDocumento, ")
                     .append("pu.modificarDocumento, ")
@@ -374,31 +429,48 @@ public class usuarioDAOImpl {
             if(rs.next()){
                 
                 _usuario = new usuario();
-                perfilUsuario _perfilUsuario = new perfilUsuario();
+                
                 
                 _usuario.setId(rs.getInt(1));
                 _usuario.setNombreCompleto(rs.getString(2));
+                _usuario.setSexo(rs.getString(3));
                 
-                _perfilUsuario.setId(rs.getInt(3));
+                perfilUsuario _perfilUsuario = new perfilUsuario();
+                _perfilUsuario.setId(rs.getInt(4));
                 
-                _usuario.setIdLocalidad(rs.getInt(4));
-                _usuario.setIdDepartamento(rs.getInt(5));
-                _usuario.setIdEmpresa(rs.getInt(6));
-                _usuario.setCuenta(rs.getString(7));
-                _usuario.setContrasena(rs.getString(8));
-                _usuario.setFotoUsuario(rs.getString(9));
-                _usuario.setCuentaActiva(rs.getBoolean(10));
-                _usuario.setIdEstado(rs.getInt(11));
+                localidad _localidad = new localidad();
+                _localidad.setId(rs.getInt(5));
+                _usuario.setLocalidad(_localidad);
                 
-                _perfilUsuario.setNombreCompleto(rs.getString(12));
-                _perfilUsuario.setDescripcion(rs.getString(13));
-                _perfilUsuario.setIngresoPlataforma(rs.getBoolean(14));
-                _perfilUsuario.setAgregarDocumento(rs.getBoolean(15));
-                _perfilUsuario.setEliminarDocumento(rs.getBoolean(16));
-                _perfilUsuario.setModificarDocumento(rs.getBoolean(17));
-                _perfilUsuario.setBuscarDocumento(rs.getBoolean(18));
-                _perfilUsuario.setImprimirDocumento(rs.getBoolean(19));
-                _perfilUsuario.setIdEstado(rs.getInt(20));
+                departamento _departamento = new departamento();
+                _departamento.setId(rs.getInt(6));
+                _usuario.setDepartamento(_departamento);
+                
+                empresa _empresa = new empresa();
+                _empresa.setId(rs.getInt(7));
+                _usuario.setEmpresa(_empresa);
+                
+                _usuario.setCuenta(rs.getString(8));
+                _usuario.setContrasena(rs.getString(9));
+                _usuario.setFotoUsuario(rs.getString(10));
+                _usuario.setCuentaActiva(rs.getBoolean(11));
+                
+                estado _estado = new estado();
+                _estado.setId(rs.getInt(12));
+                _usuario.setEstado(_estado);
+                
+                _perfilUsuario.setNombreCompleto(rs.getString(13));
+                _perfilUsuario.setDescripcion(rs.getString(14));
+                _perfilUsuario.setAccesoPlataforma(rs.getBoolean(15));
+                _perfilUsuario.setGestionCatalogos(rs.getBoolean(16));
+                _perfilUsuario.setGestionUsuario(rs.getBoolean(17));
+                _perfilUsuario.setGestionDocumentos(rs.getBoolean(18));
+                _perfilUsuario.setAgregarDocumento(rs.getBoolean(19));
+                _perfilUsuario.setEliminarDocumento(rs.getBoolean(20));
+                _perfilUsuario.setModificarDocumento(rs.getBoolean(21));
+                _perfilUsuario.setBuscarDocumento(rs.getBoolean(22));
+                _perfilUsuario.setImprimirDocumento(rs.getBoolean(23));
+                _perfilUsuario.setIdEstado(rs.getInt(24));
                 
                 _usuario.setPerfilUsuario(_perfilUsuario);
 

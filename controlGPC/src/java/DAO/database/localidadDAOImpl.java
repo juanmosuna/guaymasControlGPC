@@ -31,7 +31,7 @@ public class localidadDAOImpl implements catalogosInterface {
 
         localidad _localidadesObj = (localidad) o;
 
-        String _consulta = "INSERT INTO gpcControl.dblocalidad "
+        String _consulta = "INSERT INTO controlGPC.dblocalidad "
                 + "(nombreCompleto, "
                 + "descripcion, "
                 + "idEstado) "
@@ -58,7 +58,7 @@ public class localidadDAOImpl implements catalogosInterface {
 
         localidad _localidadesObj = (localidad) o;
 
-        String _consulta = "UPDATE gpcControl.dblocalidad "
+        String _consulta = "UPDATE controlGPC.dblocalidad "
                 + "SET "
                 + "nombreCompleto = ?, "
                 + "descripcion = ?, "
@@ -85,7 +85,7 @@ public class localidadDAOImpl implements catalogosInterface {
     @Override
     public boolean eliminarRegistro(int id) throws Exception {
 
-        String _consulta = "UPDATE gpcControl.dblocalidad SET idEstado = 3 WHERE id = ?;";
+        String _consulta = "UPDATE controlGPC.dblocalidad SET idEstado = 3 WHERE id = ?;";
 
         PreparedStatement st = this._conn.prepareStatement(_consulta);
 
@@ -113,7 +113,7 @@ public class localidadDAOImpl implements catalogosInterface {
                 + "    dblocalidad.descripcion AS 'descripcion', "
                 + "    dblocalidad.idEstado AS 'idEstado' "
                 + "FROM "
-                + "    gpcControl.dblocalidad "
+                + "    controlGPC.dblocalidad "
                 + "WHERE "
                 + "    dblocalidad.idEstado <> 3;";
 
@@ -164,7 +164,7 @@ public class localidadDAOImpl implements catalogosInterface {
                 + "    dblocalidad.descripcion AS 'descripcion', "
                 + "    dblocalidad.idEstado AS 'idEstado' "
                 + "FROM "
-                + "    gpcControl.dblocalidad "
+                + "    controlGPC.dblocalidad "
                 + "WHERE " + _campo + " LIKE '%" + _dato + "%' "
                 + "    AND dblocalidad.idEstado <> 3;";
 
@@ -213,7 +213,7 @@ public class localidadDAOImpl implements catalogosInterface {
                 + "    dblocalidad.descripcion AS 'descripcion', "
                 + "    dblocalidad.idEstado AS 'idEstado' "
                 + "FROM "
-                + "    gpcControl.dblocalidad "
+                + "    controlGPC.dblocalidad "
                 + "WHERE dblocalidad.id = " + id + " "
                 + "    AND dblocalidad.idEstado <> 3;";
 

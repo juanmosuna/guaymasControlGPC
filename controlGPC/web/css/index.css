@@ -164,6 +164,10 @@ input{
     
 }
 
+input:focus {
+    background: lightyellow;
+}
+
 div.contenedorCheckbox{
     padding: 10px;
         
@@ -184,13 +188,21 @@ div.contenedorBoton{
 }
 
 input[type="submit"]{
+    padding: 0px 8px;
+    
+    font-family: sans-serif;
+    font-size: 1em;
+    
     background: tomato;
     color: white;
 }
 
 input[type="submit"]:hover{
-    background: rgb(0, 139, 191);
     color: white;
+    
+    background: #4d90fe;
+    
+    border: 1px solid #3079ed;
     
     cursor: pointer;
 }

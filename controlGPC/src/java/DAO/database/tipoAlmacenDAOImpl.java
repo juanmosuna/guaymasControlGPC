@@ -31,7 +31,7 @@ public class tipoAlmacenDAOImpl implements catalogosInterface {
 
         tipoAlmacen _tpAlmacenesObj = (tipoAlmacen) o;
 
-        String _consulta = "INSERT INTO gpcControl.dbtipoAlmacen " +
+        String _consulta = "INSERT INTO controlGPC.dbtipoAlmacen " +
                     "(nombreCompleto, " +
                     "descripcion, " +
                     "idEstado) " +
@@ -58,7 +58,7 @@ public class tipoAlmacenDAOImpl implements catalogosInterface {
 
         tipoAlmacen _tpAlmacenesObj = (tipoAlmacen) o;
 
-        String _consulta = "UPDATE gpcControl.dbtipoAlmacen " +
+        String _consulta = "UPDATE controlGPC.dbtipoAlmacen " +
                 "SET " +
                 "nombreCompleto = ?, " +
                 "descripcion = ?, " +
@@ -85,7 +85,7 @@ public class tipoAlmacenDAOImpl implements catalogosInterface {
     @Override
     public boolean eliminarRegistro(int id) throws Exception {
 
-        String _consulta = "UPDATE gpcControl.dbtipoAlmacen SET idEstado = 3 WHERE id = ?;";
+        String _consulta = "UPDATE controlGPC.dbtipoAlmacen SET idEstado = 3 WHERE id = ?;";
 
         PreparedStatement st = this._conn.prepareStatement(_consulta);
         
@@ -113,7 +113,7 @@ public class tipoAlmacenDAOImpl implements catalogosInterface {
                 "    dbtipoAlmacen.descripcion AS 'descripcion', " +
                 "    dbtipoAlmacen.idEstado AS 'idEstado' " +
                 "FROM " +
-                "    gpcControl.dbtipoAlmacen " +
+                "    controlGPC.dbtipoAlmacen " +
                 "WHERE " +
                 "    dbtipoAlmacen.idEstado <> 3;";
 
@@ -164,7 +164,7 @@ public class tipoAlmacenDAOImpl implements catalogosInterface {
                 "    dbtipoAlmacen.descripcion AS 'descripcion', " +
                 "    dbtipoAlmacen.idEstado AS 'idEstado' " +
                 "FROM " +
-                "    gpcControl.dbtipoAlmacen " +
+                "    controlGPC.dbtipoAlmacen " +
                 "WHERE " + _campo + " LIKE '%" + _dato + "%' AND dbtipoAlmacen.idEstado <> 3;";
 
         PreparedStatement st = this._conn.prepareStatement(_consulta);
@@ -212,7 +212,7 @@ public class tipoAlmacenDAOImpl implements catalogosInterface {
                 "    dbtipoAlmacen.descripcion AS 'descripcion', " +
                 "    dbtipoAlmacen.idEstado AS 'idEstado' " +
                 "FROM " +
-                "    gpcControl.dbtipoAlmacen " +
+                "    controlGPC.dbtipoAlmacen " +
                 "WHERE dbtipoAlmacen.id = " + id + " AND dbtipoAlmacen.idEstado <> 3;";
 
         PreparedStatement st = this._conn.prepareStatement(_consulta);

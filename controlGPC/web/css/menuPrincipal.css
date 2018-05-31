@@ -8,35 +8,36 @@ and open the template in the editor.
     Author     : juan_m_osuna
 */
 
-
-@import url(https://fonts.googleapis.com/css?family=Titillium+Web:300);
 .fa-2x {
     font-size: 2em;
 }
 
-.fa {
+.fas {
     position: relative;
-    display: table-cell;
+    
     width: 60px;
     height: 36px;
+    
+    font-size:20px;
+    
     text-align: center;
     vertical-align: middle;
-    font-size:20px;
+    
+    display: table-cell;
 }
 
-
-.main-menu:hover,nav.main-menu.expanded {
+nav.navMenu:hover, nav.navMenu.expanded {
     width:250px;
     overflow:visible;
 }
 
-.main-menu {
+nav.navMenu {
     background:#212121;
     border-right:1px solid #e5e5e5;
     position:absolute;
-    top:0;
-    bottom:0;
-    height:100%;
+    top:50px;
+    bottom: 0px;
+    height:calc(100% - 50px);
     left:0;
     width:60px;
     overflow:hidden;
@@ -44,26 +45,27 @@ and open the template in the editor.
     transition:width .05s linear;
     -webkit-transform:translateZ(0) scale(1,1);
     z-index:1000;
+    
 }
 
-.main-menu>ul {
+nav.navMenu>ul {
     margin:7px 0;
 }
 
-.main-menu li {
+nav.navMenu li {
     position:relative;
     display:block;
     width:250px;
 }
 
-.main-menu li>a {
+nav.navMenu li>a {
     position:relative;
     display:table;
     border-collapse:collapse;
     border-spacing:0;
     color:#999;
-    font-family: arial;
-    font-size: 14px;
+    font-family: sans-serif;
+    font-size: 0.9em;
     text-decoration:none;
     -webkit-transform:translateZ(0) scale(1,1);
     -webkit-transition:all .1s linear;
@@ -71,7 +73,7 @@ and open the template in the editor.
   
 }
 
-.main-menu .nav-icon {
+nav.navMenu .nav-icon {
     position:relative;
     display:table-cell;
     width:60px;
@@ -81,15 +83,15 @@ and open the template in the editor.
     font-size:18px;
 }
 
-.main-menu .nav-text {
+nav.navMenu .nav-text {
     position:relative;
     display:table-cell;
     vertical-align:middle;
     width:190px;
-    font-family: 'Titillium Web', sans-serif;
+    font-family: sans-serif;
 }
 
-.main-menu>ul.logout {
+nav.navMenu>ul.logout {
     position:absolute;
     left:0;
     bottom:0;
@@ -122,21 +124,23 @@ nav ul,nav li {
     padding:0;
 }
 
-.main-menu li:hover>a,nav.main-menu li.active>a,.dropdown-menu>li>a:hover,.dropdown-menu>li>a:focus,.dropdown-menu>.active>a,.dropdown-menu>.active>a:hover,.dropdown-menu>.active>a:focus,.no-touch .dashboard-page nav.dashboard-menu ul li:hover a,.dashboard-page nav.dashboard-menu ul li.active a {
+nav.navMenu li:hover>a, 
+nav.navMenu li.active>a,
+.dropdown-menu>li>a:hover,
+.dropdown-menu>li>a:focus,
+.dropdown-menu>.active>a,
+.dropdown-menu>.active>a:hover,
+.dropdown-menu>.active>a:focus,
+.no-touch .dashboard-page nav.dashboard-menu ul li:hover a,
+.dashboard-page nav.dashboard-menu ul li.active a {
     color:#fff;
-    background-color:#5fa2db;
+    /*background-color:#5fa2db;*/
+    background: tomato;
 }
 
-.area {
+.areaMenu {
     float: left;
     background: #e2e2e2;
     width: 100%;
     height: 100%;
-}
-
-@font-face {
-    font-family: 'Titillium Web';
-    font-style: normal;
-    font-weight: 300;
-    src: local('Titillium WebLight'), local('TitilliumWeb-Light'), url(http://themes.googleusercontent.com/static/fonts/titilliumweb/v2/anMUvcNT0H1YN4FII8wpr24bNCNEoFTpS2BTjF6FB5E.woff) format('woff');
 }

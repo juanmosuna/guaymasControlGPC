@@ -31,7 +31,7 @@ public class calidadNotaDAOImpl implements catalogosInterface {
 
         calidadNota _calidadesNotaObj = (calidadNota) o;
 
-        String _consulta = "INSERT INTO gpcControl.dbcalidadesNota "
+        String _consulta = "INSERT INTO controlGPC.dbcalidadesNota "
                 + "(idDocumentacion, "
                 + "idCalidad, "
                 + "porcentajeCalidad, "
@@ -60,7 +60,7 @@ public class calidadNotaDAOImpl implements catalogosInterface {
 
         calidadNota _calidadesNotaObj = (calidadNota) o;
 
-        String _consulta = "UPDATE gpcControl.dbcalidadesNota "
+        String _consulta = "UPDATE controlGPC.dbcalidadesNota "
                 + "SET "
                 + "idDocumentacion = ?, "
                 + "idCalidad = ?, "
@@ -89,7 +89,7 @@ public class calidadNotaDAOImpl implements catalogosInterface {
     @Override
     public boolean eliminarRegistro(int id) throws Exception {
 
-        String _consulta = "UPDATE gpcControl.dbcalidadesNota SET idEstado = 3 WHERE id = ?;";
+        String _consulta = "UPDATE controlGPC.dbcalidadesNota SET idEstado = 3 WHERE id = ?;";
 
         PreparedStatement st = this._conn.prepareStatement(_consulta);
 
@@ -119,7 +119,7 @@ public class calidadNotaDAOImpl implements catalogosInterface {
                 + "    dbcalidadesNota.porcentajeCalidad AS 'porcentajeCalidad', "
                 + "    dbcalidadesNota.idEstado AS 'idEstado' "
                 + "FROM "
-                + "    gpcControl.dbcalidadesNota "
+                + "    controlGPC.dbcalidadesNota "
                 + "        LEFT JOIN "
                 + "    dbcalidad ON dbcalidad.id = dbcalidadesNota.id "
                 + "WHERE "
@@ -176,7 +176,7 @@ public class calidadNotaDAOImpl implements catalogosInterface {
                 + "    dbcalidadesNota.porcentajeCalidad AS 'porcentajeCalidad', "
                 + "    dbcalidadesNota.idEstado AS 'idEstado' "
                 + "FROM "
-                + "    gpcControl.dbcalidadesNota "
+                + "    controlGPC.dbcalidadesNota "
                 + "        LEFT JOIN "
                 + "    dbcalidad ON dbcalidad.id = dbcalidadesNota.id "
                 + "WHERE " + _campo + " LIKE '%" + _dato + "%' AND dbcalidadesNota.idEstado <> 3;";
@@ -230,7 +230,7 @@ public class calidadNotaDAOImpl implements catalogosInterface {
                 + "    dbcalidadesNota.porcentajeCalidad AS 'porcentajeCalidad', "
                 + "    dbcalidadesNota.idEstado AS 'idEstado' "
                 + "FROM "
-                + "    gpcControl.dbcalidadesNota "
+                + "    controlGPC.dbcalidadesNota "
                 + "        LEFT JOIN "
                 + "    dbcalidad ON dbcalidad.id = dbcalidadesNota.id "
                 + "WHERE dbcalidadesNota.id = " + id + " AND dbcalidadesNota.idEstado <> 3;";
