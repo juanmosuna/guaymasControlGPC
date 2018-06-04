@@ -16,10 +16,8 @@ public class almacen {
     private String nombreCompleto = new String();
     private String descripcion = new String();
     private tipoAlmacen tpAlmacen = new tipoAlmacen();
-    private String nombreTipoAlmacen = new String();
     private double capacidad = 0.0;
-    private int idunidadMedida = 0;
-    private String nombreUnidadMedida = new String();
+    unidadMedida undMedida = new unidadMedida();
     private int secciones = 0;
     private int lados = 0;
     private int segmentos = 0;
@@ -61,36 +59,12 @@ public class almacen {
         this.descripcion = descripcion;
     }
 
-    public String getNombreTipoAlmacen() {
-        return nombreTipoAlmacen;
-    }
-
-    public void setNombreTipoAlmacen(String nombreTipoAlmacen) {
-        this.nombreTipoAlmacen = nombreTipoAlmacen;
-    }
-
     public double getCapacidad() {
         return capacidad;
     }
 
     public void setCapacidad(double capacidad) {
         this.capacidad = capacidad;
-    }
-
-    public int getIdunidadMedida() {
-        return idunidadMedida;
-    }
-
-    public void setIdunidadMedida(int idunidadMedida) {
-        this.idunidadMedida = idunidadMedida;
-    }
-
-    public String getNombreUnidadMedida() {
-        return nombreUnidadMedida;
-    }
-
-    public void setNombreUnidadMedida(String nombreUnidadMedida) {
-        this.nombreUnidadMedida = nombreUnidadMedida;
     }
 
     public int getSecciones() {
@@ -139,6 +113,14 @@ public class almacen {
 
     public void setTpAlmacen(tipoAlmacen tpAlmacen) {
         this.tpAlmacen = tpAlmacen;
+    }
+
+    public unidadMedida getUndMedida() {
+        return undMedida;
+    }
+
+    public void setUndMedida(unidadMedida undMedida) {
+        this.undMedida = undMedida;
     }
 
 }

@@ -36,26 +36,32 @@ public class perfilUsuarioDAOImpl implements catalogosInterface{
         _consulta.append("INSERT INTO controlGPC.dbperfilUsuario ")
                     .append("(nombreCompleto, ")
                     .append("descripcion, ")
-                    .append("ingresoPlataforma, ")
+                    .append("accesoPlataforma, ")
+                    .append("gestionCatalogos, ")
+                    .append("gestionUsuario, ")
+                    .append("gestionDocumentos, ")
                     .append("agregarDocumento, ")
                     .append("eliminarDocumento, ")
                     .append("modificarDocumento, ")
                     .append("buscarDocumento, ")
                     .append("imprimirDocumento, ")
                     .append("idEstado) ")
-                .append("VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);");
+                .append("VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
                 
         PreparedStatement st = this.conexion.prepareStatement(_consulta.toString());
         
         st.setString(1, _perfilUsuario.getNombreCompleto());
         st.setString(2, _perfilUsuario.getDescripcion());
-        st.setBoolean(3, _perfilUsuario.isIngresoPlataforma());
-        st.setBoolean(4, _perfilUsuario.isAgregarDocumento());
-        st.setBoolean(5, _perfilUsuario.isEliminarDocumento());
-        st.setBoolean(6, _perfilUsuario.isModificarDocumento());
-        st.setBoolean(7, _perfilUsuario.isBuscarDocumento());
-        st.setBoolean(8, _perfilUsuario.isImprimirDocumento());
-        st.setInt(9, _perfilUsuario.getIdEstado());
+        st.setBoolean(3, _perfilUsuario.isAccesoPlataforma());
+        st.setBoolean(4, _perfilUsuario.isGestionCatalogos());
+        st.setBoolean(5, _perfilUsuario.isGestionUsuario());
+        st.setBoolean(6, _perfilUsuario.isGestionDocumentos());
+        st.setBoolean(7, _perfilUsuario.isAgregarDocumento());
+        st.setBoolean(8, _perfilUsuario.isEliminarDocumento());
+        st.setBoolean(9, _perfilUsuario.isModificarDocumento());
+        st.setBoolean(10, _perfilUsuario.isBuscarDocumento());
+        st.setBoolean(11, _perfilUsuario.isImprimirDocumento());
+        st.setInt(12, _perfilUsuario.getIdEstado());
         
         boolean resultado = st.execute();
         
@@ -95,7 +101,10 @@ public class perfilUsuarioDAOImpl implements catalogosInterface{
                     .append("SET ")
                         .append("nombreCompleto = ?, ")
                         .append("descripcion = ?, ")
-                        .append("ingresoPlataforma = ?, ")
+                        .append("accesoPlataforma = ?, ")
+                        .append("gestionCatalogos = ?, ")
+                        .append("gestionUsuario = ?, ")
+                        .append("gestionDocumentos = ?, ")
                         .append("agregarDocumento = ?, ")
                         .append("eliminarDocumento = ?, ")
                         .append("modificarDocumento = ?, ")
@@ -108,14 +117,17 @@ public class perfilUsuarioDAOImpl implements catalogosInterface{
         
         st.setString(1, _perfilUsuario.getNombreCompleto());
         st.setString(2, _perfilUsuario.getDescripcion());
-        st.setBoolean(3, _perfilUsuario.isIngresoPlataforma());
-        st.setBoolean(4, _perfilUsuario.isAgregarDocumento());
-        st.setBoolean(5, _perfilUsuario.isEliminarDocumento());
-        st.setBoolean(6, _perfilUsuario.isModificarDocumento());
-        st.setBoolean(7, _perfilUsuario.isBuscarDocumento());
-        st.setBoolean(8, _perfilUsuario.isImprimirDocumento());
-        st.setInt(9, _perfilUsuario.getIdEstado());
-        st.setInt(10, _perfilUsuario.getId());
+        st.setBoolean(3, _perfilUsuario.isAccesoPlataforma());
+        st.setBoolean(4, _perfilUsuario.isGestionCatalogos());
+        st.setBoolean(5, _perfilUsuario.isGestionUsuario());
+        st.setBoolean(6, _perfilUsuario.isGestionDocumentos());
+        st.setBoolean(7, _perfilUsuario.isAgregarDocumento());
+        st.setBoolean(8, _perfilUsuario.isEliminarDocumento());
+        st.setBoolean(9, _perfilUsuario.isModificarDocumento());
+        st.setBoolean(10, _perfilUsuario.isBuscarDocumento());
+        st.setBoolean(11, _perfilUsuario.isImprimirDocumento());
+        st.setInt(12, _perfilUsuario.getIdEstado());
+        st.setInt(13, _perfilUsuario.getId());
         
         boolean resultado = st.execute();
         
@@ -137,7 +149,10 @@ public class perfilUsuarioDAOImpl implements catalogosInterface{
         _consulta.append("SELECT dbperfilUsuario.id, ")
                         .append("dbperfilUsuario.nombreCompleto, ")
                         .append("dbperfilUsuario.descripcion, ")
-                        .append("dbperfilUsuario.ingresoPlataforma, ")
+                        .append("dbperfilUsuario.accesoPlataforma, ")
+                        .append("dbperfilUsuario.gestionCatalogos, ")
+                        .append("dbperfilUsuario.gestionUsuario, ")
+                        .append("dbperfilUsuario.gestionDocumentos, ")
                         .append("dbperfilUsuario.agregarDocumento, ")
                         .append("dbperfilUsuario.eliminarDocumento, ")
                         .append("dbperfilUsuario.modificarDocumento, ")
@@ -162,13 +177,16 @@ public class perfilUsuarioDAOImpl implements catalogosInterface{
                 _perfilUsuario.setId(rs.getInt(1));
                 _perfilUsuario.setNombreCompleto(rs.getString(2));
                 _perfilUsuario.setDescripcion(rs.getString(3));
-                _perfilUsuario.setIngresoPlataforma(rs.getBoolean(4));
-                _perfilUsuario.setAgregarDocumento(rs.getBoolean(5));
-                _perfilUsuario.setEliminarDocumento(rs.getBoolean(6));
-                _perfilUsuario.setModificarDocumento(rs.getBoolean(7));
-                _perfilUsuario.setBuscarDocumento(rs.getBoolean(8));
-                _perfilUsuario.setImprimirDocumento(rs.getBoolean(9));
-                _perfilUsuario.setIdEstado(rs.getInt(10));
+                _perfilUsuario.setAccesoPlataforma(rs.getBoolean(4));
+                _perfilUsuario.setGestionCatalogos(rs.getBoolean(5));
+                _perfilUsuario.setGestionUsuario(rs.getBoolean(6));
+                _perfilUsuario.setGestionDocumentos(rs.getBoolean(7));
+                _perfilUsuario.setAgregarDocumento(rs.getBoolean(8));
+                _perfilUsuario.setEliminarDocumento(rs.getBoolean(9));
+                _perfilUsuario.setModificarDocumento(rs.getBoolean(10));
+                _perfilUsuario.setBuscarDocumento(rs.getBoolean(11));
+                _perfilUsuario.setImprimirDocumento(rs.getBoolean(12));
+                _perfilUsuario.setIdEstado(rs.getInt(13));
                 
                 o = (Object)_perfilUsuario;
                 
@@ -201,7 +219,10 @@ public class perfilUsuarioDAOImpl implements catalogosInterface{
         _consulta.append("SELECT dbperfilUsuario.id, ")
                         .append("dbperfilUsuario.nombreCompleto, ")
                         .append("dbperfilUsuario.descripcion, ")
-                        .append("dbperfilUsuario.ingresoPlataforma, ")
+                        .append("dbperfilUsuario.accesoPlataforma, ")
+                        .append("dbperfilUsuario.gestionCatalogos, ")
+                        .append("dbperfilUsuario.gestionUsuario, ")
+                        .append("dbperfilUsuario.gestionDocumentos, ")
                         .append("dbperfilUsuario.agregarDocumento, ")
                         .append("dbperfilUsuario.eliminarDocumento, ")
                         .append("dbperfilUsuario.modificarDocumento, ")
@@ -226,13 +247,16 @@ public class perfilUsuarioDAOImpl implements catalogosInterface{
                 _perfilUsuario.setId(rs.getInt(1));
                 _perfilUsuario.setNombreCompleto(rs.getString(2));
                 _perfilUsuario.setDescripcion(rs.getString(3));
-                _perfilUsuario.setIngresoPlataforma(rs.getBoolean(4));
-                _perfilUsuario.setAgregarDocumento(rs.getBoolean(5));
-                _perfilUsuario.setEliminarDocumento(rs.getBoolean(6));
-                _perfilUsuario.setModificarDocumento(rs.getBoolean(7));
-                _perfilUsuario.setBuscarDocumento(rs.getBoolean(8));
-                _perfilUsuario.setImprimirDocumento(rs.getBoolean(9));
-                _perfilUsuario.setIdEstado(rs.getInt(10));
+                _perfilUsuario.setAccesoPlataforma(rs.getBoolean(4));
+                _perfilUsuario.setGestionCatalogos(rs.getBoolean(5));
+                _perfilUsuario.setGestionUsuario(rs.getBoolean(6));
+                _perfilUsuario.setGestionDocumentos(rs.getBoolean(7));
+                _perfilUsuario.setAgregarDocumento(rs.getBoolean(8));
+                _perfilUsuario.setEliminarDocumento(rs.getBoolean(9));
+                _perfilUsuario.setModificarDocumento(rs.getBoolean(10));
+                _perfilUsuario.setBuscarDocumento(rs.getBoolean(11));
+                _perfilUsuario.setImprimirDocumento(rs.getBoolean(12));
+                _perfilUsuario.setIdEstado(rs.getInt(13));
             
                 _listaPerfilUsuarios.add(_perfilUsuario);
             }
@@ -264,7 +288,10 @@ public class perfilUsuarioDAOImpl implements catalogosInterface{
         _consulta.append("SELECT dbperfilUsuario.id, ")
                         .append("dbperfilUsuario.nombreCompleto, ")
                         .append("dbperfilUsuario.descripcion, ")
-                        .append("dbperfilUsuario.ingresoPlataforma, ")
+                        .append("dbperfilUsuario.accesoPlataforma, ")
+                        .append("dbperfilUsuario.gestionCatalogos, ")
+                        .append("dbperfilUsuario.gestionUsuario, ")
+                        .append("dbperfilUsuario.gestionDocumentos, ")
                         .append("dbperfilUsuario.agregarDocumento, ")
                         .append("dbperfilUsuario.eliminarDocumento, ")
                         .append("dbperfilUsuario.modificarDocumento, ")
@@ -286,13 +313,16 @@ public class perfilUsuarioDAOImpl implements catalogosInterface{
                 _perfilUsuario.setId(rs.getInt(1));
                 _perfilUsuario.setNombreCompleto(rs.getString(2));
                 _perfilUsuario.setDescripcion(rs.getString(3));
-                _perfilUsuario.setIngresoPlataforma(rs.getBoolean(4));
-                _perfilUsuario.setAgregarDocumento(rs.getBoolean(5));
-                _perfilUsuario.setEliminarDocumento(rs.getBoolean(6));
-                _perfilUsuario.setModificarDocumento(rs.getBoolean(7));
-                _perfilUsuario.setBuscarDocumento(rs.getBoolean(8));
-                _perfilUsuario.setImprimirDocumento(rs.getBoolean(9));
-                _perfilUsuario.setIdEstado(rs.getInt(10));
+                _perfilUsuario.setAccesoPlataforma(rs.getBoolean(4));
+                _perfilUsuario.setGestionCatalogos(rs.getBoolean(5));
+                _perfilUsuario.setGestionUsuario(rs.getBoolean(6));
+                _perfilUsuario.setGestionDocumentos(rs.getBoolean(7));
+                _perfilUsuario.setAgregarDocumento(rs.getBoolean(8));
+                _perfilUsuario.setEliminarDocumento(rs.getBoolean(9));
+                _perfilUsuario.setModificarDocumento(rs.getBoolean(10));
+                _perfilUsuario.setBuscarDocumento(rs.getBoolean(11));
+                _perfilUsuario.setImprimirDocumento(rs.getBoolean(12));
+                _perfilUsuario.setIdEstado(rs.getInt(13));
             
                 _listaPerfilUsuarios.add(_perfilUsuario);
             }

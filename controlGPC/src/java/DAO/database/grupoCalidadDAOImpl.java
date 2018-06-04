@@ -30,15 +30,17 @@ public class grupoCalidadDAOImpl implements catalogosInterface {
     public boolean agregarRegistro(Object o) throws Exception {
 
         grupoCalidad _grupoCalidadesObj = (grupoCalidad) o;
+        
+        StringBuilder _consulta = new StringBuilder();
 
-        String _consulta = "INSERT INTO controlGPC.dbgrupoCalidad "
-                + "(nombreCompleto, "
-                + "descripcion, "
-                + "idEstado) "
-                + "VALUES "
-                + "(?, ?, ?);";
+        _consulta.append( "INSERT INTO controlGPC.dbgrupoCalidad ")
+                .append( "(nombreCompleto, ")
+                .append( "descripcion, ")
+                .append( "idEstado) ")
+                .append( "VALUES ")
+                .append( "(?, ?, ?);");
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         st.setString(1, _grupoCalidadesObj.getNombreCompleto());
         st.setString(2, _grupoCalidadesObj.getDescripcion());
@@ -57,15 +59,17 @@ public class grupoCalidadDAOImpl implements catalogosInterface {
     public boolean modificarRegistro(Object o) throws Exception {
 
         grupoCalidad _grupoCalidadesObj = (grupoCalidad) o;
+        
+        StringBuilder _consulta = new StringBuilder();
 
-        String _consulta = "UPDATE controlGPC.dbgrupoCalidad "
-                + "SET "
-                + "nombreCompleto = ?, "
-                + "descripcion = ?, "
-                + "idEstado = ? "
-                + "WHERE id = ?;";
+        _consulta.append( "UPDATE controlGPC.dbgrupoCalidad ")
+                .append( "SET ")
+                .append( "nombreCompleto = ?, ")
+                .append( "descripcion = ?, ")
+                .append( "idEstado = ? ")
+                .append( "WHERE id = ?;");
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         st.setString(1, _grupoCalidadesObj.getNombreCompleto());
         st.setString(2, _grupoCalidadesObj.getDescripcion());
@@ -84,10 +88,12 @@ public class grupoCalidadDAOImpl implements catalogosInterface {
 
     @Override
     public boolean eliminarRegistro(int id) throws Exception {
+        
+        StringBuilder _consulta = new StringBuilder();
 
-        String _consulta = "UPDATE controlGPC.dbgrupoCalidad SET idEstado = 3 WHERE id = ?;";
+        _consulta.append( "UPDATE controlGPC.dbgrupoCalidad SET idEstado = 3 WHERE id = ?;");
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         st.setInt(1, id);
 
@@ -106,18 +112,20 @@ public class grupoCalidadDAOImpl implements catalogosInterface {
         grupoCalidad _gupoCalidadesObj;
 
         List<grupoCalidad> _listagrupoCalidad = new ArrayList();
+        
+        StringBuilder _consulta = new StringBuilder();
 
-        String _consulta = "SELECT  "
-                + "    dbgrupoCalidad.id AS 'id', "
-                + "    dbgrupoCalidad.nombreCompleto AS 'nombreCompleto', "
-                + "    dbgrupoCalidad.descripcion AS 'descripcion', "
-                + "    dbgrupoCalidad.idEstado AS 'idEstado' "
-                + "FROM "
-                + "    controlGPC.dbgrupoCalidad "
-                + "WHERE "
-                + "    dbgrupoCalidad.idEstado <> 3;";
+        _consulta.append( "SELECT  ")
+                .append( "    dbgrupoCalidad.id AS 'id', ")
+                .append( "    dbgrupoCalidad.nombreCompleto AS 'nombreCompleto', ")
+                .append( "    dbgrupoCalidad.descripcion AS 'descripcion', ")
+                .append( "    dbgrupoCalidad.idEstado AS 'idEstado' ")
+                .append( "FROM ")
+                .append( "    controlGPC.dbgrupoCalidad ")
+                .append( "WHERE ")
+                .append( "    dbgrupoCalidad.idEstado <> 3;");
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         ResultSet rs = st.executeQuery();
 
@@ -157,18 +165,24 @@ public class grupoCalidadDAOImpl implements catalogosInterface {
         grupoCalidad _gupoCalidadesObj;
 
         List<grupoCalidad> _listagrupoCalidad = new ArrayList();
+        
+        StringBuilder _consulta = new StringBuilder();
 
-        String _consulta = "SELECT  "
-                + "    dbgrupoCalidad.id AS 'id', "
-                + "    dbgrupoCalidad.nombreCompleto AS 'nombreCompleto', "
-                + "    dbgrupoCalidad.descripcion AS 'descripcion', "
-                + "    dbgrupoCalidad.idEstado AS 'idEstado' "
-                + "FROM "
-                + "    controlGPC.dbgrupoCalidad "
-                + "WHERE " + _campo + " LIKE '%" + _dato + "%' "
-                + "    dbgrupoCalidad.idEstado <> 3;";
+        _consulta.append( "SELECT  ")
+                .append( "    dbgrupoCalidad.id AS 'id', ")
+                .append( "    dbgrupoCalidad.nombreCompleto AS 'nombreCompleto', ")
+                .append( "    dbgrupoCalidad.descripcion AS 'descripcion', ")
+                .append( "    dbgrupoCalidad.idEstado AS 'idEstado' ")
+                .append( "FROM ")
+                .append( "    controlGPC.dbgrupoCalidad ")
+                .append("WHERE ")
+                .append(_campo)
+                .append(" LIKE '%")
+                .append(_dato)
+                .append("%' ")
+                .append( "    dbgrupoCalidad.idEstado <> 3;");
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         ResultSet rs = st.executeQuery();
 
@@ -206,17 +220,21 @@ public class grupoCalidadDAOImpl implements catalogosInterface {
     public Object consultarPorId(int id) throws Exception {
 
         grupoCalidad _gupoCalidadesObj = new grupoCalidad();
+        
+        StringBuilder _consulta = new StringBuilder();
 
-        String _consulta = "SELECT  "
-                + "    dbgrupoCalidad.id AS 'id', "
-                + "    dbgrupoCalidad.nombreCompleto AS 'nombreCompleto', "
-                + "    dbgrupoCalidad.descripcion AS 'descripcion', "
-                + "    dbgrupoCalidad.idEstado AS 'idEstado' "
-                + "FROM "
-                + "    controlGPC.dbgrupoCalidad "
-                + "WHERE dbgrupoCalidad.id = " + id + " dbgrupoCalidad.idEstado <> 3;";
+        _consulta.append( "SELECT  ")
+                .append( "    dbgrupoCalidad.id AS 'id', ")
+                .append( "    dbgrupoCalidad.nombreCompleto AS 'nombreCompleto', ")
+                .append( "    dbgrupoCalidad.descripcion AS 'descripcion', ")
+                .append( "    dbgrupoCalidad.idEstado AS 'idEstado' ")
+                .append( "FROM ")
+                .append( "    controlGPC.dbgrupoCalidad ")
+                .append("WHERE dbgrupoCalidad.id = ")
+                .append(id)
+                .append(" dbgrupoCalidad.idEstado <> 3;");
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         ResultSet rs = st.executeQuery();
 

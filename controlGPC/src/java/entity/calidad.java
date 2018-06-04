@@ -15,8 +15,8 @@ public class calidad {
     private String codigo = new String();
     private String nombreCompleto = new String();
     private String descripcion = new String();
-    private int idgrupoCalidad = 0;
-    private String nombreGrupoCalidad = new String();
+    private grupoCalidad grpCalidad = new grupoCalidad();
+    
     private int idEstado = 0;
 
     public calidad() {
@@ -54,28 +54,20 @@ public class calidad {
         this.descripcion = descripcion;
     }
 
-    public int getIdgrupoCalidad() {
-        return idgrupoCalidad;
-    }
-
-    public void setIdgrupoCalidad(int idgrupoCalidad) {
-        this.idgrupoCalidad = idgrupoCalidad;
-    }
-
-    public String getNombreGrupoCalidad() {
-        return nombreGrupoCalidad;
-    }
-
-    public void setNombreGrupoCalidad(String nombreGrupoCalidad) {
-        this.nombreGrupoCalidad = nombreGrupoCalidad;
-    }
-
     public int getIdEstado() {
         return idEstado;
     }
 
     public void setIdEstado(int idEstado) {
         this.idEstado = idEstado;
+    }
+
+    public grupoCalidad getGrpCalidad() {
+        return grpCalidad;
+    }
+
+    public void setGrpCalidad(grupoCalidad grpCalidad) {
+        this.grpCalidad = grpCalidad;
     }
 
 }

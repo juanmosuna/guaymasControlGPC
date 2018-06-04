@@ -9,7 +9,7 @@ and open the template in the editor.
         <title>controlGPC v1.8</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="css/font-awesome.css" rel="stylesheet" type="text/css"/>
+        <link href="css/fontawesome-all.min.css" rel="stylesheet" type="text/css"/>
         <link href="css/index.css" rel="stylesheet" type="text/css"/>
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
@@ -37,11 +37,11 @@ and open the template in the editor.
                 <form action="login.do" method="POST" autocomplete="off">
                     <div class="agupadorCampos">
                         <div class="contenedorCampo">
-                            <span><i class="fa fa-user"></i></span>
+                            <span><i class="fas fa-user"></i></span>
                             <input id="nombreUsuario" type="text" name="nombreUsuario" value="" placeholder="usuario" title="Capture su nombre de usuario ..." autofocus required/>
                         </div>
                         <div class="contenedorCampo">
-                            <span><i class="fa fa-key   "></i></span>
+                            <span><i class="fas fa-key   "></i></span>
                             <input id="contrasena" type="password" name="contrasena" value="" placeholder="contraseña" title="Capture su contraseña ..."  required/>
                         </div>
                     </div>

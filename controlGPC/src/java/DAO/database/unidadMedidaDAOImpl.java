@@ -19,7 +19,7 @@ import java.util.List;
  * @author elara
  */
 public class unidadMedidaDAOImpl implements catalogosInterface {
-    
+
     private Connection _conn;
 
     public unidadMedidaDAOImpl(Connection _conn) {
@@ -31,14 +31,16 @@ public class unidadMedidaDAOImpl implements catalogosInterface {
 
         unidadMedida _unidadMedidaObj = (unidadMedida) o;
 
-        String _consulta = "INSERT INTO controlGPC.dbunidadMedida " +
-                "(nombreCompleto, " +
-                "descripcion, " +
-                "idEstado) " +
-                "VALUES " +
-                "(?, ?, ?);";
+        StringBuilder _consulta = new StringBuilder();
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        _consulta.append("INSERT INTO controlGPC.dbunidadMedida ")
+                .append("(nombreCompleto, ")
+                .append("descripcion, ")
+                .append("idEstado) ")
+                .append("VALUES ")
+                .append("(?, ?, ?);");
+
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         st.setString(1, _unidadMedidaObj.getNombreCompleto());
         st.setString(2, _unidadMedidaObj.getDescripcion());
@@ -58,19 +60,21 @@ public class unidadMedidaDAOImpl implements catalogosInterface {
 
         unidadMedida _unidadMedidaObj = (unidadMedida) o;
 
-        String _consulta = "UPDATE controlGPC.dbunidadMedida " +
-                "SET " +
-                "nombreCompleto = ?, " +
-                "descripcion = ?, " +
-                "idEstado = ? " +
-                "WHERE id = ?;";
+        StringBuilder _consulta = new StringBuilder();
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        _consulta.append("UPDATE controlGPC.dbunidadMedida ")
+                .append("SET ")
+                .append("nombreCompleto = ?, ")
+                .append("descripcion = ?, ")
+                .append("idEstado = ? ")
+                .append("WHERE id = ?;");
+
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         st.setString(1, _unidadMedidaObj.getNombreCompleto());
         st.setString(2, _unidadMedidaObj.getDescripcion());
         st.setInt(3, _unidadMedidaObj.getIdEstado());
-        
+
         st.setInt(4, _unidadMedidaObj.getId());
 
         boolean resultado = st.execute();
@@ -85,10 +89,12 @@ public class unidadMedidaDAOImpl implements catalogosInterface {
     @Override
     public boolean eliminarRegistro(int id) throws Exception {
 
-        String _consulta = "UPDATE controlGPC.dbunidadMedida SET idEstado = 3 WHERE id = ?;";
+        StringBuilder _consulta = new StringBuilder();
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
-        
+        _consulta.append("UPDATE controlGPC.dbunidadMedida SET idEstado = 3 WHERE id = ?;");
+
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
+
         st.setInt(1, id);
 
         boolean resultado = st.execute();
@@ -107,17 +113,19 @@ public class unidadMedidaDAOImpl implements catalogosInterface {
 
         List<unidadMedida> _listaUnidadMedida = new ArrayList();
 
-        String _consulta = "SELECT  " +
-                "    dbunidadMedida.id AS 'id', " +
-                "    dbunidadMedida.nombreCompleto AS 'nombreCompleto', " +
-                "    dbunidadMedida.descripcion AS 'descripcion', " +
-                "    dbunidadMedida.idEstado AS 'idEstado' " +
-                "FROM " +
-                "    controlGPC.dbunidadMedida " +
-                "WHERE " +
-                "    dbunidadMedida.idEstado <> 3;";
+        StringBuilder _consulta = new StringBuilder();
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        _consulta.append("SELECT  ")
+                .append("    dbunidadMedida.id AS 'id', ")
+                .append("    dbunidadMedida.nombreCompleto AS 'nombreCompleto', ")
+                .append("    dbunidadMedida.descripcion AS 'descripcion', ")
+                .append("    dbunidadMedida.idEstado AS 'idEstado' ")
+                .append("FROM ")
+                .append("    controlGPC.dbunidadMedida ")
+                .append("WHERE ")
+                .append("    dbunidadMedida.idEstado <> 3;");
+
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         ResultSet rs = st.executeQuery();
 
@@ -158,16 +166,22 @@ public class unidadMedidaDAOImpl implements catalogosInterface {
 
         List<unidadMedida> _listaUnidadMedida = new ArrayList();
 
-        String _consulta = "SELECT  " +
-                "    dbunidadMedida.id AS 'id', " +
-                "    dbunidadMedida.nombreCompleto AS 'nombreCompleto', " +
-                "    dbunidadMedida.descripcion AS 'descripcion', " +
-                "    dbunidadMedida.idEstado AS 'idEstado' " +
-                "FROM " +
-                "    controlGPC.dbunidadMedida " +
-                "WHERE " + _campo + " LIKE '%" + _dato + "%' AND dbunidadMedida.idEstado <> 3;";
+        StringBuilder _consulta = new StringBuilder();
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        _consulta.append("SELECT  ")
+                .append("    dbunidadMedida.id AS 'id', ")
+                .append("    dbunidadMedida.nombreCompleto AS 'nombreCompleto', ")
+                .append("    dbunidadMedida.descripcion AS 'descripcion', ")
+                .append("    dbunidadMedida.idEstado AS 'idEstado' ")
+                .append("FROM ")
+                .append("    controlGPC.dbunidadMedida ")
+                .append("WHERE ")
+                .append(_campo)
+                .append(" LIKE '%")
+                .append(_dato)
+                .append("%' AND dbunidadMedida.idEstado <> 3;");
+
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         ResultSet rs = st.executeQuery();
 
@@ -206,16 +220,20 @@ public class unidadMedidaDAOImpl implements catalogosInterface {
 
         unidadMedida _unidadMedidaObj = new unidadMedida();
 
-        String _consulta = "SELECT  " +
-                "    dbunidadMedida.id AS 'id', " +
-                "    dbunidadMedida.nombreCompleto AS 'nombreCompleto', " +
-                "    dbunidadMedida.descripcion AS 'descripcion', " +
-                "    dbunidadMedida.idEstado AS 'idEstado' " +
-                "FROM " +
-                "    controlGPC.dbunidadMedida " +
-                "WHERE dbunidadMedida.id = " + id + " AND dbunidadMedida.idEstado <> 3;";
+        StringBuilder _consulta = new StringBuilder();
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        _consulta.append("SELECT  ")
+                .append("    dbunidadMedida.id AS 'id', ")
+                .append("    dbunidadMedida.nombreCompleto AS 'nombreCompleto', ")
+                .append("    dbunidadMedida.descripcion AS 'descripcion', ")
+                .append("    dbunidadMedida.idEstado AS 'idEstado' ")
+                .append("FROM ")
+                .append("    controlGPC.dbunidadMedida ")
+                .append("WHERE dbunidadMedida.id = ")
+                .append(id)
+                .append(" AND dbunidadMedida.idEstado <> 3;");
+
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         ResultSet rs = st.executeQuery();
 
@@ -245,5 +263,5 @@ public class unidadMedidaDAOImpl implements catalogosInterface {
 
         return _unidadMedidaObj;
     }
-    
+
 }

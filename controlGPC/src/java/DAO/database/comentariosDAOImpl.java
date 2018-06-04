@@ -32,17 +32,19 @@ public class comentariosDAOImpl implements catalogosInterface {
     public boolean agregarRegistro(Object o) throws Exception {
 
         comentarios _comentsObj = (comentarios) o;
+        
+        StringBuilder _consulta = new StringBuilder();
 
-        String _consulta = "INSERT INTO controlGPC.dbcomentarios " +
-                "(idDocumento, " +
-                "comentario, " +
-                "idUsuario, " +
-                "fechaHora, " +
-                "idEstado) " +
-                "VALUES " +
-                "(?, ?, ?, ?, ?);";
+        _consulta.append("INSERT INTO controlGPC.dbcomentarios " )
+                .append("(idDocumento, " )
+                .append("comentario, " )
+                .append("idUsuario, " )
+                .append("fechaHora, " )
+                .append("idEstado) " )
+                .append("VALUES " )
+                .append("(?, ?, ?, ?, ?);");
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         st.setInt(1, _comentsObj.getDocumentacion().getId());
         st.setString(2, _comentsObj.getComentario());
@@ -64,17 +66,19 @@ public class comentariosDAOImpl implements catalogosInterface {
     public boolean modificarRegistro(Object o) throws Exception {
 
         comentarios _comentsObj = (comentarios) o;
+        
+        StringBuilder _consulta = new StringBuilder();
 
-        String _consulta = "UPDATE controlGPC.dbcomentarios " +
-                "SET " +
-                "idDocumento = ?, " +
-                "comentario = ?, " +
-                "idUsuario = ?, " +
-                "fechaHora = ?, " +
-                "idEstado = ? " +
-                "WHERE id = ?;";
+        _consulta.append("UPDATE controlGPC.dbcomentarios " )
+                .append("SET " )
+                .append("idDocumento = ?, " )
+                .append("comentario = ?, " )
+                .append("idUsuario = ?, " )
+                .append("fechaHora = ?, " )
+                .append("idEstado = ? " )
+                .append("WHERE id = ?;");
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         st.setInt(1, _comentsObj.getDocumentacion().getId());
         st.setString(2, _comentsObj.getComentario());
@@ -96,10 +100,12 @@ public class comentariosDAOImpl implements catalogosInterface {
 
     @Override
     public boolean eliminarRegistro(int id) throws Exception {
+        
+        StringBuilder _consulta = new StringBuilder();
 
-        String _consulta = "UPDATE controlGPC.dbcomentarios SET idEstado = 3 WHERE id = ?;";
+        _consulta.append("UPDATE controlGPC.dbcomentarios SET idEstado = 3 WHERE id = ?;");
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
         
         st.setInt(1, id);
         
@@ -118,23 +124,25 @@ public class comentariosDAOImpl implements catalogosInterface {
         comentarios _commentsObj;
 
         List<comentarios> _listaComentarios = new ArrayList();
+        
+        StringBuilder _consulta = new StringBuilder();
 
-        String _consulta = "SELECT  " +
-                "    dbcomentarios.id AS 'id', " +
-                "    dbcomentarios.idDocumento AS 'idDocumento', " +
-                "    dbcomentarios.comentario AS 'comentario', " +
-                "    dbcomentarios.idUsuario AS 'idUsuario', " +
-                "    dbusuario.nombreCompleto AS 'nombreUsuario', " +
-                "    dbcomentarios.fechaHora AS 'fechaHora', " +
-                "    dbcomentarios.idEstado AS 'idEstado' " +
-                "FROM " +
-                "    controlGPC.dbcomentarios " +
-                "        LEFT JOIN " +
-                "    dbusuario ON dbusuario.id = dbcomentarios.idUsuario " +
-                "WHERE " +
-                "    dbcomentarios.idEstado <> 3;";
+        _consulta.append("SELECT  " )
+                .append("    dbcomentarios.id AS 'id', " )
+                .append("    dbcomentarios.idDocumento AS 'idDocumento', " )
+                .append("    dbcomentarios.comentario AS 'comentario', " )
+                .append("    dbcomentarios.idUsuario AS 'idUsuario', " )
+                .append("    dbusuario.nombreCompleto AS 'nombreUsuario', " )
+                .append("    dbcomentarios.fechaHora AS 'fechaHora', " )
+                .append("    dbcomentarios.idEstado AS 'idEstado' " )
+                .append("FROM " )
+                .append("    controlGPC.dbcomentarios " )
+                .append("        LEFT JOIN " )
+                .append("    dbusuario ON dbusuario.id = dbcomentarios.idUsuario " )
+                .append("WHERE " )
+                .append("    dbcomentarios.idEstado <> 3;");
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         ResultSet rs = st.executeQuery();
 
@@ -189,21 +197,27 @@ public class comentariosDAOImpl implements catalogosInterface {
 
         List<comentarios> _listaComentarios = new ArrayList();
 
-        String _consulta = "SELECT  " +
-                "    dbcomentarios.id AS 'id', " +
-                "    dbcomentarios.idDocumento AS 'idDocumento', " +
-                "    dbcomentarios.comentario AS 'comentario', " +
-                "    dbcomentarios.idUsuario AS 'idUsuario', " +
-                "    dbusuario.nombreCompleto AS 'nombreUsuario', " +
-                "    dbcomentarios.fechaHora AS 'fechaHora', " +
-                "    dbcomentarios.idEstado AS 'idEstado' " +
-                "FROM " +
-                "    controlGPC.dbcomentarios " +
-                "        LEFT JOIN " +
-                "    dbusuario ON dbusuario.id = dbcomentarios.idUsuario " +
-                "WHERE " + _campo + " LIKE '%" + _dato + "%' AND dbcomentarios.idEstado <> 3;";
+        StringBuilder _consulta = new StringBuilder();
+        
+        _consulta.append("SELECT  " )
+                .append("    dbcomentarios.id AS 'id', " )
+                .append("    dbcomentarios.idDocumento AS 'idDocumento', " )
+                .append("    dbcomentarios.comentario AS 'comentario', " )
+                .append("    dbcomentarios.idUsuario AS 'idUsuario', " )
+                .append("    dbusuario.nombreCompleto AS 'nombreUsuario', " )
+                .append("    dbcomentarios.fechaHora AS 'fechaHora', " )
+                .append("    dbcomentarios.idEstado AS 'idEstado' " )
+                .append("FROM " )
+                .append("    controlGPC.dbcomentarios " )
+                .append("        LEFT JOIN " )
+                .append("    dbusuario ON dbusuario.id = dbcomentarios.idUsuario " )
+                .append("WHERE " )
+                .append(_campo)
+                .append(" LIKE '%" )
+                .append(_dato)
+                .append("%' AND dbcomentarios.idEstado <> 3;");
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         ResultSet rs = st.executeQuery();
 
@@ -256,21 +270,25 @@ public class comentariosDAOImpl implements catalogosInterface {
 
         comentarios _commentsObj = new comentarios();
 
-        String _consulta = "SELECT  " +
-                "    dbcomentarios.id AS 'id', " +
-                "    dbcomentarios.idDocumento AS 'idDocumento', " +
-                "    dbcomentarios.comentario AS 'comentario', " +
-                "    dbcomentarios.idUsuario AS 'idUsuario', " +
-                "    dbusuario.nombreCompleto AS 'nombreUsuario', " +
-                "    dbcomentarios.fechaHora AS 'fechaHora', " +
-                "    dbcomentarios.idEstado AS 'idEstado' " +
-                "FROM " +
-                "    controlGPC.dbcomentarios " +
-                "        LEFT JOIN " +
-                "    dbusuario ON dbusuario.id = dbcomentarios.idUsuario " +
-                "WHERE dbcomentarios.id = " + id + " AND dbcomentarios.idEstado <> 3;";
+        StringBuilder _consulta = new StringBuilder();
+        
+        _consulta.append("SELECT  " )
+                .append("    dbcomentarios.id AS 'id', " )
+                .append("    dbcomentarios.idDocumento AS 'idDocumento', " )
+                .append("    dbcomentarios.comentario AS 'comentario', " )
+                .append("    dbcomentarios.idUsuario AS 'idUsuario', " )
+                .append("    dbusuario.nombreCompleto AS 'nombreUsuario', " )
+                .append("    dbcomentarios.fechaHora AS 'fechaHora', " )
+                .append("    dbcomentarios.idEstado AS 'idEstado' " )
+                .append("FROM " )
+                .append("    controlGPC.dbcomentarios " )
+                .append("        LEFT JOIN " )
+                .append("    dbusuario ON dbusuario.id = dbcomentarios.idUsuario " )
+                .append("WHERE dbcomentarios.id = " )
+                .append(id)
+                .append(" AND dbcomentarios.idEstado <> 3;");
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         ResultSet rs = st.executeQuery();
 
