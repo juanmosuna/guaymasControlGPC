@@ -5,6 +5,16 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    if (session.getAttribute("usuario") == null){
+        response.sendRedirect("/controlGPC/logout.do");
+    }else{
+        
+        response.setHeader("Cache-Control","no-cache");
+        response.setHeader("Cache-Control","no-store");
+        response.setDateHeader("Expires", 0);
+    
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -168,16 +178,40 @@
                 </div>
             </div>
             <div class="card-deck">
-                <div class="card text-center pt-3 mb-4 mr-sm-2 col-2" style="width: 160px;" onclick="location.href='usuario/usuarioTabla.jsp';">
+                <div class="card text-center pt-3 mb-4 col-2" onclick="location.href='usuario/usuarioTabla.jsp';">
                     <i class="fas fa-users fa-2x"></i>
                     <div class="card-body">
                       <h6 class="card-title mb-0">Usuarios</h6>
                     </div>
                 </div>
-                <div class="card text-center pt-3 mb-4 mr-sm-2 col-2" style="width: 160px;" onclick="location.href='vehiculo/vehiculoTabla.jsp';">
+                <div class="card text-center pt-3 mb-4 col-2" onclick="location.href='vehiculo/vehiculoTabla.jsp';">
                     <i class="fas fa-truck fa-2x"></i>
                     <div class="card-body">
                         <h6 class="card-title mb-0">Vehículos</h6>
+                    </div>
+                </div>
+                <div class="card-body text-center pt-3 mb-4 col-2">
+                    <i class=""></i>
+                    <div class="card-body">
+                        <h6 class="card-title mb-0">&nbsp;</h6>
+                    </div>
+                </div>
+                <div class="card-body text-center pt-3 mb-4 col-2">
+                    <i class=""></i>
+                    <div class="card-body">
+                        <h6 class="card-title mb-0">&nbsp;</h6>
+                    </div>
+                </div>
+                <div class="card-body text-center pt-3 mb-4 col-2">
+                    <i class=""></i>
+                    <div class="card-body">
+                        <h6 class="card-title mb-0">&nbsp;</h6>
+                    </div>
+                </div>
+                <div class="card-body text-center pt-3 mb-4 col-2">
+                    <i class=""></i>
+                    <div class="card-body">
+                        <h6 class="card-title mb-0">&nbsp;</h6>
                     </div>
                 </div>
             </div>  
@@ -187,3 +221,6 @@
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+<%
+    }  
+%>
