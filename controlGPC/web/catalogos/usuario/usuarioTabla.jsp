@@ -1,6 +1,6 @@
 <%-- 
-    Document   : agregarTransportista
-    Created on : May 30, 2018, 10:55:56 PM
+    Document   : usuarioTabla
+    Created on : Jun 4, 2018, 9:59:27 PM
     Author     : juan_m_osuna
 --%>
 
@@ -9,7 +9,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Agregar transportista</title>
+        <title>Catálogo de usuarios</title>
+        <link href="../../css/fontawesome-all.min.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
         <style>
             
@@ -43,21 +44,47 @@
     </head>
     <body>
         <div class="container">
-            <h1 class="fontUbuntulight fontColor">Agregar transportista</h1>
+            <h1 class="fontUbuntulight "><i class="fas fa-users fontColor"></i>&nbsp;Catálogo de usuarios</h1>
+            <ul class="breadcrumb">
+                <li><a href="../catalogos.jsp">Catálogos</a> <span class="divider">/</span></li>
+                <li class="active">Usuarios</li>
+            </ul>
+            <ul class="nav nav-pills">
+                <li class="active">
+                    <a href="agregarUsuario.jsp" class="btn btn-primary">+ Agregar</a>
+                </li>
+            </ul>
             <hr>
-            <form action="" method="post" class="">
-                <div class="form-group">
-                    <label for="nombreCompleto">Nombre completo:</label>
-                    <input type="text" class="form-control is-invalid" id="nombreCompleto" placeholder="Teclee el nombre completo del tipo de transportista ..." required>
-                    <div class="invalid-feedback">
-                     Campo obligatorio!    
-                    </div>
-                </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Guardar</button>
-                    <button type="submit" class="btn btn-light">Cancelar</button>
-                </div>
-            </form>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">First</th>
+                        <th scope="col">Last</th>
+                        <th scope="col">Handle</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>Jacob</td>
+                        <td>Thornton</td>
+                        <td>@fat</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td>Larry</td>
+                        <td>the Bird</td>
+                        <td>@twitter</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </body>
 </html>

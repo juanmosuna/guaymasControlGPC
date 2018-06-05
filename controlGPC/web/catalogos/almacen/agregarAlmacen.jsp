@@ -44,6 +44,16 @@
     <body>
         <div class="container">
             <h1 class="fontUbuntulight fontColor">Agregar almacén</h1>
+            <ul class="breadcrumb">
+                <li><a href="../catalogos.jsp">Catálogos</a> <span class="divider">/</span></li>
+                <li><a href="almacenTabla.jsp">Almacén</a> <span class="divider">/</span></li>
+                <li class="active">Agregar</li>
+            </ul>
+            <ul class="nav nav-pills">
+                <li class="active">
+                    <a href="almacenTabla.jsp">Regresar</a>
+                </li>
+            </ul>
             <hr>
             <form action="" method="post" class="">
                 <div class="form-group">

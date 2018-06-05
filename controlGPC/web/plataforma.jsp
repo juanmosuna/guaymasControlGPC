@@ -108,7 +108,7 @@
                                 </a>
                             </li>
                             <li class="liMenu">
-                                <a href="#">
+                                <a href="catalogos/catalogos.jsp">
                                     <i class="fas fa-wrench"></i>
                                     <span class="nav-text">
                                         Configuración
