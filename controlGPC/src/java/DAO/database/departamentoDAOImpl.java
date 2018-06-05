@@ -30,15 +30,17 @@ public class departamentoDAOImpl implements catalogosInterface {
     public boolean agregarRegistro(Object o) throws Exception {
 
         departamento _dptosObj = (departamento) o;
+        
+        StringBuilder _consulta = new StringBuilder();
 
-        String _consulta = "INSERT INTO controlGPC.dbdepartamento "
-                + "(nombreCompleto, "
-                + "descripcion, "
-                + "idEstado) "
-                + "VALUES "
-                + "(?, ?, ?);";
+        _consulta.append("INSERT INTO controlGPC.dbdepartamento " )
+                .append("(nombreCompleto, " )
+                .append("descripcion, ")
+                .append("idEstado) ")
+                .append("VALUES ")
+                .append("(?, ?, ?);");
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         st.setString(1, _dptosObj.getNombreCompleto());
         st.setString(2, _dptosObj.getDescripcion());
@@ -57,15 +59,17 @@ public class departamentoDAOImpl implements catalogosInterface {
     public boolean modificarRegistro(Object o) throws Exception {
 
         departamento _dptosObj = (departamento) o;
+        
+        StringBuilder _consulta = new StringBuilder();
 
-        String _consulta = "UPDATE controlGPC.dbdepartamento "
-                + "SET "
-                + "nombreCompleto = ?, "
-                + "descripcion = ?, "
-                + "idEstado = ? "
-                + "WHERE id = ?;";
+        _consulta.append("UPDATE controlGPC.dbdepartamento ")
+                .append("SET ")
+                .append("nombreCompleto = ?, ")
+                .append("descripcion = ?, ")
+                .append("idEstado = ? ")
+                .append("WHERE id = ?;");
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         st.setString(1, _dptosObj.getNombreCompleto());
         st.setString(2, _dptosObj.getDescripcion());
@@ -85,9 +89,11 @@ public class departamentoDAOImpl implements catalogosInterface {
     @Override
     public boolean eliminarRegistro(int id) throws Exception {
 
-        String _consulta = "UPDATE controlGPC.dbdepartamento SET idEstado = 3 WHERE id = ?;";
+        StringBuilder _consulta = new StringBuilder();
+        
+        _consulta.append("UPDATE controlGPC.dbdepartamento SET idEstado = 3 WHERE id = ?;");
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         st.setInt(1, id);
 
@@ -107,15 +113,17 @@ public class departamentoDAOImpl implements catalogosInterface {
 
         List<departamento> _listadepartamento = new ArrayList();
 
-        String _consulta = "SELECT  "
-                + "    dbdepartamento.id AS 'id', "
-                + "    dbdepartamento.nombreCompleto AS 'nombreCompleto', "
-                + "    dbdepartamento.descripcion AS 'descripcion', "
-                + "    dbdepartamento.idEstado AS 'idEstado' "
-                + "FROM "
-                + "    controlGPC.dbdepartamento WHERE dbdepartamento.idEstado <> 3;";
+        StringBuilder _consulta = new StringBuilder();
+        
+        _consulta.append("SELECT  ")
+                .append("    dbdepartamento.id AS 'id', ")
+                .append("    dbdepartamento.nombreCompleto AS 'nombreCompleto', ")
+                .append("    dbdepartamento.descripcion AS 'descripcion', ")
+                .append("    dbdepartamento.idEstado AS 'idEstado' ")
+                .append("FROM ")
+                .append("    controlGPC.dbdepartamento WHERE dbdepartamento.idEstado <> 3;");
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         ResultSet rs = st.executeQuery();
 
@@ -155,16 +163,22 @@ public class departamentoDAOImpl implements catalogosInterface {
         departamento _dptoObj;
 
         List<departamento> _listadepartamento = new ArrayList();
+        
+        StringBuilder _consulta = new StringBuilder();
 
-        String _consulta = "SELECT  "
-                + "    dbdepartamento.id AS 'id', "
-                + "    dbdepartamento.nombreCompleto AS 'nombreCompleto', "
-                + "    dbdepartamento.descripcion AS 'descripcion', "
-                + "    dbdepartamento.idEstado AS 'idEstado' "
-                + "FROM "
-                + "    controlGPC.dbdepartamento WHERE " + _campo + " LIKE '%" + _dato + "%' AND dbdepartamento.idEstado <> 3;";
+        _consulta.append("SELECT  ")
+                .append("    dbdepartamento.id AS 'id', ")
+                .append("    dbdepartamento.nombreCompleto AS 'nombreCompleto', ")
+                .append("    dbdepartamento.descripcion AS 'descripcion', ")
+                .append("    dbdepartamento.idEstado AS 'idEstado' ")
+                .append("FROM ")
+                .append("    controlGPC.dbdepartamento WHERE ")
+                .append(_campo)
+                .append(" LIKE '%")
+                .append(_dato)
+                .append("%' AND dbdepartamento.idEstado <> 3;");
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         ResultSet rs = st.executeQuery();
 
@@ -202,16 +216,20 @@ public class departamentoDAOImpl implements catalogosInterface {
     public Object consultarPorId(int id) throws Exception {
 
         departamento _dptoObj = new departamento();
+        
+        StringBuilder _consulta = new StringBuilder();
 
-        String _consulta = "SELECT  "
-                + "    dbdepartamento.id AS 'id', "
-                + "    dbdepartamento.nombreCompleto AS 'nombreCompleto', "
-                + "    dbdepartamento.descripcion AS 'descripcion', "
-                + "    dbdepartamento.idEstado AS 'idEstado' "
-                + "FROM "
-                + "    controlGPC.dbdepartamento WHERE dbdepartamento.id = " + id + " AND dbdepartamento.idEstado <> 3;";
+        _consulta.append("SELECT  ")
+                .append("    dbdepartamento.id AS 'id', ")
+                .append("    dbdepartamento.nombreCompleto AS 'nombreCompleto', ")
+                .append("    dbdepartamento.descripcion AS 'descripcion', ")
+                .append("    dbdepartamento.idEstado AS 'idEstado' ")
+                .append("FROM ")
+                .append("    controlGPC.dbdepartamento WHERE dbdepartamento.id = ")
+                .append(id)
+                .append(" AND dbdepartamento.idEstado <> 3;");
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         ResultSet rs = st.executeQuery();
 

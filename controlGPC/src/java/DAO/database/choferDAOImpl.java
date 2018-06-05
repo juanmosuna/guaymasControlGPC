@@ -30,27 +30,29 @@ public class choferDAOImpl implements catalogosInterface {
     public boolean agregarRegistro(Object o) throws Exception {
 
         chofer _choferObj = (chofer) o;
+        
+        StringBuilder _consulta = new StringBuilder();
 
-        String _consulta = "INSERT INTO controlGPC.dbchofer " +
-                    "(nombreCompleto, " +
-                    "descripcion, " +
-                    "domicilio, " +
-                    "codigoPostal, " +
-                    "localidad, " +
-                    "ciudad, " +
-                    "estado, " +
-                    "pais, " +
-                    "telefono, " +
-                    "mobile, " +
-                    "fax, " +
-                    "correoElectronico, " +                    
-                    "fotoChofer, " +
-                    "licenciaManejo, " +
-                    "idEstado) " +
-                    "VALUES " +
-                    "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+        _consulta.append("INSERT INTO controlGPC.dbchofer " )
+                    .append("(nombreCompleto, " )
+                    .append("descripcion, " )
+                    .append("domicilio, " )
+                    .append("codigoPostal, " )
+                    .append("localidad, " )
+                    .append("ciudad, " )
+                    .append("estado, " )
+                    .append("pais, " )
+                    .append("telefono, " )
+                    .append("mobile, " )
+                    .append("fax, " )
+                    .append("correoElectronico, " )                    
+                    .append("fotoChofer, " )
+                    .append("licenciaManejo, " )
+                    .append("idEstado) " )
+                    .append("VALUES " )
+                    .append("(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         st.setString(1, _choferObj.getNombreCompleto());
         st.setString(2, _choferObj.getDescripcion());
@@ -83,26 +85,28 @@ public class choferDAOImpl implements catalogosInterface {
 
         chofer _choferObj = (chofer) o;
 
-        String _consulta = "UPDATE controlGPC.dbchofer " +
-            "SET " +
-            "nombreCompleto = ?, " +
-            "descripcion = ?, " +
-            "domicilio = ?, " +
-            "codigoPostal = ?, " +
-            "localidad = ?, " +
-            "ciudad = ?, " +
-            "estado = ?, " +
-            "pais = ?, " +
-            "telefono = ?, " +
-            "mobile = ?, " +
-            "fax = ?, " +
-            "correoElectronico = ?, " +
-            "fotoChofer = ?, " +
-            "licenciaManejo = ?, " +
-            "idEstado = ? " +
-            "WHERE id = ?;";
+        StringBuilder _consulta = new StringBuilder();
+        
+        _consulta.append("UPDATE controlGPC.dbchofer " )
+            .append("SET " )
+            .append("nombreCompleto = ?, " )
+            .append("descripcion = ?, " )
+            .append("domicilio = ?, " )
+            .append("codigoPostal = ?, " )
+            .append("localidad = ?, " )
+            .append("ciudad = ?, " )
+            .append("estado = ?, " )
+            .append("pais = ?, " )
+            .append("telefono = ?, " )
+            .append("mobile = ?, " )
+            .append("fax = ?, " )
+            .append("correoElectronico = ?, " )
+            .append("fotoChofer = ?, " )
+            .append("licenciaManejo = ?, " )
+            .append("idEstado = ? " )
+            .append("WHERE id = ?;");
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         st.setString(1, _choferObj.getNombreCompleto());
         st.setString(2, _choferObj.getDescripcion());
@@ -135,9 +139,11 @@ public class choferDAOImpl implements catalogosInterface {
     @Override
     public boolean eliminarRegistro(int id) throws Exception {
 
-        String _consulta = "UPDATE controlGPC.dbchofer idEstado = 3 WHERE id = ?;";
+        StringBuilder _consulta = new StringBuilder();
+        
+        _consulta.append("UPDATE controlGPC.dbchofer idEstado = 3 WHERE id = ?;");
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
         
         st.setInt(1, id);
         
@@ -157,29 +163,31 @@ public class choferDAOImpl implements catalogosInterface {
 
         List<chofer> _listaChofer = new ArrayList();
 
-        String _consulta = "SELECT  " +
-                "    dbchofer.id AS 'id', " +
-                "    dbchofer.nombreCompleto AS 'nombreCompleto', " +
-                "    dbchofer.descripcion AS 'descripcion', " +
-                "    dbchofer.domicilio AS 'domicilio', " +
-                "    dbchofer.codigoPostal AS 'codigoPostal', " +
-                "    dbchofer.localidad AS 'localidad', " +
-                "    dbchofer.ciudad AS 'ciudad', " +
-                "    dbchofer.estado AS 'estado', " +
-                "    dbchofer.pais AS 'pais', " +
-                "    dbchofer.telefono AS 'telefono', " +
-                "    dbchofer.mobile AS 'mobile', " +
-                "    dbchofer.fax AS 'fax', " +
-                "    dbchofer.correoElectronico AS 'correoElectronico', " +                
-                "    dbchofer.fotoChofer AS 'fotoTransportista', " +
-                "    dbchofer.licenciaManejo AS 'licenciaManejo', " +
-                "    dbchofer.idEstado AS 'idEstado' " +
-                "FROM " +
-                "    controlGPC.dbchofer " +
-                "WHERE " +
-                "    dbchofer.idEstado <> 3;";
+        StringBuilder _consulta = new StringBuilder();
+        
+        _consulta.append("SELECT  " )
+                .append("    dbchofer.id AS 'id', " )
+                .append("    dbchofer.nombreCompleto AS 'nombreCompleto', " )
+                .append("    dbchofer.descripcion AS 'descripcion', " )
+                .append("    dbchofer.domicilio AS 'domicilio', " )
+                .append("    dbchofer.codigoPostal AS 'codigoPostal', " )
+                .append("    dbchofer.localidad AS 'localidad', " )
+                .append("    dbchofer.ciudad AS 'ciudad', " )
+                .append("    dbchofer.estado AS 'estado', " )
+                .append("    dbchofer.pais AS 'pais', " )
+                .append("    dbchofer.telefono AS 'telefono', " )
+                .append("    dbchofer.mobile AS 'mobile', " )
+                .append("    dbchofer.fax AS 'fax', " )
+                .append("    dbchofer.correoElectronico AS 'correoElectronico', " )                
+                .append("    dbchofer.fotoChofer AS 'fotoTransportista', " )
+                .append("    dbchofer.licenciaManejo AS 'licenciaManejo', " )
+                .append("    dbchofer.idEstado AS 'idEstado' " )
+                .append("FROM " )
+                .append("    controlGPC.dbchofer " )
+                .append("WHERE " )
+                .append("    dbchofer.idEstado <> 3;");
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         ResultSet rs = st.executeQuery();
 
@@ -232,28 +240,34 @@ public class choferDAOImpl implements catalogosInterface {
 
         List<chofer> _listaChofer = new ArrayList();
 
-        String _consulta = "SELECT  " +
-                "    dbchofer.id AS 'id', " +
-                "    dbchofer.nombreCompleto AS 'nombreCompleto', " +
-                "    dbchofer.descripcion AS 'descripcion', " +
-                "    dbchofer.domicilio AS 'domicilio', " +
-                "    dbchofer.codigoPostal AS 'codigoPostal', " +
-                "    dbchofer.localidad AS 'localidad', " +
-                "    dbchofer.ciudad AS 'ciudad', " +
-                "    dbchofer.estado AS 'estado', " +
-                "    dbchofer.pais AS 'pais', " +
-                "    dbchofer.telefono AS 'telefono', " +
-                "    dbchofer.mobile AS 'mobile', " +
-                "    dbchofer.fax AS 'fax', " +
-                "    dbchofer.correoElectronico AS 'correoElectronico', " +                
-                "    dbchofer.fotoChofer AS 'fotoTransportista', " +
-                "    dbchofer.licenciaManejo AS 'licenciaManejo', " +
-                "    dbchofer.idEstado AS 'idEstado' " +
-                "FROM " +
-                "    controlGPC.dbchofer " +
-                "WHERE " + _campo + " LIKE '%" + _dato + "%' AND dbchofer.idEstado <> 3;";
+        StringBuilder _consulta = new StringBuilder();
+        
+        _consulta.append("SELECT  " )
+                .append("    dbchofer.id AS 'id', " )
+                .append("    dbchofer.nombreCompleto AS 'nombreCompleto', " )
+                .append("    dbchofer.descripcion AS 'descripcion', " )
+                .append("    dbchofer.domicilio AS 'domicilio', " )
+                .append("    dbchofer.codigoPostal AS 'codigoPostal', " )
+                .append("    dbchofer.localidad AS 'localidad', " )
+                .append("    dbchofer.ciudad AS 'ciudad', " )
+                .append("    dbchofer.estado AS 'estado', " )
+                .append("    dbchofer.pais AS 'pais', " )
+                .append("    dbchofer.telefono AS 'telefono', " )
+                .append("    dbchofer.mobile AS 'mobile', " )
+                .append("    dbchofer.fax AS 'fax', " )
+                .append("    dbchofer.correoElectronico AS 'correoElectronico', " )                
+                .append("    dbchofer.fotoChofer AS 'fotoTransportista', " )
+                .append("    dbchofer.licenciaManejo AS 'licenciaManejo', " )
+                .append("    dbchofer.idEstado AS 'idEstado' " )
+                .append("FROM " )
+                .append("    controlGPC.dbchofer " )
+                .append("WHERE " )
+                .append(_campo)
+                .append(" LIKE '%" )
+                .append(_dato)
+                .append("%' AND dbchofer.idEstado <> 3;");
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         ResultSet rs = st.executeQuery();
 
@@ -304,28 +318,32 @@ public class choferDAOImpl implements catalogosInterface {
 
         chofer _choferObj = new chofer();
 
-        String _consulta = "SELECT  " +
-                "    dbchofer.id AS 'id', " +
-                "    dbchofer.nombreCompleto AS 'nombreCompleto', " +
-                "    dbchofer.descripcion AS 'descripcion', " +
-                "    dbchofer.domicilio AS 'domicilio', " +
-                "    dbchofer.codigoPostal AS 'codigoPostal', " +
-                "    dbchofer.localidad AS 'localidad', " +
-                "    dbchofer.ciudad AS 'ciudad', " +
-                "    dbchofer.estado AS 'estado', " +
-                "    dbchofer.pais AS 'pais', " +
-                "    dbchofer.telefono AS 'telefono', " +
-                "    dbchofer.mobile AS 'mobile', " +
-                "    dbchofer.fax AS 'fax', " +
-                "    dbchofer.correoElectronico AS 'correoElectronico', " +                
-                "    dbchofer.fotoChofer AS 'fotoTransportista', " +
-                "    dbchofer.licenciaManejo AS 'licenciaManejo', " +
-                "    dbchofer.idEstado AS 'idEstado' " +
-                "FROM " +
-                "    controlGPC.dbchofer " +
-                "WHERE dbchofer.id = " + id + " AND dbchofer.idEstado <> 3;";
+        StringBuilder _consulta = new StringBuilder();
+        
+        _consulta.append("SELECT  " )
+                .append("    dbchofer.id AS 'id', " )
+                .append("    dbchofer.nombreCompleto AS 'nombreCompleto', " )
+                .append("    dbchofer.descripcion AS 'descripcion', " )
+                .append("    dbchofer.domicilio AS 'domicilio', " )
+                .append("    dbchofer.codigoPostal AS 'codigoPostal', " )
+                .append("    dbchofer.localidad AS 'localidad', " )
+                .append("    dbchofer.ciudad AS 'ciudad', " )
+                .append("    dbchofer.estado AS 'estado', " )
+                .append("    dbchofer.pais AS 'pais', " )
+                .append("    dbchofer.telefono AS 'telefono', " )
+                .append("    dbchofer.mobile AS 'mobile', " )
+                .append("    dbchofer.fax AS 'fax', " )
+                .append("    dbchofer.correoElectronico AS 'correoElectronico', ")               
+                .append("    dbchofer.fotoChofer AS 'fotoTransportista', " )
+                .append("    dbchofer.licenciaManejo AS 'licenciaManejo', " )
+                .append("    dbchofer.idEstado AS 'idEstado' " )
+                .append("FROM " )
+                .append("    controlGPC.dbchofer " )
+                .append("WHERE dbchofer.id = " )
+                .append(id)
+                .append(" AND dbchofer.idEstado <> 3;");
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         ResultSet rs = st.executeQuery();
 
