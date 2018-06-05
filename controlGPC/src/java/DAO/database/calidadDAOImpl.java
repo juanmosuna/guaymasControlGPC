@@ -31,7 +31,7 @@ public class calidadDAOImpl implements catalogosInterface {
 
         calidad _calidadesObj = (calidad) o;
 
-        String _consulta = "INSERT INTO gpcControl.dbcalidad "
+        String _consulta = "INSERT INTO controlGPC.dbcalidad "
                 + "(codigo, "
                 + "nombreCompleto, "
                 + "descripcion, "
@@ -62,7 +62,7 @@ public class calidadDAOImpl implements catalogosInterface {
 
         calidad _calidadesObj = (calidad) o;
 
-        String _consulta = "UPDATE gpcControl.dbcalidad "
+        String _consulta = "UPDATE controlGPC.dbcalidad "
                 + "SET "
                 + "codigo = ?, "
                 + "nombreCompleto = ?, "
@@ -93,7 +93,7 @@ public class calidadDAOImpl implements catalogosInterface {
     @Override
     public boolean eliminarRegistro(int id) throws Exception {
 
-        String _consulta = "UPDATE gpcControl.dbcalidad SET idEstado = 3 WHERE id = ?;";
+        String _consulta = "UPDATE controlGPC.dbcalidad SET idEstado = 3 WHERE id = ?;";
 
         PreparedStatement st = this._conn.prepareStatement(_consulta);
 
@@ -124,7 +124,7 @@ public class calidadDAOImpl implements catalogosInterface {
                 + "    dbgrupoCalidad.nombreCompleto AS 'nombreGrupoCalidad', "
                 + "    dbcalidad.idEstado AS 'idEstado' "
                 + "FROM "
-                + "    gpcControl.dbcalidad "
+                + "    controlGPC.dbcalidad "
                 + "        LEFT JOIN "
                 + "    dbgrupoCalidad ON dbgrupoCalidad.id = dbcalidad.idgrupoCalidad "
                 + "WHERE "
@@ -183,7 +183,7 @@ public class calidadDAOImpl implements catalogosInterface {
                 + "    dbgrupoCalidad.nombreCompleto AS 'nombreGrupoCalidad', "
                 + "    dbcalidad.idEstado AS 'idEstado' "
                 + "FROM "
-                + "    gpcControl.dbcalidad "
+                + "    controlGPC.dbcalidad "
                 + "        LEFT JOIN "
                 + "    dbgrupoCalidad ON dbgrupoCalidad.id = dbcalidad.idgrupoCalidad "
                 + "WHERE " + _campo + " LIKE '%" + _dato + "%' AND dbcalidad.idEstado <> 3;";
@@ -239,7 +239,7 @@ public class calidadDAOImpl implements catalogosInterface {
                 + "    dbgrupoCalidad.nombreCompleto AS 'nombreGrupoCalidad', "
                 + "    dbcalidad.idEstado AS 'idEstado' "
                 + "FROM "
-                + "    gpcControl.dbcalidad "
+                + "    controlGPC.dbcalidad "
                 + "        LEFT JOIN "
                 + "    dbgrupoCalidad ON dbgrupoCalidad.id = dbcalidad.idgrupoCalidad "
                 + "WHERE dbcalidad.id = " + id + " AND dbcalidad.idEstado <> 3;";

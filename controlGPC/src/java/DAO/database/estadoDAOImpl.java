@@ -31,7 +31,7 @@ public class estadoDAOImpl implements catalogosInterface {
 
         estado _estadosObj = (estado) o;
 
-        String _consulta = "INSERT INTO gpcControl.dbestado "
+        String _consulta = "INSERT INTO controlGPC.dbestado "
                 + "(nombreCompleto, "
                 + "descripcion) "
                 + "VALUES "
@@ -56,7 +56,7 @@ public class estadoDAOImpl implements catalogosInterface {
 
         estado _estadosObj = (estado) o;
 
-        String _consulta = "UPDATE gpcControl.dbestado "
+        String _consulta = "UPDATE controlGPC.dbestado "
                 + "SET "
                 + "nombreCompleto = ?, "
                 + "descripcion = ? "
@@ -81,7 +81,7 @@ public class estadoDAOImpl implements catalogosInterface {
     @Override
     public boolean eliminarRegistro(int id) throws Exception {
 
-        String _consulta = "DELETE FROM gpcControl.dbestado WHERE ?;";
+        String _consulta = "DELETE FROM controlGPC.dbestado WHERE ?;";
 
         PreparedStatement st = this._conn.prepareStatement(_consulta);
 
@@ -108,7 +108,7 @@ public class estadoDAOImpl implements catalogosInterface {
                 + "    dbestado.nombreCompleto AS 'nombreCompleto', "
                 + "    dbestado.descripcion AS 'descripcion' "
                 + "FROM "
-                + "    gpcControl.dbestado;";
+                + "    controlGPC.dbestado;";
 
         PreparedStatement st = this._conn.prepareStatement(_consulta);
 
@@ -155,7 +155,7 @@ public class estadoDAOImpl implements catalogosInterface {
                 + "    dbestado.nombreCompleto AS 'nombreCompleto', "
                 + "    dbestado.descripcion AS 'descripcion' "
                 + "FROM "
-                + "    gpcControl.dbestado WHERE " + _campo + " LIKE '%" + _dato + "%';";
+                + "    controlGPC.dbestado WHERE " + _campo + " LIKE '%" + _dato + "%';";
 
         PreparedStatement st = this._conn.prepareStatement(_consulta);
 
@@ -200,7 +200,7 @@ public class estadoDAOImpl implements catalogosInterface {
                 + "    dbestado.nombreCompleto AS 'nombreCompleto', "
                 + "    dbestado.descripcion AS 'descripcion' "
                 + "FROM "
-                + "    gpcControl.dbestado WHERE dbestado.id = " + id + ";";
+                + "    controlGPC.dbestado WHERE dbestado.id = " + id + ";";
 
         PreparedStatement st = this._conn.prepareStatement(_consulta);
 

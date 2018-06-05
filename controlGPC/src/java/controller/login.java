@@ -57,7 +57,7 @@ public class login extends HttpServlet {
             
                 if (_usuario.isCuentaActiva()){
 
-                    if (_usuario.getPerfilUsuario().isIngresoPlataforma()){
+                    if (_usuario.getPerfilUsuario().isAccesoPlataforma()){
 
                         _error = false;
 

@@ -31,7 +31,7 @@ public class departamentoDAOImpl implements catalogosInterface {
 
         departamento _dptosObj = (departamento) o;
 
-        String _consulta = "INSERT INTO gpcControl.dbdepartamento "
+        String _consulta = "INSERT INTO controlGPC.dbdepartamento "
                 + "(nombreCompleto, "
                 + "descripcion, "
                 + "idEstado) "
@@ -58,7 +58,7 @@ public class departamentoDAOImpl implements catalogosInterface {
 
         departamento _dptosObj = (departamento) o;
 
-        String _consulta = "UPDATE gpcControl.dbdepartamento "
+        String _consulta = "UPDATE controlGPC.dbdepartamento "
                 + "SET "
                 + "nombreCompleto = ?, "
                 + "descripcion = ?, "
@@ -85,7 +85,7 @@ public class departamentoDAOImpl implements catalogosInterface {
     @Override
     public boolean eliminarRegistro(int id) throws Exception {
 
-        String _consulta = "UPDATE gpcControl.dbdepartamento SET idEstado = 3 WHERE id = ?;";
+        String _consulta = "UPDATE controlGPC.dbdepartamento SET idEstado = 3 WHERE id = ?;";
 
         PreparedStatement st = this._conn.prepareStatement(_consulta);
 
@@ -113,7 +113,7 @@ public class departamentoDAOImpl implements catalogosInterface {
                 + "    dbdepartamento.descripcion AS 'descripcion', "
                 + "    dbdepartamento.idEstado AS 'idEstado' "
                 + "FROM "
-                + "    gpcControl.dbdepartamento WHERE dbdepartamento.idEstado <> 3;";
+                + "    controlGPC.dbdepartamento WHERE dbdepartamento.idEstado <> 3;";
 
         PreparedStatement st = this._conn.prepareStatement(_consulta);
 
@@ -162,7 +162,7 @@ public class departamentoDAOImpl implements catalogosInterface {
                 + "    dbdepartamento.descripcion AS 'descripcion', "
                 + "    dbdepartamento.idEstado AS 'idEstado' "
                 + "FROM "
-                + "    gpcControl.dbdepartamento WHERE " + _campo + " LIKE '%" + _dato + "%' AND dbdepartamento.idEstado <> 3;";
+                + "    controlGPC.dbdepartamento WHERE " + _campo + " LIKE '%" + _dato + "%' AND dbdepartamento.idEstado <> 3;";
 
         PreparedStatement st = this._conn.prepareStatement(_consulta);
 
@@ -209,7 +209,7 @@ public class departamentoDAOImpl implements catalogosInterface {
                 + "    dbdepartamento.descripcion AS 'descripcion', "
                 + "    dbdepartamento.idEstado AS 'idEstado' "
                 + "FROM "
-                + "    gpcControl.dbdepartamento WHERE dbdepartamento.id = " + id + " AND dbdepartamento.idEstado <> 3;";
+                + "    controlGPC.dbdepartamento WHERE dbdepartamento.id = " + id + " AND dbdepartamento.idEstado <> 3;";
 
         PreparedStatement st = this._conn.prepareStatement(_consulta);
 

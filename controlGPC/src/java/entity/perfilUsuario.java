@@ -14,7 +14,10 @@ public class perfilUsuario {
     private int id = 0;
     private String nombreCompleto = new String();
     private String descripcion = new String();
-    private boolean ingresoPlataforma = false;
+    private boolean accesoPlataforma = false;
+    private boolean gestionCatalogos = false;
+    private boolean gestionUsuario = false;
+    private boolean gestionDocumentos = false;
     private boolean agregarDocumento = false;
     private boolean eliminarDocumento = false;
     private boolean modificarDocumento = false;
@@ -49,12 +52,36 @@ public class perfilUsuario {
         this.descripcion = descripcion;
     }
 
-    public boolean isIngresoPlataforma() {
-        return ingresoPlataforma;
+    public boolean isAccesoPlataforma() {
+        return accesoPlataforma;
     }
 
-    public void setIngresoPlataforma(boolean ingresoPlataforma) {
-        this.ingresoPlataforma = ingresoPlataforma;
+    public void setAccesoPlataforma(boolean accesoPlataforma) {
+        this.accesoPlataforma = accesoPlataforma;
+    }
+
+    public boolean isGestionCatalogos() {
+        return gestionCatalogos;
+    }
+
+    public void setGestionCatalogos(boolean gestionCatalogos) {
+        this.gestionCatalogos = gestionCatalogos;
+    }
+
+    public boolean isGestionUsuario() {
+        return gestionUsuario;
+    }
+
+    public void setGestionUsuario(boolean gestionUsuario) {
+        this.gestionUsuario = gestionUsuario;
+    }
+
+    public boolean isGestionDocumentos() {
+        return gestionDocumentos;
+    }
+
+    public void setGestionDocumentos(boolean gestionDocumentos) {
+        this.gestionDocumentos = gestionDocumentos;
     }
 
     public boolean isAgregarDocumento() {
@@ -104,7 +131,5 @@ public class perfilUsuario {
     public void setIdEstado(int idEstado) {
         this.idEstado = idEstado;
     }
-    
-    
-    
+
 }

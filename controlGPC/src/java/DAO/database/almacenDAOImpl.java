@@ -7,6 +7,7 @@ package DAO.database;
 
 import DAO.interfaces.catalogosInterface;
 import entity.almacen;
+import entity.tipoAlmacen;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -31,7 +32,7 @@ public class almacenDAOImpl implements catalogosInterface {
 
         almacen _almObj = (almacen) o;
 
-        String _consulta = "INSERT INTO gpcControl.dbalmacen "
+        String _consulta = "INSERT INTO controlGPC.dbalmacen "
                 + "(codigo, "
                 + "nombreCompleto, "
                 + "descripcion, "
@@ -51,7 +52,7 @@ public class almacenDAOImpl implements catalogosInterface {
         st.setString(1, _almObj.getCodigo());
         st.setString(2, _almObj.getNombreCompleto());
         st.setString(3, _almObj.getDescripcion());
-        st.setInt(4, _almObj.getIdtipoAlmacen());
+        st.setInt(4, _almObj.getTpAlmacen().getId());
         st.setDouble(5, _almObj.getCapacidad());
         st.setInt(6, _almObj.getIdunidadMedida());
         st.setInt(7, _almObj.getSecciones());
@@ -74,7 +75,7 @@ public class almacenDAOImpl implements catalogosInterface {
 
         almacen _almObj = (almacen) o;
 
-        String _consulta = "UPDATE gpcControl.dbalmacen "
+        String _consulta = "UPDATE controlGPC.dbalmacen "
                 + "SET "
                 + "codigo = ?, "
                 + "nombreCompleto = ?, "
@@ -94,7 +95,7 @@ public class almacenDAOImpl implements catalogosInterface {
         st.setString(1, _almObj.getCodigo());
         st.setString(2, _almObj.getNombreCompleto());
         st.setString(3, _almObj.getDescripcion());
-        st.setInt(4, _almObj.getIdtipoAlmacen());
+        st.setInt(4, _almObj.getTpAlmacen().getId());
         st.setDouble(5, _almObj.getCapacidad());
         st.setInt(6, _almObj.getIdunidadMedida());
         st.setInt(7, _almObj.getSecciones());
@@ -117,7 +118,7 @@ public class almacenDAOImpl implements catalogosInterface {
     @Override
     public boolean eliminarRegistro(int id) throws Exception {
 
-        String _consulta = "UPDATE gpcControl.dbalmacen SET idEstado = 3 WHERE id = ?;";
+        String _consulta = "UPDATE controlGPC.dbalmacen SET idEstado = 3 WHERE id = ?;";
 
         PreparedStatement st = this._conn.prepareStatement(_consulta);
 
@@ -155,7 +156,7 @@ public class almacenDAOImpl implements catalogosInterface {
                 + "    dbalmacen.niveles AS 'niveles', "
                 + "    dbalmacen.idEstado AS 'idEstado' "
                 + "FROM "
-                + "    gpcControl.dbalmacen "
+                + "    controlGPC.dbalmacen "
                 + "        LEFT JOIN "
                 + "    dbtipoAlmacen ON dbtipoAlmacen.id = dbalmacen.idtipoAlmacen "
                 + "        LEFT JOIN "
@@ -172,12 +173,19 @@ public class almacenDAOImpl implements catalogosInterface {
             while (rs.next()) {
 
                 _almacenesObj = new almacen();
+                
+                
 
                 _almacenesObj.setId(rs.getInt(1));
                 _almacenesObj.setCodigo(rs.getString(2));
                 _almacenesObj.setNombreCompleto(rs.getString(3));
                 _almacenesObj.setDescripcion(rs.getString(4));
-                _almacenesObj.setIdtipoAlmacen(rs.getInt(5));
+                
+                tipoAlmacen _tpAlmacen = new tipoAlmacen();
+                _tpAlmacen.setId(rs.getInt(5));
+                
+                _almacenesObj.setTpAlmacen(_tpAlmacen);
+                
                 _almacenesObj.setNombreTipoAlmacen(rs.getString(6));
                 _almacenesObj.setCapacidad(rs.getDouble(7));
                 _almacenesObj.setIdunidadMedida(rs.getInt(8));
@@ -230,7 +238,7 @@ public class almacenDAOImpl implements catalogosInterface {
                 + "    dbalmacen.niveles AS 'niveles', "
                 + "    dbalmacen.idEstado AS 'idEstado' "
                 + "FROM "
-                + "    gpcControl.dbalmacen "
+                + "    controlGPC.dbalmacen "
                 + "        LEFT JOIN "
                 + "    dbtipoAlmacen ON dbtipoAlmacen.id = dbalmacen.idtipoAlmacen "
                 + "        LEFT JOIN "
@@ -251,7 +259,12 @@ public class almacenDAOImpl implements catalogosInterface {
                 _almacenesObj.setCodigo(rs.getString(2));
                 _almacenesObj.setNombreCompleto(rs.getString(3));
                 _almacenesObj.setDescripcion(rs.getString(4));
-                _almacenesObj.setIdtipoAlmacen(rs.getInt(5));
+                
+                tipoAlmacen _tpAlmacen = new tipoAlmacen();
+                _tpAlmacen.setId(rs.getInt(5));
+                
+                _almacenesObj.setTpAlmacen(_tpAlmacen);
+                
                 _almacenesObj.setNombreTipoAlmacen(rs.getString(6));
                 _almacenesObj.setCapacidad(rs.getDouble(7));
                 _almacenesObj.setIdunidadMedida(rs.getInt(8));
@@ -302,7 +315,7 @@ public class almacenDAOImpl implements catalogosInterface {
                 + "    dbalmacen.niveles AS 'niveles', "
                 + "    dbalmacen.idEstado AS 'idEstado' "
                 + "FROM "
-                + "    gpcControl.dbalmacen "
+                + "    controlGPC.dbalmacen "
                 + "        LEFT JOIN "
                 + "    dbtipoAlmacen ON dbtipoAlmacen.id = dbalmacen.idtipoAlmacen "
                 + "        LEFT JOIN "
@@ -321,7 +334,12 @@ public class almacenDAOImpl implements catalogosInterface {
                 _almacenesObj.setCodigo(rs.getString(2));
                 _almacenesObj.setNombreCompleto(rs.getString(3));
                 _almacenesObj.setDescripcion(rs.getString(4));
-                _almacenesObj.setIdtipoAlmacen(rs.getInt(5));
+                
+                tipoAlmacen _tpAlmacen = new tipoAlmacen();
+                _tpAlmacen.setId(rs.getInt(5));
+                
+                _almacenesObj.setTpAlmacen(_tpAlmacen);
+                
                 _almacenesObj.setNombreTipoAlmacen(rs.getString(6));
                 _almacenesObj.setCapacidad(rs.getDouble(7));
                 _almacenesObj.setIdunidadMedida(rs.getInt(8));

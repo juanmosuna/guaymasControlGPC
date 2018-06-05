@@ -31,7 +31,7 @@ public class empresaDAOImpl implements catalogosInterface {
 
         empresa _empresasObj = (empresa) o;
 
-        String _consulta = "INSERT INTO gpcControl.dbempresa "
+        String _consulta = "INSERT INTO controlGPC.dbempresa "
                 + "(nombreCompleto, "
                 + "descripcion, "
                 + "idEstado) "
@@ -58,7 +58,7 @@ public class empresaDAOImpl implements catalogosInterface {
 
         empresa _empresasObj = (empresa) o;
 
-        String _consulta = "UPDATE gpcControl.dbempresa "
+        String _consulta = "UPDATE controlGPC.dbempresa "
                 + "SET "
                 + "nombreCompleto = ?, "
                 + "descripcion = ?, "
@@ -85,7 +85,7 @@ public class empresaDAOImpl implements catalogosInterface {
     @Override
     public boolean eliminarRegistro(int id) throws Exception {
 
-        String _consulta = "UPDATE gpcControl.dbempresa SET idEstado = 3 WHERE id = ?;";
+        String _consulta = "UPDATE controlGPC.dbempresa SET idEstado = 3 WHERE id = ?;";
 
         PreparedStatement st = this._conn.prepareStatement(_consulta);
 
@@ -113,7 +113,7 @@ public class empresaDAOImpl implements catalogosInterface {
                 + "    dbempresa.descripcion AS 'descripcion', "
                 + "    dbempresa.idEstado AS 'idEstado' "
                 + "FROM "
-                + "    gpcControl.dbempresa WHERE dbempresa.idEstado <> 3;";
+                + "    controlGPC.dbempresa WHERE dbempresa.idEstado <> 3;";
 
         PreparedStatement st = this._conn.prepareStatement(_consulta);
 
@@ -162,7 +162,7 @@ public class empresaDAOImpl implements catalogosInterface {
                 + "    dbempresa.descripcion AS 'descripcion', "
                 + "    dbempresa.idEstado AS 'idEstado' "
                 + "FROM "
-                + "    gpcControl.dbempresa WHERE " + _campo + " LIKE '%" + _dato + "%' AND dbempresa.idEstado <> 3;";
+                + "    controlGPC.dbempresa WHERE " + _campo + " LIKE '%" + _dato + "%' AND dbempresa.idEstado <> 3;";
 
         PreparedStatement st = this._conn.prepareStatement(_consulta);
 
@@ -209,7 +209,7 @@ public class empresaDAOImpl implements catalogosInterface {
                 + "    dbempresa.descripcion AS 'descripcion', "
                 + "    dbempresa.idEstado AS 'idEstado' "
                 + "FROM "
-                + "    gpcControl.dbempresa WHERE dbempresa.id = " + id + " AND dbempresa.idEstado <> 3;";
+                + "    controlGPC.dbempresa WHERE dbempresa.id = " + id + " AND dbempresa.idEstado <> 3;";
 
         PreparedStatement st = this._conn.prepareStatement(_consulta);
 
