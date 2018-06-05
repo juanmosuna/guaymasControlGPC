@@ -20,7 +20,7 @@ import java.util.List;
  * @author elara
  */
 public class vehiculoDAOImpl implements catalogosInterface {
-    
+
     private Connection _conn;
 
     public vehiculoDAOImpl(Connection _conn) {
@@ -32,23 +32,25 @@ public class vehiculoDAOImpl implements catalogosInterface {
 
         vehiculo _vehiculoObj = (vehiculo) o;
 
-        String _consulta = "INSERT INTO controlGPC.dbvehiculo " +
-                "(nombrePropietario, " +
-                "idTransportista, " +
-                "marca, " +
-                "modelo, " +
-                "tipo, " +
-                "numeroSerie, " +
-                "placas, " +
-                "numeroEconomico, " +
-                "tarjetaCirculacion, " +
-                "polizaSeguro, " +
-                "fechaPoliza, " +
-                "idEstado) " +
-                "VALUES " +
-                "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+        StringBuilder _consulta = new StringBuilder();
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        _consulta.append("INSERT INTO controlGPC.dbvehiculo ")
+                .append("(nombrePropietario, ")
+                .append("idTransportista, ")
+                .append("marca, ")
+                .append("modelo, ")
+                .append("tipo, ")
+                .append("numeroSerie, ")
+                .append("placas, ")
+                .append("numeroEconomico, ")
+                .append("tarjetaCirculacion, ")
+                .append("polizaSeguro, ")
+                .append("fechaPoliza, ")
+                .append("idEstado) ")
+                .append("VALUES ")
+                .append("(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
+
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         st.setString(1, _vehiculoObj.getNombrePropietario());
         st.setInt(2, _vehiculoObj.getTransportista().getId());
@@ -62,7 +64,6 @@ public class vehiculoDAOImpl implements catalogosInterface {
         st.setString(10, _vehiculoObj.getPolizaSeguro());
         st.setString(11, _vehiculoObj.getFechaPoliza());
         st.setInt(12, _vehiculoObj.getIdEstado());
-        
 
         boolean resultado = st.execute();
 
@@ -78,23 +79,25 @@ public class vehiculoDAOImpl implements catalogosInterface {
 
         vehiculo _vehiculoObj = (vehiculo) o;
 
-        String _consulta = "UPDATE controlGPC.dbvehiculo " +
-            "SET " +
-            "nombrePropietario = ?, " +
-            "idTransportista = ?, " +
-            "marca = ?, " +
-            "modelo = ?, " +
-            "tipo = ?, " +
-            "numeroSerie = ?, " +
-            "placas = ?, " +
-            "numeroEconomico = ?, " +
-            "tarjetaCirculacion = ?, " +
-            "polizaSeguro = ?, " +
-            "fechaPoliza = ?, " +
-            "idEstado = ? " +
-            "WHERE id = ?;";
+        StringBuilder _consulta = new StringBuilder();
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        _consulta.append("UPDATE controlGPC.dbvehiculo ")
+                .append("SET ")
+                .append("nombrePropietario = ?, ")
+                .append("idTransportista = ?, ")
+                .append("marca = ?, ")
+                .append("modelo = ?, ")
+                .append("tipo = ?, ")
+                .append("numeroSerie = ?, ")
+                .append("placas = ?, ")
+                .append("numeroEconomico = ?, ")
+                .append("tarjetaCirculacion = ?, ")
+                .append("polizaSeguro = ?, ")
+                .append("fechaPoliza = ?, ")
+                .append("idEstado = ? ")
+                .append("WHERE id = ?;");
+
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         st.setString(1, _vehiculoObj.getNombrePropietario());
         st.setInt(2, _vehiculoObj.getTransportista().getId());
@@ -108,7 +111,7 @@ public class vehiculoDAOImpl implements catalogosInterface {
         st.setString(10, _vehiculoObj.getPolizaSeguro());
         st.setString(11, _vehiculoObj.getFechaPoliza());
         st.setInt(12, _vehiculoObj.getIdEstado());
-        
+
         st.setInt(13, _vehiculoObj.getId());
 
         boolean resultado = st.execute();
@@ -123,10 +126,12 @@ public class vehiculoDAOImpl implements catalogosInterface {
     @Override
     public boolean eliminarRegistro(int id) throws Exception {
 
-        String _consulta = "UPDATE controlGPC.dbvehiculo SET idEstado = 3 WHERE id = ?;";
+        StringBuilder _consulta = new StringBuilder();
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
-        
+        _consulta.append("UPDATE controlGPC.dbvehiculo SET idEstado = 3 WHERE id = ?;");
+
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
+
         st.setInt(1, id);
 
         boolean resultado = st.execute();
@@ -145,29 +150,31 @@ public class vehiculoDAOImpl implements catalogosInterface {
 
         List<vehiculo> _listaArchivos = new ArrayList();
 
-        String _consulta = "SELECT  " +
-                    "    dbvehiculo.id AS 'id', " +
-                    "    dbvehiculo.nombrePropietario AS 'nombrePropietario', " +
-                    "    dbvehiculo.idTransportista AS 'idTransportista', " +
-                    "    dbtransportista.nombreCompleto AS 'nombreTransportista', " +
-                    "    dbvehiculo.marca AS 'marca', " +
-                    "    dbvehiculo.modelo AS 'modelo', " +
-                    "    dbvehiculo.tipo AS 'tipo', " +
-                    "    dbvehiculo.numeroSerie AS 'numeroSerie', " +
-                    "    dbvehiculo.placas AS 'placas', " +
-                    "    dbvehiculo.numeroEconomico AS 'numeroEconomico', " +
-                    "    dbvehiculo.tarjetaCirculacion AS 'tarjetaCirculacion', " +
-                    "    dbvehiculo.polizaSeguro AS 'polizaSeguro', " +
-                    "    dbvehiculo.fechaPoliza AS 'fechaPoliza', " +
-                    "    dbvehiculo.idEstado AS 'idEstado' " +
-                    "FROM " +
-                    "    controlGPC.dbvehiculo " +
-                    "        LEFT JOIN " +
-                    "    dbtransportista ON dbtransportista.id = dbvehiculo.idTransportista " +
-                    "WHERE " +
-                    "    dbvehiculo.idEstado <> 3;";
+        StringBuilder _consulta = new StringBuilder();
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        _consulta.append("SELECT  ")
+                .append("    dbvehiculo.id AS 'id', ")
+                .append("    dbvehiculo.nombrePropietario AS 'nombrePropietario', ")
+                .append("    dbvehiculo.idTransportista AS 'idTransportista', ")
+                .append("    dbtransportista.nombreCompleto AS 'nombreTransportista', ")
+                .append("    dbvehiculo.marca AS 'marca', ")
+                .append("    dbvehiculo.modelo AS 'modelo', ")
+                .append("    dbvehiculo.tipo AS 'tipo', ")
+                .append("    dbvehiculo.numeroSerie AS 'numeroSerie', ")
+                .append("    dbvehiculo.placas AS 'placas', ")
+                .append("    dbvehiculo.numeroEconomico AS 'numeroEconomico', ")
+                .append("    dbvehiculo.tarjetaCirculacion AS 'tarjetaCirculacion', ")
+                .append("    dbvehiculo.polizaSeguro AS 'polizaSeguro', ")
+                .append("    dbvehiculo.fechaPoliza AS 'fechaPoliza', ")
+                .append("    dbvehiculo.idEstado AS 'idEstado' ")
+                .append("FROM ")
+                .append("    controlGPC.dbvehiculo ")
+                .append("        LEFT JOIN ")
+                .append("    dbtransportista ON dbtransportista.id = dbvehiculo.idTransportista ")
+                .append("WHERE ")
+                .append("    dbvehiculo.idEstado <> 3;");
+
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         ResultSet rs = st.executeQuery();
 
@@ -179,13 +186,13 @@ public class vehiculoDAOImpl implements catalogosInterface {
 
                 _vehiculoObj.setId(rs.getInt(1));
                 _vehiculoObj.setNombrePropietario(rs.getString(2));
-                
+
                 transportista _transportista = new transportista();
-                
+
                 _transportista.setId(rs.getInt(3));
                 _transportista.setNombreCompleto(rs.getString(4));
                 _vehiculoObj.setTransportista(_transportista);
-                
+
                 _vehiculoObj.setMarca(rs.getString(5));
                 _vehiculoObj.setModelo(rs.getString(6));
                 _vehiculoObj.setTipo(rs.getString(7));
@@ -223,28 +230,34 @@ public class vehiculoDAOImpl implements catalogosInterface {
 
         List<vehiculo> _listaArchivos = new ArrayList();
 
-        String _consulta = "SELECT  " +
-                    "    dbvehiculo.id AS 'id', " +
-                    "    dbvehiculo.nombrePropietario AS 'nombrePropietario', " +
-                    "    dbvehiculo.idTransportista AS 'idTransportista', " +
-                    "    dbtransportista.nombreCompleto AS 'nombreTransportista', " +
-                    "    dbvehiculo.marca AS 'marca', " +
-                    "    dbvehiculo.modelo AS 'modelo', " +
-                    "    dbvehiculo.tipo AS 'tipo', " +
-                    "    dbvehiculo.numeroSerie AS 'numeroSerie', " +
-                    "    dbvehiculo.placas AS 'placas', " +
-                    "    dbvehiculo.numeroEconomico AS 'numeroEconomico', " +
-                    "    dbvehiculo.tarjetaCirculacion AS 'tarjetaCirculacion', " +
-                    "    dbvehiculo.polizaSeguro AS 'polizaSeguro', " +
-                    "    dbvehiculo.fechaPoliza AS 'fechaPoliza', " +
-                    "    dbvehiculo.idEstado AS 'idEstado' " +
-                    "FROM " +
-                    "    controlGPC.dbvehiculo " +
-                    "        LEFT JOIN " +
-                    "    dbtransportista ON dbtransportista.id = dbvehiculo.idTransportista " +
-                    "WHERE " + _campo + " LIKE '%" + _dato + "%' AND dbvehiculo.idEstado <> 3;";
+        StringBuilder _consulta = new StringBuilder();
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        _consulta.append("SELECT  ")
+                .append("    dbvehiculo.id AS 'id', ")
+                .append("    dbvehiculo.nombrePropietario AS 'nombrePropietario', ")
+                .append("    dbvehiculo.idTransportista AS 'idTransportista', ")
+                .append("    dbtransportista.nombreCompleto AS 'nombreTransportista', ")
+                .append("    dbvehiculo.marca AS 'marca', ")
+                .append("    dbvehiculo.modelo AS 'modelo', ")
+                .append("    dbvehiculo.tipo AS 'tipo', ")
+                .append("    dbvehiculo.numeroSerie AS 'numeroSerie', ")
+                .append("    dbvehiculo.placas AS 'placas', ")
+                .append("    dbvehiculo.numeroEconomico AS 'numeroEconomico', ")
+                .append("    dbvehiculo.tarjetaCirculacion AS 'tarjetaCirculacion', ")
+                .append("    dbvehiculo.polizaSeguro AS 'polizaSeguro', ")
+                .append("    dbvehiculo.fechaPoliza AS 'fechaPoliza', ")
+                .append("    dbvehiculo.idEstado AS 'idEstado' ")
+                .append("FROM ")
+                .append("    controlGPC.dbvehiculo ")
+                .append("        LEFT JOIN ")
+                .append("    dbtransportista ON dbtransportista.id = dbvehiculo.idTransportista ")
+                .append("WHERE ")
+                .append(_campo)
+                .append(" LIKE '%")
+                .append(_dato)
+                .append("%' AND dbvehiculo.idEstado <> 3;");
+
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         ResultSet rs = st.executeQuery();
 
@@ -256,13 +269,13 @@ public class vehiculoDAOImpl implements catalogosInterface {
 
                 _vehiculoObj.setId(rs.getInt(1));
                 _vehiculoObj.setNombrePropietario(rs.getString(2));
-                
+
                 transportista _transportista = new transportista();
-                
+
                 _transportista.setId(rs.getInt(3));
                 _transportista.setNombreCompleto(rs.getString(4));
                 _vehiculoObj.setTransportista(_transportista);
-                
+
                 _vehiculoObj.setMarca(rs.getString(5));
                 _vehiculoObj.setModelo(rs.getString(6));
                 _vehiculoObj.setTipo(rs.getString(7));
@@ -298,28 +311,32 @@ public class vehiculoDAOImpl implements catalogosInterface {
 
         vehiculo _vehiculoObj = new vehiculo();
 
-        String _consulta = "SELECT  " +
-                    "    dbvehiculo.id AS 'id', " +
-                    "    dbvehiculo.nombrePropietario AS 'nombrePropietario', " +
-                    "    dbvehiculo.idTransportista AS 'idTransportista', " +
-                    "    dbtransportista.nombreCompleto AS 'nombreTransportista', " +
-                    "    dbvehiculo.marca AS 'marca', " +
-                    "    dbvehiculo.modelo AS 'modelo', " +
-                    "    dbvehiculo.tipo AS 'tipo', " +
-                    "    dbvehiculo.numeroSerie AS 'numeroSerie', " +
-                    "    dbvehiculo.placas AS 'placas', " +
-                    "    dbvehiculo.numeroEconomico AS 'numeroEconomico', " +
-                    "    dbvehiculo.tarjetaCirculacion AS 'tarjetaCirculacion', " +
-                    "    dbvehiculo.polizaSeguro AS 'polizaSeguro', " +
-                    "    dbvehiculo.fechaPoliza AS 'fechaPoliza', " +
-                    "    dbvehiculo.idEstado AS 'idEstado' " +
-                    "FROM " +
-                    "    controlGPC.dbvehiculo " +
-                    "        LEFT JOIN " +
-                    "    dbtransportista ON dbtransportista.id = dbvehiculo.idTransportista " +
-                    "WHERE dbvehiculo.id = " + id + " AND dbvehiculo.idEstado <> 3;";
+        StringBuilder _consulta = new StringBuilder();
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        _consulta.append("SELECT  ")
+                .append("    dbvehiculo.id AS 'id', ")
+                .append("    dbvehiculo.nombrePropietario AS 'nombrePropietario', ")
+                .append("    dbvehiculo.idTransportista AS 'idTransportista', ")
+                .append("    dbtransportista.nombreCompleto AS 'nombreTransportista', ")
+                .append("    dbvehiculo.marca AS 'marca', ")
+                .append("    dbvehiculo.modelo AS 'modelo', ")
+                .append("    dbvehiculo.tipo AS 'tipo', ")
+                .append("    dbvehiculo.numeroSerie AS 'numeroSerie', ")
+                .append("    dbvehiculo.placas AS 'placas', ")
+                .append("    dbvehiculo.numeroEconomico AS 'numeroEconomico', ")
+                .append("    dbvehiculo.tarjetaCirculacion AS 'tarjetaCirculacion', ")
+                .append("    dbvehiculo.polizaSeguro AS 'polizaSeguro', ")
+                .append("    dbvehiculo.fechaPoliza AS 'fechaPoliza', ")
+                .append("    dbvehiculo.idEstado AS 'idEstado' ")
+                .append("FROM ")
+                .append("    controlGPC.dbvehiculo ")
+                .append("        LEFT JOIN ")
+                .append("    dbtransportista ON dbtransportista.id = dbvehiculo.idTransportista ")
+                .append("WHERE dbvehiculo.id = ")
+                .append(id)
+                .append(" AND dbvehiculo.idEstado <> 3;");
+
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         ResultSet rs = st.executeQuery();
 
@@ -329,13 +346,13 @@ public class vehiculoDAOImpl implements catalogosInterface {
 
                 _vehiculoObj.setId(rs.getInt(1));
                 _vehiculoObj.setNombrePropietario(rs.getString(2));
-                
+
                 transportista _transportista = new transportista();
-                
+
                 _transportista.setId(rs.getInt(3));
                 _transportista.setNombreCompleto(rs.getString(4));
                 _vehiculoObj.setTransportista(_transportista);
-                
+
                 _vehiculoObj.setMarca(rs.getString(5));
                 _vehiculoObj.setModelo(rs.getString(6));
                 _vehiculoObj.setTipo(rs.getString(7));
@@ -364,5 +381,5 @@ public class vehiculoDAOImpl implements catalogosInterface {
 
         return _vehiculoObj;
     }
-    
+
 }

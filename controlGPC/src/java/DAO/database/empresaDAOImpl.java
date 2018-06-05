@@ -31,14 +31,16 @@ public class empresaDAOImpl implements catalogosInterface {
 
         empresa _empresasObj = (empresa) o;
 
-        String _consulta = "INSERT INTO controlGPC.dbempresa "
-                + "(nombreCompleto, "
-                + "descripcion, "
-                + "idEstado) "
-                + "VALUES "
-                + "(?, ?, ?);";
+        StringBuilder _consulta = new StringBuilder();
+        
+        _consulta.append("INSERT INTO controlGPC.dbempresa ")
+                .append("(nombreCompleto, ")
+                .append("descripcion, ")
+                .append("idEstado) ")
+                .append("VALUES ")
+                .append("(?, ?, ?);");
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         st.setString(1, _empresasObj.getNombreCompleto());
         st.setString(2, _empresasObj.getDescripcion());
@@ -58,14 +60,16 @@ public class empresaDAOImpl implements catalogosInterface {
 
         empresa _empresasObj = (empresa) o;
 
-        String _consulta = "UPDATE controlGPC.dbempresa "
-                + "SET "
-                + "nombreCompleto = ?, "
-                + "descripcion = ?, "
-                + "idEstado = ? "
-                + "WHERE id = ?;";
+        StringBuilder _consulta = new StringBuilder();
+        
+        _consulta.append("UPDATE controlGPC.dbempresa ")
+                .append("SET ")
+                .append("nombreCompleto = ?, ")
+                .append("descripcion = ?, ")
+                .append("idEstado = ? ")
+                .append("WHERE id = ?;");
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         st.setString(1, _empresasObj.getNombreCompleto());
         st.setString(2, _empresasObj.getDescripcion());
@@ -84,10 +88,12 @@ public class empresaDAOImpl implements catalogosInterface {
 
     @Override
     public boolean eliminarRegistro(int id) throws Exception {
+        
+        StringBuilder _consulta = new StringBuilder();
 
-        String _consulta = "UPDATE controlGPC.dbempresa SET idEstado = 3 WHERE id = ?;";
+        _consulta.append("UPDATE controlGPC.dbempresa SET idEstado = 3 WHERE id = ?;");
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         st.setInt(1, id);
 
@@ -107,15 +113,17 @@ public class empresaDAOImpl implements catalogosInterface {
 
         List<empresa> _listaempresa = new ArrayList();
 
-        String _consulta = "SELECT  "
-                + "    dbempresa.id AS 'id', "
-                + "    dbempresa.nombreCompleto AS 'nombreCompleto', "
-                + "    dbempresa.descripcion AS 'descripcion', "
-                + "    dbempresa.idEstado AS 'idEstado' "
-                + "FROM "
-                + "    controlGPC.dbempresa WHERE dbempresa.idEstado <> 3;";
+        StringBuilder _consulta = new StringBuilder();
+        
+        _consulta.append("SELECT  ")
+                .append("    dbempresa.id AS 'id', ")
+                .append("    dbempresa.nombreCompleto AS 'nombreCompleto', ")
+                .append("    dbempresa.descripcion AS 'descripcion', ")
+                .append("    dbempresa.idEstado AS 'idEstado' ")
+                .append("FROM ")
+                .append("    controlGPC.dbempresa WHERE dbempresa.idEstado <> 3;");
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         ResultSet rs = st.executeQuery();
 
@@ -156,15 +164,21 @@ public class empresaDAOImpl implements catalogosInterface {
 
         List<empresa> _listaempresa = new ArrayList();
 
-        String _consulta = "SELECT  "
-                + "    dbempresa.id AS 'id', "
-                + "    dbempresa.nombreCompleto AS 'nombreCompleto', "
-                + "    dbempresa.descripcion AS 'descripcion', "
-                + "    dbempresa.idEstado AS 'idEstado' "
-                + "FROM "
-                + "    controlGPC.dbempresa WHERE " + _campo + " LIKE '%" + _dato + "%' AND dbempresa.idEstado <> 3;";
+        StringBuilder _consulta = new StringBuilder();
+        
+        _consulta.append("SELECT  ")
+                .append("    dbempresa.id AS 'id', ")
+                .append("    dbempresa.nombreCompleto AS 'nombreCompleto', ")
+                .append("    dbempresa.descripcion AS 'descripcion', ")
+                .append("    dbempresa.idEstado AS 'idEstado' ")
+                .append("FROM ")
+                .append("    controlGPC.dbempresa WHERE ")
+                .append(_campo)
+                .append(" LIKE '%")
+                .append(_dato)
+                .append("%' AND dbempresa.idEstado <> 3;");
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         ResultSet rs = st.executeQuery();
 
@@ -202,16 +216,20 @@ public class empresaDAOImpl implements catalogosInterface {
     public Object consultarPorId(int id) throws Exception {
 
         empresa _empresasObj = new empresa();
+        
+        StringBuilder _consulta = new StringBuilder();
 
-        String _consulta = "SELECT  "
-                + "    dbempresa.id AS 'id', "
-                + "    dbempresa.nombreCompleto AS 'nombreCompleto', "
-                + "    dbempresa.descripcion AS 'descripcion', "
-                + "    dbempresa.idEstado AS 'idEstado' "
-                + "FROM "
-                + "    controlGPC.dbempresa WHERE dbempresa.id = " + id + " AND dbempresa.idEstado <> 3;";
+        _consulta.append("SELECT  ")
+                .append("    dbempresa.id AS 'id', ")
+                .append("    dbempresa.nombreCompleto AS 'nombreCompleto', ")
+                .append("    dbempresa.descripcion AS 'descripcion', ")
+                .append("    dbempresa.idEstado AS 'idEstado' ")
+                .append("FROM ")
+                .append("    controlGPC.dbempresa WHERE dbempresa.id = ")
+                .append(id)
+                .append(" AND dbempresa.idEstado <> 3;");
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         ResultSet rs = st.executeQuery();
 

@@ -19,7 +19,7 @@ import java.util.List;
  * @author elara
  */
 public class categoriaProductoDAOImpl implements catalogosInterface {
-    
+
     private Connection _conn;
 
     @Override
@@ -27,14 +27,16 @@ public class categoriaProductoDAOImpl implements catalogosInterface {
 
         categoriaProducto _ctgProductoObj = (categoriaProducto) o;
 
-        String _consulta = "INSERT INTO controlGPC.dbcategoriaProducto " +
-                "(nombreCompleto, " +
-                "descripcion, " +
-                "idEstado) " +
-                "VALUES " +
-                "(?, ?, ?);";
+        StringBuilder _consulta = new StringBuilder();
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        _consulta.append("INSERT INTO controlGPC.dbcategoriaProducto ")
+                .append("(nombreCompleto, ")
+                .append("descripcion, ")
+                .append("idEstado) ")
+                .append("VALUES ")
+                .append("(?, ?, ?);");
+
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         st.setString(1, _ctgProductoObj.getNombreCompleto());
         st.setString(2, _ctgProductoObj.getDescripcion());
@@ -54,19 +56,21 @@ public class categoriaProductoDAOImpl implements catalogosInterface {
 
         categoriaProducto _ctgProductoObj = (categoriaProducto) o;
 
-        String _consulta = "UPDATE controlGPC.dbcategoriaProducto " +
-                "SET " +
-                "nombreCompleto = ?, " +
-                "descripcion = ?, " +
-                "idEstado = ? " +
-                "WHERE id = ?;";
+        StringBuilder _consulta = new StringBuilder();
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        _consulta.append("UPDATE controlGPC.dbcategoriaProducto ")
+                .append("SET ")
+                .append("nombreCompleto = ?, ")
+                .append("descripcion = ?, ")
+                .append("idEstado = ? ")
+                .append("WHERE id = ?;");
+
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         st.setString(1, _ctgProductoObj.getNombreCompleto());
         st.setString(2, _ctgProductoObj.getDescripcion());
         st.setInt(3, _ctgProductoObj.getIdEstado());
-        
+
         st.setInt(4, _ctgProductoObj.getId());
 
         boolean resultado = st.execute();
@@ -81,10 +85,12 @@ public class categoriaProductoDAOImpl implements catalogosInterface {
     @Override
     public boolean eliminarRegistro(int id) throws Exception {
 
-        String _consulta = "UPDATE controlGPC.dbcategoriaProducto SET idEstado = 3 WHERE id = ?;";
+        StringBuilder _consulta = new StringBuilder();
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
-        
+        _consulta.append("UPDATE controlGPC.dbcategoriaProducto SET idEstado = 3 WHERE id = ?;");
+
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
+
         st.setInt(1, id);
 
         boolean resultado = st.execute();
@@ -103,17 +109,19 @@ public class categoriaProductoDAOImpl implements catalogosInterface {
 
         List<categoriaProducto> _listaCtgProducto = new ArrayList();
 
-        String _consulta = "SELECT  " +
-                "    dbcategoriaProducto.id AS 'id', " +
-                "    dbcategoriaProducto.nombreCompleto AS 'nombreCompleto', " +
-                "    dbcategoriaProducto.descripcion AS 'descripcion', " +
-                "    dbcategoriaProducto.idEstado AS 'idEstado' " +
-                "FROM " +
-                "    controlGPC.dbcategoriaProducto " +
-                "WHERE " +
-                "    dbcategoriaProducto.idEstado <> 3;";
+        StringBuilder _consulta = new StringBuilder();
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        _consulta.append("SELECT  ")
+                .append("    dbcategoriaProducto.id AS 'id', ")
+                .append("    dbcategoriaProducto.nombreCompleto AS 'nombreCompleto', ")
+                .append("    dbcategoriaProducto.descripcion AS 'descripcion', ")
+                .append("    dbcategoriaProducto.idEstado AS 'idEstado' ")
+                .append("FROM ")
+                .append("    controlGPC.dbcategoriaProducto ")
+                .append("WHERE ")
+                .append("    dbcategoriaProducto.idEstado <> 3;");
+
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         ResultSet rs = st.executeQuery();
 
@@ -154,16 +162,22 @@ public class categoriaProductoDAOImpl implements catalogosInterface {
 
         List<categoriaProducto> _listaCtgProducto = new ArrayList();
 
-        String _consulta = "SELECT  " +
-                "    dbcategoriaProducto.id AS 'id', " +
-                "    dbcategoriaProducto.nombreCompleto AS 'nombreCompleto', " +
-                "    dbcategoriaProducto.descripcion AS 'descripcion', " +
-                "    dbcategoriaProducto.idEstado AS 'idEstado' " +
-                "FROM " +
-                "    controlGPC.dbcategoriaProducto " +
-                "WHERE " + _campo + " LIKE '%" + _dato + "%' AND dbcategoriaProducto.idEstado <> 3;";
+        StringBuilder _consulta = new StringBuilder();
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        _consulta.append("SELECT  ")
+                .append("    dbcategoriaProducto.id AS 'id', ")
+                .append("    dbcategoriaProducto.nombreCompleto AS 'nombreCompleto', ")
+                .append("    dbcategoriaProducto.descripcion AS 'descripcion', ")
+                .append("    dbcategoriaProducto.idEstado AS 'idEstado' ")
+                .append("FROM ")
+                .append("    controlGPC.dbcategoriaProducto ")
+                .append("WHERE ")
+                .append(_campo)
+                .append(" LIKE '%")
+                .append(_dato)
+                .append("%' AND dbcategoriaProducto.idEstado <> 3;");
+
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         ResultSet rs = st.executeQuery();
 
@@ -202,16 +216,20 @@ public class categoriaProductoDAOImpl implements catalogosInterface {
 
         categoriaProducto _ctgProductoObj = new categoriaProducto();
 
-        String _consulta = "SELECT  " +
-                "    dbcategoriaProducto.id AS 'id', " +
-                "    dbcategoriaProducto.nombreCompleto AS 'nombreCompleto', " +
-                "    dbcategoriaProducto.descripcion AS 'descripcion', " +
-                "    dbcategoriaProducto.idEstado AS 'idEstado' " +
-                "FROM " +
-                "    controlGPC.dbcategoriaProducto " +
-                "WHERE dbcategoriaProducto.id = " + id + " AND dbcategoriaProducto.idEstado <> 3;";
+        StringBuilder _consulta = new StringBuilder();
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        _consulta.append("SELECT  ")
+                .append("    dbcategoriaProducto.id AS 'id', ")
+                .append("    dbcategoriaProducto.nombreCompleto AS 'nombreCompleto', ")
+                .append("    dbcategoriaProducto.descripcion AS 'descripcion', ")
+                .append("    dbcategoriaProducto.idEstado AS 'idEstado' ")
+                .append("FROM ")
+                .append("    controlGPC.dbcategoriaProducto ")
+                .append("WHERE dbcategoriaProducto.id = ")
+                .append(id)
+                .append(" AND dbcategoriaProducto.idEstado <> 3;");
+
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         ResultSet rs = st.executeQuery();
 
@@ -241,5 +259,5 @@ public class categoriaProductoDAOImpl implements catalogosInterface {
 
         return _ctgProductoObj;
     }
-    
+
 }

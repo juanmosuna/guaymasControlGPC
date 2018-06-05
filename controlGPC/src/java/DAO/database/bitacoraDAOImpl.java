@@ -32,18 +32,20 @@ public class bitacoraDAOImpl implements catalogosInterface {
     public boolean agregarRegistro(Object o) throws Exception {
 
         bitacora _bitacoraObj = (bitacora) o;
+        
+        StringBuilder _consulta = new StringBuilder();
 
-        String _consulta = "INSERT INTO controlGPC.dbbitacora "
-                + "(tabla, "
-                + "idTipoMovimiento, "
-                + "comentario, "
-                + "idUsuario, "
-                + "fechaHora, "
-                + "idEstado) "
-                + "VALUES "
-                + "(?, ?, ?, ?, ?, ?);";
+        _consulta.append("INSERT INTO controlGPC.dbbitacora ")
+                .append("(tabla, ")
+                .append("idTipoMovimiento, ")
+                .append("comentario, ")
+                .append("idUsuario, ")
+                .append("fechaHora, ")
+                .append("idEstado) ")
+                .append("VALUES ")
+                .append("(?, ?, ?, ?, ?, ?);");
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         st.setString(1, _bitacoraObj.getTabla());
         st.setInt(2, _bitacoraObj.getTpMovimiento().getId());
@@ -65,18 +67,20 @@ public class bitacoraDAOImpl implements catalogosInterface {
     public boolean modificarRegistro(Object o) throws Exception {
 
         bitacora _bitacoraObj = (bitacora) o;
+        
+        StringBuilder _consulta = new StringBuilder();
 
-        String _consulta = "UPDATE controlGPC.dbbitacora "
-                + "SET "
-                + "tabla = ?, "
-                + "idTipoMovimiento = ?, "
-                + "comentario = ?, "
-                + "idUsuario = ?, "
-                + "fechaHora = ?, "
-                + "idEstado = ? "
-                + "WHERE id = ?;";
+        _consulta.append("UPDATE controlGPC.dbbitacora ")
+                .append("SET ")
+                .append("tabla = ?, ")
+                .append("idTipoMovimiento = ?, ")
+                .append("comentario = ?, ")
+                .append("idUsuario = ?, ")
+                .append("fechaHora = ?, ")
+                .append("idEstado = ? ")
+                .append("WHERE id = ?;");
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         st.setString(1, _bitacoraObj.getTabla());
         st.setInt(2, _bitacoraObj.getTpMovimiento().getId());
@@ -99,9 +103,11 @@ public class bitacoraDAOImpl implements catalogosInterface {
     @Override
     public boolean eliminarRegistro(int id) throws Exception {
 
-        String _consulta = "UPDATE controlGPC.dbbitacora SET idEstado = 3 WHERE id = ?;";
+        StringBuilder _consulta = new StringBuilder();
+        
+        _consulta.append("UPDATE controlGPC.dbbitacora SET idEstado = 3 WHERE id = ?;");
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         st.setInt(1, id);
 
@@ -121,26 +127,28 @@ public class bitacoraDAOImpl implements catalogosInterface {
 
         List<bitacora> _listaBitacora = new ArrayList();
 
-        String _consulta = "SELECT  "
-                + "    dbbitacora.id AS 'id', "
-                + "    dbbitacora.tabla AS 'tabla', "
-                + "    dbbitacora.idTipoMovimiento AS 'idTipoMovimiento', "
-                + "    dbtipoMovimiento.nombreCompleto AS 'nombreTipoMovimiento', "
-                + "    dbbitacora.comentario AS 'comentario', "
-                + "    dbbitacora.idUsuario AS 'idUsuario', "
-                + "    dbusuario.nombreCompleto AS 'nombreUsuario', "
-                + "    dbbitacora.fechaHora AS 'fechaHora', "
-                + "    dbbitacora.idEstado AS 'idEstado' "
-                + "FROM "
-                + "    controlGPC.dbbitacora "
-                + "        LEFT JOIN "
-                + "    dbtipoMovimiento ON dbtipoMovimiento.id = dbbitacora.idTipoMovimiento "
-                + "        LEFT JOIN "
-                + "    dbusuario ON dbusuario.id = dbbitacora.idUsuario "
-                + "WHERE "
-                + "    dbbitacora.idEstado <> 3;";
+        StringBuilder _consulta = new StringBuilder();
+        
+        _consulta.append("SELECT  ")
+                .append("    dbbitacora.id AS 'id', ")
+                .append("    dbbitacora.tabla AS 'tabla', ")
+                .append("    dbbitacora.idTipoMovimiento AS 'idTipoMovimiento', ")
+                .append("    dbtipoMovimiento.nombreCompleto AS 'nombreTipoMovimiento', ")
+                .append("    dbbitacora.comentario AS 'comentario', ")
+                .append("    dbbitacora.idUsuario AS 'idUsuario', ")
+                .append("    dbusuario.nombreCompleto AS 'nombreUsuario', ")
+                .append("    dbbitacora.fechaHora AS 'fechaHora', ")
+                .append("    dbbitacora.idEstado AS 'idEstado' ")
+                .append("FROM ")
+                .append("    controlGPC.dbbitacora ")
+                .append("        LEFT JOIN ")
+                .append("    dbtipoMovimiento ON dbtipoMovimiento.id = dbbitacora.idTipoMovimiento ")
+                .append("        LEFT JOIN ")
+                .append("    dbusuario ON dbusuario.id = dbbitacora.idUsuario ")
+                .append("WHERE ")
+                .append("    dbbitacora.idEstado <> 3;");
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         ResultSet rs = st.executeQuery();
 
@@ -197,25 +205,27 @@ public class bitacoraDAOImpl implements catalogosInterface {
 
         List<bitacora> _listaBitacora = new ArrayList();
 
-        String _consulta = "SELECT  "
-                + "    dbbitacora.id AS 'id', "
-                + "    dbbitacora.tabla AS 'tabla', "
-                + "    dbbitacora.idTipoMovimiento AS 'idTipoMovimiento', "
-                + "    dbtipoMovimiento.nombreCompleto AS 'nombreTipoMovimiento', "
-                + "    dbbitacora.comentario AS 'comentario', "
-                + "    dbbitacora.idUsuario AS 'idUsuario', "
-                + "    dbusuario.nombreCompleto AS 'nombreUsuario', "
-                + "    dbbitacora.fechaHora AS 'fechaHora', "
-                + "    dbbitacora.idEstado AS 'idEstado' "
-                + "FROM "
-                + "    controlGPC.dbbitacora "
-                + "        LEFT JOIN "
-                + "    dbtipoMovimiento ON dbtipoMovimiento.id = dbbitacora.idTipoMovimiento "
-                + "        LEFT JOIN "
-                + "    dbusuario ON dbusuario.id = dbbitacora.idUsuario "
-                + "WHERE " + _campo + " LIKE '%" + _dato + "%' AND dbbitacora.idEstado <> 3;";
+        StringBuilder _consulta = new StringBuilder();
+        
+        _consulta.append("SELECT  ")
+                .append("    dbbitacora.id AS 'id', ")
+                .append("    dbbitacora.tabla AS 'tabla', ")
+                .append("    dbbitacora.idTipoMovimiento AS 'idTipoMovimiento', ")
+                .append("    dbtipoMovimiento.nombreCompleto AS 'nombreTipoMovimiento', ")
+                .append("    dbbitacora.comentario AS 'comentario', ")
+                .append("    dbbitacora.idUsuario AS 'idUsuario', ")
+                .append("    dbusuario.nombreCompleto AS 'nombreUsuario', ")
+                .append("    dbbitacora.fechaHora AS 'fechaHora', ")
+                .append("    dbbitacora.idEstado AS 'idEstado' ")
+                .append("FROM ")
+                .append("    controlGPC.dbbitacora ")
+                .append("        LEFT JOIN ")
+                .append("    dbtipoMovimiento ON dbtipoMovimiento.id = dbbitacora.idTipoMovimiento ")
+                .append("        LEFT JOIN ")
+                .append("    dbusuario ON dbusuario.id = dbbitacora.idUsuario ")
+                .append("WHERE " + _campo + " LIKE '%" + _dato + "%' AND dbbitacora.idEstado <> 3;");
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         ResultSet rs = st.executeQuery();
 
@@ -269,26 +279,28 @@ public class bitacoraDAOImpl implements catalogosInterface {
     public Object consultarPorId(int id) throws Exception {
 
         bitacora _bitacoraObj = new bitacora();
+        
+        StringBuilder _consulta = new StringBuilder();
 
-        String _consulta = "SELECT  "
-                + "    dbbitacora.id AS 'id', "
-                + "    dbbitacora.tabla AS 'tabla', "
-                + "    dbbitacora.idTipoMovimiento AS 'idTipoMovimiento', "
-                + "    dbtipoMovimiento.nombreCompleto AS 'nombreTipoMovimiento', "
-                + "    dbbitacora.comentario AS 'comentario', "
-                + "    dbbitacora.idUsuario AS 'idUsuario', "
-                + "    dbusuario.nombreCompleto AS 'nombreUsuario', "
-                + "    dbbitacora.fechaHora AS 'fechaHora', "
-                + "    dbbitacora.idEstado AS 'idEstado' "
-                + "FROM "
-                + "    controlGPC.dbbitacora "
-                + "        LEFT JOIN "
-                + "    dbtipoMovimiento ON dbtipoMovimiento.id = dbbitacora.idTipoMovimiento "
-                + "        LEFT JOIN "
-                + "    dbusuario ON dbusuario.id = dbbitacora.idUsuario "
-                + "WHERE dbbitacora.id = " + id + " AND dbbitacora.idEstado <> 3;";
+        _consulta.append("SELECT  ")
+                .append("    dbbitacora.id AS 'id', ")
+                .append("    dbbitacora.tabla AS 'tabla', ")
+                .append("    dbbitacora.idTipoMovimiento AS 'idTipoMovimiento', ")
+                .append("    dbtipoMovimiento.nombreCompleto AS 'nombreTipoMovimiento', ")
+                .append("    dbbitacora.comentario AS 'comentario', ")
+                .append("    dbbitacora.idUsuario AS 'idUsuario', ")
+                .append("    dbusuario.nombreCompleto AS 'nombreUsuario', ")
+                .append("    dbbitacora.fechaHora AS 'fechaHora', ")
+                .append("    dbbitacora.idEstado AS 'idEstado' ")
+                .append("FROM ")
+                .append("    controlGPC.dbbitacora ")
+                .append("        LEFT JOIN ")
+                .append("    dbtipoMovimiento ON dbtipoMovimiento.id = dbbitacora.idTipoMovimiento ")
+                .append("        LEFT JOIN ")
+                .append("    dbusuario ON dbusuario.id = dbbitacora.idUsuario ")
+                .append("WHERE dbbitacora.id = " + id + " AND dbbitacora.idEstado <> 3;");
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         ResultSet rs = st.executeQuery();
 

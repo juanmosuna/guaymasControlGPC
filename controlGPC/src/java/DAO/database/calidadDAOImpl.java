@@ -7,6 +7,7 @@ package DAO.database;
 
 import DAO.interfaces.catalogosInterface;
 import entity.calidad;
+import entity.grupoCalidad;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -30,22 +31,24 @@ public class calidadDAOImpl implements catalogosInterface {
     public boolean agregarRegistro(Object o) throws Exception {
 
         calidad _calidadesObj = (calidad) o;
+        
+        StringBuilder _consulta = new StringBuilder();
 
-        String _consulta = "INSERT INTO controlGPC.dbcalidad "
-                + "(codigo, "
-                + "nombreCompleto, "
-                + "descripcion, "
-                + "idgrupoCalidad, "
-                + "idEstado) "
-                + "VALUES "
-                + "(?, ?, ?, ?, ?);";
+        _consulta.append("INSERT INTO controlGPC.dbcalidad ")
+                .append("(codigo, ")
+                .append("nombreCompleto, ")
+                .append("descripcion, ")
+                .append("idgrupoCalidad, ")
+                .append("idEstado) ")
+                .append("VALUES ")
+                .append("(?, ?, ?, ?, ?);");
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         st.setString(1, _calidadesObj.getCodigo());
         st.setString(2, _calidadesObj.getNombreCompleto());
         st.setString(3, _calidadesObj.getDescripcion());
-        st.setInt(4, _calidadesObj.getIdgrupoCalidad());
+        st.setInt(4, _calidadesObj.getGrpCalidad().getId());
         st.setInt(5, _calidadesObj.getIdEstado());
 
         boolean resultado = st.execute();
@@ -61,22 +64,24 @@ public class calidadDAOImpl implements catalogosInterface {
     public boolean modificarRegistro(Object o) throws Exception {
 
         calidad _calidadesObj = (calidad) o;
+        
+        StringBuilder _consulta = new StringBuilder();
 
-        String _consulta = "UPDATE controlGPC.dbcalidad "
-                + "SET "
-                + "codigo = ?, "
-                + "nombreCompleto = ?, "
-                + "descripcion = ?, "
-                + "idgrupoCalidad = ?, "
-                + "idEstado = ? "
-                + "WHERE id = ?;";
+        _consulta.append("UPDATE controlGPC.dbcalidad ")
+                .append("SET ")
+                .append("codigo = ?, ")
+                .append("nombreCompleto = ?, ")
+                .append("descripcion = ?, ")
+                .append("idgrupoCalidad = ?, ")
+                .append("idEstado = ? ")
+                .append("WHERE id = ?;");
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         st.setString(1, _calidadesObj.getCodigo());
         st.setString(2, _calidadesObj.getNombreCompleto());
         st.setString(3, _calidadesObj.getDescripcion());
-        st.setInt(4, _calidadesObj.getIdgrupoCalidad());
+        st.setInt(4, _calidadesObj.getGrpCalidad().getId());
         st.setInt(5, _calidadesObj.getIdEstado());
 
         st.setInt(6, _calidadesObj.getId());
@@ -92,10 +97,12 @@ public class calidadDAOImpl implements catalogosInterface {
 
     @Override
     public boolean eliminarRegistro(int id) throws Exception {
+        
+        StringBuilder _consulta = new StringBuilder();
 
-        String _consulta = "UPDATE controlGPC.dbcalidad SET idEstado = 3 WHERE id = ?;";
+        _consulta.append("UPDATE controlGPC.dbcalidad SET idEstado = 3 WHERE id = ?;");
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         st.setInt(1, id);
 
@@ -115,22 +122,24 @@ public class calidadDAOImpl implements catalogosInterface {
 
         List<calidad> _listacalidad = new ArrayList();
 
-        String _consulta = "SELECT  "
-                + "    dbcalidad.id AS 'id', "
-                + "    dbcalidad.codigo AS 'codigo', "
-                + "    dbcalidad.nombreCompleto AS 'nombreCompleto', "
-                + "    dbcalidad.descripcion AS 'descripcion', "
-                + "    dbcalidad.idgrupoCalidad AS 'idgrupoCalidad', "
-                + "    dbgrupoCalidad.nombreCompleto AS 'nombreGrupoCalidad', "
-                + "    dbcalidad.idEstado AS 'idEstado' "
-                + "FROM "
-                + "    controlGPC.dbcalidad "
-                + "        LEFT JOIN "
-                + "    dbgrupoCalidad ON dbgrupoCalidad.id = dbcalidad.idgrupoCalidad "
-                + "WHERE "
-                + "    dbcalidad.idEstado <> 3;";
+        StringBuilder _consulta = new StringBuilder();
+        
+        _consulta.append("SELECT  ")
+                .append("    dbcalidad.id AS 'id', ")
+                .append("    dbcalidad.codigo AS 'codigo', ")
+                .append("    dbcalidad.nombreCompleto AS 'nombreCompleto', ")
+                .append("    dbcalidad.descripcion AS 'descripcion', ")
+                .append("    dbcalidad.idgrupoCalidad AS 'idgrupoCalidad', ")
+                .append("    dbgrupoCalidad.nombreCompleto AS 'nombreGrupoCalidad', ")
+                .append("    dbcalidad.idEstado AS 'idEstado' ")
+                .append("FROM ")
+                .append("    controlGPC.dbcalidad ")
+                .append("        LEFT JOIN ")
+                .append("    dbgrupoCalidad ON dbgrupoCalidad.id = dbcalidad.idgrupoCalidad ")
+                .append("WHERE ")
+                .append("    dbcalidad.idEstado <> 3;");
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         ResultSet rs = st.executeQuery();
 
@@ -144,8 +153,12 @@ public class calidadDAOImpl implements catalogosInterface {
                 _calidadesObj.setCodigo(rs.getString(2));
                 _calidadesObj.setNombreCompleto(rs.getString(3));
                 _calidadesObj.setDescripcion(rs.getString(4));
-                _calidadesObj.setIdgrupoCalidad(rs.getInt(5));
-                _calidadesObj.setNombreGrupoCalidad(rs.getString(6));
+                
+                grupoCalidad _grpCalidad = new grupoCalidad();
+                _grpCalidad.setId(rs.getInt(5));
+                _grpCalidad.setNombreCompleto(rs.getString(6));
+                _calidadesObj.setGrpCalidad(_grpCalidad);
+                
                 _calidadesObj.setIdEstado(rs.getInt(7));
 
                 _listacalidad.add(_calidadesObj);
@@ -173,22 +186,28 @@ public class calidadDAOImpl implements catalogosInterface {
         calidad _calidadesObj;
 
         List<calidad> _listacalidad = new ArrayList();
+        
+        StringBuilder _consulta = new StringBuilder();
 
-        String _consulta = "SELECT  "
-                + "    dbcalidad.id AS 'id', "
-                + "    dbcalidad.codigo AS 'codigo', "
-                + "    dbcalidad.nombreCompleto AS 'nombreCompleto', "
-                + "    dbcalidad.descripcion AS 'descripcion', "
-                + "    dbcalidad.idgrupoCalidad AS 'idgrupoCalidad', "
-                + "    dbgrupoCalidad.nombreCompleto AS 'nombreGrupoCalidad', "
-                + "    dbcalidad.idEstado AS 'idEstado' "
-                + "FROM "
-                + "    controlGPC.dbcalidad "
-                + "        LEFT JOIN "
-                + "    dbgrupoCalidad ON dbgrupoCalidad.id = dbcalidad.idgrupoCalidad "
-                + "WHERE " + _campo + " LIKE '%" + _dato + "%' AND dbcalidad.idEstado <> 3;";
+        _consulta.append("SELECT  ")
+                .append("    dbcalidad.id AS 'id', ")
+                .append("    dbcalidad.codigo AS 'codigo', ")
+                .append("    dbcalidad.nombreCompleto AS 'nombreCompleto', ")
+                .append("    dbcalidad.descripcion AS 'descripcion', ")
+                .append("    dbcalidad.idgrupoCalidad AS 'idgrupoCalidad', ")
+                .append("    dbgrupoCalidad.nombreCompleto AS 'nombreGrupoCalidad', ")
+                .append("    dbcalidad.idEstado AS 'idEstado' ")
+                .append("FROM ")
+                .append("    controlGPC.dbcalidad ")
+                .append("        LEFT JOIN ")
+                .append("    dbgrupoCalidad ON dbgrupoCalidad.id = dbcalidad.idgrupoCalidad ")
+                .append("WHERE ")
+                .append(_campo)
+                .append(" LIKE '%")
+                .append(_dato)
+                .append("%' AND dbcalidad.idEstado <> 3;");
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         ResultSet rs = st.executeQuery();
 
@@ -202,8 +221,12 @@ public class calidadDAOImpl implements catalogosInterface {
                 _calidadesObj.setCodigo(rs.getString(2));
                 _calidadesObj.setNombreCompleto(rs.getString(3));
                 _calidadesObj.setDescripcion(rs.getString(4));
-                _calidadesObj.setIdgrupoCalidad(rs.getInt(5));
-                _calidadesObj.setNombreGrupoCalidad(rs.getString(6));
+                
+                grupoCalidad _grpCalidad = new grupoCalidad();
+                _grpCalidad.setId(rs.getInt(5));
+                _grpCalidad.setNombreCompleto(rs.getString(6));
+                _calidadesObj.setGrpCalidad(_grpCalidad);
+                
                 _calidadesObj.setIdEstado(rs.getInt(7));
 
                 _listacalidad.add(_calidadesObj);
@@ -230,21 +253,25 @@ public class calidadDAOImpl implements catalogosInterface {
 
         calidad _calidadesObj = new calidad();
 
-        String _consulta = "SELECT  "
-                + "    dbcalidad.id AS 'id', "
-                + "    dbcalidad.codigo AS 'codigo', "
-                + "    dbcalidad.nombreCompleto AS 'nombreCompleto', "
-                + "    dbcalidad.descripcion AS 'descripcion', "
-                + "    dbcalidad.idgrupoCalidad AS 'idgrupoCalidad', "
-                + "    dbgrupoCalidad.nombreCompleto AS 'nombreGrupoCalidad', "
-                + "    dbcalidad.idEstado AS 'idEstado' "
-                + "FROM "
-                + "    controlGPC.dbcalidad "
-                + "        LEFT JOIN "
-                + "    dbgrupoCalidad ON dbgrupoCalidad.id = dbcalidad.idgrupoCalidad "
-                + "WHERE dbcalidad.id = " + id + " AND dbcalidad.idEstado <> 3;";
+        StringBuilder _consulta = new StringBuilder();
+        
+        _consulta.append("SELECT  ")
+                .append("    dbcalidad.id AS 'id', ")
+                .append("    dbcalidad.codigo AS 'codigo', ")
+                .append("    dbcalidad.nombreCompleto AS 'nombreCompleto', ")
+                .append("    dbcalidad.descripcion AS 'descripcion', ")
+                .append("    dbcalidad.idgrupoCalidad AS 'idgrupoCalidad', ")
+                .append("    dbgrupoCalidad.nombreCompleto AS 'nombreGrupoCalidad', ")
+                .append("    dbcalidad.idEstado AS 'idEstado' ")
+                .append("FROM ")
+                .append("    controlGPC.dbcalidad ")
+                .append("        LEFT JOIN ")
+                .append("    dbgrupoCalidad ON dbgrupoCalidad.id = dbcalidad.idgrupoCalidad ")
+                .append("WHERE dbcalidad.id = ")
+                .append(id)
+                .append(" AND dbcalidad.idEstado <> 3;");
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         ResultSet rs = st.executeQuery();
 
@@ -256,8 +283,12 @@ public class calidadDAOImpl implements catalogosInterface {
                 _calidadesObj.setCodigo(rs.getString(2));
                 _calidadesObj.setNombreCompleto(rs.getString(3));
                 _calidadesObj.setDescripcion(rs.getString(4));
-                _calidadesObj.setIdgrupoCalidad(rs.getInt(5));
-                _calidadesObj.setNombreGrupoCalidad(rs.getString(6));
+                
+                grupoCalidad _grpCalidad = new grupoCalidad();
+                _grpCalidad.setId(rs.getInt(5));
+                _grpCalidad.setNombreCompleto(rs.getString(6));
+                _calidadesObj.setGrpCalidad(_grpCalidad);
+                
                 _calidadesObj.setIdEstado(rs.getInt(7));
 
             }

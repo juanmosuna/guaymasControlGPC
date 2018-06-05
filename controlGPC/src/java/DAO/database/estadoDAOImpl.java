@@ -31,13 +31,15 @@ public class estadoDAOImpl implements catalogosInterface {
 
         estado _estadosObj = (estado) o;
 
-        String _consulta = "INSERT INTO controlGPC.dbestado "
-                + "(nombreCompleto, "
-                + "descripcion) "
-                + "VALUES "
-                + "(?, ?);";
+        StringBuilder _consulta = new StringBuilder();
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        _consulta.append("INSERT INTO controlGPC.dbestado ")
+                .append("(nombreCompleto, ")
+                .append("descripcion) ")
+                .append("VALUES ")
+                .append("(?, ?);");
+
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         st.setString(1, _estadosObj.getNombreCompleto());
         st.setString(2, _estadosObj.getDescripcion());
@@ -56,13 +58,15 @@ public class estadoDAOImpl implements catalogosInterface {
 
         estado _estadosObj = (estado) o;
 
-        String _consulta = "UPDATE controlGPC.dbestado "
-                + "SET "
-                + "nombreCompleto = ?, "
-                + "descripcion = ? "
-                + "WHERE id = ?;";
+        StringBuilder _consulta = new StringBuilder();
+        
+         _consulta.append("UPDATE controlGPC.dbestado ")
+                .append("SET ")
+                .append( "nombreCompleto = ?, ")
+                .append( "descripcion = ? ")
+                .append( "WHERE id = ?;");
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         st.setString(1, _estadosObj.getNombreCompleto());
         st.setString(2, _estadosObj.getDescripcion());
@@ -81,9 +85,11 @@ public class estadoDAOImpl implements catalogosInterface {
     @Override
     public boolean eliminarRegistro(int id) throws Exception {
 
-        String _consulta = "DELETE FROM controlGPC.dbestado WHERE ?;";
+        StringBuilder _consulta = new StringBuilder();
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        _consulta.append( "DELETE FROM controlGPC.dbestado WHERE ?;");
+
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         st.setInt(1, id);
 
@@ -103,14 +109,16 @@ public class estadoDAOImpl implements catalogosInterface {
 
         List<estado> _listaestado = new ArrayList();
 
-        String _consulta = "SELECT  "
-                + "    dbestado.id AS 'id', "
-                + "    dbestado.nombreCompleto AS 'nombreCompleto', "
-                + "    dbestado.descripcion AS 'descripcion' "
-                + "FROM "
-                + "    controlGPC.dbestado;";
+        StringBuilder _consulta = new StringBuilder();
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        _consulta.append( "SELECT  ")
+                .append( "    dbestado.id AS 'id', ")
+                .append( "    dbestado.nombreCompleto AS 'nombreCompleto', ")
+                .append( "    dbestado.descripcion AS 'descripcion' ")
+                .append( "FROM ")
+                .append( "    controlGPC.dbestado;");
+
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         ResultSet rs = st.executeQuery();
 
@@ -150,14 +158,20 @@ public class estadoDAOImpl implements catalogosInterface {
 
         List<estado> _listaestado = new ArrayList();
 
-        String _consulta = "SELECT  "
-                + "    dbestado.id AS 'id', "
-                + "    dbestado.nombreCompleto AS 'nombreCompleto', "
-                + "    dbestado.descripcion AS 'descripcion' "
-                + "FROM "
-                + "    controlGPC.dbestado WHERE " + _campo + " LIKE '%" + _dato + "%';";
+        StringBuilder _consulta = new StringBuilder();
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        _consulta.append( "SELECT  ")
+                .append( "    dbestado.id AS 'id', ")
+                .append( "    dbestado.nombreCompleto AS 'nombreCompleto', ")
+                .append( "    dbestado.descripcion AS 'descripcion' ")
+                .append( "FROM ")
+                .append("    controlGPC.dbestado WHERE ")
+                .append(_campo)
+                .append(" LIKE '%")
+                .append(_dato)
+                .append("%';");
+
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         ResultSet rs = st.executeQuery();
 
@@ -195,14 +209,18 @@ public class estadoDAOImpl implements catalogosInterface {
 
         estado _estadosObj = new estado();
 
-        String _consulta = "SELECT  "
-                + "    dbestado.id AS 'id', "
-                + "    dbestado.nombreCompleto AS 'nombreCompleto', "
-                + "    dbestado.descripcion AS 'descripcion' "
-                + "FROM "
-                + "    controlGPC.dbestado WHERE dbestado.id = " + id + ";";
+        StringBuilder _consulta = new StringBuilder();
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        _consulta.append( "SELECT  ")
+                .append( "    dbestado.id AS 'id', ")
+                .append( "    dbestado.nombreCompleto AS 'nombreCompleto', ")
+                .append( "    dbestado.descripcion AS 'descripcion' ")
+                .append( "FROM ")
+                .append("    controlGPC.dbestado WHERE dbestado.id = ")
+                .append(id)
+                .append(";");
+
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         ResultSet rs = st.executeQuery();
 

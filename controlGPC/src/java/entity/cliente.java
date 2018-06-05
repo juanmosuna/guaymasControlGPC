@@ -26,7 +26,6 @@ public class cliente {
     private String correoElectronico = new String();
     private String paginaWeb = new String();
     private byte[] fotoCliente = null;
-    private contactoCliente _contactoCliente = new contactoCliente();
     private int idEstado = 0;
 
     public cliente() {
@@ -150,14 +149,6 @@ public class cliente {
 
     public void setFotoCliente(byte[] fotoCliente) {
         this.fotoCliente = fotoCliente;
-    }
-
-    public contactoCliente getContactoCliente() {
-        return _contactoCliente;
-    }
-
-    public void setContactoCliente(contactoCliente _contactoCliente) {
-        this._contactoCliente = _contactoCliente;
     }
 
     public int getIdEstado() {

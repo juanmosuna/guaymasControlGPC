@@ -30,15 +30,17 @@ public class localidadDAOImpl implements catalogosInterface {
     public boolean agregarRegistro(Object o) throws Exception {
 
         localidad _localidadesObj = (localidad) o;
+        
+        StringBuilder _consulta = new StringBuilder();
 
-        String _consulta = "INSERT INTO controlGPC.dblocalidad "
-                + "(nombreCompleto, "
-                + "descripcion, "
-                + "idEstado) "
-                + "VALUES "
-                + "(?, ?, ?);";
+        _consulta.append( "INSERT INTO controlGPC.dblocalidad ")
+                .append( "(nombreCompleto, ")
+                .append( "descripcion, ")
+                .append( "idEstado) ")
+                .append( "VALUES ")
+                .append( "(?, ?, ?);");
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         st.setString(1, _localidadesObj.getNombreCompleto());
         st.setString(2, _localidadesObj.getDescripcion());
@@ -57,15 +59,17 @@ public class localidadDAOImpl implements catalogosInterface {
     public boolean modificarRegistro(Object o) throws Exception {
 
         localidad _localidadesObj = (localidad) o;
+        
+        StringBuilder _consulta = new StringBuilder();
 
-        String _consulta = "UPDATE controlGPC.dblocalidad "
-                + "SET "
-                + "nombreCompleto = ?, "
-                + "descripcion = ?, "
-                + "idEstado = ? "
-                + "WHERE id = ?;";
+        _consulta.append( "UPDATE controlGPC.dblocalidad ")
+                .append( "SET ")
+                .append( "nombreCompleto = ?, ")
+                .append( "descripcion = ?, ")
+                .append( "idEstado = ? ")
+                .append( "WHERE id = ?;");
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         st.setString(1, _localidadesObj.getNombreCompleto());
         st.setString(2, _localidadesObj.getDescripcion());
@@ -84,10 +88,12 @@ public class localidadDAOImpl implements catalogosInterface {
 
     @Override
     public boolean eliminarRegistro(int id) throws Exception {
+        
+        StringBuilder _consulta = new StringBuilder();
 
-        String _consulta = "UPDATE controlGPC.dblocalidad SET idEstado = 3 WHERE id = ?;";
+        _consulta.append( "UPDATE controlGPC.dblocalidad SET idEstado = 3 WHERE id = ?;");
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         st.setInt(1, id);
 
@@ -106,18 +112,20 @@ public class localidadDAOImpl implements catalogosInterface {
         localidad _localidadesObj;
 
         List<localidad> _listalocalidad = new ArrayList();
+        
+        StringBuilder _consulta = new StringBuilder();
 
-        String _consulta = "SELECT  "
-                + "    dblocalidad.id AS 'id', "
-                + "    dblocalidad.nombreCompleto AS 'nombreCompleto', "
-                + "    dblocalidad.descripcion AS 'descripcion', "
-                + "    dblocalidad.idEstado AS 'idEstado' "
-                + "FROM "
-                + "    controlGPC.dblocalidad "
-                + "WHERE "
-                + "    dblocalidad.idEstado <> 3;";
+        _consulta.append( "SELECT  ")
+                .append( "    dblocalidad.id AS 'id', ")
+                .append( "    dblocalidad.nombreCompleto AS 'nombreCompleto', ")
+                .append( "    dblocalidad.descripcion AS 'descripcion', ")
+                .append( "    dblocalidad.idEstado AS 'idEstado' ")
+                .append( "FROM ")
+                .append( "    controlGPC.dblocalidad ")
+                .append( "WHERE ")
+                .append( "    dblocalidad.idEstado <> 3;");
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         ResultSet rs = st.executeQuery();
 
@@ -157,18 +165,20 @@ public class localidadDAOImpl implements catalogosInterface {
         localidad _localidadesObj;
 
         List<localidad> _listalocalidad = new ArrayList();
+        
+        StringBuilder _consulta = new StringBuilder();
 
-        String _consulta = "SELECT  "
-                + "    dblocalidad.id AS 'id', "
-                + "    dblocalidad.nombreCompleto AS 'nombreCompleto', "
-                + "    dblocalidad.descripcion AS 'descripcion', "
-                + "    dblocalidad.idEstado AS 'idEstado' "
-                + "FROM "
-                + "    controlGPC.dblocalidad "
-                + "WHERE " + _campo + " LIKE '%" + _dato + "%' "
-                + "    AND dblocalidad.idEstado <> 3;";
+        _consulta.append( "SELECT  ")
+                .append( "    dblocalidad.id AS 'id', ")
+                .append( "    dblocalidad.nombreCompleto AS 'nombreCompleto', ")
+                .append( "    dblocalidad.descripcion AS 'descripcion', ")
+                .append( "    dblocalidad.idEstado AS 'idEstado' ")
+                .append( "FROM ")
+                .append( "    controlGPC.dblocalidad ")
+                .append( "WHERE " + _campo + " LIKE '%" + _dato + "%' ")
+                .append( "    AND dblocalidad.idEstado <> 3;");
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         ResultSet rs = st.executeQuery();
 
@@ -206,18 +216,20 @@ public class localidadDAOImpl implements catalogosInterface {
     public Object consultarPorId(int id) throws Exception {
 
         localidad _localidadesObj = new localidad();
+        
+        StringBuilder _consulta = new StringBuilder();
 
-        String _consulta = "SELECT  "
-                + "    dblocalidad.id AS 'id', "
-                + "    dblocalidad.nombreCompleto AS 'nombreCompleto', "
-                + "    dblocalidad.descripcion AS 'descripcion', "
-                + "    dblocalidad.idEstado AS 'idEstado' "
-                + "FROM "
-                + "    controlGPC.dblocalidad "
-                + "WHERE dblocalidad.id = " + id + " "
-                + "    AND dblocalidad.idEstado <> 3;";
+        _consulta.append( "SELECT  ")
+                .append( "    dblocalidad.id AS 'id', ")
+                .append( "    dblocalidad.nombreCompleto AS 'nombreCompleto', ")
+                .append( "    dblocalidad.descripcion AS 'descripcion', ")
+                .append( "    dblocalidad.idEstado AS 'idEstado' ")
+                .append( "FROM ")
+                .append( "    controlGPC.dblocalidad ")
+                .append( "WHERE dblocalidad.id = " + id + " ")
+                .append( "    AND dblocalidad.idEstado <> 3;");
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         ResultSet rs = st.executeQuery();
 
