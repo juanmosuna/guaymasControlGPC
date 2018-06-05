@@ -19,7 +19,7 @@ import java.util.List;
  * @author elara
  */
 public class transportistaDAOImpl implements catalogosInterface {
-    
+
     private Connection _conn;
 
     public transportistaDAOImpl(Connection _conn) {
@@ -31,26 +31,28 @@ public class transportistaDAOImpl implements catalogosInterface {
 
         transportista _transportistaObj = (transportista) o;
 
-        String _consulta = "INSERT INTO controlGPC.dbtransportista " +
-                    "(nombreCompleto, " +
-                    "descripcion, " +
-                    "domicilio, " +
-                    "codigoPostal, " +
-                    "localidad, " +
-                    "ciudad, " +
-                    "estado, " +
-                    "pais, " +
-                    "telefono, " +
-                    "mobile, " +
-                    "fax, " +
-                    "correoElectronico, " +
-                    "paginaWeb, " +
-                    "fotoTransportista, " +
-                    "idEstado) " +
-                    "VALUES " +
-                    "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+        StringBuilder _consulta = new StringBuilder();
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        _consulta.append("INSERT INTO controlGPC.dbtransportista ")
+                .append("(nombreCompleto, ")
+                .append("descripcion, ")
+                .append("domicilio, ")
+                .append("codigoPostal, ")
+                .append("localidad, ")
+                .append("ciudad, ")
+                .append("estado, ")
+                .append("pais, ")
+                .append("telefono, ")
+                .append("mobile, ")
+                .append("fax, ")
+                .append("correoElectronico, ")
+                .append("paginaWeb, ")
+                .append("fotoTransportista, ")
+                .append("idEstado) ")
+                .append("VALUES ")
+                .append("(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
+
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         st.setString(1, _transportistaObj.getNombreCompleto());
         st.setString(2, _transportistaObj.getDescripcion());
@@ -67,7 +69,6 @@ public class transportistaDAOImpl implements catalogosInterface {
         st.setString(13, _transportistaObj.getPaginaWeb());
         st.setString(14, javax.xml.bind.DatatypeConverter.printBase64Binary(_transportistaObj.getFotoTransportista()));
         st.setInt(15, _transportistaObj.getIdEstado());
-        
 
         boolean resultado = st.execute();
 
@@ -83,26 +84,28 @@ public class transportistaDAOImpl implements catalogosInterface {
 
         transportista _transportistaObj = (transportista) o;
 
-        String _consulta = "UPDATE controlGPC.dbtransportista " +
-            "SET " +
-            "nombreCompleto = ?, " +
-            "descripcion = ?, " +
-            "domicilio = ?, " +
-            "codigoPostal = ?, " +
-            "localidad = ?, " +
-            "ciudad = ?, " +
-            "estado = ?, " +
-            "pais = ?, " +
-            "telefono = ?, " +
-            "mobile = ?, " +
-            "fax = ?, " +
-            "correoElectronico = ?, " +
-            "paginaWeb = ?, " +
-            "fotoTransportista = ?, " +
-            "idEstado = ? " +
-            "WHERE id = ?;";
+        StringBuilder _consulta = new StringBuilder();
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        _consulta.append("UPDATE controlGPC.dbtransportista ")
+                .append("SET ")
+                .append("nombreCompleto = ?, ")
+                .append("descripcion = ?, ")
+                .append("domicilio = ?, ")
+                .append("codigoPostal = ?, ")
+                .append("localidad = ?, ")
+                .append("ciudad = ?, ")
+                .append("estado = ?, ")
+                .append("pais = ?, ")
+                .append("telefono = ?, ")
+                .append("mobile = ?, ")
+                .append("fax = ?, ")
+                .append("correoElectronico = ?, ")
+                .append("paginaWeb = ?, ")
+                .append("fotoTransportista = ?, ")
+                .append("idEstado = ? ")
+                .append("WHERE id = ?;");
+
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         st.setString(1, _transportistaObj.getNombreCompleto());
         st.setString(2, _transportistaObj.getDescripcion());
@@ -119,9 +122,8 @@ public class transportistaDAOImpl implements catalogosInterface {
         st.setString(13, _transportistaObj.getPaginaWeb());
         st.setString(14, javax.xml.bind.DatatypeConverter.printBase64Binary(_transportistaObj.getFotoTransportista()));
         st.setInt(15, _transportistaObj.getIdEstado());
-        
+
         st.setInt(16, _transportistaObj.getId());
-        
 
         boolean resultado = st.execute();
 
@@ -135,11 +137,13 @@ public class transportistaDAOImpl implements catalogosInterface {
     @Override
     public boolean eliminarRegistro(int id) throws Exception {
 
-        String _consulta = "UPDATE controlGPC.dbtransportista SET idEstado = 3 WHERE id = ?;";
+        StringBuilder _consulta = new StringBuilder();
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
-        
-        st.setInt(1, 1);       
+        _consulta.append("UPDATE controlGPC.dbtransportista SET idEstado = 3 WHERE id = ?;");
+
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
+
+        st.setInt(1, 1);
 
         boolean resultado = st.execute();
 
@@ -157,29 +161,31 @@ public class transportistaDAOImpl implements catalogosInterface {
 
         List<transportista> _listaTransportista = new ArrayList();
 
-        String _consulta = "SELECT  " +
-                "    dbtransportista.id AS 'id', " +
-                "    dbtransportista.nombreCompleto AS 'nombreCompleto', " +
-                "    dbtransportista.descripcion AS 'descripcion', " +
-                "    dbtransportista.domicilio AS 'domicilio', " +
-                "    dbtransportista.codigoPostal AS 'codigoPostal', " +
-                "    dbtransportista.localidad AS 'localidad', " +
-                "    dbtransportista.ciudad AS 'ciudad', " +
-                "    dbtransportista.estado AS 'estado', " +
-                "    dbtransportista.pais AS 'pais', " +
-                "    dbtransportista.telefono AS 'telefono', " +
-                "    dbtransportista.mobile AS 'mobile', " +
-                "    dbtransportista.fax AS 'fax', " +
-                "    dbtransportista.correoElectronico AS 'correoElectronico', " +
-                "    dbtransportista.paginaWeb AS 'paginaWeb', " +
-                "    dbtransportista.fotoTransportista AS 'fotoTransportista', " +
-                "    dbtransportista.idEstado AS 'idEstado' " +
-                "FROM " +
-                "    controlGPC.dbtransportista " +
-                "WHERE " +
-                "    dbtransportista.idEstado <> 3;";
+        StringBuilder _consulta = new StringBuilder();
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        _consulta.append("SELECT  ")
+                .append("    dbtransportista.id AS 'id', ")
+                .append("    dbtransportista.nombreCompleto AS 'nombreCompleto', ")
+                .append("    dbtransportista.descripcion AS 'descripcion', ")
+                .append("    dbtransportista.domicilio AS 'domicilio', ")
+                .append("    dbtransportista.codigoPostal AS 'codigoPostal', ")
+                .append("    dbtransportista.localidad AS 'localidad', ")
+                .append("    dbtransportista.ciudad AS 'ciudad', ")
+                .append("    dbtransportista.estado AS 'estado', ")
+                .append("    dbtransportista.pais AS 'pais', ")
+                .append("    dbtransportista.telefono AS 'telefono', ")
+                .append("    dbtransportista.mobile AS 'mobile', ")
+                .append("    dbtransportista.fax AS 'fax', ")
+                .append("    dbtransportista.correoElectronico AS 'correoElectronico', ")
+                .append("    dbtransportista.paginaWeb AS 'paginaWeb', ")
+                .append("    dbtransportista.fotoTransportista AS 'fotoTransportista', ")
+                .append("    dbtransportista.idEstado AS 'idEstado' ")
+                .append("FROM ")
+                .append("    controlGPC.dbtransportista ")
+                .append("WHERE ")
+                .append("    dbtransportista.idEstado <> 3;");
+
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         ResultSet rs = st.executeQuery();
 
@@ -232,28 +238,34 @@ public class transportistaDAOImpl implements catalogosInterface {
 
         List<transportista> _listaTransportista = new ArrayList();
 
-        String _consulta = "SELECT  " +
-                "    dbtransportista.id AS 'id', " +
-                "    dbtransportista.nombreCompleto AS 'nombreCompleto', " +
-                "    dbtransportista.descripcion AS 'descripcion', " +
-                "    dbtransportista.domicilio AS 'domicilio', " +
-                "    dbtransportista.codigoPostal AS 'codigoPostal', " +
-                "    dbtransportista.localidad AS 'localidad', " +
-                "    dbtransportista.ciudad AS 'ciudad', " +
-                "    dbtransportista.estado AS 'estado', " +
-                "    dbtransportista.pais AS 'pais', " +
-                "    dbtransportista.telefono AS 'telefono', " +
-                "    dbtransportista.mobile AS 'mobile', " +
-                "    dbtransportista.fax AS 'fax', " +
-                "    dbtransportista.correoElectronico AS 'correoElectronico', " +
-                "    dbtransportista.paginaWeb AS 'paginaWeb', " +
-                "    dbtransportista.fotoTransportista AS 'fotoTransportista', " +
-                "    dbtransportista.idEstado AS 'idEstado' " +
-                "FROM " +
-                "    controlGPC.dbtransportista " +
-                "WHERE " + _campo + " LIKE '%" + _dato + "%' AND dbtransportista.idEstado <> 3;";
+        StringBuilder _consulta = new StringBuilder();
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        _consulta.append("SELECT  ")
+                .append("    dbtransportista.id AS 'id', ")
+                .append("    dbtransportista.nombreCompleto AS 'nombreCompleto', ")
+                .append("    dbtransportista.descripcion AS 'descripcion', ")
+                .append("    dbtransportista.domicilio AS 'domicilio', ")
+                .append("    dbtransportista.codigoPostal AS 'codigoPostal', ")
+                .append("    dbtransportista.localidad AS 'localidad', ")
+                .append("    dbtransportista.ciudad AS 'ciudad', ")
+                .append("    dbtransportista.estado AS 'estado', ")
+                .append("    dbtransportista.pais AS 'pais', ")
+                .append("    dbtransportista.telefono AS 'telefono', ")
+                .append("    dbtransportista.mobile AS 'mobile', ")
+                .append("    dbtransportista.fax AS 'fax', ")
+                .append("    dbtransportista.correoElectronico AS 'correoElectronico', ")
+                .append("    dbtransportista.paginaWeb AS 'paginaWeb', ")
+                .append("    dbtransportista.fotoTransportista AS 'fotoTransportista', ")
+                .append("    dbtransportista.idEstado AS 'idEstado' ")
+                .append("FROM ")
+                .append("    controlGPC.dbtransportista ")
+                .append("WHERE ")
+                .append(_campo)
+                .append(" LIKE '%")
+                .append(_dato)
+                .append("%' AND dbtransportista.idEstado <> 3;");
+
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         ResultSet rs = st.executeQuery();
 
@@ -304,28 +316,32 @@ public class transportistaDAOImpl implements catalogosInterface {
 
         transportista _transportistaObj = new transportista();
 
-        String _consulta = "SELECT  " +
-                "    dbtransportista.id AS 'id', " +
-                "    dbtransportista.nombreCompleto AS 'nombreCompleto', " +
-                "    dbtransportista.descripcion AS 'descripcion', " +
-                "    dbtransportista.domicilio AS 'domicilio', " +
-                "    dbtransportista.codigoPostal AS 'codigoPostal', " +
-                "    dbtransportista.localidad AS 'localidad', " +
-                "    dbtransportista.ciudad AS 'ciudad', " +
-                "    dbtransportista.estado AS 'estado', " +
-                "    dbtransportista.pais AS 'pais', " +
-                "    dbtransportista.telefono AS 'telefono', " +
-                "    dbtransportista.mobile AS 'mobile', " +
-                "    dbtransportista.fax AS 'fax', " +
-                "    dbtransportista.correoElectronico AS 'correoElectronico', " +
-                "    dbtransportista.paginaWeb AS 'paginaWeb', " +
-                "    dbtransportista.fotoTransportista AS 'fotoTransportista', " +
-                "    dbtransportista.idEstado AS 'idEstado' " +
-                "FROM " +
-                "    controlGPC.dbtransportista " +
-                "WHERE dbtransportista.id = " + id + " AND dbtransportista.idEstado <> 3;";
+        StringBuilder _consulta = new StringBuilder();
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        _consulta.append("SELECT  ")
+                .append("    dbtransportista.id AS 'id', ")
+                .append("    dbtransportista.nombreCompleto AS 'nombreCompleto', ")
+                .append("    dbtransportista.descripcion AS 'descripcion', ")
+                .append("    dbtransportista.domicilio AS 'domicilio', ")
+                .append("    dbtransportista.codigoPostal AS 'codigoPostal', ")
+                .append("    dbtransportista.localidad AS 'localidad', ")
+                .append("    dbtransportista.ciudad AS 'ciudad', ")
+                .append("    dbtransportista.estado AS 'estado', ")
+                .append("    dbtransportista.pais AS 'pais', ")
+                .append("    dbtransportista.telefono AS 'telefono', ")
+                .append("    dbtransportista.mobile AS 'mobile', ")
+                .append("    dbtransportista.fax AS 'fax', ")
+                .append("    dbtransportista.correoElectronico AS 'correoElectronico', ")
+                .append("    dbtransportista.paginaWeb AS 'paginaWeb', ")
+                .append("    dbtransportista.fotoTransportista AS 'fotoTransportista', ")
+                .append("    dbtransportista.idEstado AS 'idEstado' ")
+                .append("FROM ")
+                .append("    controlGPC.dbtransportista ")
+                .append("WHERE dbtransportista.id = ")
+                .append(id)
+                .append(" AND dbtransportista.idEstado <> 3;");
+
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         ResultSet rs = st.executeQuery();
 
@@ -367,5 +383,5 @@ public class transportistaDAOImpl implements catalogosInterface {
 
         return _transportistaObj;
     }
-    
+
 }

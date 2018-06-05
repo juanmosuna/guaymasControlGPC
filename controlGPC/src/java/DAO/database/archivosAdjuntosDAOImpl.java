@@ -32,19 +32,21 @@ public class archivosAdjuntosDAOImpl implements catalogosInterface {
     public boolean agregarRegistro(Object o) throws Exception {
 
         archivosAdjuntos _archivosObj = (archivosAdjuntos) o;
+        
+        StringBuilder _consulta = new StringBuilder();
 
-        String _consulta = "INSERT INTO controlGPC.dbarchivosAdjuntos "
-                + "(idDocumento, "
-                + "nombreArchivo, "
-                + "tipoArchivo, "
-                + "archivo, "
-                + "idUsuario, "
-                + "fechaHora, "
-                + "idEstado) "
-                + "VALUES "
-                + "(?, ?, ?, ?, ?, ?, ?);";
+        _consulta.append("INSERT INTO controlGPC.dbarchivosAdjuntos ")
+                .append("(idDocumento, ")
+                .append("nombreArchivo, ")
+                .append("tipoArchivo, ")
+                .append("archivo, ")
+                .append("idUsuario, ")
+                .append("fechaHora, ")
+                .append("idEstado) ")
+                .append("VALUES ")
+                .append("(?, ?, ?, ?, ?, ?, ?);");
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         st.setInt(1, _archivosObj.getDocumentacion().getId());
         st.setString(2, _archivosObj.getNombreArchivo());
@@ -67,19 +69,21 @@ public class archivosAdjuntosDAOImpl implements catalogosInterface {
     public boolean modificarRegistro(Object o) throws Exception {
 
         archivosAdjuntos _archivosObj = (archivosAdjuntos) o;
+        
+        StringBuilder _consulta = new StringBuilder();
 
-        String _consulta = "UPDATE controlGPC.dbarchivosAdjuntos "
-                + "SET "
-                + "idDocumento = ?, "
-                + "nombreArchivo = ?, "
-                + "tipoArchivo = ?, "
-                + "archivo = ?, "
-                + "idUsuario = ?, "
-                + "fechaHora = ?, "
-                + "idEstado = ? "
-                + "WHERE id = ?;";
+        _consulta.append("UPDATE controlGPC.dbarchivosAdjuntos ")
+                .append("SET ")
+                .append("idDocumento = ?, ")
+                .append("nombreArchivo = ?, ")
+                .append("tipoArchivo = ?, ")
+                .append("archivo = ?, ")
+                .append("idUsuario = ?, ")
+                .append("fechaHora = ?, ")
+                .append("idEstado = ? ")
+                .append("WHERE id = ?;");
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         st.setInt(1, _archivosObj.getDocumentacion().getId());
         st.setString(2, _archivosObj.getNombreArchivo());
@@ -102,10 +106,12 @@ public class archivosAdjuntosDAOImpl implements catalogosInterface {
 
     @Override
     public boolean eliminarRegistro(int id) throws Exception {
+        
+        StringBuilder _consulta = new StringBuilder();
 
-        String _consulta = "UPDATE controlGPC.dbarchivosAdjuntos SET idEstado = 3 WHERE id = ?;";
+        _consulta.append("UPDATE controlGPC.dbarchivosAdjuntos SET idEstado = 3 WHERE id = ?;");
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         st.setInt(1, id);
 
@@ -125,24 +131,26 @@ public class archivosAdjuntosDAOImpl implements catalogosInterface {
 
         List<archivosAdjuntos> _listaArchivos = new ArrayList();
 
-        String _consulta = "SELECT  "
-                + "    dbarchivosAdjuntos.id AS 'id', "
-                + "    dbarchivosAdjuntos.idDocumento AS 'idDocumento', "
-                + "    dbarchivosAdjuntos.nombreArchivo AS 'nombreArchivo', "
-                + "    dbarchivosAdjuntos.tipoArchivo AS 'tipoArchivo', "
-                + "    dbarchivosAdjuntos.archivo AS 'archivo', "
-                + "    dbarchivosAdjuntos.idUsuario AS 'idUsuario', "
-                + "    dbusuario.nombreCompleto AS 'nombreUsuario', "
-                + "    dbarchivosAdjuntos.fechaHora AS 'fechaHora', "
-                + "    dbarchivosAdjuntos.idEstado AS 'idEstado' "
-                + "FROM "
-                + "    controlGPC.dbarchivosAdjuntos "
-                + "        LEFT JOIN "
-                + "    dbusuario ON dbusuario.id = dbarchivosAdjuntos.idUsuario "
-                + "WHERE "
-                + "    dbarchivosAdjuntos.idEstado <> 3;";
+        StringBuilder _consulta = new StringBuilder();
+        
+        _consulta.append("SELECT  ")
+                .append( "    dbarchivosAdjuntos.id AS 'id', ")
+                .append( "    dbarchivosAdjuntos.idDocumento AS 'idDocumento', ")
+                .append( "    dbarchivosAdjuntos.nombreArchivo AS 'nombreArchivo', ")
+                .append( "    dbarchivosAdjuntos.tipoArchivo AS 'tipoArchivo', ")
+                .append( "    dbarchivosAdjuntos.archivo AS 'archivo', ")
+                .append( "    dbarchivosAdjuntos.idUsuario AS 'idUsuario', ")
+                .append( "    dbusuario.nombreCompleto AS 'nombreUsuario', ")
+                .append( "    dbarchivosAdjuntos.fechaHora AS 'fechaHora', ")
+                .append( "    dbarchivosAdjuntos.idEstado AS 'idEstado' ")
+                .append( "FROM ")
+                .append( "    controlGPC.dbarchivosAdjuntos ")
+                .append( "        LEFT JOIN ")
+                .append( "    dbusuario ON dbusuario.id = dbarchivosAdjuntos.idUsuario ")
+                .append( "WHERE ")
+                .append( "    dbarchivosAdjuntos.idEstado <> 3;");
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         ResultSet rs = st.executeQuery();
 
@@ -198,24 +206,30 @@ public class archivosAdjuntosDAOImpl implements catalogosInterface {
         archivosAdjuntos _archivosObj;
 
         List<archivosAdjuntos> _listaArchivos = new ArrayList();
+        
+        StringBuilder _consulta = new StringBuilder();
 
-        String _consulta = "SELECT  "
-                + "    dbarchivosAdjuntos.id AS 'id', "
-                + "    dbarchivosAdjuntos.idDocumento AS 'idDocumento', "
-                + "    dbarchivosAdjuntos.nombreArchivo AS 'nombreArchivo', "
-                + "    dbarchivosAdjuntos.tipoArchivo AS 'tipoArchivo', "
-                + "    dbarchivosAdjuntos.archivo AS 'archivo', "
-                + "    dbarchivosAdjuntos.idUsuario AS 'idUsuario', "
-                + "    dbusuario.nombreCompleto AS 'nombreUsuario', "
-                + "    dbarchivosAdjuntos.fechaHora AS 'fechaHora', "
-                + "    dbarchivosAdjuntos.idEstado AS 'idEstado' "
-                + "FROM "
-                + "    controlGPC.dbarchivosAdjuntos "
-                + "        LEFT JOIN "
-                + "    dbusuario ON dbusuario.id = dbarchivosAdjuntos.idUsuario "
-                + "WHERE " + _campo + " LIKE '%" + _dato + "%' AND dbarchivosAdjuntos.idEstado <> 3;";
+        _consulta.append("SELECT  ")
+                .append("    dbarchivosAdjuntos.id AS 'id', ")
+                .append("    dbarchivosAdjuntos.idDocumento AS 'idDocumento', ")
+                .append("    dbarchivosAdjuntos.nombreArchivo AS 'nombreArchivo', ")
+                .append("    dbarchivosAdjuntos.tipoArchivo AS 'tipoArchivo', ")
+                .append("    dbarchivosAdjuntos.archivo AS 'archivo', ")
+                .append("    dbarchivosAdjuntos.idUsuario AS 'idUsuario', ")
+                .append("    dbusuario.nombreCompleto AS 'nombreUsuario', ")
+                .append("    dbarchivosAdjuntos.fechaHora AS 'fechaHora', ")
+                .append("    dbarchivosAdjuntos.idEstado AS 'idEstado' ")
+                .append("FROM ")
+                .append("    controlGPC.dbarchivosAdjuntos ")
+                .append("        LEFT JOIN ")
+                .append("    dbusuario ON dbusuario.id = dbarchivosAdjuntos.idUsuario ")
+                .append("WHERE ")
+                .append(_campo)
+                .append(" LIKE '%")
+                .append(_dato)
+                .append("%' AND dbarchivosAdjuntos.idEstado <> 3;");
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         ResultSet rs = st.executeQuery();
 
@@ -270,23 +284,27 @@ public class archivosAdjuntosDAOImpl implements catalogosInterface {
 
         archivosAdjuntos _archivosObj = new archivosAdjuntos();
 
-        String _consulta = "SELECT  "
-                + "    dbarchivosAdjuntos.id AS 'id', "
-                + "    dbarchivosAdjuntos.idDocumento AS 'idDocumento', "
-                + "    dbarchivosAdjuntos.nombreArchivo AS 'nombreArchivo', "
-                + "    dbarchivosAdjuntos.tipoArchivo AS 'tipoArchivo', "
-                + "    dbarchivosAdjuntos.archivo AS 'archivo', "
-                + "    dbarchivosAdjuntos.idUsuario AS 'idUsuario', "
-                + "    dbusuario.nombreCompleto AS 'nombreUsuario', "
-                + "    dbarchivosAdjuntos.fechaHora AS 'fechaHora', "
-                + "    dbarchivosAdjuntos.idEstado AS 'idEstado' "
-                + "FROM "
-                + "    controlGPC.dbarchivosAdjuntos "
-                + "        LEFT JOIN "
-                + "    dbusuario ON dbusuario.id = dbarchivosAdjuntos.idUsuario "
-                + "WHERE dbarchivosAdjuntos.id = " + id + " AND dbarchivosAdjuntos.idEstado <> 3;";
+        StringBuilder _consulta = new StringBuilder();
+        
+        _consulta.append("SELECT  ")
+                .append("    dbarchivosAdjuntos.id AS 'id', ")
+                .append("    dbarchivosAdjuntos.idDocumento AS 'idDocumento', ")
+                .append("    dbarchivosAdjuntos.nombreArchivo AS 'nombreArchivo', ")
+                .append("    dbarchivosAdjuntos.tipoArchivo AS 'tipoArchivo', ")
+                .append("    dbarchivosAdjuntos.archivo AS 'archivo', ")
+                .append("    dbarchivosAdjuntos.idUsuario AS 'idUsuario', ")
+                .append("    dbusuario.nombreCompleto AS 'nombreUsuario', ")
+                .append("    dbarchivosAdjuntos.fechaHora AS 'fechaHora', ")
+                .append("    dbarchivosAdjuntos.idEstado AS 'idEstado' ")
+                .append("FROM ")
+                .append("    controlGPC.dbarchivosAdjuntos ")
+                .append("        LEFT JOIN ")
+                .append("    dbusuario ON dbusuario.id = dbarchivosAdjuntos.idUsuario ")
+                .append("WHERE dbarchivosAdjuntos.id = ")
+                .append(id)
+                .append(" AND dbarchivosAdjuntos.idEstado <> 3;");
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         ResultSet rs = st.executeQuery();
 

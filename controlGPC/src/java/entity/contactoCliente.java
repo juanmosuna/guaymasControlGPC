@@ -25,6 +25,7 @@ public class contactoCliente {
     private String fax = new String();
     private String correoElectronico = new String();
     private byte[] fotoContactoCliente = null;
+    private cliente _cliente = new cliente();
     private int idEstado = 0;
 
     public contactoCliente() {
@@ -148,6 +149,14 @@ public class contactoCliente {
 
     public void setIdEstado(int idEstado) {
         this.idEstado = idEstado;
+    }
+
+    public cliente getCliente() {
+        return _cliente;
+    }
+
+    public void setCliente(cliente _cliente) {
+        this._cliente = _cliente;
     }
 
 }

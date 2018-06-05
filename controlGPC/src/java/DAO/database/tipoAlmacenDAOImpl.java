@@ -19,7 +19,7 @@ import java.util.List;
  * @author elara
  */
 public class tipoAlmacenDAOImpl implements catalogosInterface {
-    
+
     private Connection _conn;
 
     public tipoAlmacenDAOImpl(Connection _conn) {
@@ -31,14 +31,16 @@ public class tipoAlmacenDAOImpl implements catalogosInterface {
 
         tipoAlmacen _tpAlmacenesObj = (tipoAlmacen) o;
 
-        String _consulta = "INSERT INTO controlGPC.dbtipoAlmacen " +
-                    "(nombreCompleto, " +
-                    "descripcion, " +
-                    "idEstado) " +
-                    "VALUES " +
-                    "(?, ?, ?);";
+        StringBuilder _consulta = new StringBuilder();
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        _consulta.append("INSERT INTO controlGPC.dbtipoAlmacen ")
+                .append("(nombreCompleto, ")
+                .append("descripcion, ")
+                .append("idEstado) ")
+                .append("VALUES ")
+                .append("(?, ?, ?);");
+
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         st.setString(1, _tpAlmacenesObj.getNombreCompleto());
         st.setString(2, _tpAlmacenesObj.getDescripcion());
@@ -58,19 +60,21 @@ public class tipoAlmacenDAOImpl implements catalogosInterface {
 
         tipoAlmacen _tpAlmacenesObj = (tipoAlmacen) o;
 
-        String _consulta = "UPDATE controlGPC.dbtipoAlmacen " +
-                "SET " +
-                "nombreCompleto = ?, " +
-                "descripcion = ?, " +
-                "idEstado = ? " +
-                "WHERE id = ?;";
+        StringBuilder _consulta = new StringBuilder();
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        _consulta.append("UPDATE controlGPC.dbtipoAlmacen ")
+                .append("SET ")
+                .append("nombreCompleto = ?, ")
+                .append("descripcion = ?, ")
+                .append("idEstado = ? ")
+                .append("WHERE id = ?;");
+
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         st.setString(1, _tpAlmacenesObj.getNombreCompleto());
         st.setString(2, _tpAlmacenesObj.getDescripcion());
         st.setInt(3, _tpAlmacenesObj.getIdEstado());
-        
+
         st.setInt(4, _tpAlmacenesObj.getId());
 
         boolean resultado = st.execute();
@@ -85,10 +89,12 @@ public class tipoAlmacenDAOImpl implements catalogosInterface {
     @Override
     public boolean eliminarRegistro(int id) throws Exception {
 
-        String _consulta = "UPDATE controlGPC.dbtipoAlmacen SET idEstado = 3 WHERE id = ?;";
+        StringBuilder _consulta = new StringBuilder();
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
-        
+        _consulta.append("UPDATE controlGPC.dbtipoAlmacen SET idEstado = 3 WHERE id = ?;");
+
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
+
         st.setInt(1, id);
 
         boolean resultado = st.execute();
@@ -107,17 +113,19 @@ public class tipoAlmacenDAOImpl implements catalogosInterface {
 
         List<tipoAlmacen> _listatpAlmacenes = new ArrayList();
 
-        String _consulta = "SELECT  " +
-                "    dbtipoAlmacen.id AS 'id', " +
-                "    dbtipoAlmacen.nombreCompleto AS 'nombreCompleto', " +
-                "    dbtipoAlmacen.descripcion AS 'descripcion', " +
-                "    dbtipoAlmacen.idEstado AS 'idEstado' " +
-                "FROM " +
-                "    controlGPC.dbtipoAlmacen " +
-                "WHERE " +
-                "    dbtipoAlmacen.idEstado <> 3;";
+        StringBuilder _consulta = new StringBuilder();
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        _consulta.append("SELECT  ")
+                .append("    dbtipoAlmacen.id AS 'id', ")
+                .append("    dbtipoAlmacen.nombreCompleto AS 'nombreCompleto', ")
+                .append("    dbtipoAlmacen.descripcion AS 'descripcion', ")
+                .append("    dbtipoAlmacen.idEstado AS 'idEstado' ")
+                .append("FROM ")
+                .append("    controlGPC.dbtipoAlmacen ")
+                .append("WHERE ")
+                .append("    dbtipoAlmacen.idEstado <> 3;");
+
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         ResultSet rs = st.executeQuery();
 
@@ -158,16 +166,22 @@ public class tipoAlmacenDAOImpl implements catalogosInterface {
 
         List<tipoAlmacen> _listatpAlmacenes = new ArrayList();
 
-        String _consulta = "SELECT  " +
-                "    dbtipoAlmacen.id AS 'id', " +
-                "    dbtipoAlmacen.nombreCompleto AS 'nombreCompleto', " +
-                "    dbtipoAlmacen.descripcion AS 'descripcion', " +
-                "    dbtipoAlmacen.idEstado AS 'idEstado' " +
-                "FROM " +
-                "    controlGPC.dbtipoAlmacen " +
-                "WHERE " + _campo + " LIKE '%" + _dato + "%' AND dbtipoAlmacen.idEstado <> 3;";
+        StringBuilder _consulta = new StringBuilder();
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        _consulta.append("SELECT  ")
+                .append("    dbtipoAlmacen.id AS 'id', ")
+                .append("    dbtipoAlmacen.nombreCompleto AS 'nombreCompleto', ")
+                .append("    dbtipoAlmacen.descripcion AS 'descripcion', ")
+                .append("    dbtipoAlmacen.idEstado AS 'idEstado' ")
+                .append("FROM ")
+                .append("    controlGPC.dbtipoAlmacen ")
+                .append("WHERE ")
+                .append(_campo)
+                .append(" LIKE '%")
+                .append(_dato)
+                .append("%' AND dbtipoAlmacen.idEstado <> 3;");
+
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         ResultSet rs = st.executeQuery();
 
@@ -206,16 +220,20 @@ public class tipoAlmacenDAOImpl implements catalogosInterface {
 
         tipoAlmacen _tpAlmacenesObj = new tipoAlmacen();
 
-        String _consulta = "SELECT  " +
-                "    dbtipoAlmacen.id AS 'id', " +
-                "    dbtipoAlmacen.nombreCompleto AS 'nombreCompleto', " +
-                "    dbtipoAlmacen.descripcion AS 'descripcion', " +
-                "    dbtipoAlmacen.idEstado AS 'idEstado' " +
-                "FROM " +
-                "    controlGPC.dbtipoAlmacen " +
-                "WHERE dbtipoAlmacen.id = " + id + " AND dbtipoAlmacen.idEstado <> 3;";
+        StringBuilder _consulta = new StringBuilder();
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        _consulta.append("SELECT  ")
+                .append("    dbtipoAlmacen.id AS 'id', ")
+                .append("    dbtipoAlmacen.nombreCompleto AS 'nombreCompleto', ")
+                .append("    dbtipoAlmacen.descripcion AS 'descripcion', ")
+                .append("    dbtipoAlmacen.idEstado AS 'idEstado' ")
+                .append("FROM ")
+                .append("    controlGPC.dbtipoAlmacen ")
+                .append("WHERE dbtipoAlmacen.id = ")
+                .append(id)
+                .append(" AND dbtipoAlmacen.idEstado <> 3;");
+
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         ResultSet rs = st.executeQuery();
 
@@ -245,5 +263,5 @@ public class tipoAlmacenDAOImpl implements catalogosInterface {
 
         return _tpAlmacenesObj;
     }
-    
+
 }

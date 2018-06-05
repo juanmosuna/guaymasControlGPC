@@ -6,6 +6,7 @@
 package DAO.database;
 
 import DAO.interfaces.catalogosInterface;
+import entity.cliente;
 import entity.contactoCliente;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,7 +20,7 @@ import java.util.List;
  * @author elara
  */
 public class contactoClienteDAOImpl implements catalogosInterface {
-    
+
     private Connection _conn;
 
     public contactoClienteDAOImpl(Connection _conn) {
@@ -31,25 +32,28 @@ public class contactoClienteDAOImpl implements catalogosInterface {
 
         contactoCliente _contactoClienteObj = (contactoCliente) o;
 
-        String _consulta = "INSERT INTO controlGPC.dbcontactoCliente " +
-                    "(nombreCompleto, " +
-                    "descripcion, " +
-                    "domicilio, " +
-                    "codigoPostal, " +
-                    "localidad, " +
-                    "ciudad, " +
-                    "estado, " +
-                    "pais, " +
-                    "telefono, " +
-                    "mobile, " +
-                    "fax, " +
-                    "correoElectronico, " +
-                    "fotoContactoCliente, " +
-                    "idEstado) " +
-                    "VALUES " +
-                    "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+        StringBuilder _consulta = new StringBuilder();
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        _consulta.append("INSERT INTO controlGPC.dbcontactoCliente ")
+                .append("(nombreCompleto, ")
+                .append("descripcion, ")
+                .append("domicilio, ")
+                .append("codigoPostal, ")
+                .append("localidad, ")
+                .append("ciudad, ")
+                .append("estado, ")
+                .append("pais, ")
+                .append("telefono, ")
+                .append("mobile, ")
+                .append("fax, ")
+                .append("correoElectronico, ")
+                .append("fotoContactoCliente, ")
+                .append("idCliente, ")
+                .append("idEstado) ")
+                .append("VALUES ")
+                .append("(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
+
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         st.setString(1, _contactoClienteObj.getNombreCompleto());
         st.setString(2, _contactoClienteObj.getDescripcion());
@@ -64,8 +68,8 @@ public class contactoClienteDAOImpl implements catalogosInterface {
         st.setString(11, _contactoClienteObj.getFax());
         st.setString(12, _contactoClienteObj.getCorreoElectronico());
         st.setString(13, javax.xml.bind.DatatypeConverter.printBase64Binary(_contactoClienteObj.getFotoContactoCliente()));
-        st.setInt(14, _contactoClienteObj.getIdEstado());
-        
+        st.setInt(14, _contactoClienteObj.getCliente().getId());
+        st.setInt(15, _contactoClienteObj.getIdEstado());
 
         boolean resultado = st.execute();
 
@@ -81,25 +85,28 @@ public class contactoClienteDAOImpl implements catalogosInterface {
 
         contactoCliente _contactoClienteObj = (contactoCliente) o;
 
-        String _consulta = "UPDATE controlGPC.dbcontactoCliente " +
-            "SET " +
-            "nombreCompleto = ?, " +
-            "descripcion = ?, " +
-            "domicilio = ?, " +
-            "codigoPostal = ?, " +
-            "localidad = ?, " +
-            "ciudad = ?, " +
-            "estado = ?, " +
-            "pais = ?, " +
-            "telefono = ?, " +
-            "mobile = ?, " +
-            "fax = ?, " +
-            "correoElectronico = ?, " +
-            "fotoContactoCliente = ?, " +
-            "idEstado = ? " +
-            "WHERE id = ?;";
+        StringBuilder _consulta = new StringBuilder();
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        _consulta.append("UPDATE controlGPC.dbcontactoCliente ")
+                .append("SET ")
+                .append("nombreCompleto = ?, ")
+                .append("descripcion = ?, ")
+                .append("domicilio = ?, ")
+                .append("codigoPostal = ?, ")
+                .append("localidad = ?, ")
+                .append("ciudad = ?, ")
+                .append("estado = ?, ")
+                .append("pais = ?, ")
+                .append("telefono = ?, ")
+                .append("mobile = ?, ")
+                .append("fax = ?, ")
+                .append("correoElectronico = ?, ")
+                .append("fotoContactoCliente = ?, ")
+                .append("idCliente = ?, ")
+                .append("idEstado = ? ")
+                .append("WHERE id = ?;");
+
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         st.setString(1, _contactoClienteObj.getNombreCompleto());
         st.setString(2, _contactoClienteObj.getDescripcion());
@@ -114,10 +121,10 @@ public class contactoClienteDAOImpl implements catalogosInterface {
         st.setString(11, _contactoClienteObj.getFax());
         st.setString(12, _contactoClienteObj.getCorreoElectronico());
         st.setString(13, javax.xml.bind.DatatypeConverter.printBase64Binary(_contactoClienteObj.getFotoContactoCliente()));
-        st.setInt(14, _contactoClienteObj.getIdEstado());
-        
-        st.setInt(15, _contactoClienteObj.getId());
-        
+        st.setInt(14, _contactoClienteObj.getCliente().getId());
+        st.setInt(15, _contactoClienteObj.getIdEstado());
+
+        st.setInt(16, _contactoClienteObj.getId());
 
         boolean resultado = st.execute();
 
@@ -131,10 +138,12 @@ public class contactoClienteDAOImpl implements catalogosInterface {
     @Override
     public boolean eliminarRegistro(int id) throws Exception {
 
-        String _consulta = "UPDATE controlGPC.dbcontactoCliente SET idEstado = 3 WHERE id = ?;";
+        StringBuilder _consulta = new StringBuilder();
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
-        
+        _consulta.append("UPDATE controlGPC.dbcontactoCliente SET idEstado = 3 WHERE id = ?;");
+
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
+
         st.setInt(1, id);
 
         boolean resultado = st.execute();
@@ -153,28 +162,33 @@ public class contactoClienteDAOImpl implements catalogosInterface {
 
         List<contactoCliente> _listaContactoCliente = new ArrayList();
 
-        String _consulta = "SELECT  " +
-                "    dbcontactoCliente.id AS 'id', " +
-                "    dbcontactoCliente.nombreCompleto AS 'nombreCompleto', " +
-                "    dbcontactoCliente.descripcion AS 'descripcion', " +
-                "    dbcontactoCliente.domicilio AS 'domicilio', " +
-                "    dbcontactoCliente.codigoPostal AS 'codigoPostal', " +
-                "    dbcontactoCliente.localidad AS 'localidad', " +
-                "    dbcontactoCliente.ciudad AS 'ciudad', " +
-                "    dbcontactoCliente.estado AS 'estado', " +
-                "    dbcontactoCliente.pais AS 'pais', " +
-                "    dbcontactoCliente.telefono AS 'telefono', " +
-                "    dbcontactoCliente.mobile AS 'mobile', " +
-                "    dbcontactoCliente.fax AS 'fax', " +
-                "    dbcontactoCliente.correoElectronico AS 'correoElectronico', " +
-                "    dbcontactoCliente.fotoContactoCliente AS 'fotoContactoCliente', " +
-                "    dbcontactoCliente.idEstado AS 'idEstado' " +
-                "FROM " +
-                "    controlGPC.dbcontactoCliente " +
-                "WHERE " +
-                "    dbtransportista.idEstado <> 3;";
+        StringBuilder _consulta = new StringBuilder();
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        _consulta.append("SELECT  ")
+                .append("    dbcontactoCliente.id AS 'id', ")
+                .append("    dbcontactoCliente.nombreCompleto AS 'nombreCompleto', ")
+                .append("    dbcontactoCliente.descripcion AS 'descripcion', ")
+                .append("    dbcontactoCliente.domicilio AS 'domicilio', ")
+                .append("    dbcontactoCliente.codigoPostal AS 'codigoPostal', ")
+                .append("    dbcontactoCliente.localidad AS 'localidad', ")
+                .append("    dbcontactoCliente.ciudad AS 'ciudad', ")
+                .append("    dbcontactoCliente.estado AS 'estado', ")
+                .append("    dbcontactoCliente.pais AS 'pais', ")
+                .append("    dbcontactoCliente.telefono AS 'telefono', ")
+                .append("    dbcontactoCliente.mobile AS 'mobile', ")
+                .append("    dbcontactoCliente.fax AS 'fax', ")
+                .append("    dbcontactoCliente.correoElectronico AS 'correoElectronico', ")
+                .append("    dbcontactoCliente.fotoContactoCliente AS 'fotoContactoCliente', ")
+                .append("    dbcontactoCliente.idCliente AS 'idCliente', ")
+                .append("    dbcliente.nombreCompleto AS 'nombreCliente', ")
+                .append("    dbcontactoCliente.idEstado AS 'idEstado' ")
+                .append("FROM ")
+                .append("    controlGPC.dbcontactoCliente ")
+                .append("LEFT JOIN dbcliente ON dbcliente.id = dbcontactoCliente.idCliente ")
+                .append("WHERE ")
+                .append("    dbtransportista.idEstado <> 3;");
+
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         ResultSet rs = st.executeQuery();
 
@@ -198,7 +212,13 @@ public class contactoClienteDAOImpl implements catalogosInterface {
                 _contactoClienteObj.setFax(rs.getString(12));
                 _contactoClienteObj.setCorreoElectronico(rs.getString(13));
                 _contactoClienteObj.setFotoContactoCliente(javax.xml.bind.DatatypeConverter.parseBase64Binary(rs.getString(14)));
-                _contactoClienteObj.setIdEstado(rs.getInt(15));
+
+                cliente _clt = new cliente();
+                _clt.setId(rs.getInt(15));
+                _clt.setNombreCompleto(rs.getString(16));
+                _contactoClienteObj.setCliente(_clt);
+
+                _contactoClienteObj.setIdEstado(rs.getInt(17));
 
                 _listaContactoCliente.add(_contactoClienteObj);
             }
@@ -226,27 +246,36 @@ public class contactoClienteDAOImpl implements catalogosInterface {
 
         List<contactoCliente> _listaContactoCliente = new ArrayList();
 
-        String _consulta = "SELECT  " +
-                "    dbcontactoCliente.id AS 'id', " +
-                "    dbcontactoCliente.nombreCompleto AS 'nombreCompleto', " +
-                "    dbcontactoCliente.descripcion AS 'descripcion', " +
-                "    dbcontactoCliente.domicilio AS 'domicilio', " +
-                "    dbcontactoCliente.codigoPostal AS 'codigoPostal', " +
-                "    dbcontactoCliente.localidad AS 'localidad', " +
-                "    dbcontactoCliente.ciudad AS 'ciudad', " +
-                "    dbcontactoCliente.estado AS 'estado', " +
-                "    dbcontactoCliente.pais AS 'pais', " +
-                "    dbcontactoCliente.telefono AS 'telefono', " +
-                "    dbcontactoCliente.mobile AS 'mobile', " +
-                "    dbcontactoCliente.fax AS 'fax', " +
-                "    dbcontactoCliente.correoElectronico AS 'correoElectronico', " +
-                "    dbcontactoCliente.fotoContactoCliente AS 'fotoContactoCliente', " +
-                "    dbcontactoCliente.idEstado AS 'idEstado' " +
-                "FROM " +
-                "    controlGPC.dbcontactoCliente " +
-                "WHERE " + _campo + " LIKE '%" + _dato + "%' AND dbtransportista.idEstado <> 3;";
+        StringBuilder _consulta = new StringBuilder();
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        _consulta.append("SELECT  ")
+                .append("    dbcontactoCliente.id AS 'id', ")
+                .append("    dbcontactoCliente.nombreCompleto AS 'nombreCompleto', ")
+                .append("    dbcontactoCliente.descripcion AS 'descripcion', ")
+                .append("    dbcontactoCliente.domicilio AS 'domicilio', ")
+                .append("    dbcontactoCliente.codigoPostal AS 'codigoPostal', ")
+                .append("    dbcontactoCliente.localidad AS 'localidad', ")
+                .append("    dbcontactoCliente.ciudad AS 'ciudad', ")
+                .append("    dbcontactoCliente.estado AS 'estado', ")
+                .append("    dbcontactoCliente.pais AS 'pais', ")
+                .append("    dbcontactoCliente.telefono AS 'telefono', ")
+                .append("    dbcontactoCliente.mobile AS 'mobile', ")
+                .append("    dbcontactoCliente.fax AS 'fax', ")
+                .append("    dbcontactoCliente.correoElectronico AS 'correoElectronico', ")
+                .append("    dbcontactoCliente.fotoContactoCliente AS 'fotoContactoCliente', ")
+                .append("    dbcontactoCliente.idCliente AS 'idCliente', ")
+                .append("    dbcliente.nombreCompleto AS 'nombreCliente', ")
+                .append("    dbcontactoCliente.idEstado AS 'idEstado' ")
+                .append("FROM ")
+                .append("    controlGPC.dbcontactoCliente ")
+                .append("LEFT JOIN dbcliente ON dbcliente.id = dbcontactoCliente.idCliente ")
+                .append("WHERE ")
+                .append(_campo)
+                .append(" LIKE '%")
+                .append(_dato)
+                .append("%' AND dbtransportista.idEstado <> 3;");
+
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         ResultSet rs = st.executeQuery();
 
@@ -270,7 +299,13 @@ public class contactoClienteDAOImpl implements catalogosInterface {
                 _contactoClienteObj.setFax(rs.getString(12));
                 _contactoClienteObj.setCorreoElectronico(rs.getString(13));
                 _contactoClienteObj.setFotoContactoCliente(javax.xml.bind.DatatypeConverter.parseBase64Binary(rs.getString(14)));
-                _contactoClienteObj.setIdEstado(rs.getInt(15));
+
+                cliente _clt = new cliente();
+                _clt.setId(rs.getInt(15));
+                _clt.setNombreCompleto(rs.getString(16));
+                _contactoClienteObj.setCliente(_clt);
+
+                _contactoClienteObj.setIdEstado(rs.getInt(17));
 
                 _listaContactoCliente.add(_contactoClienteObj);
             }
@@ -296,27 +331,32 @@ public class contactoClienteDAOImpl implements catalogosInterface {
 
         contactoCliente _contactoClienteObj = new contactoCliente();
 
-        String _consulta = "SELECT  " +
-                "    dbcontactoCliente.id AS 'id', " +
-                "    dbcontactoCliente.nombreCompleto AS 'nombreCompleto', " +
-                "    dbcontactoCliente.descripcion AS 'descripcion', " +
-                "    dbcontactoCliente.domicilio AS 'domicilio', " +
-                "    dbcontactoCliente.codigoPostal AS 'codigoPostal', " +
-                "    dbcontactoCliente.localidad AS 'localidad', " +
-                "    dbcontactoCliente.ciudad AS 'ciudad', " +
-                "    dbcontactoCliente.estado AS 'estado', " +
-                "    dbcontactoCliente.pais AS 'pais', " +
-                "    dbcontactoCliente.telefono AS 'telefono', " +
-                "    dbcontactoCliente.mobile AS 'mobile', " +
-                "    dbcontactoCliente.fax AS 'fax', " +
-                "    dbcontactoCliente.correoElectronico AS 'correoElectronico', " +
-                "    dbcontactoCliente.fotoContactoCliente AS 'fotoContactoCliente', " +
-                "    dbcontactoCliente.idEstado AS 'idEstado' " +
-                "FROM " +
-                "    controlGPC.dbcontactoCliente " +
-                "WHERE dbcontactoCliente.id = " + id + " AND dbtransportista.idEstado <> 3;";
+        StringBuilder _consulta = new StringBuilder();
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        _consulta.append("SELECT  ")
+                .append("    dbcontactoCliente.id AS 'id', ")
+                .append("    dbcontactoCliente.nombreCompleto AS 'nombreCompleto', ")
+                .append("    dbcontactoCliente.descripcion AS 'descripcion', ")
+                .append("    dbcontactoCliente.domicilio AS 'domicilio', ")
+                .append("    dbcontactoCliente.codigoPostal AS 'codigoPostal', ")
+                .append("    dbcontactoCliente.localidad AS 'localidad', ")
+                .append("    dbcontactoCliente.ciudad AS 'ciudad', ")
+                .append("    dbcontactoCliente.estado AS 'estado', ")
+                .append("    dbcontactoCliente.pais AS 'pais', ")
+                .append("    dbcontactoCliente.telefono AS 'telefono', ")
+                .append("    dbcontactoCliente.mobile AS 'mobile', ")
+                .append("    dbcontactoCliente.fax AS 'fax', ")
+                .append("    dbcontactoCliente.correoElectronico AS 'correoElectronico', ")
+                .append("    dbcontactoCliente.fotoContactoCliente AS 'fotoContactoCliente', ")
+                .append("    dbcontactoCliente.idCliente AS 'idCliente', ")
+                .append("    dbcliente.nombreCompleto AS 'nombreCliente', ")
+                .append("    dbcontactoCliente.idEstado AS 'idEstado' ")
+                .append("FROM ")
+                .append("    controlGPC.dbcontactoCliente ")
+                .append("LEFT JOIN dbcliente ON dbcliente.id = dbcontactoCliente.idCliente ")
+                .append("WHERE dbcontactoCliente.id = " + id + " AND dbtransportista.idEstado <> 3;");
+
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         ResultSet rs = st.executeQuery();
 
@@ -338,7 +378,13 @@ public class contactoClienteDAOImpl implements catalogosInterface {
                 _contactoClienteObj.setFax(rs.getString(12));
                 _contactoClienteObj.setCorreoElectronico(rs.getString(13));
                 _contactoClienteObj.setFotoContactoCliente(javax.xml.bind.DatatypeConverter.parseBase64Binary(rs.getString(14)));
-                _contactoClienteObj.setIdEstado(rs.getInt(15));
+
+                cliente _clt = new cliente();
+                _clt.setId(rs.getInt(15));
+                _clt.setNombreCompleto(rs.getString(16));
+                _contactoClienteObj.setCliente(_clt);
+
+                _contactoClienteObj.setIdEstado(rs.getInt(17));
 
             }
 
@@ -357,5 +403,5 @@ public class contactoClienteDAOImpl implements catalogosInterface {
 
         return _contactoClienteObj;
     }
-    
+
 }
