@@ -1,5 +1,5 @@
 <%-- 
-    Document   : perfilUsuarioTabla
+    Document   : tipoVehiculoTabla
     Created on : Jun 4, 2018, 9:59:27 PM
     Author     : juan_m_osuna
 --%>
@@ -14,14 +14,12 @@
         response.setHeader("Cache-Control","no-store");
         response.setDateHeader("Expires", 0);
     
-        
-    
 %>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Catálogo de perfiles de usuarios</title>
+        <title>Catálogo de tipo de vehículos</title>
         <link href="../../css/fontawesome-all.min.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
         <style>
@@ -65,14 +63,14 @@
     </head>
     <body>
         <div class="container">
-            <h1 class="fontUbuntulight "><i class="fas fa-users-cog fontColor"></i>&nbsp;Catálogo de perfiles de usuarios</h1>
+            <h1 class="fontUbuntulight "><i class="fas fa-truck-loading fontColor"></i>&nbsp;Catálogo de tipo de vehículos</h1>
             <ul class="breadcrumb">
                 <li><a href="../catalogos.jsp">Catálogos</a> <span class="divider">/</span></li>
-                <li class="active">Perfiles de usuarios</li>
+                <li class="active">Tipo de vehículos</li>
             </ul>
             <ul class="nav nav-pills">
                 <li class="active">
-                    <a href="agregarPerfilUsuario.jsp" class="btn btn-primary">+ Agregar</a>
+                    <a href="agregarTipoVehiculo.jsp" class="btn btn-primary">+ Agregar</a>
                 </li>
             </ul>
             <hr>

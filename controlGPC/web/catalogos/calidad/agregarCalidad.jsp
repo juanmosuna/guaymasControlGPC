@@ -49,34 +49,53 @@
             .paddin10{
                 padding: 10px;
             }
+            
+            .divider{
+                padding: 2px;
+                color: #777;
+            }
+            
+            .active{
+                color: #777;
+            }
         </style>
     </head>
     <body>
         <div class="container">
             <h1 class="fontUbuntulight fontColor">Agregar calidad</h1>
+            <ul class="breadcrumb">
+                <li><a href="../catalogos.jsp">Catálogos</a> <span class="divider">/</span></li>
+                <li><a href="calidadTabla.jsp">Calidad</a> <span class="divider">/</span></li>
+                <li class="active">Agregar</li>
+            </ul>
+            <ul class="nav nav-pills">
+                <li class="active">
+                    <a href="calidadTabla.jsp">Regresar</a>
+                </li>
+            </ul>
             <hr>
             <form action="" method="post" class="">
                 <div class="form-group">
                     <label for="nombreCompleto">Nombre completo:</label>
-                    <input type="text" class="form-control is-invalid" id="nombreCompleto" placeholder="Teclee el nombre completo de la calidad ..." required>
+                    <input type="text" class="form-control is-invalid" id="nombreCompleto" name="nombreCompleto" placeholder="Teclee el nombre completo de la calidad ..." required>
                     <div class="invalid-feedback">
                      Campo obligatorio!    
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="codigo">Nombre completo:</label>
-                    <input type="text" class="form-control is-invalid" id="codigo" placeholder="Teclee el código de la calidad ..." required>
+                    <input type="text" class="form-control is-invalid" id="codigo" name="codigo" placeholder="Teclee el código de la calidad ..." required>
                     <div class="invalid-feedback">
                      Campo obligatorio!    
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="descripcion">Descripción:</label>
-                    <input type="text" class="form-control" id="descripcion" placeholder="Teclee una descripción acerca de la calidad ...">
+                    <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Teclee una descripción acerca de la calidad ...">
                 </div>
                 <div class="form-group">
                     <label class="mr-sm-2" for="grupoCalidad">Grupo de calidad:</label>
-                    <select class="custom-select mr-sm-2" id="grupoCalidad">
+                    <select class="custom-select mr-sm-2" id="grupoCalidad" name="idgrupoCalidad">
                         <option value="0" selected>Selecciona un grupo de calidad ...</option>
                         <option value="1">One</option>
                         <option value="2">Two</option>

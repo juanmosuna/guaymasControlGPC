@@ -164,20 +164,26 @@
                        <h6 class="card-title mb-0">Tipo de movimientos</h6>
                     </div>
                 </div>
+                <div class="card text-center pt-3 mb-4 col-2" onclick="location.href='tipoVehiculo/tipoVehiculoTabla.jsp';">
+                    <i class="fas fa-truck-loading fa-2x"></i>
+                    <div class="card-body">
+                       <h6 class="card-title mb-0">Tipo de vehículos</h6>
+                    </div>
+                </div>
                 <div class="card text-center pt-3 mb-4 col-2" onclick="location.href='transportista/transportistaTabla.jsp';">
                     <i class="fas fa-truck-moving fa-2x"></i>
                     <div class="card-body">
                       <h6 class="card-title mb-0">Transportistas</h6>
                     </div>
                 </div>
+            </div>
+            <div class="card-deck">
                 <div class="card text-center pt-3 mb-4 col-2" onclick="location.href='unidadMedida/unidadMedidaTabla.jsp';">
                     <i class="fas fa-ruler fa-2x"></i>
                     <div class="card-body">
                       <h6 class="card-title mb-0">Unidades de medidas</h6>
                     </div>
                 </div>
-            </div>
-            <div class="card-deck">
                 <div class="card text-center pt-3 mb-4 col-2" onclick="location.href='usuario/usuarioTabla.jsp';">
                     <i class="fas fa-users fa-2x"></i>
                     <div class="card-body">
@@ -188,12 +194,6 @@
                     <i class="fas fa-truck fa-2x"></i>
                     <div class="card-body">
                         <h6 class="card-title mb-0">Vehículos</h6>
-                    </div>
-                </div>
-                <div class="card-body text-center pt-3 mb-4 col-2">
-                    <i class=""></i>
-                    <div class="card-body">
-                        <h6 class="card-title mb-0">&nbsp;</h6>
                     </div>
                 </div>
                 <div class="card-body text-center pt-3 mb-4 col-2">

@@ -49,19 +49,58 @@
             .paddin10{
                 padding: 10px;
             }
+            
+            .divider{
+                padding: 2px;
+                color: #777;
+            }
+            
+            .active{
+                color: #777;
+            }
         </style>
     </head>
     <body>
         <div class="container">
             <h1 class="fontUbuntulight fontColor">Agregar producto</h1>
+            <ul class="breadcrumb">
+                <li><a href="../catalogos.jsp">Catálogos</a> <span class="divider">/</span></li>
+                <li><a href="productoTabla.jsp">Producto</a> <span class="divider">/</span></li>
+                <li class="active">Agregar</li>
+            </ul>
+            <ul class="nav nav-pills">
+                <li class="active">
+                    <a href="productoTabla.jsp">Regresar</a>
+                </li>
+            </ul>
             <hr>
             <form action="" method="post" class="">
                 <div class="form-group">
                     <label for="nombreCompleto">Nombre completo:</label>
-                    <input type="text" class="form-control is-invalid" id="nombreCompleto" placeholder="Teclee el nombre completo del producto ..." required>
+                    <input type="text" class="form-control is-invalid" id="nombreCompleto" name="nombreCompleto" placeholder="Teclee el nombre completo del producto ..." required>
                     <div class="invalid-feedback">
                      Campo obligatorio!    
                     </div>
+                </div>
+                <div class="form-group">
+                    <label for="codigo">Código del producto:</label>
+                    <input type="text" class="form-control is-invalid" id="codigo" name="codigo" placeholder="Teclee un código para éste producto ..." required>
+                    <div class="invalid-feedback">
+                     Campo obligatorio!    
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="descripcion">Descripción:</label>
+                    <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Teclee una descripción acerca del producto ..." required>
+                </div>
+                <div class="form-group">
+                    <label class="mr-sm-2" for="idCategoriaProducto">Categoría del producto:</label>
+                    <select class="custom-select mr-sm-2" id="idCategoriaProducto" name="idCategoriaProducto">
+                        <option value="0" selected>Selecciona un tipo de almacén ...</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Guardar</button>
