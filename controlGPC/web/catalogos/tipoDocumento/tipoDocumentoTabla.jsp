@@ -19,7 +19,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Catálogo de tipos de documentos</title>
+        <title>Catálogo de tipo de documentos</title>
         <link href="../../css/fontawesome-all.min.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
         <style>
@@ -50,14 +50,23 @@
             .paddin10{
                 padding: 10px;
             }
+            
+            .divider{
+                padding: 2px;
+                color: #777;
+            }
+            
+            .active{
+                color: #777;
+            }
         </style>
     </head>
     <body>
         <div class="container">
-            <h1 class="fontUbuntulight "><i class="far fa-copy fontColor"></i>&nbsp;Catálogo de tipos de documentos</h1>
+            <h1 class="fontUbuntulight "><i class="far fa-copy fontColor"></i>&nbsp;Catálogo de tipo de documentos</h1>
             <ul class="breadcrumb">
                 <li><a href="../catalogos.jsp">Catálogos</a> <span class="divider">/</span></li>
-                <li class="active">Tipos de documentos</li>
+                <li class="active">Tipo de documentos</li>
             </ul>
             <ul class="nav nav-pills">
                 <li class="active">

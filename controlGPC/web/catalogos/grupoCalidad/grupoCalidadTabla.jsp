@@ -50,6 +50,15 @@
             .paddin10{
                 padding: 10px;
             }
+            
+            .divider{
+                padding: 2px;
+                color: #777;
+            }
+            
+            .active{
+                color: #777;
+            }
         </style>
     </head>
     <body>

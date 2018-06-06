@@ -49,6 +49,15 @@
             .paddin10{
                 padding: 10px;
             }
+            
+            .divider{
+                padding: 2px;
+                color: #777;
+            }
+            
+            .active{
+                color: #777;
+            }
         </style>
     </head>
     <body>
@@ -68,25 +77,25 @@
             <form action="" method="post" class="">
                 <div class="form-group">
                     <label for="nombreCompleto">Nombre completo:</label>
-                    <input type="text" class="form-control is-invalid" id="nombreCompleto" placeholder="Teclee el nombre completo del almacén ..." required>
+                    <input type="text" class="form-control is-invalid" id="nombreCompleto" name="nombreCompleto" placeholder="Teclee el nombre completo del almacén ..." required>
                     <div class="invalid-feedback">
                      Campo obligatorio!    
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="codigo">Código del almacén:</label>
-                    <input type="text" class="form-control is-invalid" id="codigo" placeholder="Teclee el código del almacén ..." required>
+                    <input type="text" class="form-control is-invalid" id="codigo" name="codigo" placeholder="Teclee el código del almacén ..." required>
                     <div class="invalid-feedback">
                      Campo obligatorio!    
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="descripcion">Descripción:</label>
-                    <input type="text" class="form-control" id="descripcion" placeholder="Teclee una descripción acerca del almacén ..." >
+                    <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Teclee una descripción acerca del almacén ..." >
                 </div>
                 <div class="form-group">
                     <label class="mr-sm-2" for="tipoAlmacen">Tipo de almacén:</label>
-                    <select class="custom-select mr-sm-2" id="tipoAlmacen">
+                    <select class="custom-select mr-sm-2" id="tipoAlmacen" name="idtipoAlmacen">
                         <option value="0" selected>Selecciona un tipo de almacén ...</option>
                         <option value="1">One</option>
                         <option value="2">Two</option>
@@ -95,11 +104,11 @@
                 </div>
                 <div class="form-group">
                     <label for="capacidad">Capacidad del almacén:</label>
-                    <input type="number" class="form-control" id="capacidad" placeholder="Teclee la capacidad del almacén ..." >
+                    <input type="number" class="form-control" id="capacidad" name="capacidad" placeholder="Teclee la capacidad del almacén ..." >
                 </div>
                 <div class="form-group">
                     <label class="mr-sm-2" for="unidadMedida">Unidad de medida:</label>
-                    <select class="custom-select mr-sm-2" id="unidadMedida">
+                    <select class="custom-select mr-sm-2" id="unidadMedida" name="idunidadMedida">
                         <option value="0" selected>Selecciona una unidad de medida ...</option>
                         <option value="1">One</option>
                         <option value="2">Two</option>
@@ -108,25 +117,24 @@
                 </div>
                 <div class="form-group">
                     <label for="secciones">Secciones del almacén:</label>
-                    <input type="number" class="form-control" id="secciones" placeholder="Teclee el número de secciones del almacén ..." >
+                    <input type="number" class="form-control" id="secciones" name="secciones" placeholder="Teclee el número de secciones del almacén ..." >
                 </div>
                 <div class="form-group">
                     <label for="lado">Lados por sección del almacén:</label>
-                    <input type="number" class="form-control" id="lado" placeholder="Teclee el número de lados por sección del almacén ..." >
+                    <input type="number" class="form-control" id="lado" name="lados" placeholder="Teclee el número de lados por sección del almacén ..." >
                 </div>
                 <div class="form-group">
                     <label for="segmentos">Segmentos por sección del almacén:</label>
-                    <input type="number" class="form-control" id="segementos" placeholder="Teclee el número de segmentos por sección del almacén ..." >
+                    <input type="number" class="form-control" id="segementos" name="segmentos" placeholder="Teclee el número de segmentos por sección del almacén ..." >
                 </div>
                 <div class="form-group">
                     <label for="niveles">Niveles por sección del almacén:</label>
-                    <input type="number" class="form-control" id="niveles" placeholder="Teclee el número de niveles por sección del almacén ..." >
+                    <input type="number" class="form-control" id="niveles" name="niveles" placeholder="Teclee el número de niveles por sección del almacén ..." >
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Guardar</button>
                     <button type="submit" class="btn btn-light">Cancelar</button>
                 </div>
-                
             </form>
         </div>
     </body>

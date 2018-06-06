@@ -19,7 +19,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Agregar grupo de calidad</title>
+        <title>Agregar grupo de grupoCalidad</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
         <style>
             
@@ -49,19 +49,42 @@
             .paddin10{
                 padding: 10px;
             }
+            
+            .divider{
+                padding: 2px;
+                color: #777;
+            }
+            
+            .active{
+                color: #777;
+            }
         </style>
     </head>
     <body>
         <div class="container">
             <h1 class="fontUbuntulight fontColor">Agregar grupo de calidad</h1>
+            <ul class="breadcrumb">
+                <li><a href="../catalogos.jsp">Catálogos</a> <span class="divider">/</span></li>
+                <li><a href="grupoCalidadTabla.jsp">Grupo de calidad</a> <span class="divider">/</span></li>
+                <li class="active">Agregar</li>
+            </ul>
+            <ul class="nav nav-pills">
+                <li class="active">
+                    <a href="grupoCalidadTabla.jsp">Regresar</a>
+                </li>
+            </ul>
             <hr>
             <form action="" method="post" class="">
                 <div class="form-group">
                     <label for="nombreCompleto">Nombre completo:</label>
-                    <input type="text" class="form-control is-invalid" id="nombreCompleto" placeholder="Teclee el nombre completo del grupo de calidad ..." required>
+                    <input type="text" class="form-control is-invalid" id="nombreCompleto" name="nombreCompleto" placeholder="Teclee el nombre completo del grupo de calidad ..." required>
                     <div class="invalid-feedback">
                      Campo obligatorio!    
                     </div>
+                </div>
+                <div class="form-group">
+                    <label for="descripcion">Descripción:</label>
+                    <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Teclee una descripción acerca del grupo de calidad ..." required>
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Guardar</button>

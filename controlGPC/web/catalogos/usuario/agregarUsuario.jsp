@@ -49,16 +49,35 @@
             .paddin10{
                 padding: 10px;
             }
+            
+            .divider{
+                padding: 2px;
+                color: #777;
+            }
+            
+            .active{
+                color: #777;
+            }
         </style>
     </head>
     <body>
         <div class="container">
             <h1 class="fontUbuntulight fontColor">Agregar usuario</h1>
+            <ul class="breadcrumb">
+                <li><a href="../catalogos.jsp">Catálogos</a> <span class="divider">/</span></li>
+                <li><a href="usuarioTabla.jsp">Usuario</a> <span class="divider">/</span></li>
+                <li class="active">Agregar</li>
+            </ul>
+            <ul class="nav nav-pills">
+                <li class="active">
+                    <a href="usuarioTabla.jsp">Regresar</a>
+                </li>
+            </ul>
             <hr>
             <form action="" method="post" class="">
                 <div class="form-group">
                     <label for="nombreCompleto">Nombre completo:</label>
-                    <input type="text" class="form-control is-invalid" id="nombreCompleto" placeholder="Teclee el nombre completo del usuario ..." required>
+                    <input type="text" class="form-control is-invalid" id="nombreCompleto" name="nombreCompleto" placeholder="Teclee el nombre completo del usuario ..." required>
                     <div class="invalid-feedback">
                      Campo obligatorio!    
                     </div>
@@ -68,28 +87,19 @@
                       <legend class="col-form-label col-sm-4 pt-0">Sexo:</legend>
                       <div class="col-sm-10">
                         <div class="form-check form-check-inline">
-                          <input class="form-check-input" type="radio" name="sexo" id="sexo1" value="Hombre" checked>
+                          <input class="form-check-input" type="radio" id="sexo1" name="sexo" value="Hombre" checked>
                           <label class="form-check-label" for="sexo1">Hombre</label>
                         </div>
                         <div class="form-check form-check-inline">
-                          <input class="form-check-input" type="radio" name="sexo" id="sexo2" value="Mujer">
+                          <input class="form-check-input" type="radio" id="sexo2" name="sexo" value="Mujer">
                           <label class="form-check-label" for="sexo2">Mujer</label>
                         </div>
                       </div>
                     </div>
                 </fieldset>
                 <div class="form-group">
-                    <label class="mr-sm-2" for="perfilUsuario">Perfil de Usuario:</label>
-                    <select class="custom-select mr-sm-2" id="perfilUsuario">
-                        <option value="0" selected>Selecciona un perfil de usuario ...</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="mr-sm-2" for="departamento">Departamento:</label>
-                    <select class="custom-select mr-sm-2" id="departamento">
+                    <label class="mr-sm-2" for="idDepartamento">Departamento:</label>
+                    <select class="custom-select mr-sm-2" id="idDepartamento" name="idDepartamento">
                         <option value="0" selected>Selecciona un departamento...</option>
                         <option value="1">One</option>
                         <option value="2">Two</option>
@@ -97,9 +107,18 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label class="mr-sm-2" for="empresa">Empresa:</label>
-                    <select class="custom-select mr-sm-2" id="empresa">
+                    <label class="mr-sm-2" for="idEmpresa">Empresa:</label>
+                    <select class="custom-select mr-sm-2" id="idEmpresa" name="idEmpresa">
                         <option value="0" selected>Selecciona una empresa ...</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="mr-sm-2" for="idLocalidad">Localidad:</label>
+                    <select class="custom-select mr-sm-2" id="idLocalidad" name="idLocalidad">
+                        <option value="0" selected>Selecciona un localidad...</option>
                         <option value="1">One</option>
                         <option value="2">Two</option>
                         <option value="3">Three</option>
@@ -109,15 +128,24 @@
                     <label for="cuenta">Datos de la cuenta del usuario:</label>
                     <div class="container backgroundLightgray borderLightgray paddin10">
                         <div class="form-group">
+                            <label class="mr-sm-2" for="idPerfilUsuario">Perfil de Usuario:</label>
+                            <select class="custom-select mr-sm-2" id="idPerfilUsuario" name="idPerfilUsuario">
+                                <option value="0" selected>Selecciona un perfil de usuario ...</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <label for="cuenta">Cuenta de usuario:</label>
-                            <input type="email" class="form-control is-invalid" id="cuenta" placeholder="Teclee la cuenta de correo del usuario ..." required>
+                            <input type="email" class="form-control is-invalid" id="cuenta" name="cuenta" placeholder="Teclee la cuenta de correo del usuario ..." required>
                             <div class="invalid-feedback">
                              Campo obligatorio!   
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="contrasena">Contraseña:</label>
-                            <input type="password" class="form-control is-invalid" id="contrasena"  aria-describedby="passwordHelpInline" placeholder="Teclee una contraseña para el usuario ..." required>
+                            <input type="password" class="form-control is-invalid" id="contrasena" name="contrasena" aria-describedby="passwordHelpInline" placeholder="Teclee una contraseña para el usuario ..." required>
                             <div id="passwordHelpInline" class="form-text text-muted">
                                 Campo alfanumérico entre 8 a 20 caracteres!   
                             </div>
@@ -130,15 +158,15 @@
                         <label>Foto del usuario:</label>
                         <div class="form-group">
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="fotoUsuario">
+                                <input type="file" class="custom-file-input" id="fotoUsuario" name="fotoUsuario">
                                 <label class="custom-file-label" for="fotoUsuario">Selecciona una imagen</label>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="form-group form-check">
-                    <input type="checkbox" class="form-check-input" id="habilitarCuenta">
-                    <label class="form-check-label" for="habilitarCuenta">Habilitar cuenta</label>
+                    <input type="checkbox" class="form-check-input" id="cuentaActiva" name="cuentaActiva">
+                    <label class="form-check-label" for="cuentaActiva">Habilitar cuenta</label>
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Guardar</button>

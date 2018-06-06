@@ -19,7 +19,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Catálogo de tipos de movimientos</title>
+        <title>Catálogo de tipo de movimientos</title>
         <link href="../../css/fontawesome-all.min.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
         <style>
@@ -50,14 +50,23 @@
             .paddin10{
                 padding: 10px;
             }
+            
+            .divider{
+                padding: 2px;
+                color: #777;
+            }
+            
+            .active{
+                color: #777;
+            }
         </style>
     </head>
     <body>
         <div class="container">
-            <h1 class="fontUbuntulight "><i class="fas fa-exchange-alt fontColor"></i>&nbsp;Catálogo de tipos de movimientos</h1>
+            <h1 class="fontUbuntulight "><i class="fas fa-exchange-alt fontColor"></i>&nbsp;Catálogo de tipo de movimientos</h1>
             <ul class="breadcrumb">
                 <li><a href="../catalogos.jsp">Catálogos</a> <span class="divider">/</span></li>
-                <li class="active">Tipos de movimientos</li>
+                <li class="active">Tipo de movimientos</li>
             </ul>
             <ul class="nav nav-pills">
                 <li class="active">
