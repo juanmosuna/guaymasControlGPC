@@ -63,6 +63,15 @@
             .active{
                 color: #777;
             }
+            
+            .text-danger:hover{
+                color: tomato; 
+            }
+            
+            .text-primary:hover{
+               color: tomato; 
+            }
+            
         </style>
     </head>
     <body>
@@ -83,49 +92,45 @@
                 </li>
             </ul>
             <hr>
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <table class="table table-bordered table-striped table-hover">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Id</th>
-                                    <th scope="col">Nombre completo</th>
-                                    <th scope="col">Descripción</th>
-                                    <th scope="col">Editar</th>
-                                    <th scope="col">Eliminar</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <%
-                                    baseDatos _baseDatos = new baseDatos();
-                                    perfilUsuarioDAOImpl _perfilUsuarioDAOImpl = new perfilUsuarioDAOImpl(_baseDatos.getConnection());
+            <div class="container">
+                <table id="table" class="table table-bordered table-hover">
+                    <thead class="thead-light">
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Nombre completo</th>
+                            <th scope="col">Descripción</th>
+                            <th scope="col"><i class="fa fa-pencil-alt"></i></th>
+                            <th scope="col"><i class="fa fa-trash-alt"></i></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%
+                            baseDatos _baseDatos = new baseDatos();
+                            perfilUsuarioDAOImpl _perfilUsuarioDAOImpl = new perfilUsuarioDAOImpl(_baseDatos.getConnection());
 
-                                    List<perfilUsuario> _perfilUsuarioDAO = (List<perfilUsuario>)_perfilUsuarioDAOImpl.consultarTodos();
+                            List<perfilUsuario> _perfilUsuarioDAO = (List<perfilUsuario>)_perfilUsuarioDAOImpl.consultarTodos();
 
-                                    for(perfilUsuario _perfilUsuario : _perfilUsuarioDAO){
-                                %>
-                                <tr>
-                                    <th scope="row"><%=_perfilUsuario.getId() %></th>
-                                    <td><%=_perfilUsuario.getNombreCompleto()%></td>
-                                    <td><%=_perfilUsuario.getDescripcion()%></td>
-                                    <td><a href=""><button type="button" class="btn btn-warning text-white btn-sm my-0">Editar</button></td>
-                                    <td><a href=""><button type="button" class="btn btn-danger text-white btn-sm my-0">Eliminar</button></td>
-                                </tr>
-                                <%
-                                    }
-                                    try{
+                            for(perfilUsuario _perfilUsuario : _perfilUsuarioDAO){
+                        %>
+                        <tr>
+                            <td width="40" scope="row"><%=_perfilUsuario.getId() %></td>
+                            <td><%=_perfilUsuario.getNombreCompleto()%></td>
+                            <td><%=_perfilUsuario.getDescripcion()%></td>
+                            <td width="10"><a href=""><i class="fa fa-pencil-alt text-primary"></i></a></td>
+                            <td width="10"><a href=""><i class="fa fa-trash-alt  text-danger"></i></a></td>
+                        </tr>
+                        <%
+                            }
+                            try{
 
-                                    }catch(Exception ex){
-                                        ex.printStackTrace();
-                                    }finally{
-                                        _baseDatos.closeConnection();
-                                    }
-                                %>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                            }catch(Exception ex){
+                                ex.printStackTrace();
+                            }finally{
+                                _baseDatos.closeConnection();
+                            }
+                        %>
+                    </tbody>
+                </table>
             </div>
         </div>
     </body>

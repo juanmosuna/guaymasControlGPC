@@ -38,8 +38,12 @@
                 color: #3079ed;
             }
             
-            .iconColor{
+            .fontIconColor{
                 color: #ddd;
+            }
+            
+            .iconColor{
+                color: #666;
             }
              
             h6{
@@ -49,7 +53,6 @@
             .card:hover{
                 cursor: pointer;
                 border-color: #3079ed;
-                background-color: #f5f5f5;
                 
             }
             
@@ -67,12 +70,12 @@
         <div class="container">
             <div class="card-header">
                 <div class="card-text d-flex justify-content-between">
-                    <h1 class="card-body fontUbuntulight fontColor ">Catálogos generales</h1>
-                    <i class="fas fa-braille fa-4x iconColor"></i>
+                    <h1 class="card-body fontUbuntulight fontColor ">Configuración</h1>
+                    <i class="fas fa-wrench fa-4x fontIconColor"></i>
                 </div>
             </div>
             <hr>
-            <div class="card-deck">
+            <div class="card-deck iconColor">
                 <div class="card text-center pt-3 pt-3 mb-4 col-2" onclick="location.href='almacen/almacenTabla.jsp';">
                     <i class="card-img-top fas fa-warehouse fa-2x"></i>
                     <div class="card-body">
@@ -110,7 +113,7 @@
                     </div>
                 </div>
             </div>  
-            <div class="card-deck">
+            <div class="card-deck iconColor">
                 <div class="card text-center pt-3 mb-4 col-2" onclick="location.href='departamento/departamentoTabla.jsp';">
                     <i class="fab fa-laravel fa-2x"></i>
                     <div class="card-body">
@@ -148,7 +151,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card-deck">
+            <div class="card-deck iconColor">
                 <div class="card text-center pt-3 mb-4 col-2" onclick="location.href='producto/productoTabla.jsp';">
                     <i class="fas fa-box fa-2x"></i>
                     <div class="card-body">
@@ -186,7 +189,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card-deck">
+            <div class="card-deck iconColor">
                 <div class="card text-center pt-3 mb-4 col-2" onclick="location.href='unidadMedida/unidadMedidaTabla.jsp';">
                     <i class="fas fa-ruler fa-2x"></i>
                     <div class="card-body">
