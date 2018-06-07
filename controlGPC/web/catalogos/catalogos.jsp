@@ -37,6 +37,10 @@
             .fontColor{
                 color: #3079ed;
             }
+            
+            .iconColor{
+                color: #ddd;
+            }
              
             h6{
                 font-size: 0.9em;
@@ -61,7 +65,12 @@
     </head>
     <body>
         <div class="container">
-            <h1 class="fontUbuntulight fontColor">Catálogos generales</h1>
+            <div class="card-header">
+                <div class="card-text d-flex justify-content-between">
+                    <h1 class="card-body fontUbuntulight fontColor ">Catálogos generales</h1>
+                    <i class="fas fa-braille fa-4x iconColor"></i>
+                </div>
+            </div>
             <hr>
             <div class="card-deck">
                 <div class="card text-center pt-3 pt-3 mb-4 col-2" onclick="location.href='almacen/almacenTabla.jsp';">
@@ -199,19 +208,19 @@
                 <div class="card-body text-center pt-3 mb-4 col-2">
                     <i class=""></i>
                     <div class="card-body">
-                        <h6 class="card-title mb-0">&nbsp;</h6>
+                        <h6 class="card-title mb-0"></h6>
                     </div>
                 </div>
                 <div class="card-body text-center pt-3 mb-4 col-2">
                     <i class=""></i>
                     <div class="card-body">
-                        <h6 class="card-title mb-0">&nbsp;</h6>
+                        <h6 class="card-title mb-0"></h6>
                     </div>
                 </div>
                 <div class="card-body text-center pt-3 mb-4 col-2">
                     <i class=""></i>
                     <div class="card-body">
-                        <h6 class="card-title mb-0">&nbsp;</h6>
+                        <h6 class="card-title mb-0"></h6>
                     </div>
                 </div>
             </div>  

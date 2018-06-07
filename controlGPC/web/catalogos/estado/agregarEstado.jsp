@@ -74,21 +74,21 @@
                 </li>
             </ul>
             <hr>
-            <form action="" method="post" class="">
+            <form id="formulario" action="estadoServlet.do" method="post" class="">
                 <div class="form-group">
-                    <label for="nombreCompleto">Nombre completo:</label>
+                    <label class="control-label" for="nombreCompleto">Nombre completo:</label>
                     <input type="text" class="form-control is-invalid" id="nombreCompleto" name="nombreCompleto" placeholder="Teclee el nombre completo del estado ..." required>
                     <div class="invalid-feedback">
                      Campo obligatorio!    
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="descripcion">Descripción:</label>
+                    <label class="control-label" for="descripcion">Descripción:</label>
                     <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Teclee una descripción acerca del estado ..." required>
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Guardar</button>
-                    <button type="submit" class="btn btn-light">Cancelar</button>
+                    <button type="button" class="btn btn-light" onclick="location.href='estadoTabla.jsp';" >Cancelar</button>
                 </div>
             </form>
         </div>

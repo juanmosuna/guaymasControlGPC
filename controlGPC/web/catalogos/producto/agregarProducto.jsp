@@ -74,27 +74,27 @@
                 </li>
             </ul>
             <hr>
-            <form action="" method="post" class="">
+            <form id="formulario" action="productoServlet.do" method="post" class="">
                 <div class="form-group">
-                    <label for="nombreCompleto">Nombre completo:</label>
+                    <label class="control-label" for="nombreCompleto">Nombre completo:</label>
                     <input type="text" class="form-control is-invalid" id="nombreCompleto" name="nombreCompleto" placeholder="Teclee el nombre completo del producto ..." required>
                     <div class="invalid-feedback">
                      Campo obligatorio!    
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="codigo">Código del producto:</label>
+                    <label class="control-label" for="codigo">Código del producto:</label>
                     <input type="text" class="form-control is-invalid" id="codigo" name="codigo" placeholder="Teclee un código para éste producto ..." required>
                     <div class="invalid-feedback">
                      Campo obligatorio!    
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="descripcion">Descripción:</label>
+                    <label class="control-label" for="descripcion">Descripción:</label>
                     <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Teclee una descripción acerca del producto ..." required>
                 </div>
                 <div class="form-group">
-                    <label class="mr-sm-2" for="idCategoriaProducto">Categoría del producto:</label>
+                    <label class="control-label" class="mr-sm-2" for="idCategoriaProducto">Categoría del producto:</label>
                     <select class="custom-select mr-sm-2" id="idCategoriaProducto" name="idCategoriaProducto">
                         <option value="0" selected>Selecciona un tipo de almacén ...</option>
                         <option value="1">One</option>
@@ -104,7 +104,7 @@
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Guardar</button>
-                    <button type="submit" class="btn btn-light">Cancelar</button>
+                    <button type="button" class="btn btn-light" onclick="location.href='productoTabla.jsp';" >Cancelar</button>
                 </div>
             </form>
         </div>
