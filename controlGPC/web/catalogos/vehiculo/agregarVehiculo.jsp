@@ -74,23 +74,23 @@
                 </li>
             </ul>
             <hr>
-            <form action="" method="post" class="">
+            <form id="formulario" action="vehiculoServlet.do" method="post" class="">
                 <div class="form-group">
-                    <label for="marca">Marca:</label>
+                    <label class="control-label" for="marca">Marca:</label>
                     <input type="text" class="form-control is-invalid" id="marca" name="marca" placeholder="Teclee una marca para éste vehículo ..." required>
                     <div class="invalid-feedback">
                      Campo obligatorio!    
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="modelo">Modelo:</label>
+                    <label class="control-label" for="modelo">Modelo:</label>
                     <input type="text" class="form-control is-invalid" id="modelo" name="modelo" placeholder="Teclee una modelo para éste vehículo ..." required>
                     <div class="invalid-feedback">
                      Campo obligatorio!    
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="mr-sm-2" for="idTipoVehiculo">Tipo de vehículo:</label>
+                    <label class="control-label" class="mr-sm-2" for="idTipoVehiculo">Tipo de vehículo:</label>
                     <select class="custom-select mr-sm-2" id="idTipoVehiculo" name="idTipoVehiculo">
                         <option value="0" selected>Selecciona un tipo de vehículo ...</option>
                         <option value="1">One</option>
@@ -99,56 +99,56 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="numeroSerie">Número de serie:</label>
+                    <label class="control-label" for="numeroSerie">Número de serie:</label>
                     <input type="text" class="form-control is-invalid" id="numeroSerie" name="numeroSerie" placeholder="Teclee un número de serie para éste vehículo ..." required>
                     <div class="invalid-feedback">
                      Campo obligatorio!    
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="placas">Número de placas:</label>
+                    <label class="control-label" for="placas">Número de placas:</label>
                     <input type="text" class="form-control is-invalid" id="placas" name="placas" placeholder="Teclee un número de placas para éste vehículo ..." required>
                     <div class="invalid-feedback">
                      Campo obligatorio!    
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="numeroEconomico">Número de económico:</label>
+                    <label class="control-label" for="numeroEconomico">Número de económico:</label>
                     <input type="text" class="form-control is-invalid" id="numeroEconomico" name="numeroEconomico" placeholder="Teclee un número económico para éste vehículo ..." required>
                     <div class="invalid-feedback">
                      Campo obligatorio!    
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="tarjetaCirculacion">Tarjeta de circulación:</label>
+                    <label class="control-label" for="tarjetaCirculacion">Tarjeta de circulación:</label>
                     <input type="text" class="form-control is-invalid" id="tarjetaCirculacion" name="tarjetaCirculacion" placeholder="Teclee el número de tarjeta de circulación del vehículo ..." required>
                     <div class="invalid-feedback">
                      Campo obligatorio!    
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="polizaSeguro">Número de póliza de seguro:</label>
+                    <label class="control-label" for="polizaSeguro">Número de póliza de seguro:</label>
                     <input type="text" class="form-control is-invalid" id="polizaSeguro" name="polizaSeguro" placeholder="Teclee el número de póliza de seguro del vehículo ..." required>
                     <div class="invalid-feedback">
                      Campo obligatorio!    
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="fechaPoliza">Fecha de la póliza de seguro:</label>
+                    <label class="control-label" for="fechaPoliza">Fecha de la póliza de seguro:</label>
                     <input type="date" class="form-control is-invalid" id="fechaPoliza" name="fechaPoliza" placeholder="Teclee la fecha de la póliza de seguro del vehículo ..." required>
                     <div class="invalid-feedback">
                      Campo obligatorio!    
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="nombrePropietario">Nombre del propietario:</label>
+                    <label class="control-label" for="nombrePropietario">Nombre del propietario:</label>
                     <input type="text" class="form-control is-invalid" id="nombrePropietario" name="nombrePropietario" placeholder="Teclee el nombre completo del propietario del vehículo ..." required>
                     <div class="invalid-feedback">
                      Campo obligatorio!    
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="mr-sm-2" for="idTransportista">Ligar al transportista:</label>
+                    <label class="control-label" class="mr-sm-2" for="idTransportista">Ligar al transportista:</label>
                     <select class="custom-select mr-sm-2" id="idTransportista" name="idTransportista">
                         <option value="0" selected>Selecciona un transportista ...</option>
                         <option value="1">One</option>
@@ -158,7 +158,7 @@
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Guardar</button>
-                    <button type="submit" class="btn btn-light">Cancelar</button>
+                    <button type="button" class="btn btn-light" onclick="location.href='vehiculoTabla.jsp';" >Cancelar</button>
                 </div>
             </form>
         </div>

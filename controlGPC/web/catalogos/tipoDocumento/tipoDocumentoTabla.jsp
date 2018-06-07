@@ -35,7 +35,11 @@
             }
             
             .fontColor{
-                color: #3079ed;
+                color: #999999;
+            }
+            
+            .iconColor{
+                color: #ddd;
             }
             
             .backgroundLightgray{
@@ -47,11 +51,7 @@
                 border-radius: 5px;
             }
             
-            .paddin10{
-                padding: 10px;
-            }
-            
-            .divider{
+           .divider{
                 padding: 2px;
                 color: #777;
             }
@@ -63,7 +63,12 @@
     </head>
     <body>
         <div class="container">
-            <h1 class="fontUbuntulight "><i class="far fa-copy fontColor"></i>&nbsp;Catálogo de tipo de documentos</h1>
+            <div class="card-group">
+                <div class="card-body d-flex justify-content-between">
+                    <h1 class="card-title fontUbuntulight fontColor ">Tipo de documentos</h1>
+                    <i class="fas fa-copy fa-4x iconColor"></i>
+                </div>
+            </div>
             <ul class="breadcrumb">
                 <li><a href="../catalogos.jsp">Catálogos</a> <span class="divider">/</span></li>
                 <li class="active">Tipo de documentos</li>

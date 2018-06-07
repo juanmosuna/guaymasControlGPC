@@ -35,7 +35,11 @@
             }
             
             .fontColor{
-                color: #3079ed;
+                color: #999999;
+            }
+            
+            .iconColor{
+                color: #ddd;
             }
             
             .backgroundLightgray{
@@ -45,10 +49,6 @@
             .borderLightgray{
                 border: 1px solid #ced4da;
                 border-radius: 5px;
-            }
-            
-            .paddin10{
-                padding: 10px;
             }
             
             .divider{
@@ -63,10 +63,15 @@
     </head>
     <body>
         <div class="container">
-            <h1 class="fontUbuntulight "><i class="fas fa-ruler fontColor"></i>&nbsp;Catálogo de unidades de medidas</h1>
+            <div class="card-group">
+                <div class="card-body d-flex justify-content-between">
+                    <h1 class="card-title fontUbuntulight fontColor ">Unidad de medidas</h1>
+                    <i class="fas fa-ruler fa-4x iconColor"></i>
+                </div>
+            </div>
             <ul class="breadcrumb">
                 <li><a href="../catalogos.jsp">Catálogos</a> <span class="divider">/</span></li>
-                <li class="active">Unidades de medidas</li>
+                <li class="active">Unidad de medidas</li>
             </ul>
             <ul class="nav nav-pills">
                 <li class="active">

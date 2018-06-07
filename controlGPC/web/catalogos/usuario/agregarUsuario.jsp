@@ -74,9 +74,9 @@
                 </li>
             </ul>
             <hr>
-            <form action="" method="post" class="">
+            <form id="formulario" action="vehiculoServlet.do" method="post" class="">
                 <div class="form-group">
-                    <label for="nombreCompleto">Nombre completo:</label>
+                    <label class="control-label" for="nombreCompleto">Nombre completo:</label>
                     <input type="text" class="form-control is-invalid" id="nombreCompleto" name="nombreCompleto" placeholder="Teclee el nombre completo del usuario ..." required>
                     <div class="invalid-feedback">
                      Campo obligatorio!    
@@ -88,17 +88,17 @@
                       <div class="col-sm-10">
                         <div class="form-check form-check-inline">
                           <input class="form-check-input" type="radio" id="sexo1" name="sexo" value="Hombre" checked>
-                          <label class="form-check-label" for="sexo1">Hombre</label>
+                          <label class="control-label" class="form-check-label" for="sexo1">Hombre</label>
                         </div>
                         <div class="form-check form-check-inline">
                           <input class="form-check-input" type="radio" id="sexo2" name="sexo" value="Mujer">
-                          <label class="form-check-label" for="sexo2">Mujer</label>
+                          <label class="control-label" class="form-check-label" for="sexo2">Mujer</label>
                         </div>
                       </div>
                     </div>
                 </fieldset>
                 <div class="form-group">
-                    <label class="mr-sm-2" for="idDepartamento">Departamento:</label>
+                    <label class="control-label" class="mr-sm-2" for="idDepartamento">Departamento:</label>
                     <select class="custom-select mr-sm-2" id="idDepartamento" name="idDepartamento">
                         <option value="0" selected>Selecciona un departamento...</option>
                         <option value="1">One</option>
@@ -107,7 +107,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label class="mr-sm-2" for="idEmpresa">Empresa:</label>
+                    <label class="control-label" class="mr-sm-2" for="idEmpresa">Empresa:</label>
                     <select class="custom-select mr-sm-2" id="idEmpresa" name="idEmpresa">
                         <option value="0" selected>Selecciona una empresa ...</option>
                         <option value="1">One</option>
@@ -116,7 +116,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label class="mr-sm-2" for="idLocalidad">Localidad:</label>
+                    <label class="control-label" class="mr-sm-2" for="idLocalidad">Localidad:</label>
                     <select class="custom-select mr-sm-2" id="idLocalidad" name="idLocalidad">
                         <option value="0" selected>Selecciona un localidad...</option>
                         <option value="1">One</option>
@@ -125,10 +125,10 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="cuenta">Datos de la cuenta del usuario:</label>
+                    <label class="control-label" for="cuenta">Datos de la cuenta del usuario:</label>
                     <div class="container backgroundLightgray borderLightgray paddin10">
                         <div class="form-group">
-                            <label class="mr-sm-2" for="idPerfilUsuario">Perfil de Usuario:</label>
+                            <label class="control-label" class="mr-sm-2" for="idPerfilUsuario">Perfil de Usuario:</label>
                             <select class="custom-select mr-sm-2" id="idPerfilUsuario" name="idPerfilUsuario">
                                 <option value="0" selected>Selecciona un perfil de usuario ...</option>
                                 <option value="1">One</option>
@@ -137,14 +137,14 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="cuenta">Cuenta de usuario:</label>
+                            <label class="control-label" for="cuenta">Cuenta de usuario:</label>
                             <input type="email" class="form-control is-invalid" id="cuenta" name="cuenta" placeholder="Teclee la cuenta de correo del usuario ..." required>
                             <div class="invalid-feedback">
                              Campo obligatorio!   
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="contrasena">Contraseña:</label>
+                            <label class="control-label" for="contrasena">Contraseña:</label>
                             <input type="password" class="form-control is-invalid" id="contrasena" name="contrasena" aria-describedby="passwordHelpInline" placeholder="Teclee una contraseña para el usuario ..." required>
                             <div id="passwordHelpInline" class="form-text text-muted">
                                 Campo alfanumérico entre 8 a 20 caracteres!   
@@ -155,22 +155,22 @@
                         </div>
                     </div>
                     <div class="form-group" style="margin-top: 10px;">
-                        <label>Foto del usuario:</label>
+                        <label class="control-label">Foto del usuario:</label>
                         <div class="form-group">
                             <div class="custom-file">
                                 <input type="file" class="custom-file-input" id="fotoUsuario" name="fotoUsuario">
-                                <label class="custom-file-label" for="fotoUsuario">Selecciona una imagen</label>
+                                <label class="control-label" class="custom-file-label" for="fotoUsuario">Selecciona una imagen</label>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="form-group form-check">
                     <input type="checkbox" class="form-check-input" id="cuentaActiva" name="cuentaActiva">
-                    <label class="form-check-label" for="cuentaActiva">Habilitar cuenta</label>
+                    <label class="control-label" class="form-check-label" for="cuentaActiva">Habilitar cuenta</label>
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Guardar</button>
-                    <button type="submit" class="btn btn-light">Cancelar</button>
+                    <button type="button" class="btn btn-light" onclick="location.href='usuarioTabla.jsp';" >Cancelar</button>
                 </div>
             </form>
         </div>

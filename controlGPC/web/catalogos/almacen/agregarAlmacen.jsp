@@ -74,27 +74,27 @@
                 </li>
             </ul>
             <hr>
-            <form action="" method="post" class="">
+            <form id="formulario" action="almacenServlet.do" method="post" class="">
                 <div class="form-group">
-                    <label for="nombreCompleto">Nombre completo:</label>
+                    <label class="control-label" class="control-label" for="nombreCompleto">Nombre completo:</label>
                     <input type="text" class="form-control is-invalid" id="nombreCompleto" name="nombreCompleto" placeholder="Teclee el nombre completo del almacén ..." required>
                     <div class="invalid-feedback">
                      Campo obligatorio!    
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="codigo">Código del almacén:</label>
+                    <label class="control-label" for="codigo">Código del almacén:</label>
                     <input type="text" class="form-control is-invalid" id="codigo" name="codigo" placeholder="Teclee el código del almacén ..." required>
                     <div class="invalid-feedback">
                      Campo obligatorio!    
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="descripcion">Descripción:</label>
+                    <label class="control-label" for="descripcion">Descripción:</label>
                     <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Teclee una descripción acerca del almacén ..." >
                 </div>
                 <div class="form-group">
-                    <label class="mr-sm-2" for="tipoAlmacen">Tipo de almacén:</label>
+                    <label class="control-label" class="mr-sm-2" for="tipoAlmacen">Tipo de almacén:</label>
                     <select class="custom-select mr-sm-2" id="tipoAlmacen" name="idtipoAlmacen">
                         <option value="0" selected>Selecciona un tipo de almacén ...</option>
                         <option value="1">One</option>
@@ -103,11 +103,11 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="capacidad">Capacidad del almacén:</label>
+                    <label class="control-label" for="capacidad">Capacidad del almacén:</label>
                     <input type="number" class="form-control" id="capacidad" name="capacidad" placeholder="Teclee la capacidad del almacén ..." >
                 </div>
                 <div class="form-group">
-                    <label class="mr-sm-2" for="unidadMedida">Unidad de medida:</label>
+                    <label class="control-label" class="mr-sm-2" for="unidadMedida">Unidad de medida:</label>
                     <select class="custom-select mr-sm-2" id="unidadMedida" name="idunidadMedida">
                         <option value="0" selected>Selecciona una unidad de medida ...</option>
                         <option value="1">One</option>
@@ -116,24 +116,24 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="secciones">Secciones del almacén:</label>
+                    <label class="control-label" for="secciones">Secciones del almacén:</label>
                     <input type="number" class="form-control" id="secciones" name="secciones" placeholder="Teclee el número de secciones del almacén ..." >
                 </div>
                 <div class="form-group">
-                    <label for="lado">Lados por sección del almacén:</label>
+                    <label class="control-label" for="lado">Lados por sección del almacén:</label>
                     <input type="number" class="form-control" id="lado" name="lados" placeholder="Teclee el número de lados por sección del almacén ..." >
                 </div>
                 <div class="form-group">
-                    <label for="segmentos">Segmentos por sección del almacén:</label>
+                    <label class="control-label" for="segmentos">Segmentos por sección del almacén:</label>
                     <input type="number" class="form-control" id="segementos" name="segmentos" placeholder="Teclee el número de segmentos por sección del almacén ..." >
                 </div>
                 <div class="form-group">
-                    <label for="niveles">Niveles por sección del almacén:</label>
+                    <label class="control-label" for="niveles">Niveles por sección del almacén:</label>
                     <input type="number" class="form-control" id="niveles" name="niveles" placeholder="Teclee el número de niveles por sección del almacén ..." >
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Guardar</button>
-                    <button type="submit" class="btn btn-light">Cancelar</button>
+                    <button type="button" class="btn btn-light" onclick="location.href='almacenTabla.jsp';" >Cancelar</button>
                 </div>
             </form>
         </div>

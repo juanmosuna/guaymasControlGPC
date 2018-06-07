@@ -4,6 +4,10 @@
     Author     : juan_m_osuna
 --%>
 
+<%@page import="entity.perfilUsuario"%>
+<%@page import="java.util.List"%>
+<%@page import="DAO.database.perfilUsuarioDAOImpl"%>
+<%@page import="database.baseDatos"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
     if (session.getAttribute("usuario") == null){
@@ -13,8 +17,6 @@
         response.setHeader("Cache-Control","no-cache");
         response.setHeader("Cache-Control","no-store");
         response.setDateHeader("Expires", 0);
-    
-        
     
 %>
 <!DOCTYPE html>
@@ -37,7 +39,11 @@
             }
             
             .fontColor{
-                color: #3079ed;
+                color: #999999;
+            }
+            
+            .iconColor{
+                color: #ddd;
             }
             
             .backgroundLightgray{
@@ -47,10 +53,6 @@
             .borderLightgray{
                 border: 1px solid #ced4da;
                 border-radius: 5px;
-            }
-            
-            .paddin10{
-                padding: 10px;
             }
             
             .divider{
@@ -65,10 +67,15 @@
     </head>
     <body>
         <div class="container">
-            <h1 class="fontUbuntulight "><i class="fas fa-users-cog fontColor"></i>&nbsp;Catálogo de perfiles de usuarios</h1>
+            <div class="card-group">
+                <div class="card-body d-flex justify-content-between">
+                    <h1 class="card-title fontUbuntulight fontColor ">Perfil de usuarios</h1>
+                    <i class="fas fa-users-cog fa-4x iconColor"></i>
+                </div>
+            </div>
             <ul class="breadcrumb">
                 <li><a href="../catalogos.jsp">Catálogos</a> <span class="divider">/</span></li>
-                <li class="active">Perfiles de usuarios</li>
+                <li class="active">Perfil de usuarios</li>
             </ul>
             <ul class="nav nav-pills">
                 <li class="active">
@@ -76,36 +83,50 @@
                 </li>
             </ul>
             <hr>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
-                        <th scope="col">Handle</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>Larry</td>
-                        <td>the Bird</td>
-                        <td>@twitter</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <table class="table table-bordered table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Id</th>
+                                    <th scope="col">Nombre completo</th>
+                                    <th scope="col">Descripción</th>
+                                    <th scope="col">Editar</th>
+                                    <th scope="col">Eliminar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <%
+                                    baseDatos _baseDatos = new baseDatos();
+                                    perfilUsuarioDAOImpl _perfilUsuarioDAOImpl = new perfilUsuarioDAOImpl(_baseDatos.getConnection());
+
+                                    List<perfilUsuario> _perfilUsuarioDAO = (List<perfilUsuario>)_perfilUsuarioDAOImpl.consultarTodos();
+
+                                    for(perfilUsuario _perfilUsuario : _perfilUsuarioDAO){
+                                %>
+                                <tr>
+                                    <th scope="row"><%=_perfilUsuario.getId() %></th>
+                                    <td><%=_perfilUsuario.getNombreCompleto()%></td>
+                                    <td><%=_perfilUsuario.getDescripcion()%></td>
+                                    <td><a href=""><button type="button" class="btn btn-warning text-white btn-sm my-0">Editar</button></td>
+                                    <td><a href=""><button type="button" class="btn btn-danger text-white btn-sm my-0">Eliminar</button></td>
+                                </tr>
+                                <%
+                                    }
+                                    try{
+
+                                    }catch(Exception ex){
+                                        ex.printStackTrace();
+                                    }finally{
+                                        _baseDatos.closeConnection();
+                                    }
+                                %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
 </html>

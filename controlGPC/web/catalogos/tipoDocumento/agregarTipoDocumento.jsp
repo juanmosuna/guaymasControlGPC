@@ -74,22 +74,22 @@
                 </li>
             </ul>
             <hr>
-            <form action="" method="post" class="">
+            <form id="formulario" action="tipoDocumentoServlet.do" method="post" class="">
                 <div class="form-group">
-                    <label for="nombreCompleto">Nombre completo:</label>
+                    <label class="control-label" for="nombreCompleto">Nombre completo:</label>
                     <input type="text" class="form-control is-invalid" id="nombreCompleto" name="nombreCompleto" placeholder="Teclee el nombre completo del tipo de documento ..." required>
                     <div class="invalid-feedback">
                      Campo obligatorio!    
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="descripcion">Descripción:</label>
+                    <label class="control-label" for="descripcion">Descripción:</label>
                     <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Teclee una descripción acerca del tipo de documento ..." required>
                 </div>
                 <div class="form-group">
-                    <label class="mr-sm-2" for="idTipoMovimiento">Tipo de movimiento del documento:</label>
+                    <label class="control-label" class="mr-sm-2" for="idTipoMovimiento">Tipo de movimiento del documento:</label>
                     <select class="custom-select mr-sm-2" id="idTipoMovimiento" name="idTipoMovimiento">
-                        <option value="0" selected>Selecciona un tipo de almacén ...</option>
+                        <option value="0" selected>Selecciona un tipo de documento ...</option>
                         <option value="1">One</option>
                         <option value="2">Two</option>
                         <option value="3">Three</option>
@@ -97,7 +97,7 @@
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Guardar</button>
-                    <button type="submit" class="btn btn-light">Cancelar</button>
+                    <button type="button" class="btn btn-light" onclick="location.href='tipoDocumentoTabla.jsp';" >Cancelar</button>
                 </div>
             </form>
         </div>

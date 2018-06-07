@@ -74,16 +74,16 @@
                 </li>
             </ul>
             <hr>
-            <form action="" method="post" class="">
+            <form id="formulario" action="perfilUsuarioServlet.do" method="post" class="">
                 <div class="form-group">
-                    <label for="nombreCompleto">Nombre:</label>
+                    <label class="control-label" for="nombreCompleto">Nombre:</label>
                     <input type="text" class="form-control is-invalid" id="nombreCompleto" name="nombreCompleto" placeholder="Teclee el nombre del perfil del usuario ..." required>
                     <div class="invalid-feedback">
                      Campo obligatorio!   
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="descripcion">Descripción:</label>
+                    <label class="control-label" for="descripcion">Descripción:</label>
                     <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Teclee una descripción acerca del perfil del usuario ...">
                 </div>
                 <fieldset class="form-group">
@@ -92,41 +92,41 @@
                         <div class="col-sm-10">
                             <div class="form-check">
                               <input class="form-check-input" type="checkbox" id="accesoPlataforma" name="accesoPlataforma">
-                              <label class="form-check-label" for="accesoPlataforma">Acceso a la Plataforma</label>
+                              <label class="control-label" class="form-check-label" for="accesoPlataforma">Acceso a la Plataforma</label>
                             </div>
                             <div class="form-check">
                               <input class="form-check-input" type="checkbox" id="gestionCatalogos" name="gestionCatalogos">
-                              <label class="form-check-label" for="gestionCatalogos">Gestión de catálogos configuración</label>
+                              <label class="control-label" class="form-check-label" for="gestionCatalogos">Gestión de catálogos configuración</label>
                             </div>
                             <div class="form-check">
                               <input class="form-check-input" type="checkbox" id="gestionUsuario" name="gestionUsuario">
-                              <label class="form-check-label" for="gestionUsuario">Gestión de usuarios</label>
+                              <label class="control-label" class="form-check-label" for="gestionUsuario">Gestión de usuarios</label>
                             </div>
                             <div class="form-check">
                               <input class="form-check-input" type="checkbox" id="gestionDocumentos" name="gestionDocumentos" data-toggle="collapse" href="#collapseExample" role="button">
-                              <label class="form-check-label" for="gestionDocumentos">Gestión de documentos</label>
+                              <label class="control-label" class="form-check-label" for="gestionDocumentos">Gestión de documentos</label>
                             </div>
                             <div class="collapse col-sm-4" id="collapseExample">
                                 <div class="card card-body backgroundLightgray">
                                   <div class="form-check">
                                         <input class="form-check-input" type="checkbox" id="agregarDocumento" name="agregarDocumento" value="agregarDocumento">
-                                        <label class="form-check-label" for="agregarDocumento">Agregar documentos</label>
+                                        <label class="control-label" class="form-check-label" for="agregarDocumento">Agregar documentos</label>
                                     </div>
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" id="eliminarDocumento" name="eliminarDocumento" value="eliminarDocumento">
-                                        <label class="form-check-label" for="eliminarDocumento">Eliminar documentos</label>
+                                        <label class="control-label" class="form-check-label" for="eliminarDocumento">Eliminar documentos</label>
                                     </div>
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox"id="modificarDocumento" name="modificarDocumento"  value="modificarDocumento">
-                                        <label class="form-check-label" for="modificarDocumento">Modificar documentos</label>
+                                        <label class="control-label" class="form-check-label" for="modificarDocumento">Modificar documentos</label>
                                     </div>
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" id="buscarDocumento" name="buscarDocumento" value="buscarDocumento">
-                                        <label class="form-check-label" for="buscarDocumento">Buscar documentos</label>
+                                        <label class="control-label" class="form-check-label" for="buscarDocumento">Buscar documentos</label>
                                     </div>
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" id="imprimirDocumento" name="imprimirDocumento" value="imprimirDocumento">
-                                        <label class="form-check-label" for="imprimirDocumento">Imprimir documentos</label>
+                                        <label class="control-label" class="form-check-label" for="imprimirDocumento">Imprimir documentos</label>
                                     </div>
                                 </div>
                             </div>
@@ -136,7 +136,7 @@
                 </fieldset>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Guardar</button>
-                    <button type="submit" class="btn btn-light">Cancelar</button>
+                    <button type="button" class="btn btn-light" onclick="location.href='perfilUsuarioTabla.jsp';" >Cancelar</button>
                 </div>
             </form>
         </div>
