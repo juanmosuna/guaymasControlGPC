@@ -74,60 +74,60 @@
                 </li>
             </ul>
             <hr>
-            <form action="" method="post" class="">
+            <form id="formulario" action="contactoClienteServlet.do" method="post" class="">
                 <div class="form-group">
-                    <label for="nombreCompleto">Nombre completo:</label>
+                    <label class="control-label" for="nombreCompleto">Nombre completo:</label>
                     <input type="text" class="form-control is-invalid" id="nombreCompleto" name="nombreCompleto" placeholder="Teclee el nombre completo del contacto del cliente ..." required>
                     <div class="invalid-feedback">
                      Campo obligatorio!    
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="descripcion">Descripción:</label>
+                    <label class="control-label" for="descripcion">Descripción:</label>
                     <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Teclee una descripción acerca del contacto del cliente ..." >
                 </div>
                 <div class="form-group">
-                    <label for="domicilio">Domicilio:</label>
+                    <label class="control-label" for="domicilio">Domicilio:</label>
                     <input type="text" class="form-control" id="domicilio" name="domicilio" placeholder="Teclee el domicilio del contacto del cliente ..." >
                 </div>
                 <div class="form-group">
-                    <label for="codigoPostal">Código postal:</label>
+                    <label class="control-label" for="codigoPostal">Código postal:</label>
                     <input type="text" class="form-control" id="codigoPostal" name="codigoPostal" placeholder="Teclee el código postal del domicilio del contacto del cliente ..." >
                 </div>
                 <div class="form-group">
-                    <label for="localidad">Localidad:</label>
+                    <label class="control-label" for="localidad">Localidad:</label>
                     <input type="text" class="form-control" id="localidad" name="localidad" placeholder="Teclee la localidad del domicilio del contacto del cliente ..." >
                 </div>
                 <div class="form-group">
-                    <label for="ciudad">Ciudad:</label>
+                    <label class="control-label" for="ciudad">Ciudad:</label>
                     <input type="text" class="form-control" id="ciudad" name="ciudad" placeholder="Teclee la ciudad del domicilio del contacto del cliente ..." >
                 </div>
                 <div class="form-group">
-                    <label for="estado">Estado:</label>
+                    <label class="control-label" for="estado">Estado:</label>
                     <input type="text" class="form-control" id="estado" name="estado" placeholder="Teclee el estado del domicilio del contacto del cliente ..." >
                 </div>
                 <div class="form-group">
-                    <label for="pais">País:</label>
+                    <label class="control-label" for="pais">País:</label>
                     <input type="text" class="form-control" id="pais" name="pais" placeholder="Teclee el país del domicilio del contacto del cliente ..." >
                 </div>
                 <div class="form-group">
-                    <label for="telefono">Teléfono:</label>
+                    <label class="control-label" for="telefono">Teléfono:</label>
                     <input type="tel" class="form-control" id="telefono" name="telefono" placeholder="Teclee el número telefónico del contacto del cliente ..." >
                 </div>
                 <div class="form-group">
-                    <label for="mobile">Celular:</label>
+                    <label class="control-label" for="mobile">Celular:</label>
                     <input type="tel" class="form-control" id="mobile" name="mobile" placeholder="Teclee el número de celular del contacto del cliente ..." >
                 </div>
                 <div class="form-group">
-                    <label for="fax">Fax:</label>
+                    <label class="control-label" for="fax">Fax:</label>
                     <input type="tel" class="form-control" id="fax" name="fax" placeholder="Teclee el número de fax del contacto del cliente ..." >
                 </div>
                 <div class="form-group">
-                    <label for="correoElectronico">Correo electrónico:</label>
+                    <label class="control-label" for="correoElectronico">Correo electrónico:</label>
                     <input type="email" class="form-control" id="correoElectronico" name="correoElectronico" placeholder="Teclee la cuenta de correo electrónico del contacto del cliente ..." required>
                 </div>
                 <div class="form-group">
-                    <label class="mr-sm-2" for="idCliente">Ligar al siguiente cliente:</label>
+                    <label class="control-label" class="mr-sm-2" for="idCliente">Ligar al siguiente cliente:</label>
                     <select class="custom-select mr-sm-2" id="idCliente" name="idCliente">
                         <option value="0" selected>Selecciona un tipo de almacén ...</option>
                         <option value="1">One</option>
@@ -136,17 +136,17 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Foto del contacto del cliente:</label>
+                    <label class="control-label">Foto del contacto del cliente:</label>
                     <div class="form-group">
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="fotoCliente" name="fotoCliente">
-                            <label class="custom-file-label" for="fotoCliente">Selecciona una imagen</label>
+                            <input type="file" class="custom-file-input" id="fotoContactoCliente" name="fotoContactoCliente">
+                            <label class="control-label" class="custom-file-label" for="fotoContactoCliente">Selecciona una imagen</label>
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Guardar</button>
-                    <button type="submit" class="btn btn-light">Cancelar</button>
+                    <button type="button" class="btn btn-light" onclick="location.href='contactoClienteTabla.jsp';" >Cancelar</button>
                 </div>
             </form>
         </div>

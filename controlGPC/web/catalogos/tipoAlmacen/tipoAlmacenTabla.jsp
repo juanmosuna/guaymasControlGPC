@@ -35,7 +35,11 @@
             }
             
             .fontColor{
-                color: #3079ed;
+                color: #999999;
+            }
+            
+            .iconColor{
+                color: #ddd;
             }
             
             .backgroundLightgray{
@@ -45,10 +49,6 @@
             .borderLightgray{
                 border: 1px solid #ced4da;
                 border-radius: 5px;
-            }
-            
-            .paddin10{
-                padding: 10px;
             }
             
             .divider{
@@ -63,10 +63,15 @@
     </head>
     <body>
         <div class="container">
-            <h1 class="fontUbuntulight "><i class="fas fa-industry fontColor"></i>&nbsp;Catálogo de tipos de almacenes</h1>
+            <div class="card-group">
+                <div class="card-body d-flex justify-content-between">
+                    <h1 class="card-title fontUbuntulight fontColor ">Tipo de almacenes</h1>
+                    <i class="fas fa-industry fa-4x iconColor"></i>
+                </div>
+            </div>
             <ul class="breadcrumb">
                 <li><a href="../catalogos.jsp">Catálogos</a> <span class="divider">/</span></li>
-                <li class="active">Tipos de almacenes</li>
+                <li class="active">Tipo de almacenes</li>
             </ul>
             <ul class="nav nav-pills">
                 <li class="active">
