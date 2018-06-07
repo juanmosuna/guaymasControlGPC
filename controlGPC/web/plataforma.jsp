@@ -45,7 +45,7 @@
                 </div>
             </div>
             <div class="formUsuario_pie">
-                <a href="logout.do"><i class="fas fa-power-off" >&nbsp;&nbsp;Salir</i></a>
+                <a href="/controlGPC/logout.do"><i class="fas fa-power-off" >&nbsp;&nbsp;Salir</i></a>
             </div>
         </div>
         <div class="paginaCompleta">
@@ -108,7 +108,7 @@
                                 </a>
                             </li>
                             <li class="liMenu">
-                                <a href="#">
+                                <a href="catalogos/catalogos.jsp">
                                     <i class="fas fa-wrench"></i>
                                     <span class="nav-text">
                                         Configuración
@@ -118,7 +118,7 @@
                         </ul>
                         <ul class="logout">
                             <li class="liMenu">
-                               <a href="logout.do">
+                               <a href="/controlGPC/logout.do">
                                      <i class="fas fa-power-off"></i>
                                     <span class="nav-text">
                                         Salir del sistema

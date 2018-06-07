@@ -1,6 +1,6 @@
 <%-- 
-    Document   : agregarTipoAlmacen
-    Created on : May 30, 2018, 10:55:29 PM
+    Document   : agregarCategoriaProductos
+    Created on : May 30, 2018, 10:53:01 PM
     Author     : juan_m_osuna
 --%>
 
@@ -19,7 +19,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Agregar tipo de almacén</title>
+        <title>Agregar categoría del producto</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
         <style>
             
@@ -62,29 +62,30 @@
     </head>
     <body>
         <div class="container">
-            <h1 class="fontUbuntulight fontColor">Agregar tipo de almacén</h1>
+            <h1 class="fontUbuntulight fontColor">Agregar categoría del producto</h1>
             <ul class="breadcrumb">
                 <li><a href="../catalogos.jsp">Catálogos</a> <span class="divider">/</span></li>
-                <li><a href="tipoAlmacenTabla.jsp">Tipo de almacén</a> <span class="divider">/</span></li>
+                <li><a href="categoriaProductoTabla.jsp">Categoría del producto</a> <span class="divider">/</span></li>
                 <li class="active">Agregar</li>
             </ul>
             <ul class="nav nav-pills">
                 <li class="active">
-                    <a href="tipoAlmacenTabla.jsp">Regresar</a>
+                    <a href="categoriaProductoTabla.jsp">Regresar</a>
                 </li>
             </ul>
             <hr>
             <form action="" method="post" class="">
                 <div class="form-group">
                     <label for="nombreCompleto">Nombre completo:</label>
-                    <input type="text" class="form-control is-invalid" id="nombreCompleto" name="nombreCompleto" placeholder="Teclee el nombre completo del tipo de almacén ..." required>
+                    <input type="text" class="form-control is-invalid" id="nombreCompleto" name="nombreCompleto" placeholder="Teclee el nombre completo de la categoría del producto ..." required>
                     <div class="invalid-feedback">
                      Campo obligatorio!    
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="descripcion">Descripción:</label>
-                    <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Teclee una descripción acerca del tipo de almacén ..." required>
+                    <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Teclee una descripción acerca de la categoría del producto ..." required>
+
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Guardar</button>
