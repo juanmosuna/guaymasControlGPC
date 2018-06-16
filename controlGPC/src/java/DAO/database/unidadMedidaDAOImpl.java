@@ -35,16 +35,18 @@ public class unidadMedidaDAOImpl implements catalogosInterface {
 
         _consulta.append("INSERT INTO controlGPC.dbunidadMedida ")
                 .append("(nombreCompleto, ")
+                .append("codigo, ")
                 .append("descripcion, ")
                 .append("idEstado) ")
                 .append("VALUES ")
-                .append("(?, ?, ?);");
+                .append("(?, ?, ?, ?);");
 
         PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         st.setString(1, _unidadMedidaObj.getNombreCompleto());
-        st.setString(2, _unidadMedidaObj.getDescripcion());
-        st.setInt(3, _unidadMedidaObj.getIdEstado());
+        st.setString(2, _unidadMedidaObj.getCodigo());
+        st.setString(3, _unidadMedidaObj.getDescripcion());
+        st.setInt(4, _unidadMedidaObj.getIdEstado());
 
         boolean resultado = st.execute();
 
@@ -65,6 +67,7 @@ public class unidadMedidaDAOImpl implements catalogosInterface {
         _consulta.append("UPDATE controlGPC.dbunidadMedida ")
                 .append("SET ")
                 .append("nombreCompleto = ?, ")
+                .append("codigo = ?, ")
                 .append("descripcion = ?, ")
                 .append("idEstado = ? ")
                 .append("WHERE id = ?;");
@@ -72,8 +75,9 @@ public class unidadMedidaDAOImpl implements catalogosInterface {
         PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         st.setString(1, _unidadMedidaObj.getNombreCompleto());
-        st.setString(2, _unidadMedidaObj.getDescripcion());
-        st.setInt(3, _unidadMedidaObj.getIdEstado());
+        st.setString(2, _unidadMedidaObj.getCodigo());
+        st.setString(3, _unidadMedidaObj.getDescripcion());
+        st.setInt(4, _unidadMedidaObj.getIdEstado());
 
         st.setInt(4, _unidadMedidaObj.getId());
 
@@ -118,6 +122,7 @@ public class unidadMedidaDAOImpl implements catalogosInterface {
         _consulta.append("SELECT  ")
                 .append("    dbunidadMedida.id AS 'id', ")
                 .append("    dbunidadMedida.nombreCompleto AS 'nombreCompleto', ")
+                .append("    dbunidadMedida.codigo AS 'codigo', ")
                 .append("    dbunidadMedida.descripcion AS 'descripcion', ")
                 .append("    dbunidadMedida.idEstado AS 'idEstado' ")
                 .append("FROM ")
@@ -137,8 +142,9 @@ public class unidadMedidaDAOImpl implements catalogosInterface {
 
                 _unidadMedidaObj.setId(rs.getInt(1));
                 _unidadMedidaObj.setNombreCompleto(rs.getString(2));
-                _unidadMedidaObj.setDescripcion(rs.getString(3));
-                _unidadMedidaObj.setIdEstado(rs.getInt(4));
+                _unidadMedidaObj.setCodigo(rs.getString(3));
+                _unidadMedidaObj.setDescripcion(rs.getString(4));
+                _unidadMedidaObj.setIdEstado(rs.getInt(5));
 
                 _listaUnidadMedida.add(_unidadMedidaObj);
             }
@@ -171,6 +177,7 @@ public class unidadMedidaDAOImpl implements catalogosInterface {
         _consulta.append("SELECT  ")
                 .append("    dbunidadMedida.id AS 'id', ")
                 .append("    dbunidadMedida.nombreCompleto AS 'nombreCompleto', ")
+                .append("    dbunidadMedida.codigo AS 'codigo', ")
                 .append("    dbunidadMedida.descripcion AS 'descripcion', ")
                 .append("    dbunidadMedida.idEstado AS 'idEstado' ")
                 .append("FROM ")
@@ -193,8 +200,9 @@ public class unidadMedidaDAOImpl implements catalogosInterface {
 
                 _unidadMedidaObj.setId(rs.getInt(1));
                 _unidadMedidaObj.setNombreCompleto(rs.getString(2));
-                _unidadMedidaObj.setDescripcion(rs.getString(3));
-                _unidadMedidaObj.setIdEstado(rs.getInt(4));
+                _unidadMedidaObj.setCodigo(rs.getString(3));
+                _unidadMedidaObj.setDescripcion(rs.getString(4));
+                _unidadMedidaObj.setIdEstado(rs.getInt(5));
 
                 _listaUnidadMedida.add(_unidadMedidaObj);
             }
@@ -225,6 +233,7 @@ public class unidadMedidaDAOImpl implements catalogosInterface {
         _consulta.append("SELECT  ")
                 .append("    dbunidadMedida.id AS 'id', ")
                 .append("    dbunidadMedida.nombreCompleto AS 'nombreCompleto', ")
+                .append("    dbunidadMedida.codigo AS 'codigo', ")
                 .append("    dbunidadMedida.descripcion AS 'descripcion', ")
                 .append("    dbunidadMedida.idEstado AS 'idEstado' ")
                 .append("FROM ")
@@ -243,8 +252,9 @@ public class unidadMedidaDAOImpl implements catalogosInterface {
 
                 _unidadMedidaObj.setId(rs.getInt(1));
                 _unidadMedidaObj.setNombreCompleto(rs.getString(2));
-                _unidadMedidaObj.setDescripcion(rs.getString(3));
-                _unidadMedidaObj.setIdEstado(rs.getInt(4));
+                _unidadMedidaObj.setCodigo(rs.getString(3));
+                _unidadMedidaObj.setDescripcion(rs.getString(4));
+                _unidadMedidaObj.setIdEstado(rs.getInt(5));
 
             }
 

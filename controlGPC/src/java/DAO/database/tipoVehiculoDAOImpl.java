@@ -6,7 +6,7 @@
 package DAO.database;
 
 import DAO.interfaces.catalogosInterface;
-import entity.categoriaProducto;
+import entity.tipoVehiculo;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,22 +18,22 @@ import java.util.List;
  *
  * @author elara
  */
-public class categoriaProductoDAOImpl implements catalogosInterface {
+public class tipoVehiculoDAOImpl implements catalogosInterface{
 
     private Connection _conn;
 
-    public categoriaProductoDAOImpl(Connection _conn) {
+    public tipoVehiculoDAOImpl(Connection _conn) {
         this._conn = _conn;
     }
 
     @Override
     public boolean agregarRegistro(Object o) throws Exception {
 
-        categoriaProducto _ctgProductoObj = (categoriaProducto) o;
+        tipoVehiculo _tpVehiculoObj = (tipoVehiculo) o;
 
         StringBuilder _consulta = new StringBuilder();
 
-        _consulta.append("INSERT INTO controlGPC.dbcategoriaProducto ")
+        _consulta.append("INSERT INTO controlGPC.dbtipoVehiculo ")
                 .append("(nombreCompleto, ")
                 .append("descripcion, ")
                 .append("idEstado) ")
@@ -42,9 +42,9 @@ public class categoriaProductoDAOImpl implements catalogosInterface {
 
         PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
-        st.setString(1, _ctgProductoObj.getNombreCompleto());
-        st.setString(2, _ctgProductoObj.getDescripcion());
-        st.setInt(3, _ctgProductoObj.getIdEstado());
+        st.setString(1, _tpVehiculoObj.getNombreCompleto());
+        st.setString(2, _tpVehiculoObj.getDescripcion());
+        st.setInt(3, _tpVehiculoObj.getIdEstado());
 
         boolean resultado = st.execute();
 
@@ -58,11 +58,11 @@ public class categoriaProductoDAOImpl implements catalogosInterface {
     @Override
     public boolean modificarRegistro(Object o) throws Exception {
 
-        categoriaProducto _ctgProductoObj = (categoriaProducto) o;
+        tipoVehiculo _tpVehiculoObj = (tipoVehiculo) o;
 
         StringBuilder _consulta = new StringBuilder();
 
-        _consulta.append("UPDATE controlGPC.dbcategoriaProducto ")
+        _consulta.append("UPDATE controlGPC.dbtipoVehiculo ")
                 .append("SET ")
                 .append("nombreCompleto = ?, ")
                 .append("descripcion = ?, ")
@@ -71,11 +71,11 @@ public class categoriaProductoDAOImpl implements catalogosInterface {
 
         PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
-        st.setString(1, _ctgProductoObj.getNombreCompleto());
-        st.setString(2, _ctgProductoObj.getDescripcion());
-        st.setInt(3, _ctgProductoObj.getIdEstado());
+        st.setString(1, _tpVehiculoObj.getNombreCompleto());
+        st.setString(2, _tpVehiculoObj.getDescripcion());
+        st.setInt(3, _tpVehiculoObj.getIdEstado());
 
-        st.setInt(4, _ctgProductoObj.getId());
+        st.setInt(4, _tpVehiculoObj.getId());
 
         boolean resultado = st.execute();
 
@@ -91,7 +91,7 @@ public class categoriaProductoDAOImpl implements catalogosInterface {
 
         StringBuilder _consulta = new StringBuilder();
 
-        _consulta.append("UPDATE controlGPC.dbcategoriaProducto SET idEstado = 3 WHERE id = ?;");
+        _consulta.append("UPDATE controlGPC.dbtipoVehiculo SET idEstado = 3 WHERE id = ?;");
 
         PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
@@ -109,21 +109,21 @@ public class categoriaProductoDAOImpl implements catalogosInterface {
     @Override
     public Object consultarTodos() throws Exception {
 
-        categoriaProducto _ctgProductoObj;
+        tipoVehiculo _tpVehiculoObj;
 
-        List<categoriaProducto> _listaCtgProducto = new ArrayList();
+        List<tipoVehiculo> _listatpVehiculo = new ArrayList();
 
         StringBuilder _consulta = new StringBuilder();
 
         _consulta.append("SELECT  ")
-                .append("    dbcategoriaProducto.id AS 'id', ")
-                .append("    dbcategoriaProducto.nombreCompleto AS 'nombreCompleto', ")
-                .append("    dbcategoriaProducto.descripcion AS 'descripcion', ")
-                .append("    dbcategoriaProducto.idEstado AS 'idEstado' ")
+                .append("    dbtipoVehiculo.id AS 'id', ")
+                .append("    dbtipoVehiculo.nombreCompleto AS 'nombreCompleto', ")
+                .append("    dbtipoVehiculo.descripcion AS 'descripcion', ")
+                .append("    dbtipoVehiculo.idEstado AS 'idEstado' ")
                 .append("FROM ")
-                .append("    controlGPC.dbcategoriaProducto ")
+                .append("    controlGPC.dbtipoVehiculo ")
                 .append("WHERE ")
-                .append("    dbcategoriaProducto.idEstado <> 3;");
+                .append("    dbtipoVehiculo.idEstado <> 3;");
 
         PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
@@ -133,14 +133,14 @@ public class categoriaProductoDAOImpl implements catalogosInterface {
 
             while (rs.next()) {
 
-                _ctgProductoObj = new categoriaProducto();
+                _tpVehiculoObj = new tipoVehiculo();
 
-                _ctgProductoObj.setId(rs.getInt(1));
-                _ctgProductoObj.setNombreCompleto(rs.getString(2));
-                _ctgProductoObj.setDescripcion(rs.getString(3));
-                _ctgProductoObj.setIdEstado(rs.getInt(4));
+                _tpVehiculoObj.setId(rs.getInt(1));
+                _tpVehiculoObj.setNombreCompleto(rs.getString(2));
+                _tpVehiculoObj.setDescripcion(rs.getString(3));
+                _tpVehiculoObj.setIdEstado(rs.getInt(4));
 
-                _listaCtgProducto.add(_ctgProductoObj);
+                _listatpVehiculo.add(_tpVehiculoObj);
             }
 
         } catch (SQLException ex) {
@@ -156,30 +156,30 @@ public class categoriaProductoDAOImpl implements catalogosInterface {
 
         }
 
-        return _listaCtgProducto;
+        return _listatpVehiculo;
     }
 
     @Override
     public Object consultarPor(String _campo, String _dato) throws Exception {
 
-        categoriaProducto _ctgProductoObj;
+        tipoVehiculo _tpVehiculoObj;
 
-        List<categoriaProducto> _listaCtgProducto = new ArrayList();
+        List<tipoVehiculo> _listatpVehiculo = new ArrayList();
 
         StringBuilder _consulta = new StringBuilder();
 
         _consulta.append("SELECT  ")
-                .append("    dbcategoriaProducto.id AS 'id', ")
-                .append("    dbcategoriaProducto.nombreCompleto AS 'nombreCompleto', ")
-                .append("    dbcategoriaProducto.descripcion AS 'descripcion', ")
-                .append("    dbcategoriaProducto.idEstado AS 'idEstado' ")
+                .append("    dbtipoVehiculo.id AS 'id', ")
+                .append("    dbtipoVehiculo.nombreCompleto AS 'nombreCompleto', ")
+                .append("    dbtipoVehiculo.descripcion AS 'descripcion', ")
+                .append("    dbtipoVehiculo.idEstado AS 'idEstado' ")
                 .append("FROM ")
-                .append("    controlGPC.dbcategoriaProducto ")
+                .append("    controlGPC.dbtipoVehiculo ")
                 .append("WHERE ")
                 .append(_campo)
                 .append(" LIKE '%")
                 .append(_dato)
-                .append("%' AND dbcategoriaProducto.idEstado <> 3;");
+                .append("%' AND dbtipoVehiculo.idEstado <> 3;");
 
         PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
@@ -189,14 +189,14 @@ public class categoriaProductoDAOImpl implements catalogosInterface {
 
             while (rs.next()) {
 
-                _ctgProductoObj = new categoriaProducto();
+                _tpVehiculoObj = new tipoVehiculo();
 
-                _ctgProductoObj.setId(rs.getInt(1));
-                _ctgProductoObj.setNombreCompleto(rs.getString(2));
-                _ctgProductoObj.setDescripcion(rs.getString(3));
-                _ctgProductoObj.setIdEstado(rs.getInt(4));
+                _tpVehiculoObj.setId(rs.getInt(1));
+                _tpVehiculoObj.setNombreCompleto(rs.getString(2));
+                _tpVehiculoObj.setDescripcion(rs.getString(3));
+                _tpVehiculoObj.setIdEstado(rs.getInt(4));
 
-                _listaCtgProducto.add(_ctgProductoObj);
+                _listatpVehiculo.add(_tpVehiculoObj);
             }
 
         } catch (SQLException ex) {
@@ -212,26 +212,26 @@ public class categoriaProductoDAOImpl implements catalogosInterface {
 
         }
 
-        return _listaCtgProducto;
+        return _listatpVehiculo;
     }
 
     @Override
     public Object consultarPorId(int id) throws Exception {
 
-        categoriaProducto _ctgProductoObj = new categoriaProducto();
+        tipoVehiculo _tpVehiculoObj = new tipoVehiculo();
 
         StringBuilder _consulta = new StringBuilder();
 
         _consulta.append("SELECT  ")
-                .append("    dbcategoriaProducto.id AS 'id', ")
-                .append("    dbcategoriaProducto.nombreCompleto AS 'nombreCompleto', ")
-                .append("    dbcategoriaProducto.descripcion AS 'descripcion', ")
-                .append("    dbcategoriaProducto.idEstado AS 'idEstado' ")
+                .append("    dbtipoVehiculo.id AS 'id', ")
+                .append("    dbtipoVehiculo.nombreCompleto AS 'nombreCompleto', ")
+                .append("    dbtipoVehiculo.descripcion AS 'descripcion', ")
+                .append("    dbtipoVehiculo.idEstado AS 'idEstado' ")
                 .append("FROM ")
-                .append("    controlGPC.dbcategoriaProducto ")
-                .append("WHERE dbcategoriaProducto.id = ")
+                .append("    controlGPC.dbtipoVehiculo ")
+                .append("WHERE dbtipoVehiculo.id = ")
                 .append(id)
-                .append(" AND dbcategoriaProducto.idEstado <> 3;");
+                .append(" AND dbtipoVehiculo.idEstado <> 3;");
 
         PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
@@ -241,10 +241,10 @@ public class categoriaProductoDAOImpl implements catalogosInterface {
 
             while (rs.next()) {
 
-                _ctgProductoObj.setId(rs.getInt(1));
-                _ctgProductoObj.setNombreCompleto(rs.getString(2));
-                _ctgProductoObj.setDescripcion(rs.getString(3));
-                _ctgProductoObj.setIdEstado(rs.getInt(4));
+                _tpVehiculoObj.setId(rs.getInt(1));
+                _tpVehiculoObj.setNombreCompleto(rs.getString(2));
+                _tpVehiculoObj.setDescripcion(rs.getString(3));
+                _tpVehiculoObj.setIdEstado(rs.getInt(4));
 
             }
 
@@ -261,7 +261,7 @@ public class categoriaProductoDAOImpl implements catalogosInterface {
 
         }
 
-        return _ctgProductoObj;
+        return _tpVehiculoObj;
     }
-
+    
 }
