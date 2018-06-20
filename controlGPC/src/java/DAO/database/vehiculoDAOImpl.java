@@ -6,6 +6,7 @@
 package DAO.database;
 
 import DAO.interfaces.catalogosInterface;
+import entity.tipoVehiculo;
 import entity.transportista;
 import entity.vehiculo;
 import java.sql.Connection;
@@ -39,7 +40,7 @@ public class vehiculoDAOImpl implements catalogosInterface {
                 .append("idTransportista, ")
                 .append("marca, ")
                 .append("modelo, ")
-                .append("tipo, ")
+                .append("idTipoVehiculo, ")
                 .append("numeroSerie, ")
                 .append("placas, ")
                 .append("numeroEconomico, ")
@@ -56,7 +57,7 @@ public class vehiculoDAOImpl implements catalogosInterface {
         st.setInt(2, _vehiculoObj.getTransportista().getId());
         st.setString(3, _vehiculoObj.getMarca());
         st.setString(4, _vehiculoObj.getModelo());
-        st.setString(5, _vehiculoObj.getTipo());
+        st.setInt(5, _vehiculoObj.getTipoVehiculo().getId());
         st.setString(6, _vehiculoObj.getNumeroSerie());
         st.setString(7, _vehiculoObj.getPlacas());
         st.setString(8, _vehiculoObj.getNumeroEconomico());
@@ -87,7 +88,7 @@ public class vehiculoDAOImpl implements catalogosInterface {
                 .append("idTransportista = ?, ")
                 .append("marca = ?, ")
                 .append("modelo = ?, ")
-                .append("tipo = ?, ")
+                .append("idTipoVehiculo = ?, ")
                 .append("numeroSerie = ?, ")
                 .append("placas = ?, ")
                 .append("numeroEconomico = ?, ")
@@ -103,7 +104,7 @@ public class vehiculoDAOImpl implements catalogosInterface {
         st.setInt(2, _vehiculoObj.getTransportista().getId());
         st.setString(3, _vehiculoObj.getMarca());
         st.setString(4, _vehiculoObj.getModelo());
-        st.setString(5, _vehiculoObj.getTipo());
+        st.setInt(5, _vehiculoObj.getTipoVehiculo().getId());
         st.setString(6, _vehiculoObj.getNumeroSerie());
         st.setString(7, _vehiculoObj.getPlacas());
         st.setString(8, _vehiculoObj.getNumeroEconomico());
@@ -159,7 +160,8 @@ public class vehiculoDAOImpl implements catalogosInterface {
                 .append("    dbtransportista.nombreCompleto AS 'nombreTransportista', ")
                 .append("    dbvehiculo.marca AS 'marca', ")
                 .append("    dbvehiculo.modelo AS 'modelo', ")
-                .append("    dbvehiculo.tipo AS 'tipo', ")
+                .append("    dbvehiculo.idTipoVehiculo AS 'idTipoVehiculo', ")
+                .append("    dbtipoVehiculo.nombreCompleto AS 'nombreTipoVehiculo', ")
                 .append("    dbvehiculo.numeroSerie AS 'numeroSerie', ")
                 .append("    dbvehiculo.placas AS 'placas', ")
                 .append("    dbvehiculo.numeroEconomico AS 'numeroEconomico', ")
@@ -171,6 +173,8 @@ public class vehiculoDAOImpl implements catalogosInterface {
                 .append("    controlGPC.dbvehiculo ")
                 .append("        LEFT JOIN ")
                 .append("    dbtransportista ON dbtransportista.id = dbvehiculo.idTransportista ")
+                .append("        LEFT JOIN ")
+                .append("    dbtipoVehiculo ON dbtipoVehiculo.id = dbvehiculo.idTipoVehiculo ")
                 .append("WHERE ")
                 .append("    dbvehiculo.idEstado <> 3;");
 
@@ -195,14 +199,19 @@ public class vehiculoDAOImpl implements catalogosInterface {
 
                 _vehiculoObj.setMarca(rs.getString(5));
                 _vehiculoObj.setModelo(rs.getString(6));
-                _vehiculoObj.setTipo(rs.getString(7));
-                _vehiculoObj.setNumeroSerie(rs.getString(8));
-                _vehiculoObj.setPlacas(rs.getString(9));
-                _vehiculoObj.setNumeroEconomico(rs.getString(10));
-                _vehiculoObj.setTarjetaCirculacion(rs.getString(11));
-                _vehiculoObj.setPolizaSeguro(rs.getString(12));
-                _vehiculoObj.setFechaPoliza(rs.getString(13));
-                _vehiculoObj.setIdEstado(rs.getInt(14));
+                
+                tipoVehiculo _tpVehiculo = new tipoVehiculo();
+                _tpVehiculo.setId(rs.getInt(7));
+                _tpVehiculo.setNombreCompleto(rs.getString(8));                
+                _vehiculoObj.setTipoVehiculo(_tpVehiculo);
+                
+                _vehiculoObj.setNumeroSerie(rs.getString(9));
+                _vehiculoObj.setPlacas(rs.getString(10));
+                _vehiculoObj.setNumeroEconomico(rs.getString(11));
+                _vehiculoObj.setTarjetaCirculacion(rs.getString(12));
+                _vehiculoObj.setPolizaSeguro(rs.getString(13));
+                _vehiculoObj.setFechaPoliza(rs.getString(14));
+                _vehiculoObj.setIdEstado(rs.getInt(15));
 
                 _listaArchivos.add(_vehiculoObj);
             }
@@ -239,7 +248,8 @@ public class vehiculoDAOImpl implements catalogosInterface {
                 .append("    dbtransportista.nombreCompleto AS 'nombreTransportista', ")
                 .append("    dbvehiculo.marca AS 'marca', ")
                 .append("    dbvehiculo.modelo AS 'modelo', ")
-                .append("    dbvehiculo.tipo AS 'tipo', ")
+                .append("    dbvehiculo.idTipoVehiculo AS 'idTipoVehiculo', ")
+                .append("    dbtipoVehiculo.nombreCompleto AS 'nombreTipoVehiculo', ")
                 .append("    dbvehiculo.numeroSerie AS 'numeroSerie', ")
                 .append("    dbvehiculo.placas AS 'placas', ")
                 .append("    dbvehiculo.numeroEconomico AS 'numeroEconomico', ")
@@ -251,6 +261,8 @@ public class vehiculoDAOImpl implements catalogosInterface {
                 .append("    controlGPC.dbvehiculo ")
                 .append("        LEFT JOIN ")
                 .append("    dbtransportista ON dbtransportista.id = dbvehiculo.idTransportista ")
+                .append("        LEFT JOIN ")
+                .append("    dbtipoVehiculo ON dbtipoVehiculo.id = dbvehiculo.idTipoVehiculo ")
                 .append("WHERE ")
                 .append(_campo)
                 .append(" LIKE '%")
@@ -278,14 +290,19 @@ public class vehiculoDAOImpl implements catalogosInterface {
 
                 _vehiculoObj.setMarca(rs.getString(5));
                 _vehiculoObj.setModelo(rs.getString(6));
-                _vehiculoObj.setTipo(rs.getString(7));
-                _vehiculoObj.setNumeroSerie(rs.getString(8));
-                _vehiculoObj.setPlacas(rs.getString(9));
-                _vehiculoObj.setNumeroEconomico(rs.getString(10));
-                _vehiculoObj.setTarjetaCirculacion(rs.getString(11));
-                _vehiculoObj.setPolizaSeguro(rs.getString(12));
-                _vehiculoObj.setFechaPoliza(rs.getString(13));
-                _vehiculoObj.setIdEstado(rs.getInt(14));
+                
+                tipoVehiculo _tpVehiculo = new tipoVehiculo();
+                _tpVehiculo.setId(rs.getInt(7));
+                _tpVehiculo.setNombreCompleto(rs.getString(8));               
+                _vehiculoObj.setTipoVehiculo(_tpVehiculo);
+                
+                _vehiculoObj.setNumeroSerie(rs.getString(9));
+                _vehiculoObj.setPlacas(rs.getString(10));
+                _vehiculoObj.setNumeroEconomico(rs.getString(11));
+                _vehiculoObj.setTarjetaCirculacion(rs.getString(12));
+                _vehiculoObj.setPolizaSeguro(rs.getString(13));
+                _vehiculoObj.setFechaPoliza(rs.getString(14));
+                _vehiculoObj.setIdEstado(rs.getInt(15));
 
                 _listaArchivos.add(_vehiculoObj);
             }
@@ -320,7 +337,8 @@ public class vehiculoDAOImpl implements catalogosInterface {
                 .append("    dbtransportista.nombreCompleto AS 'nombreTransportista', ")
                 .append("    dbvehiculo.marca AS 'marca', ")
                 .append("    dbvehiculo.modelo AS 'modelo', ")
-                .append("    dbvehiculo.tipo AS 'tipo', ")
+                .append("    dbvehiculo.idTipoVehiculo AS 'idTipoVehiculo', ")
+                .append("    dbtipoVehiculo.nombreCompleto AS 'nombreTipoVehiculo', ")
                 .append("    dbvehiculo.numeroSerie AS 'numeroSerie', ")
                 .append("    dbvehiculo.placas AS 'placas', ")
                 .append("    dbvehiculo.numeroEconomico AS 'numeroEconomico', ")
@@ -332,6 +350,8 @@ public class vehiculoDAOImpl implements catalogosInterface {
                 .append("    controlGPC.dbvehiculo ")
                 .append("        LEFT JOIN ")
                 .append("    dbtransportista ON dbtransportista.id = dbvehiculo.idTransportista ")
+                .append("        LEFT JOIN ")
+                .append("    dbtipoVehiculo ON dbtipoVehiculo.id = dbvehiculo.idTipoVehiculo ")
                 .append("WHERE dbvehiculo.id = ")
                 .append(id)
                 .append(" AND dbvehiculo.idEstado <> 3;");
@@ -355,14 +375,19 @@ public class vehiculoDAOImpl implements catalogosInterface {
 
                 _vehiculoObj.setMarca(rs.getString(5));
                 _vehiculoObj.setModelo(rs.getString(6));
-                _vehiculoObj.setTipo(rs.getString(7));
-                _vehiculoObj.setNumeroSerie(rs.getString(8));
-                _vehiculoObj.setPlacas(rs.getString(9));
-                _vehiculoObj.setNumeroEconomico(rs.getString(10));
-                _vehiculoObj.setTarjetaCirculacion(rs.getString(11));
-                _vehiculoObj.setPolizaSeguro(rs.getString(12));
-                _vehiculoObj.setFechaPoliza(rs.getString(13));
-                _vehiculoObj.setIdEstado(rs.getInt(14));
+                
+                tipoVehiculo _tpVehiculo = new tipoVehiculo();
+                _tpVehiculo.setId(rs.getInt(7));
+                _tpVehiculo.setNombreCompleto(rs.getString(8));                
+                _vehiculoObj.setTipoVehiculo(_tpVehiculo);
+                
+                _vehiculoObj.setNumeroSerie(rs.getString(9));
+                _vehiculoObj.setPlacas(rs.getString(10));
+                _vehiculoObj.setNumeroEconomico(rs.getString(11));
+                _vehiculoObj.setTarjetaCirculacion(rs.getString(12));
+                _vehiculoObj.setPolizaSeguro(rs.getString(13));
+                _vehiculoObj.setFechaPoliza(rs.getString(14));
+                _vehiculoObj.setIdEstado(rs.getInt(15));
 
             }
 

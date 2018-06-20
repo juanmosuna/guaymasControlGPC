@@ -9,15 +9,14 @@ package entity;
  *
  * @author elara
  */
-public class unidadMedida {
-
+public class tipoVehiculo {
+    
     private int id = 0;
     private String nombreCompleto = new String();
-    private String codigo = new String();
     private String descripcion = new String();
     private int idEstado = 0;
 
-    public unidadMedida() {
+    public tipoVehiculo() {
     }
 
     public int getId() {
@@ -51,13 +50,4 @@ public class unidadMedida {
     public void setIdEstado(int idEstado) {
         this.idEstado = idEstado;
     }
-
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
-    }
-
 }

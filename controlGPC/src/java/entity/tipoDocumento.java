@@ -14,6 +14,7 @@ public class tipoDocumento {
     private int id = 0;
     private String nombreCompleto = new String();
     private String descripcion = new String();
+    private tipoMovimiento tipoMovimiento = new tipoMovimiento();
     private int idEstado = 0;
 
     public tipoDocumento() {
@@ -49,6 +50,14 @@ public class tipoDocumento {
 
     public void setIdEstado(int idEstado) {
         this.idEstado = idEstado;
+    }
+
+    public tipoMovimiento getTipoMovimiento() {
+        return tipoMovimiento;
+    }
+
+    public void setTipoMovimiento(tipoMovimiento tipoMovimiento) {
+        this.tipoMovimiento = tipoMovimiento;
     }
 
 }
