@@ -29,6 +29,10 @@
                 src: url(../..//fonts/Ubuntu-L.ttf);
             }
             
+            .container{
+                width: 100%;
+            }
+            
             .fontUbuntulight{
                 font-family: ubuntuLight;
                 

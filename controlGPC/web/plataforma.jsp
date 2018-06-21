@@ -8,7 +8,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
     if (session.getAttribute("usuario") == null){
-        response.sendRedirect("index.jsp");
+        response.sendRedirect("/controlGPC/logout.do");
     }else{
         
         response.setHeader("Cache-Control","no-cache");
@@ -69,13 +69,12 @@
                     </div>
                 </div>
             </div>
-            <div class="cuerpoPagina">
-                <div class="contenedorMenu">
+            <div class="contenedorMenu">
                     <div class="areaMenu"></div>
                     <nav class="navMenu">
                         <ul class="ulMenu">
                             <li class="liMenu">
-                                <a href="#">
+                                <a onclick="seleccionarOpcion(0);">
                                     <i class="fas fa-home"></i>
                                     <span class="nav-text">
                                         Inicio
@@ -84,7 +83,7 @@
 
                             </li>
                             <li class="liMenu">
-                                <a href="#">
+                                <a onclick="seleccionarOpcion(0);">
                                     <i class="fas fa-warehouse"></i>
                                     <span class="nav-text">
                                         Almacén
@@ -92,7 +91,7 @@
                                 </a>
                             </li>
                             <li class="liMenu">
-                                <a href="#">
+                                <a onclick="seleccionarOpcion(0);">
                                     <i class="fas fa-calendar-alt"></i>
                                     <span class="nav-text">
                                         Agenda
@@ -100,7 +99,7 @@
                                 </a>
                             </li>
                             <li class="liMenu">
-                                <a href="#">
+                                <a onclick="seleccionarOpcion(0);">
                                     <i class="fas fa-file"></i>
                                     <span class="nav-text">
                                         Reportes
@@ -108,7 +107,7 @@
                                 </a>
                             </li>
                             <li class="liMenu">
-                                <a href="catalogos/catalogos.jsp">
+                                <a onclick="seleccionarOpcion(5);">
                                     <i class="fas fa-wrench"></i>
                                     <span class="nav-text">
                                         Configuración
@@ -128,22 +127,42 @@
                         </ul>
                     </nav>
                 </div>
+            <div class="cuerpoPagina">
+                
+                <iframe src="" style="width: 100%; height: 100%;"  frameborder="0" scrolling="yes"></iframe>
+                
             </div>
         </div>
-        <script type="text/javascript">
-
-            function toggle_visibility(id) {
-                var e = document.getElementById(id);
-                if(e.style.display === 'block'){
-                    e.style.display = 'none';
-                }else{
-                    e.style.display = 'block';
-                }
-            }
-
-        </script>
+        
     </body>
 </html>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script type="text/javascript">
+
+    function toggle_visibility(id) {
+        var e = document.getElementById(id);
+        if(e.style.display === 'block'){
+            e.style.display = 'none';
+        }else{
+            e.style.display = 'block';
+        }
+    }
+
+    function seleccionarOpcion(number){
+        var src = '';
+        switch (number){
+            case 1: { break;}
+                case 2: { break;}
+                    case 3: { break;}
+                        case 4: { break;}
+                            case 5: { src = 'catalogos/catalogos.jsp'; break;}
+                                case 6: { break;}
+        }
+
+        $('iframe').attr('src', src);
+    }
+
+</script>
 <%
     }  
 %>

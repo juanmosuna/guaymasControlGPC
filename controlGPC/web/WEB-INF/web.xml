@@ -9,6 +9,10 @@
         <servlet-class>controller.logout</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>perfilUsuarioServlet</servlet-name>
+        <servlet-class>controller.perfilUsuarioServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>choferServlet</servlet-name>
         <servlet-class>controller.choferServlet</servlet-class>
         <multipart-config>
@@ -55,6 +59,10 @@
     <servlet-mapping>
         <servlet-name>logout</servlet-name>
         <url-pattern>/logout.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>perfilUsuarioServlet</servlet-name>
+        <url-pattern>/perfilUsuarioServlet.do</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>choferServlet</servlet-name>

@@ -14,16 +14,40 @@ and open the template in the editor.
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
         <script src="js/bootstrap.min.js" type="text/javascript"></script>
+        <style>
+            
+            .alert {
+                top: 20px;
+                right: 20px;
+                
+                position:absolute;
+                z-index: 1;
+                
+            }
+            
+        </style>
     </head>
     <body>
         <%
-            String _mensaje = (session.getAttribute("mensajeError") != null ? String.valueOf(session.getAttribute("mensajeError")) : new String() );
+            String _mensaje = (session.getAttribute("m") != null ? String.valueOf(session.getAttribute("m")) : new String() );
+
+            boolean _mostrarAlerta = false;
+            String[] _mensajeAlerta = new String[2];
+
+            if (_mensaje != null && !_mensaje.isEmpty()){
+
+                _mensajeAlerta = _mensaje.split(",");
+                _mostrarAlerta = true;
+
+            }
             
-            if (!_mensaje.isEmpty()){
+            if (_mostrarAlerta){
         %>
-        <div class="alerta">
-            <div class="iconoAlerta"><i class="fa fa-warning fa-3x"></i></div>
-            <div class="mensajeAlerta"><%=_mensaje %></div>
+        <div class="alert alert-<%=_mensajeAlerta[0] %> alert-dismissible fade show" role="alert">
+            <%=_mensajeAlerta[1] %>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
         </div>
         <%
             }
@@ -58,3 +82,14 @@ and open the template in the editor.
         </div>
     </body>
 </html>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function() {
+        // show the alert
+        setTimeout(function() {
+            $(".alert").alert('close');
+        }, 3000);
+    });
+</script>

@@ -9,7 +9,6 @@ import DAO.database.perfilUsuarioDAOImpl;
 import database.baseDatos;
 import entity.perfilUsuario;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -55,15 +54,15 @@ public class perfilUsuarioServlet extends HttpServlet {
             int _id = (request.getParameter("id") != null && !request.getParameter("id").isEmpty() ? Integer.valueOf(request.getParameter("id").trim()) : 0);
             String _nombreCompleto = (request.getParameter("nombreCompleto") != null && !request.getParameter("nombreCompleto").isEmpty() ? request.getParameter("nombreCompleto").trim() : new String());
             String _descripcion = (request.getParameter("descripcion") != null && !request.getParameter("descripcion").isEmpty() ? request.getParameter("descripcion").trim() : new String());
-            boolean _accesoPlataforma = (request.getParameter("accesoPlataforma") != null && !request.getParameter("accesoPlataforma").isEmpty() ? Boolean.valueOf(request.getParameter("accesoPlataforma")) : false);
-            boolean _gestionCatalogos = (request.getParameter("gestionCatalogos") != null && !request.getParameter("gestionCatalogos").isEmpty() ? Boolean.valueOf(request.getParameter("gestionCatalogos")) : false);
-            boolean _gestionUsuario = (request.getParameter("gestionUsuario") != null && !request.getParameter("gestionUsuario").isEmpty() ? Boolean.valueOf(request.getParameter("gestionUsuario")) : false);
-            boolean _gestionDocumentos = (request.getParameter("gestionDocumentos") != null && !request.getParameter("gestionDocumentos").isEmpty() ? Boolean.valueOf(request.getParameter("gestionDocumentos")) : false);
-            boolean _agregarDocumento = (request.getParameter("agregarDocumento") != null && !request.getParameter("agregarDocumento").isEmpty() ? Boolean.valueOf(request.getParameter("agregarDocumento")) : false);
-            boolean _eliminarDocumento = (request.getParameter("eliminarDocumento") != null && !request.getParameter("eliminarDocumento").isEmpty() ? Boolean.valueOf(request.getParameter("eliminarDocumento")) : false);
-            boolean _modificarDocumento = (request.getParameter("modificarDocumento") != null && !request.getParameter("modificarDocumento").isEmpty() ? Boolean.valueOf(request.getParameter("modificarDocumento")) : false);
-            boolean _buscarDocumento = (request.getParameter("buscarDocumento") != null && !request.getParameter("buscarDocumento").isEmpty() ? Boolean.valueOf(request.getParameter("buscarDocumento")) : false);
-            boolean _imprimirDocumento = (request.getParameter("imprimirDocumento") != null && !request.getParameter("imprimirDocumento").isEmpty() ? Boolean.valueOf(request.getParameter("imprimirDocumento")) : false);
+            boolean _accesoPlataforma = (request.getParameter("accesoPlataforma") != null && !request.getParameter("accesoPlataforma").isEmpty() ? (request.getParameter("accesoPlataforma").equals("on") ? true : false ) : false);
+            boolean _gestionCatalogos = (request.getParameter("gestionCatalogos") != null && !request.getParameter("gestionCatalogos").isEmpty() ? (request.getParameter("gestionCatalogos").equals("on") ? true  : false ) : false);
+            boolean _gestionUsuario = (request.getParameter("gestionUsuario") != null && !request.getParameter("gestionUsuario").isEmpty() ? (request.getParameter("gestionUsuario").equals("on") ? true  : false ) : false);
+            boolean _gestionDocumentos = (request.getParameter("gestionDocumentos") != null && !request.getParameter("gestionDocumentos").isEmpty() ? (request.getParameter("gestionDocumentos").equals("on") ? true  : false ) : false);
+            boolean _agregarDocumento = (request.getParameter("agregarDocumento") != null && !request.getParameter("agregarDocumento").isEmpty() ? (request.getParameter("agregarDocumento").equals("on") && _gestionDocumentos ? true  : false ) : false);
+            boolean _eliminarDocumento = (request.getParameter("eliminarDocumento") != null && !request.getParameter("eliminarDocumento").isEmpty() ? (request.getParameter("eliminarDocumento").equals("on") && _gestionDocumentos ? true  : false ) : false);
+            boolean _modificarDocumento = (request.getParameter("modificarDocumento") != null && !request.getParameter("modificarDocumento").isEmpty() ? (request.getParameter("modificarDocumento").equals("on") && _gestionDocumentos ? true  : false ) : false);
+            boolean _buscarDocumento = (request.getParameter("buscarDocumento") != null && !request.getParameter("buscarDocumento").isEmpty() ? (request.getParameter("buscarDocumento").equals("on") && _gestionDocumentos ? true  : false ) : false);
+            boolean _imprimirDocumento = (request.getParameter("imprimirDocumento") != null && !request.getParameter("imprimirDocumento").isEmpty() ? (request.getParameter("imprimirDocumento").equals("on") && _gestionDocumentos ? true  : false ) : false);
 
             switch (_opcion) {
                 case 1: {
@@ -84,9 +83,9 @@ public class perfilUsuarioServlet extends HttpServlet {
                     _perfilUsuarioObj.setIdEstado(1);
 
                     if (!_perfilUsuarioDAO.agregarRegistro(_perfilUsuarioObj)) {
-                        mensajeAlerta = "Se agrego satisfactoriamente";
+                        mensajeAlerta = "success, Se ha agregado el registro satisfactoriamente ... !!";
                     } else {
-                        mensajeAlerta = "Error!!";
+                        mensajeAlerta = "danger, Error al agregar el registro ... !!";
                     }
 
                     break;
@@ -110,9 +109,9 @@ public class perfilUsuarioServlet extends HttpServlet {
                     _perfilUsuarioObj.setIdEstado(2);
 
                     if (!_perfilUsuarioDAO.modificarRegistro(_perfilUsuarioObj)) {
-                        mensajeAlerta = "Se modifico satisfactoriamente";
+                        mensajeAlerta = "success, Se ha modificado el registro satisfactoriamente ... !!";
                     } else {
-                        mensajeAlerta = "Error!!";
+                        mensajeAlerta = "danger, Error al modificar el registro ... !!";
                     }
 
                     break;
@@ -120,9 +119,9 @@ public class perfilUsuarioServlet extends HttpServlet {
                 case 3: {
 
                     if (!_perfilUsuarioDAO.eliminarRegistro(_id)) {
-                        mensajeAlerta = "Se elimino satisfactoriamente";
+                        mensajeAlerta = "success, Se ha eliminado el registro satisfactoriamente ... !!";
                     } else {
-                        mensajeAlerta = "Error!!";
+                        mensajeAlerta = "danger, Error al eliminar el registro ... !!";
                     }
 
                     break;
@@ -132,10 +131,12 @@ public class perfilUsuarioServlet extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
+            
             if (_baseDatos != null) {
                 _baseDatos.closeConnection();
             }
-            response.sendRedirect("/controlGPC/catalogos/perfilUsuario/perfilUsuarioTabla.jsp");
+            
+            response.sendRedirect("/controlGPC/catalogos/perfilUsuario/perfilUsuarioTabla.jsp?m="+mensajeAlerta);
         }
 
     }

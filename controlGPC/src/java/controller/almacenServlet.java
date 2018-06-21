@@ -6,14 +6,11 @@
 package controller;
 
 import DAO.database.almacenDAOImpl;
-import DAO.database.bitacoraDAOImpl;
 import database.baseDatos;
 import entity.almacen;
-import entity.bitacora;
 import entity.tipoAlmacen;
 import entity.unidadMedida;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

@@ -4,6 +4,7 @@
     Author     : juan_m_osuna
 --%>
 
+<%@page import="java.util.ArrayList"%>
 <%@page import="entity.perfilUsuario"%>
 <%@page import="java.util.List"%>
 <%@page import="DAO.database.perfilUsuarioDAOImpl"%>
@@ -17,6 +18,16 @@
         response.setHeader("Cache-Control","no-cache");
         response.setHeader("Cache-Control","no-store");
         response.setDateHeader("Expires", 0);
+        
+        boolean _mostrarAlerta = false;
+        String[] _mensajeAlerta = new String[2];
+        
+        if (request.getParameter("m") != null){
+            
+            _mensajeAlerta = String.valueOf(request.getParameter("m")).split(",");
+            _mostrarAlerta = true;
+            
+        }
     
 %>
 <!DOCTYPE html>
@@ -72,9 +83,30 @@
                color: tomato; 
             }
             
+            .alert {
+                top: 20px;
+                right: 20px;
+                
+                position:absolute;
+                z-index: 1;
+                
+            }
+            
         </style>
     </head>
     <body>
+        <%
+            if (_mostrarAlerta){
+        %>
+        <div class="alert alert-<%=_mensajeAlerta[0] %> alert-dismissible fade show" role="alert">
+            <%=_mensajeAlerta[1] %>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <%
+            }
+        %>
         <div class="container">
             <div class="card-group">
                 <div class="card-body d-flex justify-content-between">
@@ -106,27 +138,37 @@
                     <tbody>
                         <%
                             baseDatos _baseDatos = new baseDatos();
-                            perfilUsuarioDAOImpl _perfilUsuarioDAOImpl = new perfilUsuarioDAOImpl(_baseDatos.getConnection());
+                            
+                            List<perfilUsuario> _perfilUsuarioDAO = new ArrayList<perfilUsuario>();
+                                
+                            try{
+                            
+                                perfilUsuarioDAOImpl _perfilUsuarioDAOImpl = new perfilUsuarioDAOImpl(_baseDatos.getConnection());
+                                
+                                _perfilUsuarioDAO = (List<perfilUsuario>)_perfilUsuarioDAOImpl.consultarTodos();
+                            
+                            }catch(Exception ex){
 
-                            List<perfilUsuario> _perfilUsuarioDAO = (List<perfilUsuario>)_perfilUsuarioDAOImpl.consultarTodos();
+                                ex.printStackTrace();
 
+                            }finally{
+
+                                if (_baseDatos != null){
+                                    _baseDatos.closeConnection();
+                                }
+
+                            }
+                        
                             for(perfilUsuario _perfilUsuario : _perfilUsuarioDAO){
                         %>
                         <tr>
                             <td width="40" scope="row"><%=_perfilUsuario.getId() %></td>
                             <td><%=_perfilUsuario.getNombreCompleto()%></td>
                             <td><%=_perfilUsuario.getDescripcion()%></td>
-                            <td width="10"><a href=""><i class="fa fa-pencil-alt text-primary"></i></a></td>
-                            <td width="10"><a href=""><i class="fa fa-trash-alt  text-danger"></i></a></td>
+                            <td width="10"><a href="modificarPerfilUsuario.jsp?id=<%=_perfilUsuario.getId() %>"><i class="fa fa-pencil-alt text-primary"></i></a></td>
+                            <td width="10"><a href="/controlGPC/perfilUsuarioServlet.do?op=3&id=<%=_perfilUsuario.getId() %>"><i class="fa fa-trash-alt  text-danger"></i></a></td>
                         </tr>
                         <%
-                            }
-                            try{
-
-                            }catch(Exception ex){
-                                ex.printStackTrace();
-                            }finally{
-                                _baseDatos.closeConnection();
                             }
                         %>
                     </tbody>
@@ -138,6 +180,14 @@
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function() {
+        // show the alert
+        setTimeout(function() {
+            $(".alert").alert('close');
+        }, 3000);
+    });
+</script>
 <%
     }  
 %>

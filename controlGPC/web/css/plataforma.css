@@ -44,12 +44,21 @@ div.cabeceraPagina{
     
     background: rgb(0, 139, 191);
     
-    
 }
 
 
 div.cuerpoPagina{
+    position:absolute;
+    top:50px;
+    left: 60px;
+    bottom: 0px;
     
+    width: calc(100% - 60px);
+    height:calc(100% - 50px);
+    
+    overflow:hidden;
+    
+    z-index: 5;
 }
 
 div.piePagina{
