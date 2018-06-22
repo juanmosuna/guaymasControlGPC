@@ -121,6 +121,7 @@
             <ul class="nav nav-pills">
                 <li class="active">
                     <a href="agregarPerfilUsuario.jsp" class="btn btn-primary">+ Agregar</a>
+                    <a href="../catalogos.jsp" class="btn btn-light">Regresar</a>
                 </li>
             </ul>
             <hr>
@@ -131,6 +132,10 @@
                             <th scope="col">Id</th>
                             <th scope="col">Nombre completo</th>
                             <th scope="col">Descripción</th>
+                            <th scope="col">Plataforma</th>
+                            <th scope="col">Configuración</th>
+                            <th scope="col">Usuarios</th>
+                            <th scope="col">Documentos</th>
                             <th scope="col"><i class="fa fa-pencil-alt"></i></th>
                             <th scope="col"><i class="fa fa-trash-alt"></i></th>
                         </tr>
@@ -163,8 +168,12 @@
                         %>
                         <tr>
                             <td width="40" scope="row"><%=_perfilUsuario.getId() %></td>
-                            <td><%=_perfilUsuario.getNombreCompleto()%></td>
-                            <td><%=_perfilUsuario.getDescripcion()%></td>
+                            <td><%=_perfilUsuario.getNombreCompleto() %></td>
+                            <td><%=_perfilUsuario.getDescripcion() %></td>
+                            <td width="100" align="CENTER"><%=( _perfilUsuario.isAccesoPlataforma() ? "SI" : "NO" ) %></td>
+                            <td width="100" align="CENTER"><%=( _perfilUsuario.isGestionCatalogos() ? "SI" : "NO" ) %></td>
+                            <td width="100" align="CENTER"><%=( _perfilUsuario.isGestionUsuario() ? "SI" : "NO" ) %></td>
+                            <td width="100" align="CENTER"><%=( _perfilUsuario.isGestionDocumentos() ? "SI" : "NO" ) %></td>
                             <td width="10"><a href="modificarPerfilUsuario.jsp?id=<%=_perfilUsuario.getId() %>"><i class="fa fa-pencil-alt text-primary"></i></a></td>
                             <td width="10"><a href="/controlGPC/perfilUsuarioServlet.do?op=3&id=<%=_perfilUsuario.getId() %>"><i class="fa fa-trash-alt  text-danger"></i></a></td>
                         </tr>

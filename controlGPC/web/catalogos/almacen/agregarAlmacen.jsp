@@ -20,10 +20,11 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Agregar almacén</title>
+        <link href="../../css/fontawesome-all.min.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
         <style>
             
-            @font-face{
+             @font-face{
                 font-family: ubuntuLight;
                 src: url(../..//fonts/Ubuntu-L.ttf);
             }
@@ -35,6 +36,10 @@
             
             .fontColor{
                 color: #3079ed;
+            }
+            
+            .iconColor{
+                color: #ddd;
             }
             
             .backgroundLightgray{
@@ -62,7 +67,12 @@
     </head>
     <body>
         <div class="container">
-            <h1 class="fontUbuntulight fontColor">Agregar almacén</h1>
+            <div class="card-group">
+                <div class="card-body d-flex justify-content-between">
+                    <h1 class="card-title fontUbuntulight fontColor ">Agregar almacén</h1>
+                    <i class="fa fa-plus fa-4x iconColor"></i>
+                </div>
+            </div>
             <ul class="breadcrumb">
                 <li><a href="../catalogos.jsp">Catálogos</a> <span class="divider">/</span></li>
                 <li><a href="almacenTabla.jsp">Almacén</a> <span class="divider">/</span></li>
@@ -70,7 +80,7 @@
             </ul>
             <ul class="nav nav-pills">
                 <li class="active">
-                    <a href="almacenTabla.jsp">Regresar</a>
+                    <a href="almacenTabla.jsp" class="btn btn-light">Regresar</a>
                 </li>
             </ul>
             <hr>
@@ -104,7 +114,7 @@
                 </div>
                 <div class="form-group">
                     <label class="control-label" for="capacidad">Capacidad del almacén:</label>
-                    <input type="number" class="form-control" id="capacidad" name="capacidad" placeholder="Teclee la capacidad del almacén ..." >
+                    <input type="number" class="form-control" id="capacidad" name="capacidad" placeholder="Teclee la capacidad del almacén ..." value="0" >
                 </div>
                 <div class="form-group">
                     <label class="control-label" class="mr-sm-2" for="unidadMedida">Unidad de medida:</label>
@@ -117,19 +127,19 @@
                 </div>
                 <div class="form-group">
                     <label class="control-label" for="secciones">Secciones del almacén:</label>
-                    <input type="number" class="form-control" id="secciones" name="secciones" placeholder="Teclee el número de secciones del almacén ..." >
+                    <input type="number" class="form-control" id="secciones" name="secciones" placeholder="Teclee el número de secciones del almacén ..." value="0" >
                 </div>
                 <div class="form-group">
                     <label class="control-label" for="lado">Lados por sección del almacén:</label>
-                    <input type="number" class="form-control" id="lado" name="lados" placeholder="Teclee el número de lados por sección del almacén ..." >
+                    <input type="number" class="form-control" id="lado" name="lados" placeholder="Teclee el número de lados por sección del almacén ..." value="0" >
                 </div>
                 <div class="form-group">
                     <label class="control-label" for="segmentos">Segmentos por sección del almacén:</label>
-                    <input type="number" class="form-control" id="segementos" name="segmentos" placeholder="Teclee el número de segmentos por sección del almacén ..." >
+                    <input type="number" class="form-control" id="segementos" name="segmentos" placeholder="Teclee el número de segmentos por sección del almacén ..." value="0" >
                 </div>
                 <div class="form-group">
                     <label class="control-label" for="niveles">Niveles por sección del almacén:</label>
-                    <input type="number" class="form-control" id="niveles" name="niveles" placeholder="Teclee el número de niveles por sección del almacén ..." >
+                    <input type="number" class="form-control" id="niveles" name="niveles" placeholder="Teclee el número de niveles por sección del almacén ..." value="0" >
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Guardar</button>

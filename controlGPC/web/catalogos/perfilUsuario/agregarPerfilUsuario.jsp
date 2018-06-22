@@ -80,7 +80,7 @@
             </ul>
             <ul class="nav nav-pills">
                 <li class="active">
-                    <a href="perfilUsuarioTabla.jsp">Regresar</a>
+                    <a href="perfilUsuarioTabla.jsp" class="btn btn-light">Regresar</a>
                 </li>
             </ul>
             <hr>

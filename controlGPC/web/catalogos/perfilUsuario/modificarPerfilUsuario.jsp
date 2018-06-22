@@ -110,7 +110,7 @@
             </ul>
             <ul class="nav nav-pills">
                 <li class="active">
-                    <a href="perfilUsuarioTabla.jsp">Regresar</a>
+                    <a href="perfilUsuarioTabla.jsp" class="btn btn-light">Regresar</a>
                 </li>
             </ul>
             <hr>
@@ -139,14 +139,14 @@
                               <label class="control-label" class="form-check-label" for="gestionCatalogos">Gestión de catálogos configuración</label>
                             </div>
                             <div class="form-check">
-                              <input class="form-check-input" type="checkbox" id="gestionUsuario" name="gestionUsuario" <%=(_perfilUsuario.isGestionUsuario()? "checked" : "") %>>
+                              <input class="form-check-input" type="checkbox" id="gestionUsuario" name="gestionUsuario" <%=(_perfilUsuario.isGestionUsuario() ? "checked" : "") %>>
                               <label class="control-label" class="form-check-label" for="gestionUsuario">Gestión de usuarios</label>
                             </div>
                             <div class="form-check">
                               <input class="form-check-input" type="checkbox" id="gestionDocumentos" name="gestionDocumentos" data-toggle="collapse" href="#collapseExample" role="button" <%=(_perfilUsuario.isGestionDocumentos() ? "checked" : "") %>>
                               <label class="control-label" class="form-check-label" for="gestionDocumentos">Gestión de documentos</label>
                             </div>
-                            <div class="collapse col-sm-4" id="collapseExample">
+                            <div class="<%=(_perfilUsuario.isGestionDocumentos() ? "" : "collapse") %> col-sm-4" id="collapseExample">
                                 <div class="card card-body backgroundLightgray">
                                   <div class="form-check">
                                         <input class="form-check-input" type="checkbox" id="agregarDocumento" name="agregarDocumento" <%=(_perfilUsuario.isAgregarDocumento() ? "checked" : "") %>>

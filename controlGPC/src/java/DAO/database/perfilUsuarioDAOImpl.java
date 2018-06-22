@@ -33,19 +33,19 @@ public class perfilUsuarioDAOImpl implements catalogosInterface{
         
         StringBuilder _consulta = new StringBuilder();
                 
-        _consulta.append("INSERT INTO controlGPC.dbperfilUsuario pu (")
-                    .append("pu.nombreCompleto, ")
-                    .append("pu.descripcion, ")
-                    .append("pu.accesoPlataforma, ")
-                    .append("pu.gestionCatalogos, ")
-                    .append("pu.gestionUsuario, ")
-                    .append("pu.gestionDocumentos, ")
-                    .append("pu.agregarDocumento, ")
-                    .append("pu.eliminarDocumento, ")
-                    .append("pu.modificarDocumento, ")
-                    .append("pu.buscarDocumento, ")
-                    .append("pu.imprimirDocumento, ")
-                    .append("pu.idEstado ")
+        _consulta.append("INSERT INTO controlGPC.dbperfilUsuario (")
+                    .append("nombreCompleto, ")
+                    .append("descripcion, ")
+                    .append("accesoPlataforma, ")
+                    .append("gestionCatalogos, ")
+                    .append("gestionUsuario, ")
+                    .append("gestionDocumentos, ")
+                    .append("agregarDocumento, ")
+                    .append("eliminarDocumento, ")
+                    .append("modificarDocumento, ")
+                    .append("buscarDocumento, ")
+                    .append("imprimirDocumento, ")
+                    .append("idEstado ")
                 .append(") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
                 
         PreparedStatement st = this.conexion.prepareStatement(_consulta.toString());

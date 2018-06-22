@@ -48,7 +48,7 @@ public class usuarioDAOImpl {
                     .append("fotoUsuario, ")
                     .append("cuentaActiva, ")
                     .append("idEstado) ")
-                .append("VALUES (?, ?' ?, ?, ?, ?, ?, aes_encrypt(?, 'gpc'), ?, ?, ?);");
+                .append("VALUES (?, ?' ?, ?, ?, ?, ?, aes_encrypt(?, 'gpc'), ?, ?, 1);");
                 
         PreparedStatement st = this.conexion.prepareStatement(_consulta.toString());
         
@@ -62,7 +62,6 @@ public class usuarioDAOImpl {
         st.setString(8, _usuario.getContrasena());
         st.setString(9, _usuario.getFotoUsuario());
         st.setBoolean(10, _usuario.isCuentaActiva());
-        st.setInt(11, _usuario.getEstado().getId());
         
         boolean resultado = st.execute();
         
@@ -108,7 +107,7 @@ public class usuarioDAOImpl {
                     .append("contrasena = aes_encrypt(?, 'gpc'), ")
                     .append("fotoUsuario = ?, ")
                     .append("cuentaActiva = ?, ")
-                    .append("idEstado = ? ")
+                    .append("idEstado = 2 ")
                 .append("WHERE id = ?;");
         
         PreparedStatement st = this.conexion.prepareStatement(_consulta.toString());
@@ -123,8 +122,7 @@ public class usuarioDAOImpl {
         st.setString(8, _usuario.getContrasena());
         st.setString(9, _usuario.getFotoUsuario());
         st.setBoolean(10, _usuario.isCuentaActiva());
-        st.setInt(11, _usuario.getEstado().getId());
-        st.setInt(12, _usuario.getId());
+        st.setInt(11, _usuario.getId());
         
         boolean resultado = st.execute();
         
@@ -143,20 +141,31 @@ public class usuarioDAOImpl {
         StringBuilder _consulta = new StringBuilder();
         
         _consulta.append("SELECT ")
-                    .append("dbusuario.id, ")
-                    .append("dbusuario.nombreCompleto, ")
-                    .append("dbusuario.sexo, ")
-                    .append("dbusuario.idPerfilUsuario, ")
-                    .append("dbusuario.idLocalidad, ")
-                    .append("dbusuario.idDepartamento, ")
-                    .append("dbusuario.idEmpresa, ")
-                    .append("dbusuario.cuenta, ")
-                    .append("aes_decrypt(dbusuario.contrasena, 'gpc'), ")
-                    .append("dbusuario.fotoUsuario, ")
-                    .append("dbusuario.cuentaActiva, ")
-                    .append("dbusuario.idEstado ")
-                .append("FROM controlGPC.dbusuario ")
-                .append("WHERE id = ?;");
+                    .append("u.id AS 'id', ")
+                    .append("u.nombreCompleto AS 'nombreCompleto', ")
+                    .append("u.sexo AS 'sexo', ")
+                    .append("u.idPerfilUsuario AS 'idPerfilUsuario', ")
+                    .append("pu.nombreCompleto AS 'perfilUsuario', ")
+                    .append("u.idLocalidad AS 'idLocalidad', ")
+                    .append("l.nombreCompleto AS 'localidad', ")
+                    .append("u.idDepartamento AS 'idDepartamento', ")
+                    .append("d.nombreCompleto AS 'departamento', ")
+                    .append("u.idEmpresa AS 'idEmpresa', ")
+                    .append("em.nombreCompleto AS 'empresa', ")
+                    .append("u.cuenta AS 'cuenta', ")
+                    .append("aes_decrypt(u.contrasena, 'gpc'), ")
+                    .append("u.fotoUsuario AS 'fotoUsuario', ")
+                    .append("u.cuentaActiva AS 'cuentaActiva', ")
+                    .append("u.idEstado AS 'idEstado', ")
+                    .append("es.nombreCompleto AS 'estado' ")
+                .append("FROM ")
+                    .append("controlGPC.dbusuario u ")
+                        .append("INNER JOIN controlGPC.dbperfilUsuario pu ON pu.id = u.idPerfilUsuario ")
+                        .append("INNER JOIN controlGPC.dblocalidad l ON l.id = u.idLocalidad ")
+                        .append("INNER JOIN controlGPC.dbdepartamento d ON d.id = u.idDepartamento ")
+                        .append("INNER JOIN controlGPC.dbempresa em ON em.id = u.idEmpresa ")
+                        .append("INNER JOIN controlGPC.dbestado es ON es.id = u.idEstado")
+                .append("WHERE u.id = ?;");
         
         PreparedStatement st = this.conexion.prepareStatement(_consulta.toString());
         
@@ -172,31 +181,36 @@ public class usuarioDAOImpl {
             
                 _usuario.setId(rs.getInt(1));
                 _usuario.setNombreCompleto(rs.getString(2));
-                _usuario.setId(rs.getInt(3));
+                _usuario.setSexo(rs.getString(3));
                 
                 perfilUsuario _perfilUsuario = new perfilUsuario();
                 _perfilUsuario.setId(rs.getInt(4));
+                _perfilUsuario.setNombreCompleto(rs.getString(5));
                 _usuario.setPerfilUsuario(_perfilUsuario);
                 
                 localidad _localidad = new localidad();
-                _localidad.setId(rs.getInt(5));
+                _localidad.setId(rs.getInt(6));
+                _localidad.setNombreCompleto(rs.getString(7));
                 _usuario.setLocalidad(_localidad);
                 
                 departamento _departamento = new departamento();
-                _departamento.setId(rs.getInt(6));
+                _departamento.setId(rs.getInt(8));
+                _departamento.setNombreCompleto(rs.getString(9));
                 _usuario.setDepartamento(_departamento);
                 
                 empresa _empresa = new empresa();
-                _empresa.setId(rs.getInt(7));
+                _empresa.setId(rs.getInt(10));
+                _empresa.setNombreCompleto(rs.getString(11));
                 _usuario.setEmpresa(_empresa);
                 
-                _usuario.setCuenta(rs.getString(8));
-                _usuario.setContrasena(rs.getString(9));
-                _usuario.setFotoUsuario(rs.getString(10));
-                _usuario.setCuentaActiva(rs.getBoolean(11));
+                _usuario.setCuenta(rs.getString(12));
+                _usuario.setContrasena(rs.getString(13));
+                _usuario.setFotoUsuario(rs.getString(14));
+                _usuario.setCuentaActiva(rs.getBoolean(15));
                 
                 estado _estado = new estado();
-                _estado.setId(rs.getInt(12));
+                _estado.setId(rs.getInt(16));
+                _estado.setNombreCompleto(rs.getString(17));
                 _usuario.setEstado(_estado);
                 
                 o = (Object)_usuario;
@@ -226,19 +240,31 @@ public class usuarioDAOImpl {
         
         StringBuilder _consulta = new StringBuilder();
         
-        _consulta.append("SELECT dbusuario.id, ")
-                    .append("dbusuario.nombreCompleto, ")
-                    .append("dbusuario.sexo, ")
-                    .append("dbusuario.idPerfilUsuario, ")
-                    .append("dbusuario.idLocalidad, ")
-                    .append("dbusuario.idDepartamento, ")
-                    .append("dbusuario.idEmpresa, ")
-                    .append("dbusuario.cuenta, ")
-                    .append("aes_decrypt(dbusuario.contrasena, 'gpc'), ")
-                    .append("dbusuario.fotoUsuario, ")
-                    .append("dbusuario.cuentaActiva, ")
-                    .append("dbusuario.idEstado ")
-                    .append("FROM controlGPC.dbusuario ")
+        _consulta.append("SELECT ")
+                    .append("u.id AS 'id', ")
+                    .append("u.nombreCompleto AS 'nombreCompleto', ")
+                    .append("u.sexo AS 'sexo', ")
+                    .append("u.idPerfilUsuario AS 'idPerfilUsuario', ")
+                    .append("pu.nombreCompleto AS 'perfilUsuario', ")
+                    .append("u.idLocalidad AS 'idLocalidad', ")
+                    .append("l.nombreCompleto AS 'localidad', ")
+                    .append("u.idDepartamento AS 'idDepartamento', ")
+                    .append("d.nombreCompleto AS 'departamento', ")
+                    .append("u.idEmpresa AS 'idEmpresa', ")
+                    .append("em.nombreCompleto AS 'empresa', ")
+                    .append("u.cuenta AS 'cuenta', ")
+                    .append("aes_decrypt(u.contrasena, 'gpc'), ")
+                    .append("u.fotoUsuario AS 'fotoUsuario', ")
+                    .append("u.cuentaActiva AS 'cuentaActiva', ")
+                    .append("u.idEstado AS 'idEstado', ")
+                    .append("es.nombreCompleto AS 'estado' ")
+                .append("FROM ")
+                    .append("controlGPC.dbusuario u ")
+                        .append("INNER JOIN controlGPC.dbperfilUsuario pu ON pu.id = u.idPerfilUsuario ")
+                        .append("INNER JOIN controlGPC.dblocalidad l ON l.id = u.idLocalidad ")
+                        .append("INNER JOIN controlGPC.dbdepartamento d ON d.id = u.idDepartamento ")
+                        .append("INNER JOIN controlGPC.dbempresa em ON em.id = u.idEmpresa ")
+                        .append("INNER JOIN controlGPC.dbestado es ON es.id = u.idEstado")
                 .append("WHERE " + _campo + " LIKE ?;");
                 
         PreparedStatement st = this.conexion.prepareStatement(_consulta.toString());
@@ -255,31 +281,36 @@ public class usuarioDAOImpl {
             
                 _usuario.setId(rs.getInt(1));
                 _usuario.setNombreCompleto(rs.getString(2));
-                _usuario.setId(rs.getInt(3));
+                _usuario.setSexo(rs.getString(3));
                 
                 perfilUsuario _perfilUsuario = new perfilUsuario();
                 _perfilUsuario.setId(rs.getInt(4));
+                _perfilUsuario.setNombreCompleto(rs.getString(5));
                 _usuario.setPerfilUsuario(_perfilUsuario);
                 
                 localidad _localidad = new localidad();
-                _localidad.setId(rs.getInt(5));
+                _localidad.setId(rs.getInt(6));
+                _localidad.setNombreCompleto(rs.getString(7));
                 _usuario.setLocalidad(_localidad);
                 
                 departamento _departamento = new departamento();
-                _departamento.setId(rs.getInt(6));
+                _departamento.setId(rs.getInt(8));
+                _departamento.setNombreCompleto(rs.getString(9));
                 _usuario.setDepartamento(_departamento);
                 
                 empresa _empresa = new empresa();
-                _empresa.setId(rs.getInt(7));
+                _empresa.setId(rs.getInt(10));
+                _empresa.setNombreCompleto(rs.getString(11));
                 _usuario.setEmpresa(_empresa);
                 
-                _usuario.setCuenta(rs.getString(8));
-                _usuario.setContrasena(rs.getString(9));
-                _usuario.setFotoUsuario(rs.getString(10));
-                _usuario.setCuentaActiva(rs.getBoolean(11));
+                _usuario.setCuenta(rs.getString(12));
+                _usuario.setContrasena(rs.getString(13));
+                _usuario.setFotoUsuario(rs.getString(14));
+                _usuario.setCuentaActiva(rs.getBoolean(15));
                 
                 estado _estado = new estado();
-                _estado.setId(rs.getInt(12));
+                _estado.setId(rs.getInt(16));
+                _estado.setNombreCompleto(rs.getString(17));
                 _usuario.setEstado(_estado);
             
                 _listaUsuarios.add(_usuario);
@@ -308,19 +339,31 @@ public class usuarioDAOImpl {
         
         StringBuilder _consulta = new StringBuilder();
         
-        _consulta.append("SELECT dbusuario.id, ")
-                    .append("dbusuario.nombreCompleto, ")
-                    .append("dbusuario.sexo, ")
-                    .append("dbusuario.idPerfilUsuario, ")
-                    .append("dbusuario.idLocalidad, ")
-                    .append("dbusuario.idDepartamento, ")
-                    .append("dbusuario.idEmpresa, ")
-                    .append("dbusuario.cuenta, ")
-                    .append("aes_decrypt(dbusuario.contrasena, 'gpc'), ")
-                    .append("dbusuario.fotoUsuario, ")
-                    .append("dbusuario.cuentaActiva, ")
-                    .append("dbusuario.idEstado ")
-                .append("FROM controlGPC.dbusuario; ");
+        _consulta.append("SELECT ")
+                    .append("u.id AS 'id', ")
+                    .append("u.nombreCompleto AS 'nombreCompleto', ")
+                    .append("u.sexo AS 'sexo', ")
+                    .append("u.idPerfilUsuario AS 'idPerfilUsuario', ")
+                    .append("pu.nombreCompleto AS 'perfilUsuario', ")
+                    .append("u.idLocalidad AS 'idLocalidad', ")
+                    .append("l.nombreCompleto AS 'localidad', ")
+                    .append("u.idDepartamento AS 'idDepartamento', ")
+                    .append("d.nombreCompleto AS 'departamento', ")
+                    .append("u.idEmpresa AS 'idEmpresa', ")
+                    .append("em.nombreCompleto AS 'empresa', ")
+                    .append("u.cuenta AS 'cuenta', ")
+                    .append("aes_decrypt(u.contrasena, 'gpc'), ")
+                    .append("u.fotoUsuario AS 'fotoUsuario', ")
+                    .append("u.cuentaActiva AS 'cuentaActiva', ")
+                    .append("u.idEstado AS 'idEstado', ")
+                    .append("es.nombreCompleto AS 'estado' ")
+                .append("FROM ")
+                    .append("controlGPC.dbusuario u ")
+                        .append("INNER JOIN controlGPC.dbperfilUsuario pu ON pu.id = u.idPerfilUsuario ")
+                        .append("INNER JOIN controlGPC.dblocalidad l ON l.id = u.idLocalidad ")
+                        .append("INNER JOIN controlGPC.dbdepartamento d ON d.id = u.idDepartamento ")
+                        .append("INNER JOIN controlGPC.dbempresa em ON em.id = u.idEmpresa ")
+                        .append("INNER JOIN controlGPC.dbestado es ON es.id = u.idEstado");
         
         PreparedStatement st = this.conexion.prepareStatement(_consulta.toString());
         
@@ -334,31 +377,36 @@ public class usuarioDAOImpl {
             
                 _usuario.setId(rs.getInt(1));
                 _usuario.setNombreCompleto(rs.getString(2));
-                _usuario.setId(rs.getInt(3));
+                _usuario.setSexo(rs.getString(3));
                 
                 perfilUsuario _perfilUsuario = new perfilUsuario();
                 _perfilUsuario.setId(rs.getInt(4));
+                _perfilUsuario.setNombreCompleto(rs.getString(5));
                 _usuario.setPerfilUsuario(_perfilUsuario);
                 
                 localidad _localidad = new localidad();
-                _localidad.setId(rs.getInt(5));
+                _localidad.setId(rs.getInt(6));
+                _localidad.setNombreCompleto(rs.getString(7));
                 _usuario.setLocalidad(_localidad);
                 
                 departamento _departamento = new departamento();
-                _departamento.setId(rs.getInt(6));
+                _departamento.setId(rs.getInt(8));
+                _departamento.setNombreCompleto(rs.getString(9));
                 _usuario.setDepartamento(_departamento);
                 
                 empresa _empresa = new empresa();
-                _empresa.setId(rs.getInt(7));
+                _empresa.setId(rs.getInt(10));
+                _empresa.setNombreCompleto(rs.getString(11));
                 _usuario.setEmpresa(_empresa);
                 
-                _usuario.setCuenta(rs.getString(8));
-                _usuario.setContrasena(rs.getString(9));
-                _usuario.setFotoUsuario(rs.getString(10));
-                _usuario.setCuentaActiva(rs.getBoolean(11));
+                _usuario.setCuenta(rs.getString(12));
+                _usuario.setContrasena(rs.getString(13));
+                _usuario.setFotoUsuario(rs.getString(14));
+                _usuario.setCuentaActiva(rs.getBoolean(15));
                 
                 estado _estado = new estado();
-                _estado.setId(rs.getInt(12));
+                _estado.setId(rs.getInt(16));
+                _estado.setNombreCompleto(rs.getString(17));
                 _usuario.setEstado(_estado);
             
                 _listaUsuarios.add(_usuario);

@@ -20,10 +20,11 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Agregar calidad</title>
+        <link href="../../css/fontawesome-all.min.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
         <style>
             
-            @font-face{
+             @font-face{
                 font-family: ubuntuLight;
                 src: url(../..//fonts/Ubuntu-L.ttf);
             }
@@ -35,6 +36,10 @@
             
             .fontColor{
                 color: #3079ed;
+            }
+            
+            .iconColor{
+                color: #ddd;
             }
             
             .backgroundLightgray{
@@ -62,7 +67,12 @@
     </head>
     <body>
         <div class="container">
-            <h1 class="fontUbuntulight fontColor">Agregar calidad</h1>
+            <div class="card-group">
+                <div class="card-body d-flex justify-content-between">
+                    <h1 class="card-title fontUbuntulight fontColor ">Agregar calidad</h1>
+                    <i class="fa fa-plus fa-4x iconColor"></i>
+                </div>
+            </div>
             <ul class="breadcrumb">
                 <li><a href="../catalogos.jsp">Catálogos</a> <span class="divider">/</span></li>
                 <li><a href="calidadTabla.jsp">Calidad</a> <span class="divider">/</span></li>
@@ -70,7 +80,7 @@
             </ul>
             <ul class="nav nav-pills">
                 <li class="active">
-                    <a href="calidadTabla.jsp">Regresar</a>
+                    <a href="calidadTabla.jsp" class="btn btn-light">Regresar</a>
                 </li>
             </ul>
             <hr>
@@ -83,7 +93,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label" for="codigo">Nombre completo:</label>
+                    <label class="control-label" for="codigo">Código:</label>
                     <input type="text" class="form-control is-invalid" id="codigo" name="codigo" placeholder="Teclee el código de la calidad ..." required>
                     <div class="invalid-feedback">
                      Campo obligatorio!    
