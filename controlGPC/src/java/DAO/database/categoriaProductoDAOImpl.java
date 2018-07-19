@@ -22,6 +22,10 @@ public class categoriaProductoDAOImpl implements catalogosInterface {
 
     private Connection _conn;
 
+    public categoriaProductoDAOImpl(Connection _conn) {
+        this._conn = _conn;
+    }
+
     @Override
     public boolean agregarRegistro(Object o) throws Exception {
 

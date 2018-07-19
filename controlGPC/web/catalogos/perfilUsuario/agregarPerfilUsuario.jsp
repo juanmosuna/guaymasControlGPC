@@ -20,6 +20,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Agregar perfil de usuario</title>
+        <link href="../../css/fontawesome-all.min.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
         <style>
             
@@ -35,6 +36,10 @@
             
             .fontColor{
                 color: #3079ed;
+            }
+            
+            .iconColor{
+                color: #ddd;
             }
             
             .backgroundLightgray{
@@ -62,7 +67,12 @@
     </head>
     <body>
         <div class="container">
-            <h1 class="fontUbuntulight fontColor">Agregar perfil de usuario</h1>
+           <div class="card-group">
+                <div class="card-body d-flex justify-content-between">
+                    <h1 class="card-title fontUbuntulight fontColor ">Agregar perfil de usuario</h1>
+                    <i class="fa fa-plus fa-4x iconColor"></i>
+                </div>
+            </div>
             <ul class="breadcrumb">
                 <li><a href="../catalogos.jsp">Catálogos</a> <span class="divider">/</span></li>
                 <li><a href="perfilUsuarioTabla.jsp">Perfil de usuario</a> <span class="divider">/</span></li>
@@ -70,11 +80,11 @@
             </ul>
             <ul class="nav nav-pills">
                 <li class="active">
-                    <a href="perfilUsuarioTabla.jsp">Regresar</a>
+                    <a href="perfilUsuarioTabla.jsp" class="btn btn-light">Regresar</a>
                 </li>
             </ul>
             <hr>
-            <form id="formulario" action="perfilUsuarioServlet.do" method="post" class="">
+            <form id="formulario" action="/controlGPC/perfilUsuarioServlet.do" method="post" class="">
                 <div class="form-group">
                     <label class="control-label" for="nombreCompleto">Nombre:</label>
                     <input type="text" class="form-control is-invalid" id="nombreCompleto" name="nombreCompleto" placeholder="Teclee el nombre del perfil del usuario ..." required>
@@ -109,28 +119,27 @@
                             <div class="collapse col-sm-4" id="collapseExample">
                                 <div class="card card-body backgroundLightgray">
                                   <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="agregarDocumento" name="agregarDocumento" value="agregarDocumento">
+                                        <input class="form-check-input" type="checkbox" id="agregarDocumento" name="agregarDocumento">
                                         <label class="control-label" class="form-check-label" for="agregarDocumento">Agregar documentos</label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="eliminarDocumento" name="eliminarDocumento" value="eliminarDocumento">
+                                        <input class="form-check-input" type="checkbox" id="eliminarDocumento" name="eliminarDocumento">
                                         <label class="control-label" class="form-check-label" for="eliminarDocumento">Eliminar documentos</label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox"id="modificarDocumento" name="modificarDocumento"  value="modificarDocumento">
+                                        <input class="form-check-input" type="checkbox"id="modificarDocumento" name="modificarDocumento">
                                         <label class="control-label" class="form-check-label" for="modificarDocumento">Modificar documentos</label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="buscarDocumento" name="buscarDocumento" value="buscarDocumento">
+                                        <input class="form-check-input" type="checkbox" id="buscarDocumento" name="buscarDocumento">
                                         <label class="control-label" class="form-check-label" for="buscarDocumento">Buscar documentos</label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="imprimirDocumento" name="imprimirDocumento" value="imprimirDocumento">
+                                        <input class="form-check-input" type="checkbox" id="imprimirDocumento" name="imprimirDocumento">
                                         <label class="control-label" class="form-check-label" for="imprimirDocumento">Imprimir documentos</label>
                                     </div>
                                 </div>
                             </div>
-                            
                         </div>
                     </div>
                 </fieldset>
@@ -138,6 +147,7 @@
                     <button type="submit" class="btn btn-primary">Guardar</button>
                     <button type="button" class="btn btn-light" onclick="location.href='perfilUsuarioTabla.jsp';" >Cancelar</button>
                 </div>
+                <input type="hidden" id="op" name="op" value="1">
             </form>
         </div>
     </body>

@@ -186,7 +186,7 @@ public class contactoClienteDAOImpl implements catalogosInterface {
                 .append("    controlGPC.dbcontactoCliente ")
                 .append("LEFT JOIN dbcliente ON dbcliente.id = dbcontactoCliente.idCliente ")
                 .append("WHERE ")
-                .append("    dbtransportista.idEstado <> 3;");
+                .append("    dbcontactoCliente.idEstado <> 3;");
 
         PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
@@ -273,7 +273,7 @@ public class contactoClienteDAOImpl implements catalogosInterface {
                 .append(_campo)
                 .append(" LIKE '%")
                 .append(_dato)
-                .append("%' AND dbtransportista.idEstado <> 3;");
+                .append("%' AND dbcontactoCliente.idEstado <> 3;");
 
         PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
@@ -354,7 +354,7 @@ public class contactoClienteDAOImpl implements catalogosInterface {
                 .append("FROM ")
                 .append("    controlGPC.dbcontactoCliente ")
                 .append("LEFT JOIN dbcliente ON dbcliente.id = dbcontactoCliente.idCliente ")
-                .append("WHERE dbcontactoCliente.id = " + id + " AND dbtransportista.idEstado <> 3;");
+                .append("WHERE dbcontactoCliente.id = " + id + " AND dbcontactoCliente.idEstado <> 3;");
 
         PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 

@@ -16,7 +16,7 @@ public class vehiculo {
     private transportista _transportista = new transportista();
     private String marca = new String();
     private String modelo = new String();
-    private String tipo = new String();
+    private tipoVehiculo tipoVehiculo = new tipoVehiculo();
     private String numeroSerie = new String();
     private String placas = new String();
     private String numeroEconomico = new String();
@@ -66,14 +66,6 @@ public class vehiculo {
 
     public void setModelo(String modelo) {
         this.modelo = modelo;
-    }
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
     }
 
     public String getNumeroSerie() {
@@ -130,6 +122,14 @@ public class vehiculo {
 
     public void setIdEstado(int idEstado) {
         this.idEstado = idEstado;
+    }
+
+    public tipoVehiculo getTipoVehiculo() {
+        return tipoVehiculo;
+    }
+
+    public void setTipoVehiculo(tipoVehiculo tipoVehiculo) {
+        this.tipoVehiculo = tipoVehiculo;
     }
 
 }

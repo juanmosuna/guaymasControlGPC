@@ -33,8 +33,8 @@ public class perfilUsuarioDAOImpl implements catalogosInterface{
         
         StringBuilder _consulta = new StringBuilder();
                 
-        _consulta.append("INSERT INTO controlGPC.dbperfilUsuario ")
-                    .append("(nombreCompleto, ")
+        _consulta.append("INSERT INTO controlGPC.dbperfilUsuario (")
+                    .append("nombreCompleto, ")
                     .append("descripcion, ")
                     .append("accesoPlataforma, ")
                     .append("gestionCatalogos, ")
@@ -45,8 +45,8 @@ public class perfilUsuarioDAOImpl implements catalogosInterface{
                     .append("modificarDocumento, ")
                     .append("buscarDocumento, ")
                     .append("imprimirDocumento, ")
-                    .append("idEstado) ")
-                .append("VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
+                    .append("idEstado ")
+                .append(") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
                 
         PreparedStatement st = this.conexion.prepareStatement(_consulta.toString());
         
@@ -75,9 +75,14 @@ public class perfilUsuarioDAOImpl implements catalogosInterface{
     @Override
     public boolean eliminarRegistro(int _indice) throws Exception {
         
-        String _consulta = "DELETE FROM controlGPC.dbperfilUsuario WHERE id = ?;";
+        StringBuilder _consulta = new StringBuilder();
         
-        PreparedStatement st = this.conexion.prepareStatement(_consulta);
+        _consulta.append("UPDATE controlGPC.dbperfilUsuario pu ")
+                    .append("SET ")
+                        .append("pu.idEstado = 3 ")
+                    .append("WHERE pu.id = ?;");
+        
+        PreparedStatement st = this.conexion.prepareStatement(_consulta.toString());
         
         st.setInt(1, _indice);
         
@@ -97,21 +102,21 @@ public class perfilUsuarioDAOImpl implements catalogosInterface{
         
         StringBuilder _consulta = new StringBuilder();
         
-        _consulta.append("UPDATE controlGPC.dbperfilUsuario ")
+        _consulta.append("UPDATE controlGPC.dbperfilUsuario pu ")
                     .append("SET ")
-                        .append("nombreCompleto = ?, ")
-                        .append("descripcion = ?, ")
-                        .append("accesoPlataforma = ?, ")
-                        .append("gestionCatalogos = ?, ")
-                        .append("gestionUsuario = ?, ")
-                        .append("gestionDocumentos = ?, ")
-                        .append("agregarDocumento = ?, ")
-                        .append("eliminarDocumento = ?, ")
-                        .append("modificarDocumento = ?, ")
-                        .append("buscarDocumento = ?, ")
-                        .append("imprimirDocumento = ?, ")
-                        .append("idEstado = ? ")
-                    .append("WHERE id = ?;");
+                        .append("pu.nombreCompleto = ?, ")
+                        .append("pu.descripcion = ?, ")
+                        .append("pu.accesoPlataforma = ?, ")
+                        .append("pu.gestionCatalogos = ?, ")
+                        .append("pu.gestionUsuario = ?, ")
+                        .append("pu.gestionDocumentos = ?, ")
+                        .append("pu.agregarDocumento = ?, ")
+                        .append("pu.eliminarDocumento = ?, ")
+                        .append("pu.modificarDocumento = ?, ")
+                        .append("pu.buscarDocumento = ?, ")
+                        .append("pu.imprimirDocumento = ?, ")
+                        .append("pu.idEstado = ? ")
+                    .append("WHERE pu.id = ?;");
         
         PreparedStatement st = this.conexion.prepareStatement(_consulta.toString());
         
@@ -146,21 +151,22 @@ public class perfilUsuarioDAOImpl implements catalogosInterface{
                 
         StringBuilder _consulta = new StringBuilder();
         
-        _consulta.append("SELECT dbperfilUsuario.id, ")
-                        .append("dbperfilUsuario.nombreCompleto, ")
-                        .append("dbperfilUsuario.descripcion, ")
-                        .append("dbperfilUsuario.accesoPlataforma, ")
-                        .append("dbperfilUsuario.gestionCatalogos, ")
-                        .append("dbperfilUsuario.gestionUsuario, ")
-                        .append("dbperfilUsuario.gestionDocumentos, ")
-                        .append("dbperfilUsuario.agregarDocumento, ")
-                        .append("dbperfilUsuario.eliminarDocumento, ")
-                        .append("dbperfilUsuario.modificarDocumento, ")
-                        .append("dbperfilUsuario.buscarDocumento, ")
-                        .append("dbperfilUsuario.imprimirDocumento, ")
-                        .append("dbperfilUsuario.idEstado ")
-                    .append("FROM controlGPC.dbperfilUsuario ")
-                    .append("WHERE dbperfilUsuario.id = ?;");
+        _consulta.append("SELECT pu.id, ")
+                        .append("pu.nombreCompleto, ")
+                        .append("pu.descripcion, ")
+                        .append("pu.accesoPlataforma, ")
+                        .append("pu.gestionCatalogos, ")
+                        .append("pu.gestionUsuario, ")
+                        .append("pu.gestionDocumentos, ")
+                        .append("pu.agregarDocumento, ")
+                        .append("pu.eliminarDocumento, ")
+                        .append("pu.modificarDocumento, ")
+                        .append("pu.buscarDocumento, ")
+                        .append("pu.imprimirDocumento, ")
+                        .append("pu.idEstado ")
+                    .append("FROM controlGPC.dbperfilUsuario pu ")
+                    .append("WHERE pu.id = ? ")
+                    .append("AND pu.idEstado != 3; ");
         
         PreparedStatement st = this.conexion.prepareStatement(_consulta.toString());
         
@@ -216,21 +222,22 @@ public class perfilUsuarioDAOImpl implements catalogosInterface{
         
         StringBuilder _consulta = new StringBuilder();
         
-        _consulta.append("SELECT dbperfilUsuario.id, ")
-                        .append("dbperfilUsuario.nombreCompleto, ")
-                        .append("dbperfilUsuario.descripcion, ")
-                        .append("dbperfilUsuario.accesoPlataforma, ")
-                        .append("dbperfilUsuario.gestionCatalogos, ")
-                        .append("dbperfilUsuario.gestionUsuario, ")
-                        .append("dbperfilUsuario.gestionDocumentos, ")
-                        .append("dbperfilUsuario.agregarDocumento, ")
-                        .append("dbperfilUsuario.eliminarDocumento, ")
-                        .append("dbperfilUsuario.modificarDocumento, ")
-                        .append("dbperfilUsuario.buscarDocumento, ")
-                        .append("dbperfilUsuario.imprimirDocumento, ")
-                        .append("dbperfilUsuario.idEstado ")
-                    .append("FROM controlGPC.dbperfilUsuario ")
-                    .append("WHERE " + _campo + " LIKE ?;");
+        _consulta.append("SELECT pu.id, ")
+                        .append("pu.nombreCompleto, ")
+                        .append("pu.descripcion, ")
+                        .append("pu.accesoPlataforma, ")
+                        .append("pu.gestionCatalogos, ")
+                        .append("pu.gestionUsuario, ")
+                        .append("pu.gestionDocumentos, ")
+                        .append("pu.agregarDocumento, ")
+                        .append("pu.eliminarDocumento, ")
+                        .append("pu.modificarDocumento, ")
+                        .append("pu.buscarDocumento, ")
+                        .append("pu.imprimirDocumento, ")
+                        .append("pu.idEstado ")
+                    .append("FROM controlGPC.dbperfilUsuario pu ")
+                    .append("WHERE pu." + _campo + " LIKE ? ")
+                    .append("AND pu.idEstado != 3; ");
                 
         PreparedStatement st = this.conexion.prepareStatement(_consulta.toString());
         
@@ -285,20 +292,21 @@ public class perfilUsuarioDAOImpl implements catalogosInterface{
         
         StringBuilder _consulta = new StringBuilder();
         
-        _consulta.append("SELECT dbperfilUsuario.id, ")
-                        .append("dbperfilUsuario.nombreCompleto, ")
-                        .append("dbperfilUsuario.descripcion, ")
-                        .append("dbperfilUsuario.accesoPlataforma, ")
-                        .append("dbperfilUsuario.gestionCatalogos, ")
-                        .append("dbperfilUsuario.gestionUsuario, ")
-                        .append("dbperfilUsuario.gestionDocumentos, ")
-                        .append("dbperfilUsuario.agregarDocumento, ")
-                        .append("dbperfilUsuario.eliminarDocumento, ")
-                        .append("dbperfilUsuario.modificarDocumento, ")
-                        .append("dbperfilUsuario.buscarDocumento, ")
-                        .append("dbperfilUsuario.imprimirDocumento, ")
-                        .append("dbperfilUsuario.idEstado ")
-                    .append("FROM controlGPC.dbperfilUsuario;");
+        _consulta.append("SELECT pu.id, ")
+                        .append("pu.nombreCompleto, ")
+                        .append("pu.descripcion, ")
+                        .append("pu.accesoPlataforma, ")
+                        .append("pu.gestionCatalogos, ")
+                        .append("pu.gestionUsuario, ")
+                        .append("pu.gestionDocumentos, ")
+                        .append("pu.agregarDocumento, ")
+                        .append("pu.eliminarDocumento, ")
+                        .append("pu.modificarDocumento, ")
+                        .append("pu.buscarDocumento, ")
+                        .append("pu.imprimirDocumento, ")
+                        .append("pu.idEstado ")
+                    .append("FROM controlGPC.dbperfilUsuario pu ")
+                    .append("WHERE pu.idEstado != 3; ");
         
         PreparedStatement st = this.conexion.prepareStatement(_consulta.toString());
         

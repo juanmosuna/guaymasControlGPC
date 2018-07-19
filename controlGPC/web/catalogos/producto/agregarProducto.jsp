@@ -4,6 +4,11 @@
     Author     : juan_m_osuna
 --%>
 
+<%@page import="database.baseDatos"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
+<%@page import="DAO.database.categoriaProductoDAOImpl"%>
+<%@page import="entity.categoriaProducto"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
     if (session.getAttribute("usuario") == null){
@@ -20,10 +25,11 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Agregar producto</title>
+        <link href="../../css/fontawesome-all.min.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
         <style>
             
-            @font-face{
+             @font-face{
                 font-family: ubuntuLight;
                 src: url(../..//fonts/Ubuntu-L.ttf);
             }
@@ -35,6 +41,10 @@
             
             .fontColor{
                 color: #3079ed;
+            }
+            
+            .iconColor{
+                color: #ddd;
             }
             
             .backgroundLightgray{
@@ -62,7 +72,12 @@
     </head>
     <body>
         <div class="container">
-            <h1 class="fontUbuntulight fontColor">Agregar producto</h1>
+            <div class="card-group">
+                <div class="card-body d-flex justify-content-between">
+                    <h1 class="card-title fontUbuntulight fontColor ">Agregar producto</h1>
+                    <i class="fa fa-plus fa-4x iconColor"></i>
+                </div>
+            </div>
             <ul class="breadcrumb">
                 <li><a href="../catalogos.jsp">Catálogos</a> <span class="divider">/</span></li>
                 <li><a href="productoTabla.jsp">Producto</a> <span class="divider">/</span></li>
@@ -70,11 +85,11 @@
             </ul>
             <ul class="nav nav-pills">
                 <li class="active">
-                    <a href="productoTabla.jsp">Regresar</a>
+                    <a href="productoTabla.jsp" class="btn btn-light">Regresar</a>
                 </li>
             </ul>
             <hr>
-            <form id="formulario" action="productoServlet.do" method="post" class="">
+            <form id="formulario" action="/controlGPC/productoServlet.do" method="post" class="">
                 <div class="form-group">
                     <label class="control-label" for="nombreCompleto">Nombre completo:</label>
                     <input type="text" class="form-control is-invalid" id="nombreCompleto" name="nombreCompleto" placeholder="Teclee el nombre completo del producto ..." required>
@@ -96,16 +111,42 @@
                 <div class="form-group">
                     <label class="control-label" class="mr-sm-2" for="idCategoriaProducto">Categoría del producto:</label>
                     <select class="custom-select mr-sm-2" id="idCategoriaProducto" name="idCategoriaProducto">
-                        <option value="0" selected>Selecciona un tipo de almacén ...</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                        <option value="0" selected>Selecciona una categoría para el producto ...</option>
+                        <%
+                            baseDatos _baseDatos = new baseDatos();
+                            
+                            List<categoriaProducto> _categoriaProductoDAO = new ArrayList<categoriaProducto>();
+                                
+                            try{
+                            
+                                categoriaProductoDAOImpl _categoriaProductoDAOImpl = new categoriaProductoDAOImpl(_baseDatos.getConnection());
+                                
+                                _categoriaProductoDAO = (List<categoriaProducto>)_categoriaProductoDAOImpl.consultarTodos();
+                            
+                            }catch(Exception ex){
+
+                                ex.printStackTrace();
+
+                            }finally{
+
+                                if (_baseDatos != null){
+                                    _baseDatos.closeConnection();
+                                }
+
+                            }
+                        
+                            for(categoriaProducto _categoriaProducto : _categoriaProductoDAO){
+                                out.print("<option value=\""+_categoriaProducto.getId()+"\">"+_categoriaProducto.getNombreCompleto()+"</option>");
+                            }
+                        %>
+                        
                     </select>
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Guardar</button>
                     <button type="button" class="btn btn-light" onclick="location.href='productoTabla.jsp';" >Cancelar</button>
                 </div>
+                <input type="hidden" id="op" name="op" value="1">
             </form>
         </div>
     </body>

@@ -20,10 +20,11 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Agregar grupo de grupoCalidad</title>
+        <link href="../../css/fontawesome-all.min.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
         <style>
             
-            @font-face{
+             @font-face{
                 font-family: ubuntuLight;
                 src: url(../..//fonts/Ubuntu-L.ttf);
             }
@@ -35,6 +36,10 @@
             
             .fontColor{
                 color: #3079ed;
+            }
+            
+            .iconColor{
+                color: #ddd;
             }
             
             .backgroundLightgray{
@@ -62,7 +67,12 @@
     </head>
     <body>
         <div class="container">
-            <h1 class="fontUbuntulight fontColor">Agregar grupo de calidad</h1>
+            <div class="card-group">
+                <div class="card-body d-flex justify-content-between">
+                    <h1 class="card-title fontUbuntulight fontColor ">Agregar grupo de calidad</h1>
+                    <i class="fa fa-plus fa-4x iconColor"></i>
+                </div>
+            </div>
             <ul class="breadcrumb">
                 <li><a href="../catalogos.jsp">Catálogos</a> <span class="divider">/</span></li>
                 <li><a href="grupoCalidadTabla.jsp">Grupo de calidad</a> <span class="divider">/</span></li>
@@ -70,11 +80,11 @@
             </ul>
             <ul class="nav nav-pills">
                 <li class="active">
-                    <a href="grupoCalidadTabla.jsp">Regresar</a>
+                    <a href="grupoCalidadTabla.jsp" class="btn btn-light">Regresar</a>
                 </li>
             </ul>
             <hr>
-            <form id="formulario" action="grupoCalidadServlet.do" method="post" class="">
+            <form id="formulario" action="/controlGPC/grupoCalidadServlet.do" method="post" class="">
                 <div class="form-group">
                     <label class="control-label" for="nombreCompleto">Nombre completo:</label>
                     <input type="text" class="form-control is-invalid" id="nombreCompleto" name="nombreCompleto" placeholder="Teclee el nombre completo del grupo de calidad ..." required>
@@ -90,6 +100,7 @@
                     <button type="submit" class="btn btn-primary">Guardar</button>
                     <button type="button" class="btn btn-light" onclick="location.href='grupoCalidadTabla.jsp';" >Cancelar</button>
                 </div>
+                <input type="hidden" id="op" name="op" value="1">
             </form>
         </div>
     </body>

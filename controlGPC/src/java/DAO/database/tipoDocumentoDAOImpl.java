@@ -7,6 +7,7 @@ package DAO.database;
 
 import DAO.interfaces.catalogosInterface;
 import entity.tipoDocumento;
+import entity.tipoMovimiento;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,7 +20,7 @@ import java.util.List;
  * @author elara
  */
 public class tipoDocumentoDAOImpl implements catalogosInterface {
-    
+
     private Connection _conn;
 
     public tipoDocumentoDAOImpl(Connection _conn) {
@@ -31,18 +32,22 @@ public class tipoDocumentoDAOImpl implements catalogosInterface {
 
         tipoDocumento _tpDocumentosObj = (tipoDocumento) o;
 
-        String _consulta = "INSERT INTO controlGPC.dbtipoDocumento " +
-                "(nombreCompleto, " +
-                "descripcion, " +
-                "idEstado) " +
-                "VALUES " +
-                "(?, ?, ?);";
+        StringBuilder _consulta = new StringBuilder();
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        _consulta.append("INSERT INTO controlGPC.dbtipoDocumento ")
+                .append("(nombreCompleto, ")
+                .append("descripcion, ")
+                .append("idTipoMovimiento, ")
+                .append("idEstado) ")
+                .append("VALUES ")
+                .append("(?, ?, ?, ?);");
+
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         st.setString(1, _tpDocumentosObj.getNombreCompleto());
         st.setString(2, _tpDocumentosObj.getDescripcion());
-        st.setInt(3, _tpDocumentosObj.getIdEstado());
+        st.setInt(3, _tpDocumentosObj.getTipoMovimiento().getId());
+        st.setInt(4, _tpDocumentosObj.getIdEstado());
 
         boolean resultado = st.execute();
 
@@ -58,20 +63,24 @@ public class tipoDocumentoDAOImpl implements catalogosInterface {
 
         tipoDocumento _tpDocumentosObj = (tipoDocumento) o;
 
-        String _consulta = "UPDATE controlGPC.dbtipoDocumento " +
-            "SET " +
-            "nombreCompleto = ?, " +
-            "descripcion = ?, " +
-            "idEstado = ? " +
-            "WHERE id = ?;";
+        StringBuilder _consulta = new StringBuilder();
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        _consulta.append("UPDATE controlGPC.dbtipoDocumento ")
+                .append("SET ")
+                .append("nombreCompleto = ?, ")
+                .append("descripcion = ?, ")
+                .append("idTipoMovimiento = ?, ")
+                .append("idEstado = ? ")
+                .append("WHERE id = ?;");
+
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         st.setString(1, _tpDocumentosObj.getNombreCompleto());
         st.setString(2, _tpDocumentosObj.getDescripcion());
-        st.setInt(3, _tpDocumentosObj.getIdEstado());
-        
-        st.setInt(4, _tpDocumentosObj.getId());
+        st.setInt(3, _tpDocumentosObj.getTipoMovimiento().getId());
+        st.setInt(4, _tpDocumentosObj.getIdEstado());
+
+        st.setInt(5, _tpDocumentosObj.getId());
 
         boolean resultado = st.execute();
 
@@ -88,7 +97,7 @@ public class tipoDocumentoDAOImpl implements catalogosInterface {
         String _consulta = "UPDATE controlGPC.dbtipoDocumento SET idEstado = 3 WHERE id = ?;";
 
         PreparedStatement st = this._conn.prepareStatement(_consulta);
-        
+
         st.setInt(1, id);
 
         boolean resultado = st.execute();
@@ -107,17 +116,20 @@ public class tipoDocumentoDAOImpl implements catalogosInterface {
 
         List<tipoDocumento> _listatpDocumentos = new ArrayList();
 
-        String _consulta = "SELECT  " +
-                    "    dbtipoDocumento.id AS 'id', " +
-                    "    dbtipoDocumento.nombreCompleto AS 'nombreCompleto', " +
-                    "    dbtipoDocumento.descripcion AS 'descripcion', " +
-                    "    dbtipoDocumento.idEstado AS 'idEstado' " +
-                    "FROM " +
-                    "    controlGPC.dbtipoDocumento " +
-                    "WHERE " +
-                    "    dbtipoDocumento.idEstado <> 3;";
+        StringBuilder _consulta = new StringBuilder();
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        _consulta.append("SELECT ")
+                    .append("td.id AS 'id', ")
+                    .append("td.nombreCompleto AS 'nombreCompleto', ")
+                    .append("td.descripcion AS 'descripcion', ")
+                    .append("td.idTipoMovimiento AS 'idTipoMovimiento', ")
+                    .append("tm.nombreCompleto AS 'nombreTipoMovimiento', ")
+                    .append("td.idEstado AS 'idEstado' ")
+                .append("FROM dbtipoDocumento td ")
+                    .append("LEFT JOIN dbtipoMovimiento tm ON tm.id = td.idTipoMovimiento ")
+                .append("WHERE td.idEstado != 3;");
+
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         ResultSet rs = st.executeQuery();
 
@@ -130,7 +142,13 @@ public class tipoDocumentoDAOImpl implements catalogosInterface {
                 _tpDocumentosObj.setId(rs.getInt(1));
                 _tpDocumentosObj.setNombreCompleto(rs.getString(2));
                 _tpDocumentosObj.setDescripcion(rs.getString(3));
-                _tpDocumentosObj.setIdEstado(rs.getInt(4));
+                
+                tipoMovimiento _tpMovimiento = new tipoMovimiento();
+                _tpMovimiento.setId(rs.getInt(4));
+                _tpMovimiento.setNombreCompleto(rs.getString(5));
+                _tpDocumentosObj.setTipoMovimiento(_tpMovimiento);
+                
+                _tpDocumentosObj.setIdEstado(rs.getInt(6));
 
                 _listatpDocumentos.add(_tpDocumentosObj);
             }
@@ -158,16 +176,24 @@ public class tipoDocumentoDAOImpl implements catalogosInterface {
 
         List<tipoDocumento> _listatpDocumentos = new ArrayList();
 
-        String _consulta = "SELECT  " +
-                    "    dbtipoDocumento.id AS 'id', " +
-                    "    dbtipoDocumento.nombreCompleto AS 'nombreCompleto', " +
-                    "    dbtipoDocumento.descripcion AS 'descripcion', " +
-                    "    dbtipoDocumento.idEstado AS 'idEstado' " +
-                    "FROM " +
-                    "    controlGPC.dbtipoDocumento " +
-                    "WHERE " + _campo + " LIKE '%" + _dato + "%' AND dbtipoDocumento.idEstado <> 3;";
+        StringBuilder _consulta = new StringBuilder();
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        _consulta.append("SELECT ")
+                    .append("td.id AS 'id', ")
+                    .append("td.nombreCompleto AS 'nombreCompleto', ")
+                    .append("td.descripcion AS 'descripcion', ")
+                    .append("td.idTipoMovimiento AS 'idTipoMovimiento', ")
+                    .append("tm.nombreCompleto AS 'nombreTipoMovimiento', ")
+                    .append("td.idEstado AS 'idEstado' ")
+                .append("FROM dbtipoDocumento td ")
+                    .append("LEFT JOIN dbtipoMovimiento tm ON tm.id = td.idTipoMovimiento ")
+                .append("WHERE ")
+                .append(_campo)
+                .append(" LIKE '%")
+                .append(_dato)
+                .append("%' AND td.idEstado != 3;");
+
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         ResultSet rs = st.executeQuery();
 
@@ -180,7 +206,13 @@ public class tipoDocumentoDAOImpl implements catalogosInterface {
                 _tpDocumentosObj.setId(rs.getInt(1));
                 _tpDocumentosObj.setNombreCompleto(rs.getString(2));
                 _tpDocumentosObj.setDescripcion(rs.getString(3));
-                _tpDocumentosObj.setIdEstado(rs.getInt(4));
+                
+                tipoMovimiento _tpMovimiento = new tipoMovimiento();
+                _tpMovimiento.setId(rs.getInt(4));
+                _tpMovimiento.setNombreCompleto(rs.getString(5));
+                _tpDocumentosObj.setTipoMovimiento(_tpMovimiento);
+                
+                _tpDocumentosObj.setIdEstado(rs.getInt(6));
 
                 _listatpDocumentos.add(_tpDocumentosObj);
             }
@@ -206,16 +238,24 @@ public class tipoDocumentoDAOImpl implements catalogosInterface {
 
         tipoDocumento _tpDocumentosObj = new tipoDocumento();
 
-        String _consulta = "SELECT  " +
-                    "    dbtipoDocumento.id AS 'id', " +
-                    "    dbtipoDocumento.nombreCompleto AS 'nombreCompleto', " +
-                    "    dbtipoDocumento.descripcion AS 'descripcion', " +
-                    "    dbtipoDocumento.idEstado AS 'idEstado' " +
-                    "FROM " +
-                    "    controlGPC.dbtipoDocumento " +
-                    "WHERE dbtipoDocumento.id = " + id + " AND dbtipoDocumento.idEstado <> 3;";
+        StringBuilder _consulta = new StringBuilder();
 
-        PreparedStatement st = this._conn.prepareStatement(_consulta);
+        _consulta.append("SELECT  ")
+                .append("    dbtipoDocumento.id AS 'id', ")
+                .append("    dbtipoDocumento.nombreCompleto AS 'nombreCompleto', ")
+                .append("    dbtipoDocumento.descripcion AS 'descripcion', ")
+                .append("    dbtipoDocumento.idTipoMovimiento AS 'idTipoMovimiento', ")
+                .append("    dbtipoMovimento.nombreCompleto AS 'nombreTipoMovimiento', ")
+                .append("    dbtipoDocumento.idEstado AS 'idEstado' ")
+                .append("FROM ")
+                .append("    controlGPC.dbtipoDocumento ")
+                .append(" LEFT JOIN dbtipoMovimento ON dbtipoMovimiento.id = dbtipoDocumento.idTipoMovimiento ")
+                .append("WHERE ")
+                .append("dbtipoDocumento.id = ")
+                .append(id)
+                .append(" AND dbtipoDocumento.idEstado <> 3;");
+
+        PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
         ResultSet rs = st.executeQuery();
 
@@ -226,7 +266,13 @@ public class tipoDocumentoDAOImpl implements catalogosInterface {
                 _tpDocumentosObj.setId(rs.getInt(1));
                 _tpDocumentosObj.setNombreCompleto(rs.getString(2));
                 _tpDocumentosObj.setDescripcion(rs.getString(3));
-                _tpDocumentosObj.setIdEstado(rs.getInt(4));
+                
+                tipoMovimiento _tpMovimiento = new tipoMovimiento();
+                _tpMovimiento.setId(rs.getInt(4));
+                _tpMovimiento.setNombreCompleto(rs.getString(5));
+                _tpDocumentosObj.setTipoMovimiento(_tpMovimiento);
+                
+                _tpDocumentosObj.setIdEstado(rs.getInt(6));
 
             }
 
@@ -245,5 +291,5 @@ public class tipoDocumentoDAOImpl implements catalogosInterface {
 
         return _tpDocumentosObj;
     }
-    
+
 }

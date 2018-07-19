@@ -2,6 +2,15 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/home/juan_m_osuna/NetBeansProjects/git/guaymasControlGPC/controlGPC/web/catalogos/categoriaProducto/agregarCategoriaProducto.jsp</file>
+            <file>file:/home/juan_m_osuna/NetBeansProjects/git/guaymasControlGPC/controlGPC/web/catalogos/cliente/agregarCliente.jsp</file>
+            <file>file:/home/juan_m_osuna/NetBeansProjects/git/guaymasControlGPC/controlGPC/src/java/controller/usuarioServlet.java</file>
+            <file>file:/home/juan_m_osuna/NetBeansProjects/git/guaymasControlGPC/controlGPC/web/catalogos/transportista/agregarTransportista.jsp</file>
+            <file>file:/home/juan_m_osuna/NetBeansProjects/git/guaymasControlGPC/controlGPC/web/catalogos/usuario/agregarUsuario.jsp</file>
+            <file>file:/home/juan_m_osuna/NetBeansProjects/git/guaymasControlGPC/controlGPC/web/catalogos/chofer/agregarChofer.jsp</file>
+            <file>file:/home/juan_m_osuna/NetBeansProjects/git/guaymasControlGPC/controlGPC/web/catalogos/contactoCliente/agregarContactoCliente.jsp</file>
+            <file>file:/home/juan_m_osuna/NetBeansProjects/git/guaymasControlGPC/controlGPC/web/catalogos/vehiculo/agregarVehiculo.jsp</file>
+        </group>
     </open-files>
 </project-private>

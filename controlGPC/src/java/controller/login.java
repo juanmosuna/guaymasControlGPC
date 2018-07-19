@@ -9,7 +9,6 @@ import DAO.database.usuarioDAOImpl;
 import database.baseDatos;
 import entity.usuario;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -67,26 +66,26 @@ public class login extends HttpServlet {
 
                     }else{
                         _error = true;
-                        _mensajeError = "No tiene privilegio para ingresar a la plataforma, consulte con su administrador del sistema ...";
+                        _mensajeError = "danger, No tiene privilegio para ingresar a la plataforma, consulte con su administrador del sistema ...";
                     }
                 }else{
                     _error = true;
-                    _mensajeError = "Su cuenta de usuario se encuentra deshabilitada, consulte con su administrador del sistema ...";
+                    _mensajeError = "danger, Su cuenta de usuario se encuentra deshabilitada, consulte con su administrador del sistema ...";
                 }
                 
             }else{
                 _error = true;
-                _mensajeError = "No se encontr&oacute; la cuenta de usuario, intente de nuevo por favor ...";
+                _mensajeError = "danger, No se encontr&oacute; la cuenta de usuario, intente de nuevo por favor ...";
             }
         
         }else{
             _error = true;
-            _mensajeError = "Nombre de usuario y/o contrase&ntilde;a incorrecto ...";
+            _mensajeError = "danger, Nombre de usuario y/o contrase&ntilde;a incorrecto ...";
         }
         
         if (_error){
 
-            session.setAttribute( "mensajeError", _mensajeError );
+            session.setAttribute( "m", _mensajeError );
             response.sendRedirect("index.jsp");
             
         }
