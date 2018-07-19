@@ -51,7 +51,7 @@ public class clienteDAOImpl implements catalogosInterface {
                     .append("fotoCliente, " )
                     .append("idEstado) " )
                     .append("VALUES " )
-                    .append("(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
+                    .append("(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
 
         PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
@@ -179,7 +179,7 @@ public class clienteDAOImpl implements catalogosInterface {
                 .append("    dbcliente.fax AS 'fax', " )
                 .append("    dbcliente.correoElectronico AS 'correoElectronico', " )
                 .append("    dbcliente.paginaWeb AS 'paginaWeb', " )
-                .append("    dbcliente.fotoTransportista AS 'fotoCliente', " )
+                .append("    dbcliente.fotoCliente AS 'fotoCliente', " )
                 .append("    dbcliente.idEstado AS 'idEstado' " )
                 .append("FROM " )
                 .append("    controlGPC.dbcliente ")
@@ -256,7 +256,7 @@ public class clienteDAOImpl implements catalogosInterface {
                 .append("    dbcliente.fax AS 'fax', " )
                 .append("    dbcliente.correoElectronico AS 'correoElectronico', " )
                 .append("    dbcliente.paginaWeb AS 'paginaWeb', " )
-                .append("    dbcliente.fotoTransportista AS 'fotoCliente', " )
+                .append("    dbcliente.fotoCliente AS 'fotoCliente', " )
                 .append("    dbcliente.idEstado AS 'idEstado' " )
                 .append("FROM " )
                 .append("    controlGPC.dbcliente " )
@@ -334,7 +334,7 @@ public class clienteDAOImpl implements catalogosInterface {
                 .append("    dbcliente.fax AS 'fax', " )
                 .append("    dbcliente.correoElectronico AS 'correoElectronico', " )
                 .append("    dbcliente.paginaWeb AS 'paginaWeb', " )
-                .append("    dbcliente.fotoTransportista AS 'fotoCliente', " )
+                .append("    dbcliente.fotoCliente AS 'fotoCliente', " )
                 .append("    dbcliente.idEstado AS 'idEstado' " )
                 .append("FROM " )
                 .append("    controlGPC.dbcliente ")

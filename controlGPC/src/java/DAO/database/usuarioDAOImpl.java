@@ -38,7 +38,7 @@ public class usuarioDAOImpl {
         
         _consulta.append("INSERT INTO controlGPC.dbusuario ")
                     .append("(nombreCompleto, ")
-                    .append("(sexo, ")
+                    .append("sexo, ")
                     .append("idPerfilUsuario, ")
                     .append("idLocalidad, ")
                     .append("idDepartamento, ")
@@ -48,7 +48,7 @@ public class usuarioDAOImpl {
                     .append("fotoUsuario, ")
                     .append("cuentaActiva, ")
                     .append("idEstado) ")
-                .append("VALUES (?, ?' ?, ?, ?, ?, ?, aes_encrypt(?, 'gpc'), ?, ?, 1);");
+                .append("VALUES (?, ?, ?, ?, ?, ?, ?, aes_encrypt(?, 'gpc'), ?, ?, 1);");
                 
         PreparedStatement st = this.conexion.prepareStatement(_consulta.toString());
         
@@ -57,10 +57,10 @@ public class usuarioDAOImpl {
         st.setInt(3, _usuario.getPerfilUsuario().getId());
         st.setInt(4, _usuario.getLocalidad().getId());
         st.setInt(5, _usuario.getDepartamento().getId());
-        st.setInt(6, _usuario.getEstado().getId());
+        st.setInt(6, _usuario.getIdEstado());
         st.setString(7, _usuario.getCuenta());
         st.setString(8, _usuario.getContrasena());
-        st.setString(9, _usuario.getFotoUsuario());
+        st.setString(9, javax.xml.bind.DatatypeConverter.printBase64Binary(_usuario.getFotoUsuario()));
         st.setBoolean(10, _usuario.isCuentaActiva());
         
         boolean resultado = st.execute();
@@ -117,10 +117,10 @@ public class usuarioDAOImpl {
         st.setInt(3, _usuario.getPerfilUsuario().getId());
         st.setInt(4, _usuario.getLocalidad().getId());
         st.setInt(5, _usuario.getDepartamento().getId());
-        st.setInt(6, _usuario.getEstado().getId());
+        st.setInt(6, _usuario.getEmpresa().getId());
         st.setString(7, _usuario.getCuenta());
         st.setString(8, _usuario.getContrasena());
-        st.setString(9, _usuario.getFotoUsuario());
+        st.setString(9, javax.xml.bind.DatatypeConverter.printBase64Binary(_usuario.getFotoUsuario()));
         st.setBoolean(10, _usuario.isCuentaActiva());
         st.setInt(11, _usuario.getId());
         
@@ -205,13 +205,10 @@ public class usuarioDAOImpl {
                 
                 _usuario.setCuenta(rs.getString(12));
                 _usuario.setContrasena(rs.getString(13));
-                _usuario.setFotoUsuario(rs.getString(14));
+                _usuario.setFotoUsuario(javax.xml.bind.DatatypeConverter.parseBase64Binary(rs.getString(14)));
                 _usuario.setCuentaActiva(rs.getBoolean(15));
-                
-                estado _estado = new estado();
-                _estado.setId(rs.getInt(16));
-                _estado.setNombreCompleto(rs.getString(17));
-                _usuario.setEstado(_estado);
+                _usuario.setIdEstado(rs.getInt(16));
+                _usuario.setEstado(rs.getString(17));
                 
                 o = (Object)_usuario;
                 
@@ -305,13 +302,10 @@ public class usuarioDAOImpl {
                 
                 _usuario.setCuenta(rs.getString(12));
                 _usuario.setContrasena(rs.getString(13));
-                _usuario.setFotoUsuario(rs.getString(14));
+                _usuario.setFotoUsuario(javax.xml.bind.DatatypeConverter.parseBase64Binary(rs.getString(14)));
                 _usuario.setCuentaActiva(rs.getBoolean(15));
-                
-                estado _estado = new estado();
-                _estado.setId(rs.getInt(16));
-                _estado.setNombreCompleto(rs.getString(17));
-                _usuario.setEstado(_estado);
+                _usuario.setIdEstado(rs.getInt(16));
+                _usuario.setEstado(rs.getString(17));
             
                 _listaUsuarios.add(_usuario);
             }
@@ -401,13 +395,10 @@ public class usuarioDAOImpl {
                 
                 _usuario.setCuenta(rs.getString(12));
                 _usuario.setContrasena(rs.getString(13));
-                _usuario.setFotoUsuario(rs.getString(14));
+                _usuario.setFotoUsuario(javax.xml.bind.DatatypeConverter.parseBase64Binary(rs.getString(14)));
                 _usuario.setCuentaActiva(rs.getBoolean(15));
-                
-                estado _estado = new estado();
-                _estado.setId(rs.getInt(16));
-                _estado.setNombreCompleto(rs.getString(17));
-                _usuario.setEstado(_estado);
+                _usuario.setIdEstado(rs.getInt(16));
+                _usuario.setEstado(rs.getString(17));
             
                 _listaUsuarios.add(_usuario);
             }
@@ -478,7 +469,6 @@ public class usuarioDAOImpl {
                 
                 _usuario = new usuario();
                 
-                
                 _usuario.setId(rs.getInt(1));
                 _usuario.setNombreCompleto(rs.getString(2));
                 _usuario.setSexo(rs.getString(3));
@@ -500,12 +490,9 @@ public class usuarioDAOImpl {
                 
                 _usuario.setCuenta(rs.getString(8));
                 _usuario.setContrasena(rs.getString(9));
-                _usuario.setFotoUsuario(rs.getString(10));
+                _usuario.setFotoUsuario(javax.xml.bind.DatatypeConverter.parseBase64Binary(rs.getString(10)));
                 _usuario.setCuentaActiva(rs.getBoolean(11));
-                
-                estado _estado = new estado();
-                _estado.setId(rs.getInt(12));
-                _usuario.setEstado(_estado);
+                _usuario.setId(rs.getInt(12));
                 
                 _perfilUsuario.setNombreCompleto(rs.getString(13));
                 _perfilUsuario.setDescripcion(rs.getString(14));

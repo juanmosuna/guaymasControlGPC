@@ -67,9 +67,9 @@ public class unidadMedidaServlet extends HttpServlet {
                     _unidadMedidaObj.setIdEstado(1);
                     
                     if(!_unidadMedidaDAO.agregarRegistro(_unidadMedidaObj)){
-                        mensajeAlerta = "Se agrego satisfactoriamente";
-                    }else {
-                        mensajeAlerta = "Error!!";
+                        mensajeAlerta = "success, Se ha agregado el registro satisfactoriamente ... !!";
+                    } else {
+                        mensajeAlerta = "danger, Error al agregar el registro ... !!";
                     }                   
                     
                     break;
@@ -84,20 +84,20 @@ public class unidadMedidaServlet extends HttpServlet {
                     _unidadMedidaObj.setIdEstado(2);
                     
                     if(!_unidadMedidaDAO.modificarRegistro(_unidadMedidaObj)){
-                        mensajeAlerta = "Se modifico satisfactoriamente";
-                    }else {
-                        mensajeAlerta = "Error!!";
-                    }                   
+                        mensajeAlerta = "success, Se ha modificado el registro satisfactoriamente ... !!";
+                    } else {
+                        mensajeAlerta = "danger, Error al modificar el registro ... !!";
+                    }                  
                     
                     break;
                 }
                 case 3: {
                     
                     if(!_unidadMedidaDAO.eliminarRegistro(_id)){
-                        mensajeAlerta = "Se elimino satisfactoriamente";
-                    }else {
-                        mensajeAlerta = "Error!!";
-                    }                   
+                        mensajeAlerta = "success, Se ha eliminado el registro satisfactoriamente ... !!";
+                    } else {
+                        mensajeAlerta = "danger, Error al eliminar el registro ... !!";
+                    }                
                     
                     break;
                 }
@@ -109,7 +109,7 @@ public class unidadMedidaServlet extends HttpServlet {
             if (_baseDatos != null) {
                 _baseDatos.closeConnection();
             }
-            response.sendRedirect("/controlGPC/catalogos/unidadMedida/unidadMedidaTabla.jsp");
+            response.sendRedirect("/controlGPC/catalogos/unidadMedida/unidadMedidaTabla.jsp?m="+mensajeAlerta);
         }
 
     }

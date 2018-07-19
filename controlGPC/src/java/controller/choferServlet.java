@@ -101,9 +101,9 @@ public class choferServlet extends HttpServlet {
                     _choferObj.setIdEstado(1);
                     
                     if(!_choferDAO.agregarRegistro(_choferObj)){
-                        mensajeAlerta = "Se agrego satisfactoriamente";
-                    }else {
-                        mensajeAlerta = "Error!!";
+                        mensajeAlerta = "success, Se ha agregado el registro satisfactoriamente ... !!";
+                    } else {
+                        mensajeAlerta = "danger, Error al agregar el registro ... !!";
                     }                   
                     
                     break;
@@ -130,20 +130,20 @@ public class choferServlet extends HttpServlet {
                     _choferObj.setIdEstado(2);
                     
                     if(!_choferDAO.modificarRegistro(_choferObj)){
-                        mensajeAlerta = "Se modifico satisfactoriamente";
-                    }else {
-                        mensajeAlerta = "Error!!";
-                    }                   
+                        mensajeAlerta = "success, Se ha modificado el registro satisfactoriamente ... !!";
+                    } else {
+                        mensajeAlerta = "danger, Error al modificar el registro ... !!";
+                    }
                     
                     break;
                 }
                 case 3: {
                     
                     if(!_choferDAO.eliminarRegistro(_id)){
-                        mensajeAlerta = "Se elimino satisfactoriamente";
-                    }else {
-                        mensajeAlerta = "Error!!";
-                    }                   
+                        mensajeAlerta = "success, Se ha eliminado el registro satisfactoriamente ... !!";
+                    } else {
+                        mensajeAlerta = "danger, Error al eliminar el registro ... !!";
+                    }
                     
                     break;
                 }
@@ -155,7 +155,7 @@ public class choferServlet extends HttpServlet {
             if (_baseDatos != null) {
                 _baseDatos.closeConnection();
             }
-            response.sendRedirect("/controlGPC/catalogos/chofer/choferTabla.jsp");
+            response.sendRedirect("/controlGPC/catalogos/chofer/choferTabla.jsp?m="+mensajeAlerta);
         }
 
     }

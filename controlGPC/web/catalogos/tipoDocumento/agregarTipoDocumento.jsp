@@ -4,6 +4,11 @@
     Author     : juan_m_osuna
 --%>
 
+<%@page import="database.baseDatos"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="DAO.database.tipoMovimientoDAOImpl"%>
+<%@page import="java.util.List"%>
+<%@page import="entity.tipoMovimiento"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
     if (session.getAttribute("usuario") == null){
@@ -84,7 +89,7 @@
                 </li>
             </ul>
             <hr>
-            <form id="formulario" action="tipoDocumentoServlet.do" method="post" class="">
+            <form id="formulario" action="/controlGPC/tipoDocumentoServlet.do" method="post" class="">
                 <div class="form-group">
                     <label class="control-label" for="nombreCompleto">Nombre completo:</label>
                     <input type="text" class="form-control is-invalid" id="nombreCompleto" name="nombreCompleto" placeholder="Teclee el nombre completo del tipo de documento ..." required>
@@ -99,16 +104,41 @@
                 <div class="form-group">
                     <label class="control-label" class="mr-sm-2" for="idTipoMovimiento">Tipo de movimiento del documento:</label>
                     <select class="custom-select mr-sm-2" id="idTipoMovimiento" name="idTipoMovimiento">
-                        <option value="0" selected>Selecciona un tipo de documento ...</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                        <option value="0" selected>Selecciona un tipo de movimiento para el documento ...</option>
+                        <%
+                            baseDatos _baseDatos = new baseDatos();
+                            
+                            List<tipoMovimiento> _tipoMovimientoDAO = new ArrayList<tipoMovimiento>();
+                                
+                            try{
+                            
+                                tipoMovimientoDAOImpl _tipoMovimientoDAOImpl = new tipoMovimientoDAOImpl(_baseDatos.getConnection());
+                                
+                                _tipoMovimientoDAO = (List<tipoMovimiento>)_tipoMovimientoDAOImpl.consultarTodos();
+                            
+                            }catch(Exception ex){
+
+                                ex.printStackTrace();
+
+                            }finally{
+
+                                if (_baseDatos != null){
+                                    _baseDatos.closeConnection();
+                                }
+
+                            }
+                        
+                            for(tipoMovimiento _tipoMovimiento : _tipoMovimientoDAO){
+                                out.print("<option value=\""+_tipoMovimiento.getId()+"\">"+_tipoMovimiento.getNombreCompleto()+"</option>");
+                            }
+                        %>
                     </select>
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Guardar</button>
                     <button type="button" class="btn btn-light" onclick="location.href='tipoDocumentoTabla.jsp';" >Cancelar</button>
                 </div>
+                <input type="hidden" id="op" name="op" value="1">
             </form>
         </div>
     </body>

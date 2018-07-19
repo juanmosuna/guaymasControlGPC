@@ -20,9 +20,10 @@ public class usuario {
     private empresa empresa = new empresa();
     private String cuenta = new String();
     private String contrasena = new String();
-    private String fotoUsuario = new String();
+    private byte[] fotoUsuario = null;
     private boolean cuentaActiva = false;
-    private estado estado =  new estado();
+    private int idEstado = 0;
+    private String estado = new String();
     
     public usuario() {
     }
@@ -99,11 +100,11 @@ public class usuario {
         this.contrasena = contrasena;
     }
 
-    public String getFotoUsuario() {
+    public byte[] getFotoUsuario() {
         return fotoUsuario;
     }
 
-    public void setFotoUsuario(String fotoUsuario) {
+    public void setFotoUsuario(byte[] fotoUsuario) {
         this.fotoUsuario = fotoUsuario;
     }
 
@@ -115,11 +116,19 @@ public class usuario {
         this.cuentaActiva = cuentaActiva;
     }
 
-    public estado getEstado() {
+    public int getIdEstado() {
+        return idEstado;
+    }
+
+    public void setIdEstado(int idEstado) {
+        this.idEstado = idEstado;
+    }
+
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(estado estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
 

@@ -4,6 +4,13 @@
     Author     : juan_m_osuna
 --%>
 
+<%@page import="DAO.database.clienteDAOImpl"%>
+<%@page import="entity.cliente"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="database.baseDatos"%>
+<%@page import="database.baseDatos"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
     if (session.getAttribute("usuario") == null){
@@ -84,7 +91,7 @@
                 </li>
             </ul>
             <hr>
-            <form id="formulario" action="contactoClienteServlet.do" method="post" class="">
+            <form id="formulario" action="/controlGPC/contactoClienteServlet.do" method="post" enctype="multipart/form-data" class="">
                 <div class="form-group">
                     <label class="control-label" for="nombreCompleto">Nombre completo:</label>
                     <input type="text" class="form-control is-invalid" id="nombreCompleto" name="nombreCompleto" placeholder="Teclee el nombre completo del contacto del cliente ..." required>
@@ -139,10 +146,35 @@
                 <div class="form-group">
                     <label class="control-label" class="mr-sm-2" for="idCliente">Ligar al siguiente cliente:</label>
                     <select class="custom-select mr-sm-2" id="idCliente" name="idCliente">
-                        <option value="0" selected>Selecciona un tipo de almacén ...</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                        <option value="0" selected>Selecciona un cliente para éste contacto ...</option>
+                        
+                        <%
+                            baseDatos _baseDatos = new baseDatos();
+                            
+                            List<cliente> _clienteDAO = new ArrayList<cliente>();
+                                
+                            try{
+                            
+                                clienteDAOImpl _clienteDAOImpl = new clienteDAOImpl(_baseDatos.getConnection());
+                                
+                                _clienteDAO = (List<cliente>)_clienteDAOImpl.consultarTodos();
+                            
+                            }catch(Exception ex){
+
+                                ex.printStackTrace();
+
+                            }finally{
+
+                                if (_baseDatos != null){
+                                    _baseDatos.closeConnection();
+                                }
+
+                            }
+                        
+                            for(cliente _cliente : _clienteDAO){
+                                out.print("<option value=\""+_cliente.getId()+"\">"+_cliente.getNombreCompleto()+"</option>");
+                            }
+                        %>
                     </select>
                 </div>
                 <div class="form-group">
@@ -158,6 +190,7 @@
                     <button type="submit" class="btn btn-primary">Guardar</button>
                     <button type="button" class="btn btn-light" onclick="location.href='contactoClienteTabla.jsp';" >Cancelar</button>
                 </div>
+                <input type="hidden" id="op" name="op" value="1">
             </form>
         </div>
     </body>

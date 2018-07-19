@@ -169,7 +169,7 @@
                             <td><%=_vehiculo.getPlacas() %></td>
                             <td><%=_vehiculo.getMarca() %></td>
                             <td><%=_vehiculo.getModelo() %></td>
-                            <td><%=_vehiculo.getTipoVehiculo() %></td>
+                            <td><%=_vehiculo.getTipoVehiculo().getNombreCompleto() %></td>
                             <td width="10"><a href="modificarVehiculo.jsp?id=<%=_vehiculo.getId() %>"><i class="fa fa-pencil-alt text-primary"></i></a></td>
                             <td width="10"><a href="/controlGPC/vehiculoServlet.do?op=3&id=<%=_vehiculo.getId() %>"><i class="fa fa-trash-alt  text-danger"></i></a></td>
                         </tr>

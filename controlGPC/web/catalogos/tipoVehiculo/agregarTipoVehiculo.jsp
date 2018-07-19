@@ -84,7 +84,7 @@
                 </li>
             </ul>
             <hr>
-            <form id="formulario" action="tipoVehiculoServlet.do" method="post" class="">
+            <form id="formulario" action="/controlGPC/tipoVehiculoServlet.do" method="post" class="">
                 <div class="form-group">
                     <label class="control-label" for="nombreCompleto">Nombre completo:</label>
                     <input type="text" class="form-control is-invalid" id="nombreCompleto" name="nombreCompleto" placeholder="Teclee el nombre completo del tipo de vehículo ..." required>
@@ -100,6 +100,7 @@
                     <button type="submit" class="btn btn-primary">Guardar</button>
                     <button type="button" class="btn btn-light" onclick="location.href='tipoVehiculoTabla.jsp';" >Cancelar</button>
                 </div>
+                <input type="hidden" id="op" name="op" value="1">
             </form>
         </div>
     </body>

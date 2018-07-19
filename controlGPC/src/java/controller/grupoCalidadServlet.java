@@ -5,13 +5,13 @@
  */
 package controller;
 
-import DAO.database.tipoMovimientoDAOImpl;
+import DAO.database.grupoCalidadDAOImpl;
 import database.baseDatos;
-import entity.tipoMovimiento;
+import entity.grupoCalidad;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,10 +19,9 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author elara
+ * @author juan_m_osuna
  */
-@WebServlet(name = "tipoMovimientoServlet", urlPatterns = {"/tipoMovimientoServlet.do"})
-public class tipoMovimientoServlet extends HttpServlet {
+public class grupoCalidadServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,7 +34,6 @@ public class tipoMovimientoServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         HttpSession session = request.getSession(true);
         String _nombreUsuario = (session.getAttribute("nombreUsuario") != null ? session.getAttribute("nombreUsuario").toString() : new String());
 
@@ -43,7 +41,7 @@ public class tipoMovimientoServlet extends HttpServlet {
         SimpleDateFormat _formatoHora = new SimpleDateFormat("HH:mm:ss");
 
         baseDatos _baseDatos = new baseDatos();
-        tipoMovimientoDAOImpl _tipoMovimientoDAO = new tipoMovimientoDAOImpl(_baseDatos.getConnection());
+        grupoCalidadDAOImpl _grupoCalidadDAO = new grupoCalidadDAOImpl(_baseDatos.getConnection());
 
         String mensajeAlerta = new String();
         
@@ -58,13 +56,13 @@ public class tipoMovimientoServlet extends HttpServlet {
             switch (_opcion) {
                 case 1: {
                     
-                    tipoMovimiento _tpMvimientoObj = new tipoMovimiento();
+                    grupoCalidad _grupoCalidadObj = new grupoCalidad();
                     
-                    _tpMvimientoObj.setNombreCompleto(_nombreCompleto);
-                    _tpMvimientoObj.setDescripcion(_descripcion);
-                    _tpMvimientoObj.setIdEstado(1);
+                    _grupoCalidadObj.setNombreCompleto(_nombreCompleto);
+                    _grupoCalidadObj.setDescripcion(_descripcion);
+                    _grupoCalidadObj.setIdEstado(1);
                     
-                    if(!_tipoMovimientoDAO.agregarRegistro(_tpMvimientoObj)){
+                    if(!_grupoCalidadDAO.agregarRegistro(_grupoCalidadObj)){
                         mensajeAlerta = "success, Se ha agregado el registro satisfactoriamente ... !!";
                     } else {
                         mensajeAlerta = "danger, Error al agregar el registro ... !!";
@@ -74,28 +72,28 @@ public class tipoMovimientoServlet extends HttpServlet {
                 }
                 case 2: {
                     
-                    tipoMovimiento _tpMvimientoObj = new tipoMovimiento();
+                    grupoCalidad _grupoCalidadObj = new grupoCalidad();
                     
-                    _tpMvimientoObj.setId(_id);
-                    _tpMvimientoObj.setNombreCompleto(_nombreCompleto);
-                    _tpMvimientoObj.setDescripcion(_descripcion);
-                    _tpMvimientoObj.setIdEstado(2);
+                    _grupoCalidadObj.setId(_id);
+                    _grupoCalidadObj.setNombreCompleto(_nombreCompleto);
+                    _grupoCalidadObj.setDescripcion(_descripcion);
+                    _grupoCalidadObj.setIdEstado(2);
                     
-                    if(!_tipoMovimientoDAO.modificarRegistro(_tpMvimientoObj)){
+                    if(!_grupoCalidadDAO.modificarRegistro(_grupoCalidadObj)){
                         mensajeAlerta = "success, Se ha modificado el registro satisfactoriamente ... !!";
                     } else {
                         mensajeAlerta = "danger, Error al modificar el registro ... !!";
-                    }               
+                    }                
                     
                     break;
                 }
                 case 3: {
                     
-                    if(!_tipoMovimientoDAO.eliminarRegistro(_id)){
+                    if(!_grupoCalidadDAO.eliminarRegistro(_id)){
                         mensajeAlerta = "success, Se ha eliminado el registro satisfactoriamente ... !!";
                     } else {
                         mensajeAlerta = "danger, Error al eliminar el registro ... !!";
-                    }                
+                    }                 
                     
                     break;
                 }
@@ -107,9 +105,8 @@ public class tipoMovimientoServlet extends HttpServlet {
             if (_baseDatos != null) {
                 _baseDatos.closeConnection();
             }
-            response.sendRedirect("/controlGPC/catalogos/tipoMovimiento/tipoMovimientoTabla.jsp?m="+mensajeAlerta);
+            response.sendRedirect("/controlGPC/catalogos/grupoCalidad/grupoCalidadTabla.jsp?m="+mensajeAlerta);
         }
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

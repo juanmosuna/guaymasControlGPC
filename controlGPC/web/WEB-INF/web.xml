@@ -93,8 +93,34 @@
         <servlet-class>controller.unidadMedidaServlet</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>usuarioServlet</servlet-name>
+        <servlet-class>controller.usuarioServlet</servlet-class>
+        <multipart-config>
+            <location>/tmp</location>
+            <max-file-size>20848820</max-file-size>
+            <max-request-size>418018841</max-request-size>
+            <file-size-threshold> 10485760 </file-size-threshold>
+        </multipart-config>
+    </servlet>
+    <servlet>
         <servlet-name>vehiculoServlet</servlet-name>
         <servlet-class>controller.vehiculoServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>calidadServlet</servlet-name>
+        <servlet-class>controller.calidadServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>estadoServlet</servlet-name>
+        <servlet-class>controller.estadoServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>grupoCalidadServlet</servlet-name>
+        <servlet-class>controller.grupoCalidadServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>tipoDocumentoServlet</servlet-name>
+        <servlet-class>controller.tipoDocumentoServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>almacenServlet</servlet-name>
@@ -165,8 +191,28 @@
         <url-pattern>/unidadMedidaServlet.do</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>usuarioServlet</servlet-name>
+        <url-pattern>/usuarioServlet.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>vehiculoServlet</servlet-name>
         <url-pattern>/vehiculoServlet.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>calidadServlet</servlet-name>
+        <url-pattern>/calidadServlet.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>estadoServlet</servlet-name>
+        <url-pattern>/estadoServlet.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>grupoCalidadServlet</servlet-name>
+        <url-pattern>/grupoCalidadServlet.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>tipoDocumentoServlet</servlet-name>
+        <url-pattern>/tipoDocumentoServlet.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -167,7 +167,7 @@
                             <td width="40" scope="row"><%=_tipoDocumento.getId() %></td>
                             <td><%=_tipoDocumento.getNombreCompleto() %></td>
                             <td><%=_tipoDocumento.getDescripcion() %></td>
-                            <td><%=_tipoDocumento.getTipoMovimiento() %></td>
+                            <td><%=_tipoDocumento.getTipoMovimiento().getNombreCompleto() %></td>
                             <td width="10"><a href="modificarTipoDocumento.jsp?id=<%=_tipoDocumento.getId() %>"><i class="fa fa-pencil-alt text-primary"></i></a></td>
                             <td width="10"><a href="/controlGPC/tipoDocumentoServlet.do?op=3&id=<%=_tipoDocumento.getId() %>"><i class="fa fa-trash-alt  text-danger"></i></a></td>
                         </tr>

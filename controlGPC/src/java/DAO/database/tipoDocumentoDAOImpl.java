@@ -40,7 +40,7 @@ public class tipoDocumentoDAOImpl implements catalogosInterface {
                 .append("idTipoMovimiento, ")
                 .append("idEstado) ")
                 .append("VALUES ")
-                .append("(?, ?, ?);");
+                .append("(?, ?, ?, ?);");
 
         PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
@@ -80,7 +80,7 @@ public class tipoDocumentoDAOImpl implements catalogosInterface {
         st.setInt(3, _tpDocumentosObj.getTipoMovimiento().getId());
         st.setInt(4, _tpDocumentosObj.getIdEstado());
 
-        st.setInt(4, _tpDocumentosObj.getId());
+        st.setInt(5, _tpDocumentosObj.getId());
 
         boolean resultado = st.execute();
 
@@ -118,18 +118,16 @@ public class tipoDocumentoDAOImpl implements catalogosInterface {
 
         StringBuilder _consulta = new StringBuilder();
 
-        _consulta.append("SELECT  ")
-                .append("    dbtipoDocumento.id AS 'id', ")
-                .append("    dbtipoDocumento.nombreCompleto AS 'nombreCompleto', ")
-                .append("    dbtipoDocumento.descripcion AS 'descripcion', ")
-                .append("    dbtipoDocumento.idTipoMovimiento AS 'idTipoMovimiento', ")
-                .append("    dbtipoMovimento.nombreCompleto AS 'nombreTipoMovimiento', ")
-                .append("    dbtipoDocumento.idEstado AS 'idEstado' ")
-                .append("FROM ")
-                .append("    controlGPC.dbtipoDocumento ")
-                .append(" LEFT JOIN dbtipoMovimento ON dbtipoMovimiento.id = dbtipoDocumento.idTipoMovimiento ")
-                .append("WHERE ")
-                .append("    dbtipoDocumento.idEstado <> 3;");
+        _consulta.append("SELECT ")
+                    .append("td.id AS 'id', ")
+                    .append("td.nombreCompleto AS 'nombreCompleto', ")
+                    .append("td.descripcion AS 'descripcion', ")
+                    .append("td.idTipoMovimiento AS 'idTipoMovimiento', ")
+                    .append("tm.nombreCompleto AS 'nombreTipoMovimiento', ")
+                    .append("td.idEstado AS 'idEstado' ")
+                .append("FROM dbtipoDocumento td ")
+                    .append("LEFT JOIN dbtipoMovimiento tm ON tm.id = td.idTipoMovimiento ")
+                .append("WHERE td.idEstado != 3;");
 
         PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
@@ -180,21 +178,20 @@ public class tipoDocumentoDAOImpl implements catalogosInterface {
 
         StringBuilder _consulta = new StringBuilder();
 
-        _consulta.append("SELECT  ")
-                .append("    dbtipoDocumento.id AS 'id', ")
-                .append("    dbtipoDocumento.nombreCompleto AS 'nombreCompleto', ")
-                .append("    dbtipoDocumento.descripcion AS 'descripcion', ")
-                .append("    dbtipoDocumento.idTipoMovimiento AS 'idTipoMovimiento', ")
-                .append("    dbtipoMovimento.nombreCompleto AS 'nombreTipoMovimiento', ")
-                .append("    dbtipoDocumento.idEstado AS 'idEstado' ")
-                .append("FROM ")
-                .append("    controlGPC.dbtipoDocumento ")
-                .append(" LEFT JOIN dbtipoMovimento ON dbtipoMovimiento.id = dbtipoDocumento.idTipoMovimiento ")
+        _consulta.append("SELECT ")
+                    .append("td.id AS 'id', ")
+                    .append("td.nombreCompleto AS 'nombreCompleto', ")
+                    .append("td.descripcion AS 'descripcion', ")
+                    .append("td.idTipoMovimiento AS 'idTipoMovimiento', ")
+                    .append("tm.nombreCompleto AS 'nombreTipoMovimiento', ")
+                    .append("td.idEstado AS 'idEstado' ")
+                .append("FROM dbtipoDocumento td ")
+                    .append("LEFT JOIN dbtipoMovimiento tm ON tm.id = td.idTipoMovimiento ")
                 .append("WHERE ")
                 .append(_campo)
                 .append(" LIKE '%")
                 .append(_dato)
-                .append("%' AND dbtipoDocumento.idEstado <> 3;");
+                .append("%' AND td.idEstado != 3;");
 
         PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 

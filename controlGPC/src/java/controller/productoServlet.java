@@ -74,9 +74,9 @@ public class productoServlet extends HttpServlet {
                     _productoObj.setIdEstado(1);
 
                     if (!_productoDAO.agregarRegistro(_productoObj)) {
-                        mensajeAlerta = "Se agrego satisfactoriamente";
+                        mensajeAlerta = "success, Se ha agregado el registro satisfactoriamente ... !!";
                     } else {
-                        mensajeAlerta = "Error!!";
+                        mensajeAlerta = "danger, Error al agregar el registro ... !!";
                     }
 
                     break;
@@ -97,9 +97,9 @@ public class productoServlet extends HttpServlet {
                     _productoObj.setIdEstado(2);
 
                     if (!_productoDAO.modificarRegistro(_productoObj)) {
-                        mensajeAlerta = "Se modifico satisfactoriamente";
+                        mensajeAlerta = "success, Se ha modificado el registro satisfactoriamente ... !!";
                     } else {
-                        mensajeAlerta = "Error!!";
+                        mensajeAlerta = "danger, Error al modificar el registro ... !!";
                     }
 
                     break;
@@ -107,9 +107,9 @@ public class productoServlet extends HttpServlet {
                 case 3: {
 
                     if (!_productoDAO.eliminarRegistro(_id)) {
-                        mensajeAlerta = "Se elimino satisfactoriamente";
+                        mensajeAlerta = "success, Se ha eliminado el registro satisfactoriamente ... !!";
                     } else {
-                        mensajeAlerta = "Error!!";
+                        mensajeAlerta = "danger, Error al eliminar el registro ... !!";
                     }
 
                     break;
@@ -122,7 +122,7 @@ public class productoServlet extends HttpServlet {
             if (_baseDatos != null) {
                 _baseDatos.closeConnection();
             }
-            response.sendRedirect("/controlGPC/catalogos/producto/productoTabla.jsp");
+            response.sendRedirect("/controlGPC/catalogos/producto/productoTabla.jsp?m="+mensajeAlerta);
         }
 
     }

@@ -4,6 +4,11 @@
     Author     : juan_m_osuna
 --%>
 
+<%@page import="database.baseDatos"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
+<%@page import="DAO.database.grupoCalidadDAOImpl"%>
+<%@page import="entity.grupoCalidad"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
     if (session.getAttribute("usuario") == null){
@@ -84,7 +89,7 @@
                 </li>
             </ul>
             <hr>
-            <form id="formulario" action="calidadServlet.do" method="post" class="">
+            <form id="formulario" action="/controlGPC/calidadServlet.do" method="post" class="">
                 <div class="form-group">
                     <label class="control-label" for="nombreCompleto">Nombre completo:</label>
                     <input type="text" class="form-control is-invalid" id="nombreCompleto" name="nombreCompleto" placeholder="Teclee el nombre completo de la calidad ..." required>
@@ -107,15 +112,40 @@
                     <label class="control-label" class="mr-sm-2" for="grupoCalidad">Grupo de calidad:</label>
                     <select class="custom-select mr-sm-2" id="grupoCalidad" name="idgrupoCalidad">
                         <option value="0" selected>Selecciona un grupo de calidad ...</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                        <%
+                            baseDatos _baseDatos = new baseDatos();
+                            
+                            List<grupoCalidad> _grupoCalidadDAO = new ArrayList<grupoCalidad>();
+                                
+                            try{
+                            
+                                grupoCalidadDAOImpl _grupoCalidadDAOImpl = new grupoCalidadDAOImpl(_baseDatos.getConnection());
+                                
+                                _grupoCalidadDAO = (List<grupoCalidad>)_grupoCalidadDAOImpl.consultarTodos();
+                            
+                            }catch(Exception ex){
+
+                                ex.printStackTrace();
+
+                            }finally{
+
+                                if (_baseDatos != null){
+                                    _baseDatos.closeConnection();
+                                }
+
+                            }
+                        
+                            for(grupoCalidad _grupoCalidad : _grupoCalidadDAO){
+                                out.print("<option value=\""+_grupoCalidad.getId()+"\">"+_grupoCalidad.getNombreCompleto()+"</option>");
+                            }
+                        %>
                     </select>
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Guardar</button>
                     <button type="button" class="btn btn-light" onclick="location.href='calidadTabla.jsp';" >Cancelar</button>
                 </div>
+                <input type="hidden" id="op" name="op" value="1">
             </form>
         </div>
     </body>

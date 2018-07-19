@@ -66,9 +66,9 @@ public class categoriaProductoServlet extends HttpServlet {
                     _categoriaProductoObj.setIdEstado(1);
                     
                     if(!_categoriaProductoDAO.agregarRegistro(_categoriaProductoObj)){
-                        mensajeAlerta = "Se agrego satisfactoriamente";
-                    }else {
-                        mensajeAlerta = "Error!!";
+                        mensajeAlerta = "success, Se ha agregado el registro satisfactoriamente ... !!";
+                    } else {
+                        mensajeAlerta = "danger, Error al agregar el registro ... !!";
                     }                   
                     
                     break;
@@ -83,20 +83,20 @@ public class categoriaProductoServlet extends HttpServlet {
                     _categoriaProductoObj.setIdEstado(2);
                     
                     if(!_categoriaProductoDAO.modificarRegistro(_categoriaProductoObj)){
-                        mensajeAlerta = "Se modifico satisfactoriamente";
-                    }else {
-                        mensajeAlerta = "Error!!";
-                    }                   
+                        mensajeAlerta = "success, Se ha modificado el registro satisfactoriamente ... !!";
+                    } else {
+                        mensajeAlerta = "danger, Error al modificar el registro ... !!";
+                    }               
                     
                     break;
                 }
                 case 3: {
                     
                     if(!_categoriaProductoDAO.eliminarRegistro(_id)){
-                        mensajeAlerta = "Se elimino satisfactoriamente";
-                    }else {
-                        mensajeAlerta = "Error!!";
-                    }                   
+                        mensajeAlerta = "success, Se ha eliminado el registro satisfactoriamente ... !!";
+                    } else {
+                        mensajeAlerta = "danger, Error al eliminar el registro ... !!";
+                    }               
                     
                     break;
                 }
@@ -108,7 +108,7 @@ public class categoriaProductoServlet extends HttpServlet {
             if (_baseDatos != null) {
                 _baseDatos.closeConnection();
             }
-            response.sendRedirect("/controlGPC/catalogos/categoriaProducto/categoriaProductoTabla.jsp");
+            response.sendRedirect("/controlGPC/catalogos/categoriaProducto/categoriaProductoTabla.jsp?m="+mensajeAlerta);
         }
 
     }

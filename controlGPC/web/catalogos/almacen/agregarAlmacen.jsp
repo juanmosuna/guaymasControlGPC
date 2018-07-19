@@ -4,6 +4,13 @@
     Author     : juan_m_osuna
 --%>
 
+<%@page import="DAO.database.unidadMedidaDAOImpl"%>
+<%@page import="entity.unidadMedida"%>
+<%@page import="database.baseDatos"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="entity.tipoAlmacen"%>
+<%@page import="java.util.List"%>
+<%@page import="DAO.database.tipoAlmacenDAOImpl"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
     if (session.getAttribute("usuario") == null){
@@ -84,7 +91,7 @@
                 </li>
             </ul>
             <hr>
-            <form id="formulario" action="almacenServlet.do" method="post" class="">
+            <form id="formulario" action="/controlGPC/almacenServlet.do" method="post" class="">
                 <div class="form-group">
                     <label class="control-label" class="control-label" for="nombreCompleto">Nombre completo:</label>
                     <input type="text" class="form-control is-invalid" id="nombreCompleto" name="nombreCompleto" placeholder="Teclee el nombre completo del almacén ..." required>
@@ -107,9 +114,34 @@
                     <label class="control-label" class="mr-sm-2" for="tipoAlmacen">Tipo de almacén:</label>
                     <select class="custom-select mr-sm-2" id="tipoAlmacen" name="idtipoAlmacen">
                         <option value="0" selected>Selecciona un tipo de almacén ...</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                        <% 
+                            baseDatos _baseDatos = new baseDatos();
+
+                                List<tipoAlmacen> _tipoAlmacenDAO = new ArrayList<tipoAlmacen>();
+
+                                try{
+
+                                    tipoAlmacenDAOImpl _tipoAlmacenDAOImpl = new tipoAlmacenDAOImpl(_baseDatos.getConnection());
+
+                                    _tipoAlmacenDAO = (List<tipoAlmacen>)_tipoAlmacenDAOImpl.consultarTodos();
+
+                                }catch(Exception ex){
+
+                                    ex.printStackTrace();
+
+                                }finally{
+
+                                    if (_baseDatos != null){
+                                        _baseDatos.closeConnection();
+                                    }
+
+                                }
+
+                                for(tipoAlmacen _tipoAlmacen : _tipoAlmacenDAO){
+                                    out.print("<option value=\""+_tipoAlmacen.getId()+"\">"+_tipoAlmacen.getNombreCompleto()+"</option>");
+                                }
+                                
+                        %>
                     </select>
                 </div>
                 <div class="form-group">
@@ -120,9 +152,33 @@
                     <label class="control-label" class="mr-sm-2" for="unidadMedida">Unidad de medida:</label>
                     <select class="custom-select mr-sm-2" id="unidadMedida" name="idunidadMedida">
                         <option value="0" selected>Selecciona una unidad de medida ...</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                        <%
+                            _baseDatos = new baseDatos();
+                            
+                            List<unidadMedida> _unidadMedidaDAO = new ArrayList<unidadMedida>();
+                                
+                            try{
+                            
+                                unidadMedidaDAOImpl _unidadMedidaDAOImpl = new unidadMedidaDAOImpl(_baseDatos.getConnection());
+                                
+                                _unidadMedidaDAO = (List<unidadMedida>)_unidadMedidaDAOImpl.consultarTodos();
+                            
+                            }catch(Exception ex){
+
+                                ex.printStackTrace();
+
+                            }finally{
+
+                                if (_baseDatos != null){
+                                    _baseDatos.closeConnection();
+                                }
+
+                            }
+                        
+                            for(unidadMedida _unidadMedida : _unidadMedidaDAO){
+                                out.print("<option value=\""+_unidadMedida.getId()+"\">"+_unidadMedida.getNombreCompleto()+"</option>");
+                            }
+                        %>
                     </select>
                 </div>
                 <div class="form-group">
@@ -145,6 +201,7 @@
                     <button type="submit" class="btn btn-primary">Guardar</button>
                     <button type="button" class="btn btn-light" onclick="location.href='almacenTabla.jsp';" >Cancelar</button>
                 </div>
+                <input type="hidden" id="op" name="op" value="1">
             </form>
         </div>
     </body>

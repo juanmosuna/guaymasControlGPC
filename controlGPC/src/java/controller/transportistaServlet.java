@@ -101,9 +101,9 @@ public class transportistaServlet extends HttpServlet {
                     _transportistaObj.setIdEstado(1);
                     
                     if(!_transportistaDAO.agregarRegistro(_transportistaObj)){
-                        mensajeAlerta = "Se agrego satisfactoriamente";
-                    }else {
-                        mensajeAlerta = "Error!!";
+                        mensajeAlerta = "success, Se ha agregado el registro satisfactoriamente ... !!";
+                    } else {
+                        mensajeAlerta = "danger, Error al agregar el registro ... !!";
                     }                   
                     
                     break;
@@ -130,20 +130,20 @@ public class transportistaServlet extends HttpServlet {
                     _transportistaObj.setIdEstado(2);
                     
                     if(!_transportistaDAO.modificarRegistro(_transportistaObj)){
-                        mensajeAlerta = "Se modifico satisfactoriamente";
-                    }else {
-                        mensajeAlerta = "Error!!";
-                    }                   
+                        mensajeAlerta = "success, Se ha modificado el registro satisfactoriamente ... !!";
+                    } else {
+                        mensajeAlerta = "danger, Error al modificar el registro ... !!";
+                    }                
                     
                     break;
                 }
                 case 3: {
                     
                     if(!_transportistaDAO.eliminarRegistro(_id)){
-                        mensajeAlerta = "Se elimino satisfactoriamente";
-                    }else {
-                        mensajeAlerta = "Error!!";
-                    }                   
+                        mensajeAlerta = "success, Se ha eliminado el registro satisfactoriamente ... !!";
+                    } else {
+                        mensajeAlerta = "danger, Error al eliminar el registro ... !!";
+                    }                
                     
                     break;
                 }
@@ -155,7 +155,7 @@ public class transportistaServlet extends HttpServlet {
             if (_baseDatos != null) {
                 _baseDatos.closeConnection();
             }
-            response.sendRedirect("/controlGPC/catalogos/transportista/transportistaTabla.jsp");
+            response.sendRedirect("/controlGPC/catalogos/transportista/transportistaTabla.jsp?m="+mensajeAlerta);
         }
 
     }

@@ -4,6 +4,11 @@
     Author     : juan_m_osuna
 --%>
 
+<%@page import="database.baseDatos"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
+<%@page import="DAO.database.categoriaProductoDAOImpl"%>
+<%@page import="entity.categoriaProducto"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
     if (session.getAttribute("usuario") == null){
@@ -84,7 +89,7 @@
                 </li>
             </ul>
             <hr>
-            <form id="formulario" action="productoServlet.do" method="post" class="">
+            <form id="formulario" action="/controlGPC/productoServlet.do" method="post" class="">
                 <div class="form-group">
                     <label class="control-label" for="nombreCompleto">Nombre completo:</label>
                     <input type="text" class="form-control is-invalid" id="nombreCompleto" name="nombreCompleto" placeholder="Teclee el nombre completo del producto ..." required>
@@ -106,16 +111,42 @@
                 <div class="form-group">
                     <label class="control-label" class="mr-sm-2" for="idCategoriaProducto">Categoría del producto:</label>
                     <select class="custom-select mr-sm-2" id="idCategoriaProducto" name="idCategoriaProducto">
-                        <option value="0" selected>Selecciona un tipo de almacén ...</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                        <option value="0" selected>Selecciona una categoría para el producto ...</option>
+                        <%
+                            baseDatos _baseDatos = new baseDatos();
+                            
+                            List<categoriaProducto> _categoriaProductoDAO = new ArrayList<categoriaProducto>();
+                                
+                            try{
+                            
+                                categoriaProductoDAOImpl _categoriaProductoDAOImpl = new categoriaProductoDAOImpl(_baseDatos.getConnection());
+                                
+                                _categoriaProductoDAO = (List<categoriaProducto>)_categoriaProductoDAOImpl.consultarTodos();
+                            
+                            }catch(Exception ex){
+
+                                ex.printStackTrace();
+
+                            }finally{
+
+                                if (_baseDatos != null){
+                                    _baseDatos.closeConnection();
+                                }
+
+                            }
+                        
+                            for(categoriaProducto _categoriaProducto : _categoriaProductoDAO){
+                                out.print("<option value=\""+_categoriaProducto.getId()+"\">"+_categoriaProducto.getNombreCompleto()+"</option>");
+                            }
+                        %>
+                        
                     </select>
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Guardar</button>
                     <button type="button" class="btn btn-light" onclick="location.href='productoTabla.jsp';" >Cancelar</button>
                 </div>
+                <input type="hidden" id="op" name="op" value="1">
             </form>
         </div>
     </body>

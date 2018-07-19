@@ -84,7 +84,7 @@
                 </li>
             </ul>
             <hr>
-            <form id="formulario" action="choferServlet.do" method="post" class="">
+            <form id="formulario" action="/controlGPC/choferServlet.do" method="post" enctype="multipart/form-data" class="">
                 <div class="form-group">
                     <label class="control-label" for="nombreCompleto">Nombre completo:</label>
                     <input type="text" class="form-control is-invalid" id="nombreCompleto" name="nombreCompleto" placeholder="Teclee el nombre completo del chofer ..." required>
@@ -153,6 +153,7 @@
                     <button type="submit" class="btn btn-primary">Guardar</button>
                     <button type="button" class="btn btn-light" onclick="location.href='choferTabla.jsp';" >Cancelar</button>
                 </div>
+                <input type="hidden" id="op" name="op" value="1">
             </form>
         </div>
     </body>

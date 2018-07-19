@@ -171,10 +171,8 @@ public class vehiculoDAOImpl implements catalogosInterface {
                 .append("    dbvehiculo.idEstado AS 'idEstado' ")
                 .append("FROM ")
                 .append("    controlGPC.dbvehiculo ")
-                .append("        LEFT JOIN ")
-                .append("    dbtransportista ON dbtransportista.id = dbvehiculo.idTransportista ")
-                .append("        LEFT JOIN ")
-                .append("    dbtipoVehiculo ON dbtipoVehiculo.id = dbvehiculo.idTipoVehiculo ")
+                .append("        LEFT JOIN dbtransportista ON dbtransportista.id = dbvehiculo.idTransportista ")
+                .append("        LEFT JOIN dbtipoVehiculo ON dbtipoVehiculo.id = dbvehiculo.idTipoVehiculo ")
                 .append("WHERE ")
                 .append("    dbvehiculo.idEstado <> 3;");
 

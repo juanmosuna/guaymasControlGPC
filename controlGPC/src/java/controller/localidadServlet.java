@@ -65,9 +65,9 @@ public class localidadServlet extends HttpServlet {
                     _localidadObj.setIdEstado(1);
 
                     if (!_localidadDAO.agregarRegistro(_localidadObj)) {
-                        mensajeAlerta = "Se agrego satisfactoriamente";
+                        mensajeAlerta = "success, Se ha agregado el registro satisfactoriamente ... !!";
                     } else {
-                        mensajeAlerta = "Error!!";
+                        mensajeAlerta = "danger, Error al agregar el registro ... !!";
                     }
 
                     break;
@@ -82,9 +82,9 @@ public class localidadServlet extends HttpServlet {
                     _localidadObj.setIdEstado(2);
 
                     if (!_localidadDAO.modificarRegistro(_localidadObj)) {
-                        mensajeAlerta = "Se modifico satisfactoriamente";
+                        mensajeAlerta = "success, Se ha modificado el registro satisfactoriamente ... !!";
                     } else {
-                        mensajeAlerta = "Error!!";
+                        mensajeAlerta = "danger, Error al modificar el registro ... !!";
                     }
 
                     break;
@@ -92,9 +92,9 @@ public class localidadServlet extends HttpServlet {
                 case 3: {
 
                     if (!_localidadDAO.eliminarRegistro(_id)) {
-                        mensajeAlerta = "Se elimino satisfactoriamente";
+                        mensajeAlerta = "success, Se ha eliminado el registro satisfactoriamente ... !!";
                     } else {
-                        mensajeAlerta = "Error!!";
+                        mensajeAlerta = "danger, Error al eliminar el registro ... !!";
                     }
 
                     break;
@@ -107,7 +107,7 @@ public class localidadServlet extends HttpServlet {
             if (_baseDatos != null) {
                 _baseDatos.closeConnection();
             }
-            response.sendRedirect("/controlGPC/catalogos/localidad/localidadTabla.jsp");
+            response.sendRedirect("/controlGPC/catalogos/localidad/localidadTabla.jsp?m="+mensajeAlerta);
         }
 
     }

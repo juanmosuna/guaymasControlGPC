@@ -65,9 +65,9 @@ public class tipoVehiculoServlet extends HttpServlet {
                     _tpVehiculoObj.setIdEstado(1);
                     
                     if(!_tipoVehiculoDAO.agregarRegistro(_tpVehiculoObj)){
-                        mensajeAlerta = "Se agrego satisfactoriamente";
-                    }else {
-                        mensajeAlerta = "Error!!";
+                        mensajeAlerta = "success, Se ha agregado el registro satisfactoriamente ... !!";
+                    } else {
+                        mensajeAlerta = "danger, Error al agregar el registro ... !!";
                     }                   
                     
                     break;
@@ -82,20 +82,20 @@ public class tipoVehiculoServlet extends HttpServlet {
                     _tpVehiculoObj.setIdEstado(2);
                     
                     if(!_tipoVehiculoDAO.modificarRegistro(_tpVehiculoObj)){
-                        mensajeAlerta = "Se modifico satisfactoriamente";
-                    }else {
-                        mensajeAlerta = "Error!!";
-                    }                   
+                        mensajeAlerta = "success, Se ha modificado el registro satisfactoriamente ... !!";
+                    } else {
+                        mensajeAlerta = "danger, Error al modificar el registro ... !!";
+                    }                 
                     
                     break;
                 }
                 case 3: {
                     
                     if(!_tipoVehiculoDAO.eliminarRegistro(_id)){
-                        mensajeAlerta = "Se elimino satisfactoriamente";
-                    }else {
-                        mensajeAlerta = "Error!!";
-                    }                   
+                        mensajeAlerta = "success, Se ha eliminado el registro satisfactoriamente ... !!";
+                    } else {
+                        mensajeAlerta = "danger, Error al eliminar el registro ... !!";
+                    }                
                     
                     break;
                 }
@@ -107,7 +107,7 @@ public class tipoVehiculoServlet extends HttpServlet {
             if (_baseDatos != null) {
                 _baseDatos.closeConnection();
             }
-            response.sendRedirect("/controlGPC/catalogos/tipoVehiculo/tipoVehiculoTabla.jsp");
+            response.sendRedirect("/controlGPC/catalogos/tipoVehiculo/tipoVehiculoTabla.jsp?m="+mensajeAlerta);
         }
 
     }
