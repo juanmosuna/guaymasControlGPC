@@ -116,14 +116,12 @@ public class grupoCalidadDAOImpl implements catalogosInterface {
         StringBuilder _consulta = new StringBuilder();
 
         _consulta.append( "SELECT  ")
-                .append( "    dbgrupoCalidad.id AS 'id', ")
-                .append( "    dbgrupoCalidad.nombreCompleto AS 'nombreCompleto', ")
-                .append( "    dbgrupoCalidad.descripcion AS 'descripcion', ")
-                .append( "    dbgrupoCalidad.idEstado AS 'idEstado' ")
-                .append( "FROM ")
-                .append( "    controlGPC.dbgrupoCalidad ")
-                .append( "WHERE ")
-                .append( "    dbgrupoCalidad.idEstado <> 3;");
+                    .append("dbgrupoCalidad.id AS 'id', ")
+                    .append("dbgrupoCalidad.nombreCompleto AS 'nombreCompleto', ")
+                    .append("dbgrupoCalidad.descripcion AS 'descripcion', ")
+                    .append("dbgrupoCalidad.idEstado AS 'idEstado' ")
+                    .append("FROM controlGPC.dbgrupoCalidad ")
+                .append("WHERE dbgrupoCalidad.idEstado <> 3;");
 
         PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
@@ -169,18 +167,13 @@ public class grupoCalidadDAOImpl implements catalogosInterface {
         StringBuilder _consulta = new StringBuilder();
 
         _consulta.append( "SELECT  ")
-                .append( "    dbgrupoCalidad.id AS 'id', ")
-                .append( "    dbgrupoCalidad.nombreCompleto AS 'nombreCompleto', ")
-                .append( "    dbgrupoCalidad.descripcion AS 'descripcion', ")
-                .append( "    dbgrupoCalidad.idEstado AS 'idEstado' ")
-                .append( "FROM ")
-                .append( "    controlGPC.dbgrupoCalidad ")
-                .append("WHERE ")
-                .append(_campo)
-                .append(" LIKE '%")
-                .append(_dato)
-                .append("%' ")
-                .append( "    dbgrupoCalidad.idEstado <> 3;");
+                    .append("dbgrupoCalidad.id AS 'id', ")
+                    .append("dbgrupoCalidad.nombreCompleto AS 'nombreCompleto', ")
+                    .append("dbgrupoCalidad.descripcion AS 'descripcion', ")
+                    .append("dbgrupoCalidad.idEstado AS 'idEstado' ")
+                .append("FROM controlGPC.dbgrupoCalidad ")
+                .append("WHERE ").append(_campo).append(" LIKE '%").append(_dato).append("%' ")
+                .append( "  AND dbgrupoCalidad.idEstado <> 3;");
 
         PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
@@ -224,15 +217,13 @@ public class grupoCalidadDAOImpl implements catalogosInterface {
         StringBuilder _consulta = new StringBuilder();
 
         _consulta.append( "SELECT  ")
-                .append( "    dbgrupoCalidad.id AS 'id', ")
-                .append( "    dbgrupoCalidad.nombreCompleto AS 'nombreCompleto', ")
-                .append( "    dbgrupoCalidad.descripcion AS 'descripcion', ")
-                .append( "    dbgrupoCalidad.idEstado AS 'idEstado' ")
-                .append( "FROM ")
-                .append( "    controlGPC.dbgrupoCalidad ")
-                .append("WHERE dbgrupoCalidad.id = ")
-                .append(id)
-                .append(" dbgrupoCalidad.idEstado <> 3;");
+                .append( "dbgrupoCalidad.id AS 'id', ")
+                .append( "dbgrupoCalidad.nombreCompleto AS 'nombreCompleto', ")
+                .append( "dbgrupoCalidad.descripcion AS 'descripcion', ")
+                .append( "dbgrupoCalidad.idEstado AS 'idEstado' ")
+                .append( "FROM controlGPC.dbgrupoCalidad ")
+                .append("WHERE dbgrupoCalidad.id = ").append(id)
+                .append(" AND dbgrupoCalidad.idEstado != 3;");
 
         PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
