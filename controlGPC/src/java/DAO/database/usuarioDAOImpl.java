@@ -158,13 +158,12 @@ public class usuarioDAOImpl {
                     .append("u.cuentaActiva AS 'cuentaActiva', ")
                     .append("u.idEstado AS 'idEstado', ")
                     .append("es.nombreCompleto AS 'estado' ")
-                .append("FROM ")
-                    .append("controlGPC.dbusuario u ")
+                .append("FROM controlGPC.dbusuario u ")
                         .append("INNER JOIN controlGPC.dbperfilUsuario pu ON pu.id = u.idPerfilUsuario ")
                         .append("INNER JOIN controlGPC.dblocalidad l ON l.id = u.idLocalidad ")
                         .append("INNER JOIN controlGPC.dbdepartamento d ON d.id = u.idDepartamento ")
                         .append("INNER JOIN controlGPC.dbempresa em ON em.id = u.idEmpresa ")
-                        .append("INNER JOIN controlGPC.dbestado es ON es.id = u.idEstado")
+                        .append("INNER JOIN controlGPC.dbestado es ON es.id = u.idEstado ")
                 .append("WHERE u.id = ?;");
         
         PreparedStatement st = this.conexion.prepareStatement(_consulta.toString());
@@ -261,7 +260,7 @@ public class usuarioDAOImpl {
                         .append("INNER JOIN controlGPC.dblocalidad l ON l.id = u.idLocalidad ")
                         .append("INNER JOIN controlGPC.dbdepartamento d ON d.id = u.idDepartamento ")
                         .append("INNER JOIN controlGPC.dbempresa em ON em.id = u.idEmpresa ")
-                        .append("INNER JOIN controlGPC.dbestado es ON es.id = u.idEstado")
+                        .append("INNER JOIN controlGPC.dbestado es ON es.id = u.idEstado ")
                 .append("WHERE " + _campo + " LIKE ?;");
                 
         PreparedStatement st = this.conexion.prepareStatement(_consulta.toString());
@@ -357,7 +356,7 @@ public class usuarioDAOImpl {
                         .append("INNER JOIN controlGPC.dblocalidad l ON l.id = u.idLocalidad ")
                         .append("INNER JOIN controlGPC.dbdepartamento d ON d.id = u.idDepartamento ")
                         .append("INNER JOIN controlGPC.dbempresa em ON em.id = u.idEmpresa ")
-                        .append("INNER JOIN controlGPC.dbestado es ON es.id = u.idEstado");
+                        .append("INNER JOIN controlGPC.dbestado es ON es.id = u.idEstado; ");
         
         PreparedStatement st = this.conexion.prepareStatement(_consulta.toString());
         

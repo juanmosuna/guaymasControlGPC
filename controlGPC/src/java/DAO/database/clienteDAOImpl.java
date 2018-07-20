@@ -320,27 +320,25 @@ public class clienteDAOImpl implements catalogosInterface {
         StringBuilder _consulta = new StringBuilder();
         
         _consulta.append("SELECT  " )
-                .append("    dbcliente.id AS 'id', " )
-                .append("    dbcliente.nombreCompleto AS 'nombreCompleto', " )
-                .append("    dbcliente.descripcion AS 'descripcion', " )
-                .append("    dbcliente.domicilio AS 'domicilio', " )
-                .append("    dbcliente.codigoPostal AS 'codigoPostal', " )
-                .append("    dbcliente.localidad AS 'localidad', " )
-                .append("    dbcliente.ciudad AS 'ciudad', " )
-                .append("    dbcliente.estado AS 'estado', " )
-                .append("    dbcliente.pais AS 'pais', " )
-                .append("    dbcliente.telefono AS 'telefono', " )
-                .append("    dbcliente.mobile AS 'mobile', " )
-                .append("    dbcliente.fax AS 'fax', " )
-                .append("    dbcliente.correoElectronico AS 'correoElectronico', " )
-                .append("    dbcliente.paginaWeb AS 'paginaWeb', " )
-                .append("    dbcliente.fotoCliente AS 'fotoCliente', " )
-                .append("    dbcliente.idEstado AS 'idEstado' " )
-                .append("FROM " )
-                .append("    controlGPC.dbcliente ")
-                .append("WHERE dbcliente.id = " )
-                .append(id)
-                .append(" AND dbcliente.idEstado <> 3;");
+                    .append("dbcliente.id AS 'id', " )
+                    .append("dbcliente.nombreCompleto AS 'nombreCompleto', " )
+                    .append("dbcliente.descripcion AS 'descripcion', " )
+                    .append("dbcliente.domicilio AS 'domicilio', " )
+                    .append("dbcliente.codigoPostal AS 'codigoPostal', " )
+                    .append("dbcliente.localidad AS 'localidad', " )
+                    .append("dbcliente.ciudad AS 'ciudad', " )
+                    .append("dbcliente.estado AS 'estado', " )
+                    .append("dbcliente.pais AS 'pais', " )
+                    .append("dbcliente.telefono AS 'telefono', " )
+                    .append("dbcliente.mobile AS 'mobile', " )
+                    .append("dbcliente.fax AS 'fax', " )
+                    .append("dbcliente.correoElectronico AS 'correoElectronico', " )
+                    .append("dbcliente.paginaWeb AS 'paginaWeb', " )
+                    .append("dbcliente.fotoCliente AS 'fotoCliente', " )
+                    .append("dbcliente.idEstado AS 'idEstado' " )
+                .append("FROM controlGPC.dbcliente ")
+                .append("WHERE dbcliente.id = " ).append(id)
+                    .append(" AND dbcliente.idEstado != 3;");
 
         PreparedStatement st = this._conn.prepareStatement(_consulta.toString());
 
@@ -365,7 +363,7 @@ public class clienteDAOImpl implements catalogosInterface {
                 _clienteObj.setCorreoElectronico(rs.getString(13));
                 _clienteObj.setPaginaWeb(rs.getString(14));
                 _clienteObj.setFotoCliente(javax.xml.bind.DatatypeConverter.parseBase64Binary(rs.getString(15)));
-                _clienteObj.setIdEstado(rs.getInt(18));
+                _clienteObj.setIdEstado(rs.getInt(16));
 
             }
 

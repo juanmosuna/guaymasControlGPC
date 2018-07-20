@@ -106,7 +106,7 @@
             <ul class="breadcrumb">
                 <li><a href="../catalogos.jsp">Catálogos</a> <span class="divider">/</span></li>
                 <li><a href="perfilUsuarioTabla.jsp">Perfil de usuario</a> <span class="divider">/</span></li>
-                <li class="active">Agregar</li>
+                <li class="active">Modificar</li>
             </ul>
             <ul class="nav nav-pills">
                 <li class="active">
@@ -189,7 +189,7 @@
 <%
         }else{
             
-            String _mensajeAlerta = "No se encontró el perfil de usuario ...";
+            String _mensajeAlerta = "danger, No se encontró el perfil de usuario ...";
             response.sendRedirect("/controlGPC/catalogos/perfilUsuario/perfilUsuarioTabla.jsp?m=" + _mensajeAlerta);
         }
     }  
